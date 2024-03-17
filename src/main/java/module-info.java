@@ -1,0 +1,14 @@
+module com.example.proyectofinal {
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires javafx.graphics;
+    requires javafx.base;
+    requires java.logging;
+    requires java.desktop;
+
+    opens co.edu.uniquindio.estructuraDatos.proyecto.app to javafx.graphics, javafx.fxml;
+    opens co.edu.uniquindio.estructuraDatos.proyecto.model to javafx.base;
+    opens co.edu.uniquindio.estructuraDatos.proyecto.viewControllers to javafx.fxml, javafx.graphics;
+
+    exports co.edu.uniquindio.estructuraDatos.proyecto.model;
+}
