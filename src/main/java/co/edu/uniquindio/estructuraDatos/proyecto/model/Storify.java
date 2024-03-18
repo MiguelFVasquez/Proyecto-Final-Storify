@@ -123,6 +123,49 @@ public class Storify implements IStorify {
         return updated;
     }
 
+    /**
+     * Metodo para añadir una canción a la lista del usuario
+     * Se verifica que el usuario exista, si existe se añade la canción a la lista
+     * @param username
+     * @param newSong
+     * @return
+     * @throws UserException
+     * @throws SongException
+     */
+    public boolean addSongToUserList(String username, Song newSong) throws UserException, SongException {
+        boolean flag=false;
+        User userAux= getUser(username);
+        if (userAux==null){
+            throw new UserException("El usuario no ha sido encontrado");
+        }else {
+            if (userAux.addSongToList(newSong)){
+                flag=true;
+            }
+        }
+        return flag;
+    }
+
+    /**
+     *Metodo que permite eliminar una cancion de la lista del usuario
+     * @param username
+     * @param songDelete
+     * @return
+     * @throws UserException
+     * @throws SongException
+     */
+    public boolean removeSongFromUserList(String username, Song songDelete) throws UserException, SongException{
+        boolean flag= false;
+        User userAux= getUser(username);
+        if (userAux==null){
+            throw new UserException("El usuario no ha sido encontrado");
+        }else {
+            if (userAux.removeSongFromList(songDelete)){
+                flag=true;
+            }
+        }
+        return flag;
+    }
+
 //---------------METODOS ARTISTA------------------------------------------
 
     /**
@@ -188,6 +231,49 @@ public class Storify implements IStorify {
     public boolean updateArtist(Artist artistUpdate) throws ArtistException {
         return false;
     }
+
+    /**
+     * Metodo para añadir una cancion al artista, se verifica que el artista exista y si existe se hace el proceso para añadir la cancion a su lista
+     * @param name
+     * @param newSong
+     * @return
+     * @throws ArtistException
+     * @throws SongException
+     */
+    public boolean addSongToArtistList(String name, Song newSong) throws ArtistException,SongException{
+        boolean flag= false;
+        Artist artistAux= getArtist(name);
+        if (artistAux==null){
+            throw new ArtistException("El artista no ha sido encontrado");
+        }else {
+            if (artistAux.addSongToList(newSong)){
+                flag=true;
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * Metodo para eliminar una canción de la lista del artista
+     * @param name
+     * @param songDelete
+     * @return
+     * @throws ArtistException
+     * @throws SongException
+     */
+    public boolean deleteSongFromArtistList(String name, Song songDelete) throws ArtistException,SongException{
+        boolean flag= false;
+        Artist artistAux= getArtist(name);
+        if (artistAux==null){
+            throw new ArtistException("El artista no ha sido encontrado");
+        }else {
+            if (artistAux.removeSongToList(songDelete)){
+                flag=true;
+            }
+        }
+        return flag;
+    }
+
 //-----------------------METODOS CANCION---------------------------------------
 
     /**

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.model;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList;
+import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 
 import java.io.Serializable;
 
@@ -9,7 +10,7 @@ public class Artist implements Serializable, Comparable<Artist> {
     private String name;
     private String nationality;
     private Boolean isAlone;
-    private DoublyLinkedList<Song> listaCanciones;
+    private DoublyLinkedList<Song> songList;
 
     public Artist() {
     }
@@ -19,7 +20,7 @@ public class Artist implements Serializable, Comparable<Artist> {
         this.name = name;
         this.nationality = nationality;
         this.isAlone = isAlone;
-        this.listaCanciones= new DoublyLinkedList<>();
+        this.songList = new DoublyLinkedList<>();
     }
 
     public String getCode() {
@@ -54,26 +55,62 @@ public class Artist implements Serializable, Comparable<Artist> {
         isAlone = alone;
     }
 
-    public DoublyLinkedList<Song> getListaCanciones() {
-        return listaCanciones;
+    public DoublyLinkedList<Song> getSongList() {
+        return songList;
     }
 
-    public void setListaCanciones(DoublyLinkedList<Song> listaCanciones) {
-        this.listaCanciones = listaCanciones;
+    public void setSongList(DoublyLinkedList<Song> songList) {
+        this.songList = songList;
     }
 
 
     //--------------------Metodos propios del artista------------------------
 
     public void addSong(Song newSong){
-        this.listaCanciones.addLast(newSong);
+        this.songList.addLast(newSong);
     }
     public void delateSong(Song songDelete){
-        this.listaCanciones.delete(songDelete);
+        this.songList.delete(songDelete);
     }
 
     @Override
     public int compareTo(Artist another) {
         return this.name.compareTo(another.getName());
     }
+
+
+    private boolean verifySong(String code){
+        boolean flag=false;
+        for (Song songAux: songList){
+            if (songAux.verifyCode(code)){
+                flag=true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    public boolean addSongToList(Song newSong) throws SongException {
+        boolean flag= false;
+        if (verifySong(newSong.getCode())){
+            throw new SongException("La cación ya se encuentra en la lista");
+        }else {
+            songList.addLast(newSong);
+            flag=true;
+        }
+        return flag;
+    }
+
+    public boolean removeSongToList(Song songDelete) throws SongException{
+        boolean flag= false;
+        if (!verifySong(songDelete.getCode())){
+            throw new SongException("La canción no se encuentra en la lista");
+        }else {
+            songList.delete(songDelete);
+            flag=true;
+        }
+        return flag;
+    }
+
+
 }

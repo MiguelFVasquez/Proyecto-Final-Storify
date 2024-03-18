@@ -118,4 +118,8 @@ public class Song implements Serializable {
     public int hashCode() {
         return Objects.hash(code);
     }
+
+    public boolean verifyCode(String code){
+        return this.getCode().equals(code);
+    }
 }
