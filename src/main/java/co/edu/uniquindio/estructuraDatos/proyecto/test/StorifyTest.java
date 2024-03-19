@@ -38,6 +38,9 @@ public class StorifyTest {
         return new Artist(code,name,nationality,isAlone);
     }
     //-------------Metodos de prueba(test)------------------------
+
+    //--------Metodos de usuarios----------------
+
     /**
      * Testeamos de que un usuario sea añadido con exito a la lista
      * @throws UserException
@@ -61,6 +64,27 @@ public class StorifyTest {
         assertTrue(result);
     }
 
+
+    @Test
+    public void testAddSongToUserList() throws UserException, MalformedURLException, SongException {
+        User newUser= new User("juanmi","0190191","juanmi@gmail.com");
+        Song newSong= newSong();
+        storify.addUser(newUser);
+        storify.addSong(newSong);
+        boolean result= storify.addSongToUserList(newUser.getUserName(), newSong);
+        assertTrue(result);
+    }
+    @Test
+    public void testRemoveSongFromUserList() throws MalformedURLException, UserException, SongException {
+        User newUser= new User("juanmi","0190191","juanmi@gmail.com");
+        Song song= newSong();
+        storify.addUser(newUser);
+        storify.addSong(song);
+        storify.addSongToUserList(newUser.getUserName(), song);
+        boolean result= storify.removeSongFromUserList(newUser.getUserName(),song);
+        assertTrue(result);
+    }
+    //------------------------Metodos de las canciones--------------------------
     /**
      *
      * @throws UserException
@@ -85,7 +109,7 @@ public class StorifyTest {
         boolean result= storify.delateSong(song);
         assertTrue(result);
     }
-
+    //-------------------Metodos de los artistas---------------------------
     @Test
     public void testAddArtist() throws ArtistException {
         Artist newArtist= newArtist();
@@ -101,14 +125,23 @@ public class StorifyTest {
     }
 
     @Test
-    public void testAddSongToUserList() throws UserException, MalformedURLException, SongException {
-        User newUser= new User("juanmi","0190191","juanmi@gmail.com");
-        Song newSong= newSong();
-        storify.addUser(newUser);
-        storify.addSong(newSong);
-        boolean result= storify.addSongToUserList(newUser.getUserName(), newSong);
+    public void testAddSongToArtistList() throws MalformedURLException, ArtistException, SongException {
+        Artist artist= newArtist();
+        Song song= newSong();
+        storify.addArtist(artist);
+        storify.addSong(song);
+        boolean result= storify.addSongToArtistList(newArtist().getName(), song);
         assertTrue(result);
     }
-
+    @Test
+    public void testRemoveSongFromArtistList() throws MalformedURLException, ArtistException, SongException {
+        Artist artist= newArtist();
+        Song song= newSong();
+        storify.addArtist(artist);
+        storify.addSong(song);
+        storify.addSongToArtistList(artist.getName(), song);
+        boolean result= storify.removeSongFromArtistList(artist.getName(),song);
+        assertTrue(result);
+    }
 
 }

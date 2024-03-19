@@ -282,7 +282,7 @@ public class Storify implements IStorify {
      * @throws ArtistException
      * @throws SongException
      */
-    public boolean deleteSongFromArtistList(String name, Song songDelete) throws ArtistException,SongException{
+    public boolean removeSongFromArtistList(String name, Song songDelete) throws ArtistException,SongException{
         boolean flag= false;
         Artist artistAux= getArtist(name);
         if (artistAux==null){
@@ -341,24 +341,7 @@ public class Storify implements IStorify {
         }
         return deleted;
     }
-    /*
-  *   public boolean updateUser(User userUpdate) throws UserException {
-      boolean updated=false;
-      String userName= userUpdate.getUserName();//El username al ser la identificación no se pude cambiar
-      String newPassword= userUpdate.getPassword();
-      String newEmail= userUpdate.getEmail();
-      User userAux= getUser(userName);
-      if (userAux==null){
-          throw new UserException("El usuario: '" + userName + "' no ha sido encontrado.");
-      }else {
-          updated=true;
-          userAux.setPassword(newPassword);
-          userAux.setEmail(newEmail);
-      }
-      return updated;
-  }
 
-  * */
     @Override
     public boolean updateSong(Song songUpdate) throws SongException {
         boolean updated = false;
