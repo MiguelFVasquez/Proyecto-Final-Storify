@@ -4,8 +4,11 @@ import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.BinaryTree;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.ArtistException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Interfaces.IStorify;
 
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -230,10 +233,24 @@ public class Storify implements IStorify {
         }
         return deleted;
     }
-
     @Override
     public boolean updateArtist(Artist artistUpdate) throws ArtistException {
-        return false;
+        boolean updated= false;
+        String name= artistUpdate.getName(); //El nombre es la identificación del artista por lo tanto no se puede cambiar;
+        String newCode= artistUpdate.getCode();
+        String newNationality= artistUpdate.getNationality();
+        boolean newStatus= artistUpdate.getAlone();
+        Artist artistAux= getArtist(name);
+        if (artistAux==null){
+            throw new ArtistException("El artista: '" + name+"' no ha sido encontrado");
+
+        }else {
+            updated=true;
+            artistAux.setCode(newCode);
+            artistAux.setNationality(newNationality);
+            artistAux.setAlone(newStatus);
+        }
+        return updated;
     }
 
     /**
@@ -324,10 +341,50 @@ public class Storify implements IStorify {
         }
         return deleted;
     }
+    /*
+  *   public boolean updateUser(User userUpdate) throws UserException {
+      boolean updated=false;
+      String userName= userUpdate.getUserName();//El username al ser la identificación no se pude cambiar
+      String newPassword= userUpdate.getPassword();
+      String newEmail= userUpdate.getEmail();
+      User userAux= getUser(userName);
+      if (userAux==null){
+          throw new UserException("El usuario: '" + userName + "' no ha sido encontrado.");
+      }else {
+          updated=true;
+          userAux.setPassword(newPassword);
+          userAux.setEmail(newEmail);
+      }
+      return updated;
+  }
 
+  * */
     @Override
     public boolean updateSong(Song songUpdate) throws SongException {
-        return false;
+        boolean updated = false;
+        String code = songUpdate.getCode();//Este no podra ser cambiado ya que es el id de la canción
+        String name = songUpdate.getName();
+        File newCover = songUpdate.getCover();
+        String newYear = songUpdate.getYear();
+        String newDuration = songUpdate.getDuration();
+        Gender newGender = songUpdate.getGender();
+        URL newLink = songUpdate.getLink();
+        Artist newArtist = songUpdate.getArtist();
+
+        Song songAux= getSong(code);
+        if (songAux==null){
+            throw new SongException("La canción: '" + name+ "' no ha sido encontrada");
+        }else {
+            updated=true;
+            songAux.setName(name);
+            songAux.setCover(newCover);
+            songAux.setYear(newYear);
+            songAux.setDuration(newDuration);
+            songAux.setGender(newGender);
+            songAux.setLink(newLink);
+            songAux.setArtist(newArtist);
+        }
+        return updated;
     }
 
 
