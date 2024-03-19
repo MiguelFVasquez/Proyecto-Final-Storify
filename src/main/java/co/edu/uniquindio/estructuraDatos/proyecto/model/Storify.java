@@ -26,6 +26,10 @@ public class Storify implements IStorify {
     private List<Song> songList;
 
     public Storify() {
+        this.nombre = nombre;
+        this.usersMap = new HashMap<>();
+        this.artistTree= new BinaryTree<>();
+        this.songList= new ArrayList<>();
     }
     public Storify(String nombre) {
         this.nombre = nombre;
@@ -275,19 +279,17 @@ public class Storify implements IStorify {
     }
 
 //-----------------------METODOS CANCION---------------------------------------
-
     /**
-     * Retorna true si la lista está vacia, osea que no hay canciones con un mismo código
-     * Retorna false si hay elementos en la lista, por lo que habrian canciones con el mismo código
+     *
      * @param code
-     * @return
+     * @return true si la canción ya está en la lista
+     * @return false si la canción no está en la lista
      */
-    private boolean verifySong(String code){
-        List<Song> songListAux= this.songList.stream()
-                .filter(s ->s.getCode().equals(code))
-                .collect(Collectors.toList());
-        return songListAux.isEmpty();
+    private boolean verifySong(String code) {
+        return this.songList.stream()
+                .anyMatch(s -> s.getCode().equals(code));
     }
+
 
     private Song getSong(String code){
         Optional<Song> songOptional= this.songList.stream()
