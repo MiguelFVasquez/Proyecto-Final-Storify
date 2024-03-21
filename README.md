@@ -1,4 +1,4 @@
-# TRABAJANDO EN EL PROYECTO: Kmilito
+# TRABAJANDO EN EL PROYECTO: 
 
 ## ***TASKS***
 ### **TO DO**
