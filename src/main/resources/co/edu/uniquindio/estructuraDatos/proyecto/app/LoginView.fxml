@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="715.0" prefWidth="1365.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="715.0" prefWidth="1365.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController">
    <children>
       <TabPane prefHeight="354.0" prefWidth="628.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -56,16 +56,16 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="background-register" stylesheets="@../styles/style.css">
                      <children>
                         <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="628.0" layoutX="43.0" layoutY="26.0" stroke="WHITE" strokeType="INSIDE" width="1281.0" />
-                        <FontAwesomeIconView fill="#a3c0f5" glyphName="USER" layoutX="127.0" layoutY="485.0" selectionFill="#a3c0f5" size="400" stroke="BLACK" wrappingWidth="291.5714282989502" />
+                        <FontAwesomeIconView fill="#a3c0f5" glyphName="USER" layoutX="113.0" layoutY="526.0" selectionFill="#a3c0f5" size="450" stroke="BLACK" wrappingWidth="291.5714282989502" />
                         <Label contentDisplay="CENTER" layoutX="574.0" layoutY="39.0" prefHeight="141.0" prefWidth="377.0" text="Register">
                            <font>
                               <Font name="System Bold" size="96.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtNameRegister" layoutX="494.0" layoutY="233.0" prefHeight="52.0" prefWidth="536.0" promptText="Name " />
-                        <TextField fx:id="txtPasswordRegister" layoutX="494.0" layoutY="295.0" prefHeight="52.0" prefWidth="536.0" promptText="Password" />
-                        <TextField fx:id="txtPasswordConfirRegister" layoutX="494.0" layoutY="358.0" prefHeight="52.0" prefWidth="536.0" promptText="Password confirmation" />
-                        <TextField fx:id="txtEmail" layoutX="494.0" layoutY="425.0" prefHeight="52.0" prefWidth="536.0" promptText="Email" />
+                        <TextField fx:id="txtNameRegister" layoutX="494.0" layoutY="233.0" prefHeight="52.0" prefWidth="536.0" promptText="Name " styleClass="txtFields2" stylesheets="@../styles/style.css" />
+                        <TextField fx:id="txtPasswordRegister" layoutX="494.0" layoutY="295.0" prefHeight="52.0" prefWidth="536.0" promptText="Password" styleClass="txtFields2" />
+                        <TextField fx:id="txtPasswordConfirRegister" layoutX="494.0" layoutY="358.0" prefHeight="52.0" prefWidth="536.0" promptText="Password confirmation" styleClass="txtFields2" />
+                        <TextField fx:id="txtEmail" layoutX="494.0" layoutY="425.0" prefHeight="52.0" prefWidth="536.0" promptText="Email" styleClass="txtFields2" />
                         <Button fx:id="btnRegister" layoutX="662.0" layoutY="513.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="42.0" prefWidth="202.0" style="-fx-background-color: #edb3a1; -fx-background-radius: 16;" styleClass="btnVerde" stylesheets="@../styles/style.css" text="Register" />
                         <Button fx:id="btnAlrHavAcc" layoutX="684.0" layoutY="482.0" mnemonicParsing="false" onAction="#activeLogInTab" style="-fx-background-color: transparent;" text="Already have and account?" textFill="#2b00ff" />
                      </children></AnchorPane>

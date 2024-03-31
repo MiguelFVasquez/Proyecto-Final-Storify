@@ -12,10 +12,20 @@
    -fx-border-width: 0 0 1 0; /* Espesor del borde inferior */
    -fx-border-color: black; /* Color del borde */
 }
+
+.txtFields2{
+   -fx-background-color: transparent;
+   -fx-border-radius: 15px;
+   -fx-border-color: #edb3a1; /* Color del borde */
+}
 .txtFields:selected{
+   -fx-border-width: 0 0 2 0; /* Espesor del borde inferior */
     -fx-border-color: blue;
 }
-
+.txtFields:focused{
+   -fx-border-width: 0 0 2 0; /* Espesor del borde inferior */
+    -fx-border-color: blue;
+}
 
 .photoLogo{
      -fx-background-image: url('../images/logo2.jpg');
