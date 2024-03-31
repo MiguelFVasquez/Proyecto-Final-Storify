@@ -1,4 +1,4 @@
-# TRABAJANDO EN EL PROYECTO: Shuh3n
+# TRABAJANDO EN EL PROYECTO: 
 
 ## ***TASKS***
 - Interfaz de inicio sesión de usuario
