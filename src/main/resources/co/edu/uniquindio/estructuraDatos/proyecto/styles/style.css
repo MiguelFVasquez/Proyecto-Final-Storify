@@ -1,0 +1,41 @@
+.background-login{
+    -fx-background-color: linear-gradient(to bottom right, #a3c0f5, #edb3a1);
+    -fx-border-color: transparent;
+}
+.background-register{
+    -fx-background-color: linear-gradient(to bottom right, #edb3a1, #a3c0f5 );
+    -fx-border-color: transparent;
+}
+.txtFields{
+   -fx-background-color: transparent;
+   -fx-border-style: hidden hidden solid hidden;
+   -fx-border-width: 0 0 1 0; /* Espesor del borde inferior */
+   -fx-border-color: black; /* Color del borde */
+}
+.txtFields:selected{
+    -fx-border-color: blue;
+}
+
+
+.photoLogo{
+     -fx-background-image: url('../images/logo2.jpg');
+     -fx-background-size: cover;
+     -fx-background-repeat: no-repeat;
+     -fx-background-opacity: 60%;
+}
+
+.btnVerde{
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}
+
+.btnVerde:hover{
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+    -fx-text-fill: green;
+    -fx-border-color: green;
+}
+
+.button:hover{
+    -fx-cursor: hand;
+}
