@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="715.0" prefWidth="1365.0" styleClass="background-login" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.app.AdminView">
+   <children>
+      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="727.0" layoutX="-21.0" stroke="TRANSPARENT" strokeType="INSIDE" width="261.0" />
+      <VBox alignment="TOP_CENTER" layoutX="13.0" layoutY="239.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="214.0" prefWidth="215.0" style="-fx-spacing: 12;">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="215.0" style="-fx-background-color: transparent;" text="Artists" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri Light" size="32.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="69.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="215.0" style="-fx-background-color: transparent;" text="Songs" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri Light" size="32.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="69.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <Button alignment="TOP_LEFT" layoutX="14.0" layoutY="680.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: TRANSPARENT;" text="Log out">
+         <graphic>
+            <FontAwesomeIconView fill="#bc0000" glyphName="CLOSE" size="18" textAlignment="JUSTIFY" />
+         </graphic>
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="662.0" layoutX="287.0" layoutY="32.0" strokeType="INSIDE" width="1030.0">
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color opacity="0.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Rectangle>
+      <ImageView fitHeight="214.0" fitWidth="322.0" layoutX="15.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/AdminLogo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="322.0" layoutY="51.0" text="Artists">
+         <font>
+            <Font name="System Bold" size="70.0" />
+         </font>
+      </Label>
+      <Label layoutX="316.0" layoutY="141.0" text="Information of artist">
+         <font>
+            <Font name="System Italic" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="316.0" layoutY="208.0" text="Name">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <TextField layoutX="458.0" layoutY="214.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
+      <Label layoutX="316.0" layoutY="246.0" text="Nationality">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <TextField layoutX="458.0" layoutY="252.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
+      <Label layoutX="316.0" layoutY="284.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <CheckBox layoutX="802.0" layoutY="221.0" mnemonicParsing="false" selected="true" style="-fx-border-radius: 8; -fx-background-color: transparent; -fx-border-color: #a3c0f5;" text="It's a group?">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </CheckBox>
+      <Button layoutX="676.0" layoutY="290.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" style="-fx-background-color: #a3c0f5; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Add" />
+      <Button layoutX="316.0" layoutY="295.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" style="-fx-border-radius: 8;" styleClass="btnRed" text="Clean up" />
+      <TableView layoutX="322.0" layoutY="363.0" prefHeight="305.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
+        <columns>
+          <TableColumn prefWidth="243.0" styleClass="table-row-cell" text="Code" />
+          <TableColumn minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
+            <TableColumn minWidth="0.0" prefWidth="364.0" styleClass="table-row-cell" text="Nationality" />
+            <TableColumn minWidth="0.0" prefWidth="124.0" styleClass="table-row-cell" text="Group?" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="715.0" prefWidth="1365.0" styleClass="background-login" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.app.UsuarioView">
+   <children>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="727.0" layoutX="-23.0" stroke="TRANSPARENT" strokeType="INSIDE" width="240.0" />
+      <ImageView fitHeight="189.0" fitWidth="222.0" layoutX="14.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logo.jpg" />
+         </image>
+      </ImageView>
+      <VBox alignment="TOP_CENTER" layoutX="1.0" layoutY="258.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="214.0" prefWidth="215.0" style="-fx-spacing: 12;">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="270.0" style="-fx-background-color: transparent;" text="Home" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri Light" size="32.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#a3c0f5" glyphName="HOME" size="25" stroke="#4a4a4a" textAlignment="JUSTIFY" />
+               </graphic></Button>
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="239.0" style="-fx-background-color: transparent;" text="Search" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri Light" size="32.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#a3c0f5" glyphName="SEARCH" size="25" stroke="#4a4a4a" textAlignment="JUSTIFY" />
+               </graphic>
+            </Button>
+            <Button fx:id="gridPaneLibrary" layoutX="74.0" layoutY="10.0" lineSpacing="10.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="253.0" style="-fx-background-color: transparent;" text="Library" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri Light" size="32.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#a3c0f5" glyphName="BOOK" size="25" stroke="#4a4a4a" textAlignment="JUSTIFY" />
+               </graphic></Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <Button alignment="TOP_LEFT" layoutX="14.0" layoutY="681.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: TRANSPARENT;" text="Log out">
+         <graphic>
+            <FontAwesomeIconView fill="#bc0000" glyphName="CLOSE" size="18" textAlignment="JUSTIFY" />
+         </graphic>
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Label layoutX="263.0" layoutY="33.0" text="Home">
+         <font>
+            <Font name="System Bold" size="57.0" />
+         </font>
+      </Label>
+      <StackPane layoutX="263.0" layoutY="117.0" prefHeight="572.0" prefWidth="1059.0">
+         <children>
+            <GridPane fx:id="gridPaneHome" prefHeight="573.0" prefWidth="1056.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="gridPaneSearch" layoutX="10.0" layoutY="10.0" prefHeight="573.0" prefWidth="1056.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="gridPaneLibrary" layoutX="10.0" layoutY="10.0" prefHeight="573.0" prefWidth="1056.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

@@ -49,6 +49,20 @@
 .button:hover{
     -fx-cursor: hand;
 }
+
+.btnRed{
+  -fx-border-radius: 8;
+  -fx-background-radius: 8;
+  -fx-background-color: transparent;
+  -fx-border-color: #E74C3C;
+  -fx-text-fill: #E74C3C;
+}
+.btnRed:hover{
+ -fx-cursor: hand;
+ -fx-background-color: #E74C3C;
+ -fx-border-color: #E74C3C;
+ -fx-text-fill: white;
+}
 .tabsLogIn{
  -fx-background-color: linear-gradient(to bottom right, #a3c0f5, #edb3a1);
  -fx-border-color: transparent;
@@ -57,3 +71,32 @@
  -fx-background-color: linear-gradient(to bottom right,#edb3a1 ,#a3c0f5 );
  -fx-border-color: transparent;
 }
+
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #a3c0f5;
+    -fx-border-radius: 8;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+    -fx-border-color: #a3c0f5;
+}
+
+.table-view .column-header {
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #f8f8f8;
+    -fx-text-fill: #333333;
+    -fx-border-width: 0 1 2 0; /* Espesor del borde inferior */
+    -fx-border-color: #a3c0f5;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #336699;
+    -fx-text-fill: white;
+}
+
+
