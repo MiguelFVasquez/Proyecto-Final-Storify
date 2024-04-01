@@ -1,7 +1,7 @@
-# TRABAJANDO EN EL PROYECTO: Shuh3n
+# TRABAJANDO EN EL PROYECTO: 
 
 ## ***TASKS***
-- Interfaz de inicio sesión de usuario
+
 - Navegación de tab login y Register 
 - Funcionalidad de botones tab login
 - Funcionalidad de botones Tab register
@@ -13,9 +13,10 @@
 - Crear interfaces y controladores
 
 ### DOING
-
-
+- Gridpane's de UserView. ((Navegación))
+- GridPane's de AdminView ((Navegación))
 ### DONE
+- Interfaz de inicio sesión de usuario
 - ~~Cruds~~
 - ~~Uso de colecciones~~
 
