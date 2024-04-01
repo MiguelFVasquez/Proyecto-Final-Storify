@@ -15,14 +15,14 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="715.0" prefWidth="1365.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController">
    <children>
-      <TabPane prefHeight="354.0" prefWidth="628.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane fx:id="tabPane" prefHeight="354.0" prefWidth="628.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab text="Log in">
+          <Tab fx:id="tabLogIn" styleClass="tabsLogIn" text="Log in">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="background-login" stylesheets="@../styles/style.css">
                      <children>
-                        <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="628.0" layoutX="42.0" layoutY="24.0" stroke="WHITE" strokeType="INSIDE" width="1281.0" />
-                        <ImageView fitHeight="589.0" fitWidth="730.0" layoutX="43.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: transparent;">
+                        <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="628.0" layoutX="40.0" layoutY="29.0" stroke="WHITE" strokeType="INSIDE" width="1281.0" />
+                        <ImageView fitHeight="589.0" fitWidth="730.0" layoutX="44.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: transparent;">
                            <image>
                               <Image url="@../images/logo.jpg" />
                            </image>
@@ -33,31 +33,33 @@
                               <Font name="System Bold" size="96.0" />
                            </font></Label>
                         <PasswordField fx:id="txtPassword" layoutX="690.0" layoutY="365.0" prefHeight="40.0" prefWidth="545.0" promptText="Password" styleClass="txtFields" />
-                        <Button fx:id="btnLogin" layoutX="860.0" layoutY="450.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="206.0" style="-fx-background-color: #a3c0f5; -fx-background-radius: 18;" text="Login">
+                        <Button fx:id="btnLogin" layoutX="860.0" layoutY="426.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="206.0" style="-fx-background-color: #a3c0f5; -fx-background-radius: 18;" text="Login">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Button>
                         <FontAwesomeIconView fill="#a3c0f5" glyphName="USER" layoutX="796.0" layoutY="237.0" selectionFill="#a3c0f5" size="30" wrappingWidth="16.571428298950195" />
                         <Label layoutX="913.0" layoutY="417.0" textFill="#6600ff" />
-                        <Button fx:id="btnForgotPassword" layoutX="894.0" layoutY="414.0" mnemonicParsing="false" onAction="#rescuePassword" style="-fx-background-color: transparent;" text="Forgot your password?" textFill="#2b00ff" />
-                        <Button fx:id="btnHaveAnAcc" layoutX="1112.0" layoutY="500.0" mnemonicParsing="false" onAction="#activeRegisterTab" style="-fx-background-color: transparent;" text="Haven't an account?" textFill="#2b00ff" />
+                        <Button fx:id="btnForgotPassword" layoutX="959.0" layoutY="476.0" mnemonicParsing="false" onAction="#rescuePassword" style="-fx-background-color: transparent;" text="password?" textFill="#2b00ff" underline="true" />
+                        <Button fx:id="btnHaveAnAcc" layoutX="982.0" layoutY="263.0" mnemonicParsing="false" onAction="#activeRegisterTab" style="-fx-background-color: transparent;" text="Sign Up" textFill="#2b00ff" underline="true" />
                         <Button fx:id="btnCloseWindow" layoutX="1262.0" layoutY="36.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="30.0" prefWidth="37.0" style="-fx-background-color: RED; -fx-background-radius: 12;">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="20" />
                            </graphic>
                         </Button>
+                        <Label layoutX="884.0" layoutY="267.0" text="No registered yet?" />
+                        <Label layoutX="926.0" layoutY="480.0" text="Forgot" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Register">
+          <Tab fx:id="tabSignUp" disable="true" styleClass="tabsSignUp" text="Sign Up">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="background-register" stylesheets="@../styles/style.css">
                      <children>
-                        <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="628.0" layoutX="43.0" layoutY="26.0" stroke="WHITE" strokeType="INSIDE" width="1281.0" />
+                        <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="628.0" layoutX="33.0" layoutY="29.0" stroke="WHITE" strokeType="INSIDE" width="1281.0" />
                         <FontAwesomeIconView fill="#a3c0f5" glyphName="USER" layoutX="113.0" layoutY="526.0" selectionFill="#a3c0f5" size="450" stroke="BLACK" wrappingWidth="291.5714282989502" />
-                        <Label contentDisplay="CENTER" layoutX="574.0" layoutY="39.0" prefHeight="141.0" prefWidth="377.0" text="Register">
+                        <Label contentDisplay="CENTER" layoutX="575.0" layoutY="70.0" prefHeight="141.0" prefWidth="377.0" text="Sign Up">
                            <font>
                               <Font name="System Bold" size="96.0" />
                            </font>
@@ -66,8 +68,11 @@
                         <TextField fx:id="txtPasswordRegister" layoutX="494.0" layoutY="295.0" prefHeight="52.0" prefWidth="536.0" promptText="Password" styleClass="txtFields2" />
                         <TextField fx:id="txtPasswordConfirRegister" layoutX="494.0" layoutY="358.0" prefHeight="52.0" prefWidth="536.0" promptText="Password confirmation" styleClass="txtFields2" />
                         <TextField fx:id="txtEmail" layoutX="494.0" layoutY="425.0" prefHeight="52.0" prefWidth="536.0" promptText="Email" styleClass="txtFields2" />
-                        <Button fx:id="btnRegister" layoutX="662.0" layoutY="513.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="42.0" prefWidth="202.0" style="-fx-background-color: #edb3a1; -fx-background-radius: 16;" styleClass="btnVerde" stylesheets="@../styles/style.css" text="Register" />
-                        <Button fx:id="btnAlrHavAcc" layoutX="684.0" layoutY="482.0" mnemonicParsing="false" onAction="#activeLogInTab" style="-fx-background-color: transparent;" text="Already have and account?" textFill="#2b00ff" />
+                        <Button fx:id="btnRegister" contentDisplay="CENTER" layoutX="662.0" layoutY="513.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="42.0" prefWidth="202.0" style="-fx-background-color: #edb3a1; -fx-background-radius: 16;" styleClass="btnVerde" stylesheets="@../styles/style.css" text="Sign Up">
+                           <font>
+                              <Font size="24.0" />
+                           </font></Button>
+                        <Button fx:id="btnAlrHavAcc" layoutX="684.0" layoutY="482.0" mnemonicParsing="false" onAction="#activeLogInTab" style="-fx-background-color: transparent;" text="Already have an account?" textFill="#2b00ff" />
                      </children></AnchorPane>
             </content>
           </Tab>

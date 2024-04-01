@@ -49,3 +49,11 @@
 .button:hover{
     -fx-cursor: hand;
 }
+.tabsLogIn{
+ -fx-background-color: linear-gradient(to bottom right, #a3c0f5, #edb3a1);
+ -fx-border-color: transparent;
+}
+.tabsSignUp{
+ -fx-background-color: linear-gradient(to bottom right,#edb3a1 ,#a3c0f5 );
+ -fx-border-color: transparent;
+}

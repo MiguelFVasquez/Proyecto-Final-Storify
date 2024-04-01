@@ -4,9 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class LoginViewController {
@@ -49,6 +47,15 @@ public class LoginViewController {
 
     @FXML
     private TextField txtPasswordConfirRegister;
+
+    @FXML
+    private Tab tabLogIn;
+
+    @FXML
+    private TabPane tabPane;
+
+    @FXML
+    private Tab tabSignUp;
 
     @FXML
     private TextField txtPasswordRegister;
