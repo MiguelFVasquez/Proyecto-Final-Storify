@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -12,36 +14,36 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="715.0" prefWidth="1365.0" styleClass="background-login" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.app.AdminView">
+<AnchorPane pickOnBounds="false" prefHeight="715.0" prefWidth="1365.0" styleClass="background-login" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.app.AdminView">
    <children>
-      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="727.0" layoutX="-21.0" stroke="TRANSPARENT" strokeType="INSIDE" width="261.0" />
+      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="727.0" layoutX="-21.0" stroke="TRANSPARENT" strokeType="INSIDE" width="261.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass></Rectangle>
       <VBox alignment="TOP_CENTER" layoutX="13.0" layoutY="239.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="214.0" prefWidth="215.0" style="-fx-spacing: 12;">
          <children>
-            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="215.0" style="-fx-background-color: transparent;" text="Artists" textAlignment="CENTER">
+            <Button mnemonicParsing="false" prefHeight="67.0" prefWidth="215.0" style="-fx-background-color: transparent;" text="Artists" textAlignment="CENTER">
                <font>
                   <Font name="Calibri Light" size="32.0" />
                </font>
                <graphic>
-                  <ImageView fitHeight="69.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="56.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/1.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="215.0" style="-fx-background-color: transparent;" text="Songs" textAlignment="CENTER">
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="215.0" style="-fx-background-color: transparent;" text="Songs" textAlignment="CENTER">
                <font>
                   <Font name="Calibri Light" size="32.0" />
                </font>
                <graphic>
-                  <ImageView fitHeight="69.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="62.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/2.png" />
                      </image>
@@ -61,70 +63,118 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="662.0" layoutX="287.0" layoutY="32.0" strokeType="INSIDE" width="1030.0">
-         <stroke>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color opacity="0.0" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </stroke>
-      </Rectangle>
-      <ImageView fitHeight="214.0" fitWidth="322.0" layoutX="15.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="214.0" fitWidth="322.0" layoutX="15.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
          <image>
             <Image url="@../images/AdminLogo.png" />
          </image>
       </ImageView>
-      <Label layoutX="322.0" layoutY="51.0" text="Artists">
-         <font>
-            <Font name="System Bold" size="70.0" />
-         </font>
-      </Label>
-      <Label layoutX="316.0" layoutY="141.0" text="Information of artist">
-         <font>
-            <Font name="System Italic" size="26.0" />
-         </font>
-      </Label>
-      <Label layoutX="316.0" layoutY="208.0" text="Name">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <TextField layoutX="458.0" layoutY="214.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
-      <Label layoutX="316.0" layoutY="246.0" text="Nationality">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <TextField layoutX="458.0" layoutY="252.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
-      <Label layoutX="316.0" layoutY="284.0">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <CheckBox layoutX="802.0" layoutY="221.0" mnemonicParsing="false" selected="true" style="-fx-border-radius: 8; -fx-background-color: transparent; -fx-border-color: #a3c0f5;" text="It's a group?">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </CheckBox>
-      <Button layoutX="676.0" layoutY="290.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" style="-fx-background-color: #a3c0f5; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Add" />
-      <Button layoutX="316.0" layoutY="295.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" style="-fx-border-radius: 8;" styleClass="btnRed" text="Clean up" />
-      <TableView layoutX="322.0" layoutY="363.0" prefHeight="305.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
-        <columns>
-          <TableColumn prefWidth="243.0" styleClass="table-row-cell" text="Code" />
-          <TableColumn minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
-            <TableColumn minWidth="0.0" prefWidth="364.0" styleClass="table-row-cell" text="Nationality" />
-            <TableColumn minWidth="0.0" prefWidth="124.0" styleClass="table-row-cell" text="Group?" />
-        </columns>
-      </TableView>
+      <AnchorPane layoutX="285.0" layoutY="41.0" prefHeight="661.0" prefWidth="1038.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <Button layoutX="397.0" layoutY="247.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" style="-fx-background-color: #a3c0f5; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Add" />
+            <Button layoutX="35.0" layoutY="247.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" style="-fx-border-radius: 8;" styleClass="btnRed" text="Clean up" />
+            <Label layoutX="35.0" layoutY="14.0" text="Artists">
+               <font>
+                  <Font name="System Bold" size="70.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="96.0" text="Information of artist">
+               <font>
+                  <Font name="System Italic" size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="158.0" text="Name">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="196.0" text="Nationality">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <TextField layoutX="179.0" layoutY="201.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
+            <TextField layoutX="179.0" layoutY="163.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
+            <CheckBox layoutX="527.0" layoutY="180.0" mnemonicParsing="false" selected="true" style="-fx-border-radius: 8; -fx-background-color: transparent; -fx-border-color: #a3c0f5;" text="It's a group?">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </CheckBox>
+            <TableView layoutX="42.0" layoutY="331.0" prefHeight="305.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
+              <columns>
+                <TableColumn prefWidth="243.0" styleClass="table-row-cell" text="Code" />
+                <TableColumn minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
+                  <TableColumn minWidth="0.0" prefWidth="364.0" styleClass="table-row-cell" text="Nationality" />
+                  <TableColumn minWidth="0.0" prefWidth="124.0" styleClass="table-row-cell" text="Group?" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="285.0" layoutY="41.0" prefHeight="661.0" prefWidth="1038.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <Label layoutX="44.0" layoutY="14.0" text="Songs">
+               <font>
+                  <Font name="System Bold" size="70.0" />
+               </font>
+            </Label>
+            <Label layoutX="68.0" layoutY="116.0" text="Name">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="68.0" layoutY="150.0" text="Album">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="68.0" layoutY="184.0" text="Portait">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="68.0" layoutY="218.0" text="Year">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="68.0" layoutY="252.0" text="Duration">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <TextField layoutX="193.0" layoutY="121.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
+            <TextField layoutX="193.0" layoutY="155.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
+            <TextField layoutX="193.0" layoutY="223.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
+            <TextField layoutX="193.0" layoutY="257.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
+            <ComboBox layoutX="192.0" layoutY="189.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #edb3a1; -fx-border-radius: 8;" />
+            <ImageView fitHeight="181.0" fitWidth="241.0" layoutX="641.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/musica.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="851.0" layoutY="186.0" text="Portait">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Label>
+            <TableView layoutX="48.0" layoutY="395.0" prefHeight="239.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
+               <columns>
+                  <TableColumn prefWidth="243.0" styleClass="table-row-cell" text="Code" />
+                  <TableColumn minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
+                  <TableColumn minWidth="0.0" prefWidth="364.0" styleClass="table-row-cell" text="Nationality" />
+                  <TableColumn minWidth="0.0" prefWidth="124.0" styleClass="table-row-cell" text="Group?" />
+               </columns>
+            </TableView>
+            <Button layoutX="437.0" layoutY="306.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="89.0" styleClass="btnBlue" text="Add" />
+            <Button layoutX="68.0" layoutY="312.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="89.0" styleClass="btnRed" text="Clean Up" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

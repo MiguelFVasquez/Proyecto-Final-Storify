@@ -15,11 +15,14 @@
 
 .txtFields2{
    -fx-background-color: transparent;
-   -fx-border-radius: 15px;
+   -fx-border-radius: 8px;
    -fx-border-color: #edb3a1; /* Color del borde */
 }
 .txtFields:selected{
    -fx-border-width: 0 0 2 0; /* Espesor del borde inferior */
+    -fx-border-color: blue;
+}
+.txtFields2:selected{
     -fx-border-color: blue;
 }
 .txtFields:focused{
@@ -34,16 +37,32 @@
      -fx-background-opacity: 60%;
 }
 
-.btnVerde{
+.btnGreen{
     -fx-background-color: green;
     -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
 }
 
-.btnVerde:hover{
+.btnGreen:hover{
     -fx-cursor: hand;
     -fx-background-color: transparent;
     -fx-text-fill: green;
     -fx-border-color: green;
+}
+
+.btnBlue{
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #a3c0f5;
+}
+.btnBlue:hover{
+    -fx-cursor: hand;
+    -fx-background-color: #a3c0f5;
+    -fx-text-fill: black;
+    -fx-border-color: black;
 }
 
 .button:hover{
@@ -98,5 +117,13 @@
     -fx-background-color: #336699;
     -fx-text-fill: white;
 }
+.white-bg{
+    -fx-background-color: #fff;
+    -fx-background-radius: 8px;
+}
+.shadow{
+    -fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.5), 6,0,0,0);
+}
+
 
 

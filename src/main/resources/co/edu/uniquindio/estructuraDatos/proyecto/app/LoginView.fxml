@@ -21,7 +21,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="background-login" stylesheets="@../styles/style.css">
                      <children>
-                        <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="628.0" layoutX="40.0" layoutY="29.0" stroke="WHITE" strokeType="INSIDE" width="1281.0" />
+                        <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="628.0" layoutX="40.0" layoutY="29.0" stroke="WHITE" strokeType="INSIDE" styleClass="shadow" width="1281.0" />
                         <ImageView fitHeight="589.0" fitWidth="730.0" layoutX="44.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: transparent;">
                            <image>
                               <Image url="@../images/logo.jpg" />
@@ -57,7 +57,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="background-register" stylesheets="@../styles/style.css">
                      <children>
-                        <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="628.0" layoutX="33.0" layoutY="29.0" stroke="WHITE" strokeType="INSIDE" width="1281.0" />
+                        <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="628.0" layoutX="33.0" layoutY="29.0" stroke="WHITE" strokeType="INSIDE" styleClass="shadow" width="1281.0" />
                         <FontAwesomeIconView fill="#a3c0f5" glyphName="USER" layoutX="113.0" layoutY="526.0" selectionFill="#a3c0f5" size="450" stroke="BLACK" wrappingWidth="291.5714282989502" />
                         <Label contentDisplay="CENTER" layoutX="575.0" layoutY="70.0" prefHeight="141.0" prefWidth="377.0" text="Sign Up">
                            <font>
