@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.estructuraDatos.proyecto.app.AdminViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.app.App;
 import co.edu.uniquindio.estructuraDatos.proyecto.app.UserViewController;
 import javafx.animation.FadeTransition;
@@ -88,23 +89,52 @@ public class LoginViewController {
     }
     @FXML
     void logIn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation( App.class.getResource( "UserView.fxml" ) );
-        AnchorPane anchorPane = loader.load();
-        UserViewController controller = loader.getController();
-        Stage stage = new Stage();
-        stage.setScene( new Scene( anchorPane , 1365 , 715 ) );
-        controller.init( stage );
+
+        if(txtName.getText().equals(  "admin" ) && txtPassword.getText().equals( "$aDmiN")||txtPassword.getText().equals( "123") ){
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation( App.class.getResource( "AdminView.fxml" ) );
+            AnchorPane anchorPane = loader.load();
+            AdminViewController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.setScene( new Scene( anchorPane , 1365 , 715 ) );
+            controller.init( stage );
 
 
-        controller.setAnchorPane( anchorPane );
-        controller.setLoginViewController( this );
+            controller.setAnchorPane( anchorPane );
+            controller.setLoginViewController( this );
 
-        stage.initStyle( StageStyle.TRANSPARENT );
-        stage.centerOnScreen();
-        controller.show();
-        this.stage.close();
+            stage.initStyle( StageStyle.TRANSPARENT );
+            stage.centerOnScreen();
+            controller.show();
+            this.stage.close();
 
+        }else {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation( App.class.getResource( "UserView.fxml" ) );
+            AnchorPane anchorPane = loader.load();
+            UserViewController controller = loader.getController();
+            Stage stage = new Stage();
+            stage.setScene( new Scene( anchorPane , 1365 , 715 ) );
+            controller.init( stage );
+
+
+            controller.setAnchorPane( anchorPane );
+            controller.setLoginViewController( this );
+
+            stage.initStyle( StageStyle.TRANSPARENT );
+            stage.centerOnScreen();
+            controller.show();
+            this.stage.close();
+
+        }
+        cleanUp();
+
+
+    }
+
+    void cleanUp(){
+        txtName.clear();
+        txtPassword.clear();
     }
 
     @FXML

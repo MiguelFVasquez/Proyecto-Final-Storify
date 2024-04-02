@@ -17,37 +17,29 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane pickOnBounds="false" prefHeight="715.0" prefWidth="1365.0" styleClass="background-login" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.app.AdminView">
+<AnchorPane pickOnBounds="false" prefHeight="715.0" prefWidth="1365.0" styleClass="background-login" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.app.AdminViewController">
    <children>
-      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="727.0" layoutX="-21.0" stroke="TRANSPARENT" strokeType="INSIDE" width="261.0">
+      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="WHITE" height="715.0" layoutX="-21.0" stroke="TRANSPARENT" strokeType="INSIDE" width="261.0">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />
          </styleClass></Rectangle>
-      <VBox alignment="TOP_CENTER" layoutX="13.0" layoutY="239.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="214.0" prefWidth="215.0" style="-fx-spacing: 12;">
+      <VBox layoutX="13.0" layoutY="239.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="214.0" prefWidth="215.0" style="-fx-spacing: 2;">
          <children>
-            <Button mnemonicParsing="false" prefHeight="67.0" prefWidth="215.0" style="-fx-background-color: transparent;" text="Artists" textAlignment="CENTER">
+            <Button fx:id="btnArtists" mnemonicParsing="false" onAction="#showArtistsInfo" prefHeight="19.0" prefWidth="215.0" style="-fx-background-radius: 8px; -fx-background-color: transparent;" text="Artists" textAlignment="CENTER">
                <font>
                   <Font name="Calibri Light" size="32.0" />
                </font>
                <graphic>
-                  <ImageView fitHeight="56.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/1.png" />
-                     </image>
-                  </ImageView>
+                  <FontAwesomeIconView glyphName="MUSIC" size="20" />
                </graphic>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="215.0" style="-fx-background-color: transparent;" text="Songs" textAlignment="CENTER">
+            <Button fx:id="btnSongs" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showSongsInfo" prefHeight="40.0" prefWidth="215.0" style="-fx-background-radius: 8px; -fx-background-color: transparent;" text="Songs" textAlignment="CENTER">
                <font>
                   <Font name="Calibri Light" size="32.0" />
                </font>
                <graphic>
-                  <ImageView fitHeight="62.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/2.png" />
-                     </image>
-                  </ImageView>
+                  <FontAwesomeIconView glyphName="MUSIC" size="20" />
                </graphic>
             </Button>
          </children>
@@ -55,7 +47,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Button alignment="TOP_LEFT" layoutX="14.0" layoutY="680.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: TRANSPARENT;" text="Log out">
+      <Button fx:id="btnLogOut" alignment="TOP_LEFT" layoutX="44.0" layoutY="667.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="116.0" style="-fx-background-radius: 8px; -fx-background-color: transparent;" text="Log out">
          <graphic>
             <FontAwesomeIconView fill="#bc0000" glyphName="CLOSE" size="18" textAlignment="JUSTIFY" />
          </graphic>
@@ -68,14 +60,14 @@
             <Image url="@../images/AdminLogo.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="285.0" layoutY="41.0" prefHeight="661.0" prefWidth="1038.0">
+      <AnchorPane fx:id="anchorArtists" layoutX="285.0" layoutY="41.0" prefHeight="661.0" prefWidth="1038.0">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />
          </styleClass>
          <children>
-            <Button layoutX="397.0" layoutY="247.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" style="-fx-background-color: #a3c0f5; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Add" />
-            <Button layoutX="35.0" layoutY="247.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" style="-fx-border-radius: 8;" styleClass="btnRed" text="Clean up" />
+            <Button fx:id="btnAddArtist" layoutX="397.0" layoutY="247.0" mnemonicParsing="false" onAction="#addArtist" prefHeight="27.0" prefWidth="69.0" style="-fx-background-color: #a3c0f5; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Add" />
+            <Button fx:id="btnCleanUpArtist" layoutX="35.0" layoutY="247.0" mnemonicParsing="false" onAction="#cleanUpArtist" prefHeight="27.0" prefWidth="69.0" style="-fx-border-radius: 8;" styleClass="btnRed" text="Clean up" />
             <Label layoutX="35.0" layoutY="14.0" text="Artists">
                <font>
                   <Font name="System Bold" size="70.0" />
@@ -96,24 +88,24 @@
                   <Font size="26.0" />
                </font>
             </Label>
-            <TextField layoutX="179.0" layoutY="201.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
-            <TextField layoutX="179.0" layoutY="163.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
-            <CheckBox layoutX="527.0" layoutY="180.0" mnemonicParsing="false" selected="true" style="-fx-border-radius: 8; -fx-background-color: transparent; -fx-border-color: #a3c0f5;" text="It's a group?">
+            <TextField fx:id="txtNationalityArtist" layoutX="179.0" layoutY="201.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
+            <TextField fx:id="txtNameArtist" layoutX="179.0" layoutY="163.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
+            <CheckBox fx:id="checkGroupArtist" layoutX="527.0" layoutY="180.0" mnemonicParsing="false" selected="true" style="-fx-border-radius: 8; -fx-background-color: transparent; -fx-border-color: #a3c0f5;" text="It's a group?">
                <font>
                   <Font size="19.0" />
                </font>
             </CheckBox>
-            <TableView layoutX="42.0" layoutY="331.0" prefHeight="305.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
+            <TableView fx:id="tableViewArtists" layoutX="42.0" layoutY="331.0" prefHeight="305.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
               <columns>
-                <TableColumn prefWidth="243.0" styleClass="table-row-cell" text="Code" />
-                <TableColumn minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
-                  <TableColumn minWidth="0.0" prefWidth="364.0" styleClass="table-row-cell" text="Nationality" />
-                  <TableColumn minWidth="0.0" prefWidth="124.0" styleClass="table-row-cell" text="Group?" />
+                <TableColumn fx:id="tableColumnCode" prefWidth="243.0" styleClass="table-row-cell" text="Code" />
+                <TableColumn fx:id="tableColumnName" minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
+                  <TableColumn fx:id="tableColumnNationality" minWidth="0.0" prefWidth="364.0" styleClass="table-row-cell" text="Nationality" />
+                  <TableColumn fx:id="tableColumnGroup" minWidth="0.0" prefWidth="124.0" styleClass="table-row-cell" text="Group?" />
               </columns>
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="285.0" layoutY="41.0" prefHeight="661.0" prefWidth="1038.0">
+      <AnchorPane fx:id="anchorSongs" layoutX="285.0" layoutY="41.0" prefHeight="661.0" prefWidth="1038.0">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />
@@ -149,12 +141,12 @@
                   <Font size="23.0" />
                </font>
             </Label>
-            <TextField layoutX="193.0" layoutY="121.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
-            <TextField layoutX="193.0" layoutY="155.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
-            <TextField layoutX="193.0" layoutY="223.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
-            <TextField layoutX="193.0" layoutY="257.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
+            <TextField fx:id="txtNameSong" layoutX="193.0" layoutY="121.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
+            <TextField fx:id="txtNameAlbumnSong" layoutX="193.0" layoutY="155.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
+            <TextField fx:id="txtYearSong" layoutX="193.0" layoutY="223.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
+            <TextField fx:id="txtDurationSong" layoutX="193.0" layoutY="257.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
             <ComboBox layoutX="192.0" layoutY="189.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #edb3a1; -fx-border-radius: 8;" />
-            <ImageView fitHeight="181.0" fitWidth="241.0" layoutX="641.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageViewSongPortait" fitHeight="181.0" fitWidth="241.0" layoutX="641.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/musica.png" />
                </image>
@@ -164,16 +156,16 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Label>
-            <TableView layoutX="48.0" layoutY="395.0" prefHeight="239.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
+            <TableView fx:id="tableViewArtists1" layoutX="48.0" layoutY="395.0" prefHeight="239.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
                <columns>
-                  <TableColumn prefWidth="243.0" styleClass="table-row-cell" text="Code" />
-                  <TableColumn minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
-                  <TableColumn minWidth="0.0" prefWidth="364.0" styleClass="table-row-cell" text="Nationality" />
-                  <TableColumn minWidth="0.0" prefWidth="124.0" styleClass="table-row-cell" text="Group?" />
+                  <TableColumn fx:id="tableColumnCode1" prefWidth="243.0" styleClass="table-row-cell" text="Code" />
+                  <TableColumn fx:id="tableColumnName1" minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
+                  <TableColumn fx:id="tableColumnNationality1" minWidth="0.0" prefWidth="364.0" styleClass="table-row-cell" text="Nationality" />
+                  <TableColumn fx:id="tableColumnGroup1" minWidth="0.0" prefWidth="124.0" styleClass="table-row-cell" text="Group?" />
                </columns>
             </TableView>
-            <Button layoutX="437.0" layoutY="306.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="89.0" styleClass="btnBlue" text="Add" />
-            <Button layoutX="68.0" layoutY="312.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="89.0" styleClass="btnRed" text="Clean Up" />
+            <Button fx:id="btnAddSong" layoutX="437.0" layoutY="306.0" mnemonicParsing="false" onAction="#addSong" prefHeight="38.0" prefWidth="89.0" styleClass="btnBlue" text="Add" />
+            <Button fx:id="btnCleanUpSong" layoutX="68.0" layoutY="312.0" mnemonicParsing="false" onAction="#cleanUpSong" prefHeight="38.0" prefWidth="89.0" styleClass="btnRed" text="Clean Up" />
          </children>
       </AnchorPane>
    </children>
