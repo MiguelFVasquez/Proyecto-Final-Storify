@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="715.0" prefWidth="1365.0" styleClass="background-login" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.app.UsuarioView">
+<AnchorPane prefHeight="715.0" prefWidth="1365.0" styleClass="background-login" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.app.UserViewController">
    <children>
       <StackPane disable="true" layoutX="263.0" layoutY="117.0" prefHeight="572.0" prefWidth="1059.0">
          <children>
@@ -46,22 +46,22 @@
             </GridPane>
          </children>
       </StackPane>
-      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="727.0" layoutX="-23.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="shadow" width="240.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="715.0" layoutX="-23.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="shadow" width="240.0" />
       <ImageView fitHeight="189.0" fitWidth="222.0" layoutX="14.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/logo.jpg" />
          </image>
       </ImageView>
-      <VBox alignment="TOP_CENTER" layoutX="1.0" layoutY="258.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="214.0" prefWidth="215.0" style="-fx-spacing: 12;">
+      <VBox alignment="TOP_CENTER" layoutX="7.0" layoutY="258.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="214.0" prefWidth="204.0" style="-fx-spacing: 12;">
          <children>
-            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="270.0" style="-fx-background-color: transparent;" text="Home" textAlignment="CENTER">
+            <Button alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="59.0" prefWidth="270.0" style="-fx-background-color: transparent;" text="Home" textAlignment="CENTER">
                <font>
                   <Font name="Calibri Light" size="32.0" />
                </font>
                <graphic>
                   <FontAwesomeIconView fill="#a3c0f5" glyphName="HOME" size="25" stroke="#4a4a4a" textAlignment="JUSTIFY" />
                </graphic></Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="239.0" style="-fx-background-color: transparent;" text="Search" textAlignment="CENTER">
+            <Button alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="239.0" style="-fx-background-color: transparent;" text="Search" textAlignment="CENTER">
                <font>
                   <Font name="Calibri Light" size="32.0" />
                </font>
@@ -69,7 +69,7 @@
                   <FontAwesomeIconView fill="#a3c0f5" glyphName="SEARCH" size="25" stroke="#4a4a4a" textAlignment="JUSTIFY" />
                </graphic>
             </Button>
-            <Button fx:id="gridPaneLibrary" layoutX="74.0" layoutY="10.0" lineSpacing="10.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="253.0" style="-fx-background-color: transparent;" text="Library" textAlignment="CENTER">
+            <Button alignment="TOP_RIGHT" layoutX="74.0" layoutY="10.0" lineSpacing="10.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="253.0" style="-fx-background-color: transparent;" text="Library" textAlignment="CENTER">
                <font>
                   <Font name="Calibri Light" size="32.0" />
                </font>
@@ -81,7 +81,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Button alignment="TOP_LEFT" layoutX="14.0" layoutY="681.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: TRANSPARENT;" text="Log out">
+      <Button fx:id="btnLogOut" alignment="TOP_LEFT" layoutX="30.0" layoutY="666.0" mnemonicParsing="false" onAction="#logOut" prefHeight="27.0" prefWidth="97.0" style="-fx-background-color: TRANSPARENT;" text="Log out">
          <graphic>
             <FontAwesomeIconView fill="#bc0000" glyphName="CLOSE" size="18" textAlignment="JUSTIFY" />
          </graphic>

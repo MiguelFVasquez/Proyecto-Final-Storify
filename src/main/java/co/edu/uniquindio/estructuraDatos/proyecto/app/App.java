@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -17,6 +18,9 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class App extends Application {
+    private double y;
+    private double x;
+
     @Override
     public void start(Stage primaryStage) throws IOException {
 
@@ -50,8 +54,23 @@ public class App extends Application {
                         Stage stage = new Stage();
                         stage.setScene( new Scene( anchorPane , 1365 , 715 ) );
                         controller.init( stage );
+                        anchorPane.setOnMousePressed( (MouseEvent event) ->{
+                            x = event.getSceneX();
+                            y= event.getSceneY();
+                        });
+                        
+                        anchorPane.setOnMouseDragged((MouseEvent event) -> {
+                            stage.setX( event.getScreenX()-x );
+                            stage.setY( event.getScreenY()-y );
+                        });
+                        FadeTransition fadeIn2 = new FadeTransition( Duration.seconds(1), anchorPane);
+                        fadeIn2.setFromValue(0);
+                        fadeIn2.setToValue(1);
+                        controller.setAnchorPane( anchorPane );
+                        stage.initStyle( StageStyle.TRANSPARENT );
                         stage.centerOnScreen();
                         stage.show();
+                        fadeIn2.play();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="715.0" prefWidth="1365.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController">
    <children>
-      <TabPane fx:id="tabPane" prefHeight="354.0" prefWidth="628.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane fx:id="tabPane" prefHeight="715.0" prefWidth="1365.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab fx:id="tabLogIn" styleClass="tabsLogIn" text="Log in">
             <content>
@@ -33,7 +33,7 @@
                               <Font name="System Bold" size="96.0" />
                            </font></Label>
                         <PasswordField fx:id="txtPassword" layoutX="690.0" layoutY="365.0" prefHeight="40.0" prefWidth="545.0" promptText="Password" styleClass="txtFields" />
-                        <Button fx:id="btnLogin" layoutX="860.0" layoutY="426.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="206.0" style="-fx-background-color: #a3c0f5; -fx-background-radius: 18;" text="Login">
+                        <Button fx:id="btnLogin" layoutX="860.0" layoutY="426.0" mnemonicParsing="false" onAction="#logIn" prefHeight="36.0" prefWidth="206.0" style="-fx-background-color: #a3c0f5; -fx-background-radius: 18;" text="Login">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -41,7 +41,7 @@
                         <FontAwesomeIconView fill="#a3c0f5" glyphName="USER" layoutX="796.0" layoutY="237.0" selectionFill="#a3c0f5" size="30" wrappingWidth="16.571428298950195" />
                         <Label layoutX="913.0" layoutY="417.0" textFill="#6600ff" />
                         <Button fx:id="btnForgotPassword" layoutX="959.0" layoutY="476.0" mnemonicParsing="false" onAction="#rescuePassword" style="-fx-background-color: transparent;" text="password?" textFill="#2b00ff" underline="true" />
-                        <Button fx:id="btnHaveAnAcc" layoutX="982.0" layoutY="263.0" mnemonicParsing="false" onAction="#activeRegisterTab" style="-fx-background-color: transparent;" text="Sign Up" textFill="#2b00ff" underline="true" />
+                        <Button fx:id="btnHaveAnAcc" layoutX="982.0" layoutY="263.0" mnemonicParsing="false" onAction="#activeSignUpTab" style="-fx-background-color: transparent;" text="Sign Up" textFill="#2b00ff" underline="true" />
                         <Button fx:id="btnCloseWindow" layoutX="1262.0" layoutY="36.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="30.0" prefWidth="37.0" style="-fx-background-color: RED; -fx-background-radius: 12;">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="20" />
