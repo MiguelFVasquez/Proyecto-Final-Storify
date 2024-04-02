@@ -33,7 +33,7 @@
                               <Font name="System Bold" size="96.0" />
                            </font></Label>
                         <PasswordField fx:id="txtPassword" layoutX="690.0" layoutY="365.0" prefHeight="40.0" prefWidth="545.0" promptText="Password" styleClass="txtFields" />
-                        <Button fx:id="btnLogin" layoutX="860.0" layoutY="426.0" mnemonicParsing="false" onAction="#logIn" prefHeight="36.0" prefWidth="206.0" style="-fx-background-color: #a3c0f5; -fx-background-radius: 18;" text="Login">
+                        <Button fx:id="btnLogin" layoutX="860.0" layoutY="426.0" mnemonicParsing="false" onAction="#logIn" prefHeight="36.0" prefWidth="206.0" style="-fx-background-radius: 18; -fx-border-radius: 18; -fx-border-color: #a3c0f5; -fx-background-color: transparent;" text="Login">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -49,6 +49,11 @@
                         </Button>
                         <Label layoutX="884.0" layoutY="267.0" text="No registered yet?" />
                         <Label layoutX="926.0" layoutY="480.0" text="Forgot" />
+                        <ImageView fitHeight="271.0" fitWidth="247.0" layoutX="410.0" layoutY="462.0" pickOnBounds="true" preserveRatio="true" rotate="-7.8">
+                           <image>
+                              <Image url="@../images/Shuhenfy%20(1).png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
             </content>

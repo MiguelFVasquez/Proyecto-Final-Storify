@@ -24,9 +24,9 @@
             <String fx:value="white-bg" />
             <String fx:value="shadow" />
          </styleClass></Rectangle>
-      <VBox layoutX="13.0" layoutY="239.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="214.0" prefWidth="215.0" style="-fx-spacing: 2;">
+      <VBox layoutX="-5.0" layoutY="239.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="214.0" prefWidth="245.0" style="-fx-spacing: 2;">
          <children>
-            <Button fx:id="btnArtists" mnemonicParsing="false" onAction="#showArtistsInfo" prefHeight="19.0" prefWidth="215.0" style="-fx-background-radius: 8px; -fx-background-color: transparent;" text="Artists" textAlignment="CENTER">
+            <Button fx:id="btnArtists" mnemonicParsing="false" onAction="#showArtistsInfo" prefHeight="59.0" prefWidth="254.0" style="-fx-background-radius: 8px; -fx-background-color: transparent;" text="Artists" textAlignment="CENTER">
                <font>
                   <Font name="Calibri Light" size="32.0" />
                </font>
@@ -34,7 +34,7 @@
                   <FontAwesomeIconView glyphName="MUSIC" size="20" />
                </graphic>
             </Button>
-            <Button fx:id="btnSongs" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showSongsInfo" prefHeight="40.0" prefWidth="215.0" style="-fx-background-radius: 8px; -fx-background-color: transparent;" text="Songs" textAlignment="CENTER">
+            <Button fx:id="btnSongs" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showSongsInfo" prefHeight="59.0" prefWidth="252.0" style="-fx-background-radius: 8px; -fx-background-color: transparent;" text="Songs" textAlignment="CENTER">
                <font>
                   <Font name="Calibri Light" size="32.0" />
                </font>
@@ -47,14 +47,6 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Button fx:id="btnLogOut" alignment="TOP_LEFT" layoutX="44.0" layoutY="667.0" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="116.0" style="-fx-background-radius: 8px; -fx-background-color: transparent;" text="Log out">
-         <graphic>
-            <FontAwesomeIconView fill="#bc0000" glyphName="CLOSE" size="18" textAlignment="JUSTIFY" />
-         </graphic>
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
       <ImageView fitHeight="214.0" fitWidth="322.0" layoutX="15.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
          <image>
             <Image url="@../images/AdminLogo.png" />
@@ -168,5 +160,17 @@
             <Button fx:id="btnCleanUpSong" layoutX="68.0" layoutY="312.0" mnemonicParsing="false" onAction="#cleanUpSong" prefHeight="38.0" prefWidth="89.0" styleClass="btnRed" text="Clean Up" />
          </children>
       </AnchorPane>
+      <Button fx:id="btnLogOut" alignment="CENTER" layoutX="-4.0" layoutY="656.0" mnemonicParsing="false" onAction="#logOut" prefHeight="57.0" prefWidth="245.0" style="-fx-background-color: TRANSPARENT;" text="Log out">
+         <font>
+            <Font name="Calibri Light" size="27.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exitLogo.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

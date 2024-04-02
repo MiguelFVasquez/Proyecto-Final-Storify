@@ -8,11 +8,7 @@ import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -107,11 +103,15 @@ public class AdminViewController {
 
     @FXML
     private TextField txtYearSong;
+
     private Stage stage;
     private AnchorPane anchorPane;
     private Double x;
     private Double y;
     private LoginViewController loginViewController;
+
+
+    //------------------------------------
 
     @FXML
     void addArtist(ActionEvent event) {

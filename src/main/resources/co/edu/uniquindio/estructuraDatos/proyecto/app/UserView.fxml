@@ -46,55 +46,64 @@
             </GridPane>
          </children>
       </StackPane>
-      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="715.0" layoutX="-23.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="shadow" width="240.0" />
-      <ImageView fitHeight="189.0" fitWidth="222.0" layoutX="14.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="715.0" layoutX="-23.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="shadow" width="227.0" />
+      <ImageView fitHeight="189.0" fitWidth="222.0" layoutX="-2.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/logo.jpg" />
          </image>
       </ImageView>
-      <VBox alignment="TOP_CENTER" layoutX="7.0" layoutY="258.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="214.0" prefWidth="204.0" style="-fx-spacing: 12;">
+      <ImageView disable="true" fitHeight="150.0" fitWidth="134.0" layoutX="63.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Shuhenfy%20(1).png" />
+         </image>
+      </ImageView>
+      <VBox layoutY="252.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="214.0" prefWidth="204.0" style="-fx-spacing: 12;">
          <children>
-            <Button alignment="TOP_RIGHT" mnemonicParsing="false" prefHeight="59.0" prefWidth="270.0" style="-fx-background-color: transparent;" text="Home" textAlignment="CENTER">
+            <Button fx:id="btnHome" mnemonicParsing="false" onAction="#showHomeInfo" prefHeight="59.0" prefWidth="210.0" style="-fx-background-color: transparent;" text="Home" textAlignment="CENTER">
                <font>
-                  <Font name="Calibri Light" size="32.0" />
+                  <Font name="Calibri Light" size="27.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView fill="#a3c0f5" glyphName="HOME" size="25" stroke="#4a4a4a" textAlignment="JUSTIFY" />
+                  <FontAwesomeIconView fill="#a3c0f5" glyphName="HOME" size="30" stroke="#4a4a4a" textAlignment="JUSTIFY" />
                </graphic></Button>
-            <Button alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="239.0" style="-fx-background-color: transparent;" text="Search" textAlignment="CENTER">
+            <Button fx:id="btnSearch" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showSearchInfo" prefHeight="59.0" prefWidth="206.0" style="-fx-background-color: transparent;" text="Search" textAlignment="CENTER">
                <font>
-                  <Font name="Calibri Light" size="32.0" />
+                  <Font name="Calibri Light" size="27.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView fill="#a3c0f5" glyphName="SEARCH" size="25" stroke="#4a4a4a" textAlignment="JUSTIFY" />
+                  <FontAwesomeIconView fill="#a3c0f5" glyphName="SEARCH" size="30" stroke="#4a4a4a" textAlignment="JUSTIFY" />
                </graphic>
             </Button>
-            <Button alignment="TOP_RIGHT" layoutX="74.0" layoutY="10.0" lineSpacing="10.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="253.0" style="-fx-background-color: transparent;" text="Library" textAlignment="CENTER">
+            <Button fx:id="btnLibrary" layoutX="74.0" layoutY="10.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#showLibraryInfo" prefHeight="59.0" prefWidth="222.0" style="-fx-background-color: transparent;" text="Library" textAlignment="CENTER">
                <font>
-                  <Font name="Calibri Light" size="32.0" />
+                  <Font name="Calibri Light" size="27.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView fill="#a3c0f5" glyphName="BOOK" size="25" stroke="#4a4a4a" textAlignment="JUSTIFY" />
+                  <FontAwesomeIconView fill="#a3c0f5" glyphName="BOOK" size="30" stroke="#4a4a4a" textAlignment="JUSTIFY" />
                </graphic></Button>
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </VBox>
-      <Button fx:id="btnLogOut" alignment="TOP_LEFT" layoutX="30.0" layoutY="666.0" mnemonicParsing="false" onAction="#logOut" prefHeight="27.0" prefWidth="97.0" style="-fx-background-color: TRANSPARENT;" text="Log out">
-         <graphic>
-            <FontAwesomeIconView fill="#bc0000" glyphName="CLOSE" size="18" textAlignment="JUSTIFY" />
-         </graphic>
+      <Button fx:id="btnLogOut" alignment="CENTER" layoutY="663.0" mnemonicParsing="false" onAction="#logOut" prefHeight="50.0" prefWidth="204.0" style="-fx-background-color: TRANSPARENT;" text="Log out">
          <font>
-            <Font size="16.0" />
+            <Font name="Calibri Light" size="27.0" />
          </font>
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exitLogo.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
-      <Label layoutX="263.0" layoutY="33.0" text="Home">
+      <Label fx:id="labelTitle" layoutX="263.0" layoutY="33.0" text="Home">
          <font>
             <Font name="System Bold" size="57.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="258.0" layoutY="115.0" prefHeight="586.0" prefWidth="1066.0">
+      <AnchorPane layoutX="258.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />

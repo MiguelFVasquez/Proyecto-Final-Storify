@@ -8,7 +8,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="592.0" prefWidth="463.0" scaleShape="false" snapToPixel="false" styleClass="background-login" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.app.PlayerView">
    <children>
       <AnchorPane layoutX="55.0" layoutY="3.0" prefHeight="588.0" prefWidth="636.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -18,38 +17,13 @@
                   <Image url="@../images/texture.png" />
                </image>
             </ImageView>
-            <AnchorPane layoutX="74.0" layoutY="443.0" prefHeight="110.0" prefWidth="453.0" style="-fx-background-color: #00053D; -fx-border-color: fff; -fx-border-radius: 8;">
+            <AnchorPane layoutX="109.0" layoutY="451.0" prefHeight="91.0" prefWidth="386.0" style="-fx-background-color: #00053D; -fx-border-color: fff; -fx-border-radius: 8;">
                <styleClass>
                   <String fx:value="white-bg" />
                   <String fx:value="shadow" />
                </styleClass>
                <children>
                   <Button layoutX="200.0" layoutY="33.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="52.0" style="-fx-background-color: transparent;" />
-                  <ImageView accessibleRole="BUTTON" fitHeight="68.0" fitWidth="70.0" layoutX="277.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/playerItems/2.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView accessibleRole="BUTTON" fitHeight="68.0" fitWidth="68.0" layoutX="118.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/playerItems/3.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView accessibleRole="BUTTON" fitHeight="62.0" fitWidth="78.0" layoutX="345.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/playerItems/4.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView accessibleRole="BUTTON" fitHeight="62.0" fitWidth="78.0" layoutX="50.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/playerItems/5.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="54.0" fitWidth="71.0" layoutX="209.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/playerItems/1.png" />
-                     </image>
-                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="179.0" layoutY="71.0" prefHeight="237.0" prefWidth="243.0">
@@ -65,7 +39,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="304.0" fitWidth="296.0" layoutX="153.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView disable="true" fitHeight="304.0" fitWidth="296.0" layoutX="153.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/playerItems/6.png" />
                </image>
@@ -80,6 +54,31 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" />
                </graphic>
             </Button>
+            <ImageView accessibleRole="BUTTON" fitHeight="48.0" fitWidth="45.0" layoutX="400.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/playerItems/4.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="54.0" fitWidth="71.0" layoutX="275.0" layoutY="470.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/playerItems/1.png" />
+               </image>
+            </ImageView>
+            <ImageView accessibleRole="BUTTON" fitHeight="48.0" fitWidth="45.0" layoutX="157.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/playerItems/5.png" />
+               </image>
+            </ImageView>
+            <ImageView accessibleRole="BUTTON" fitHeight="34.0" fitWidth="35.0" layoutX="351.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/playerItems/advance.png" />
+               </image>
+            </ImageView>
+            <ImageView accessibleRole="BUTTON" fitHeight="34.0" fitWidth="35.0" layoutX="226.0" layoutY="480.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/playerItems/reverse.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

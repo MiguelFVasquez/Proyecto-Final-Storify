@@ -8,6 +8,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.app.AdminViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.app.App;
 import co.edu.uniquindio.estructuraDatos.proyecto.app.UserViewController;
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -172,9 +173,41 @@ public class LoginViewController {
     @FXML
     void initialize() {
         tabSignUp.setDisable( true );
+        eventsControl();
+
     }
     public void init(Stage stage2) {
         this.stage = stage2;
+    }
+
+    void eventsControl(){
+        ScaleTransition scaleIn = new ScaleTransition(Duration.seconds(0.2), btnLogin);
+        scaleIn.setFromX(1);
+        scaleIn.setFromY(1);
+        scaleIn.setToX(1.1);
+        scaleIn.setToY(1.1);
+
+        ScaleTransition scaleOut = new ScaleTransition(Duration.seconds(0.2), btnLogin);
+        scaleOut.setFromX(1.1);
+        scaleOut.setFromY(1.1);
+        scaleOut.setToX(1);
+        scaleOut.setToY(1);
+
+        btnLogin.setOnMouseEntered(event -> {
+            btnLogin.setStyle("-fx-background-color:  #a3c0f5;  " +
+                    "-fx-cursor: hand ; " +
+                    "-fx-background-radius: 18px ; " +
+                    "-fx-border-radius: 18px " );
+            scaleIn.play();
+        });
+
+        // Manejamos el evento cuando el mouse sale del botón
+        btnLogin.setOnMouseExited(event -> {
+            btnLogin.setStyle("-fx-background-color:   transparent; " +
+                    "-fx-cursor: default; " +
+                    "-fx-border-color:    #a3c0f5; " +
+                    "-fx-border-radius: 18px ");
+            scaleOut.play();});
     }
 
     public void show() {
