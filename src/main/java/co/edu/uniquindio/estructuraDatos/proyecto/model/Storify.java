@@ -41,6 +41,10 @@ public class Storify implements IStorify {
         this.songList= new ArrayList<>();
     }
 
+
+
+
+
     public String getNombre() {
         return nombre;
     }
@@ -79,12 +83,15 @@ public class Storify implements IStorify {
      * @param username
      * @return
      */
-    private User getUser(String username){
+    public User getUser(String username){
         return usersMap.getOrDefault(username,null);
     }
 
-    private boolean verifyUser(String username){
+    public boolean verifyUser(String username){
         return usersMap.containsKey(username);
+    }
+    public boolean verifyPassword(String password){
+        return usersMap.containsKey(password);
     }
 
     @Override

@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.estructuraDatos.proyecto.app.AdminViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.app.App;
 import co.edu.uniquindio.estructuraDatos.proyecto.app.UserViewController;
+import co.edu.uniquindio.estructuraDatos.proyecto.controllers.LoginController;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
@@ -72,6 +74,9 @@ public class LoginViewController {
 
     @FXML
     private TextField txtPasswordRegister;
+
+    private LoginController loginController;
+    private Storify storify;
     private Stage stage;
     private double x;
     private double y;
@@ -90,8 +95,9 @@ public class LoginViewController {
     }
     @FXML
     void logIn(ActionEvent event) throws IOException {
-
-        if(txtName.getText().equals(  "admin" ) && txtPassword.getText().equals( "$aDmiN")||txtPassword.getText().equals( "123") ){
+        String userName = txtName.getText();
+        String password = txtPassword.getText();
+        if(txtName.getText().equals(  "admin" ) && txtPassword.getText().equals( "$aDmiN" )||txtPassword.getText().equals( "123" ) ){
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation( App.class.getResource( "AdminView.fxml" ) );
             AnchorPane anchorPane = loader.load();
@@ -110,28 +116,64 @@ public class LoginViewController {
             this.stage.close();
 
         }else {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation( App.class.getResource( "UserView.fxml" ) );
-            AnchorPane anchorPane = loader.load();
-            UserViewController controller = loader.getController();
-            Stage stage = new Stage();
-            stage.setScene( new Scene( anchorPane , 1365 , 715 ) );
-            controller.init( stage );
+            if (verifyBlankSpaces(userName,password)) {
+                if (verifyUser(userName)) {
+                    if (verifyPassword(password)) {
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(App.class.getResource("UserView.fxml"));
+                        AnchorPane anchorPane = loader.load();
+                        UserViewController controller = loader.getController();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(anchorPane, 1365, 715));
+                        controller.init(stage);
 
+                        controller.setAnchorPane(anchorPane);
+                        controller.setLoginViewController(this);
 
-            controller.setAnchorPane( anchorPane );
-            controller.setLoginViewController( this );
-
-            stage.initStyle( StageStyle.TRANSPARENT );
-            stage.centerOnScreen();
-            controller.show();
-            this.stage.close();
-
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.centerOnScreen();
+                        controller.show();
+                        this.stage.close();
+                    } else {
+                        txtPassword.clear();
+                        showMessage("Notification", "Invalid credentials",
+                                "password is invalid", Alert.AlertType.INFORMATION);
+                    }
+                } else {
+                    txtName.clear();
+                    showMessage("Notification", "Invalid credentials",
+                            "User name is invalid", Alert.AlertType.INFORMATION);
+                }
+            }
         }
         cleanUp();
-
-
     }
+
+    public boolean verifyUser(String userName){
+        return loginController.mfm.verifyUser(userName);
+    }
+    public boolean verifyPassword(String password){
+        return loginController.mfm.verifyPassword(password);
+    }
+
+    private boolean verifyBlankSpaces(String userName, String password) {
+        String notification = "";
+        if(userName.isEmpty()){
+            txtName.clear();
+            notification += "Type your user name \n";
+        }
+        if (password.isEmpty()){
+            txtPassword.clear();
+            notification += "Type your password";
+        }
+        if (notification.equals("")) {
+            return true;
+        }
+        showMessage("Notification", "Blank space",
+                notification, Alert.AlertType.INFORMATION);
+        return false;
+    }
+
 
     void cleanUp(){
         txtName.clear();
@@ -178,6 +220,14 @@ public class LoginViewController {
     }
     public void init(Stage stage2) {
         this.stage = stage2;
+    }
+
+    public void showMessage(String title, String header, String content, Alert.AlertType alertype) {
+        Alert alert = new Alert(alertype);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     void eventsControl(){
