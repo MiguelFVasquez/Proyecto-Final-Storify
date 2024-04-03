@@ -2,15 +2,16 @@
 
 ## ***TASKS**
 ### **TO DO**
-- Validar ingreso de usuarios creados
 - Serializar usuarios
 - Funcionamiento del tab registrar
 - Creación de artistas (AdminView)
 - Creación de sonidos (AdminView)
 - Visualización de portadas en UserView
-- Validación de campos de Login
 - Validación de campos de Register
+- 
 ### DOING
+- Validar ingreso de usuarios creados
+- Validación de campos de Login
 - Funcionalidad de botones Tab register
 - Gridpane's de UserView. ((Navegación))
 - GridPane's de AdminView ((Navegación))
@@ -24,6 +25,6 @@
 
 
 ## OPTIONALS
-- Rescue password
+- Rescue password with email
 
 <sub>**Agregen las demas cosas que se vayan haciendo uwu**</sub>
