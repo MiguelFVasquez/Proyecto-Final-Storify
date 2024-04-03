@@ -5,8 +5,11 @@ import co.edu.uniquindio.estructuraDatos.proyecto.app.UserViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
+import co.edu.uniquindio.estructuraDatos.proyecto.persistence.Persistence;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.ArtistViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
+
+import java.io.IOException;
 
 public class ModelFactoryController {
     private LoginViewController loginViewController;
@@ -17,7 +20,15 @@ public class ModelFactoryController {
 
     private static class SingletonHolder {
         // El constructor de Singleton puede ser llamado desde aquí al ser protected
-        private final static ModelFactoryController eINSTANCE = new ModelFactoryController();
+        private final static ModelFactoryController eINSTANCE;
+
+        static {
+            try {
+                eINSTANCE = new ModelFactoryController();
+            } catch (UserException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     // Método para obtener la instancia de nuestra clase
@@ -25,16 +36,19 @@ public class ModelFactoryController {
         return SingletonHolder.eINSTANCE;
     }
 
-    public ModelFactoryController() {
+    public ModelFactoryController() throws UserException {
         //1. inicializar datos y luego guardarlo en archivos
         System.out.println("Invocacion clase singleton");
         initData();
     }
 
-    private void initData(){
+    private void initData() throws UserException {
         storify = new Storify("SHUHENFY");
 
+
+
         User user1 = new User("Camilo","123","camilo@gmail.com");
+        storify.addUser(user1);
     }
 
     public void initLoginViewController(LoginViewController loginViewController){
@@ -52,15 +66,36 @@ public class ModelFactoryController {
 
     //----------------------- USER FUNCTIONS --------------------------------------------//
 
+    public boolean registerUser(String userName, String password, String emial)throws UserException{
+
+        User user = new User(userName,password,emial);
+        return storify.addUser(user);
+    }
+
     public boolean verifyUser(String userName){
         return storify.verifyUser(userName);
     }
-
     public boolean verifyPassword(String password){
         return storify.verifyPassword(password);
     }
+
+    public boolean logInUser(String userName, String password){
+        return storify.logIn(userName,password);
+    }
     public User getUser(String userName){
         return storify.getUser(userName);
+    }
+
+      /*
+      Metodo para cargar archivos serializados de cliente
+       */
+
+
+
+    //------------------------ Serialization functions --------------------------------------//
+
+    public void userSerialization() throws IOException {
+        Persistence.saveUsers( storify.getUsersMap() );
     }
 
 }

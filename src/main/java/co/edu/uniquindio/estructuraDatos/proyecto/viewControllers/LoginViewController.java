@@ -8,6 +8,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.app.AdminViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.app.App;
 import co.edu.uniquindio.estructuraDatos.proyecto.app.UserViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.LoginController;
+import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -97,7 +98,7 @@ public class LoginViewController {
     void logIn(ActionEvent event) throws IOException {
         String userName = txtName.getText();
         String password = txtPassword.getText();
-        if(txtName.getText().equals(  "admin" ) && txtPassword.getText().equals( "$aDmiN" )||txtPassword.getText().equals( "123" ) ){
+        if(txtName.getText().equals(  "admin" ) /*&& txtPassword.getText().equals( "$aDmiN" )*/&& txtPassword.getText().equals( "123" ) ){
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation( App.class.getResource( "AdminView.fxml" ) );
             AnchorPane anchorPane = loader.load();
@@ -117,8 +118,8 @@ public class LoginViewController {
 
         }else {
             if (verifyBlankSpaces(userName,password)) {
-                if (verifyUser(userName)) {
-                    if (verifyPassword(password)) {
+                if (verifyUser(userName) ) {
+                    if (loginController.mfm.logInUser(userName, password)) {
                         FXMLLoader loader = new FXMLLoader();
                         loader.setLocation(App.class.getResource("UserView.fxml"));
                         AnchorPane anchorPane = loader.load();
@@ -134,27 +135,25 @@ public class LoginViewController {
                         stage.centerOnScreen();
                         controller.show();
                         this.stage.close();
-                    } else {
-                        txtPassword.clear();
-                        showMessage("Notification", "Invalid credentials",
-                                "password is invalid", Alert.AlertType.INFORMATION);
                     }
-                } else {
-                    txtName.clear();
+                }else {
                     showMessage("Notification", "Invalid credentials",
-                            "User name is invalid", Alert.AlertType.INFORMATION);
+                            "credentials are invalid", Alert.AlertType.INFORMATION);
                 }
             }
+            cleanUp();
         }
-        cleanUp();
+    }
+
+    private boolean verifyPassword(String password) {
+        return loginController.mfm.verifyPassword(password);
     }
 
     public boolean verifyUser(String userName){
         return loginController.mfm.verifyUser(userName);
     }
-    public boolean verifyPassword(String password){
-        return loginController.mfm.verifyPassword(password);
-    }
+
+
 
     private boolean verifyBlankSpaces(String userName, String password) {
         String notification = "";
@@ -178,6 +177,10 @@ public class LoginViewController {
     void cleanUp(){
         txtName.clear();
         txtPassword.clear();
+        txtNameRegister.clear();
+        txtPasswordRegister.clear();
+        txtPasswordConfirRegister.clear();
+        txtEmail.clear();
     }
 
     @FXML
@@ -201,9 +204,71 @@ public class LoginViewController {
 
 
     @FXML
-    void registerUser(ActionEvent event) {
-        
+    void registerUser(ActionEvent event) throws UserException, IOException {
+        String userName = txtNameRegister.getText();
+        String password = txtPasswordRegister.getText();
+        String email = txtEmail.getText();
+        if(verifyRegisterBlankSpaces(userName,password,email) && verifyPasswordRegister()){
+            if(userRegist(userName,password,email)){
+                loginController.mfm.userSerialization();
+                activeLogInTab( event );
+
+            }
+            cleanUp();
+        }
     }
+
+    public boolean userRegist(String userName, String password, String email) throws UserException {
+        try {
+            if(loginController.mfm.registerUser(userName,password,email)){
+                showMessage("Notification", "User created","You can logIn", Alert.AlertType.INFORMATION);
+                return true;
+            }
+        }catch (UserException ue){
+            showMessage("Notification", "User not created", ue.getMessage(), Alert.AlertType.ERROR);
+        }
+        return false;
+    }
+
+
+
+    public boolean verifyPasswordRegister(){
+        boolean flag = false;
+        if (txtPasswordRegister.getText().equals(txtPasswordConfirRegister.getText())){
+            return true;
+        }else{
+            showMessage("Notification", "Password does not match", "Type your password again",
+                    Alert.AlertType.INFORMATION);
+        }
+        return false;
+    }
+
+    private boolean verifyRegisterBlankSpaces(String userName, String password, String email) {
+        String notification = "";
+        if(userName.isEmpty()){
+            txtNameRegister.clear();
+            notification += "Type your user name \n";
+        }
+        if (password.isEmpty()){
+            txtPasswordRegister.clear();
+            notification += "Type your password\n";
+        }
+        if(password.isEmpty()){
+            txtPasswordConfirRegister.clear();
+            notification += "Confirm your password\n";
+        }
+        if(email.isEmpty()){
+            txtEmail.clear();
+            notification += "Type your email";
+        }
+        if (notification.equals("")) {
+            return true;
+        }
+        showMessage("Notification", "Blank space",
+                notification, Alert.AlertType.INFORMATION);
+        return false;
+    }
+
 
 
     @FXML
@@ -215,6 +280,7 @@ public class LoginViewController {
     @FXML
     void initialize() {
         tabSignUp.setDisable( true );
+        this.loginController= new LoginController();
         eventsControl();
 
     }

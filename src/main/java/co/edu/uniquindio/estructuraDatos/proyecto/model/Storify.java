@@ -94,6 +94,17 @@ public class Storify implements IStorify {
         return usersMap.containsKey(password);
     }
 
+    public boolean logIn(String userName, String password){
+        boolean flag= false;
+        if (usersMap.containsKey(userName)){
+            User userAux= usersMap.get(userName);
+            if (userAux.getPassword().equals(password)){
+                flag=true;
+            }
+        }
+        return flag;
+    }
+
     @Override
     public boolean addUser(User newUser) throws UserException {
         boolean added= false;

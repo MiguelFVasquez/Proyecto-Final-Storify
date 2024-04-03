@@ -21,7 +21,7 @@ public class StorifyTest {
     private Song newSong() throws MalformedURLException {
         String code= "0003";
         String name= "Todo Lit";
-        String rutaCover = "C:\\Users\\Juan Miguel\\OneDrive - uqvirtual.edu.co\\5to semestre\\Programación\\Cover1.jpeg";
+        String rutaCover = "C:\\Users.txt\\Juan Miguel\\OneDrive - uqvirtual.edu.co\\5to semestre\\Programación\\Cover1.jpeg";
         File cover = new File(rutaCover);
         String year= "2024";
         String duration= "3:00";

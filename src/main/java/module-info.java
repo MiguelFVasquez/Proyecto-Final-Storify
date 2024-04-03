@@ -6,6 +6,7 @@ module com.example.proyectofinal {
     requires java.logging;
     requires java.desktop;
     requires junit;
+    requires java.mail;
 
     opens co.edu.uniquindio.estructuraDatos.proyecto.app to javafx.graphics, javafx.fxml;
     opens co.edu.uniquindio.estructuraDatos.proyecto.model to javafx.base;
