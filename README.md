@@ -1,4 +1,4 @@
-# WORKING ON PROJECT: Migue
+# WORKING ON PROJECT: 
 
 ## ***TASKS**
 ### **TO DO**
