@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import co.edu.uniquindio.estructuraDatos.proyecto.app.AdminViewController;
+import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.AdminViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.app.App;
-import co.edu.uniquindio.estructuraDatos.proyecto.app.UserViewController;
+import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.UserViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.LoginController;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;

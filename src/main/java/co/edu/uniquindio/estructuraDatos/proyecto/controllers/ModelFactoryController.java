@@ -1,7 +1,9 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.controllers;
 
-import co.edu.uniquindio.estructuraDatos.proyecto.app.AdminViewController;
-import co.edu.uniquindio.estructuraDatos.proyecto.app.UserViewController;
+import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.ArtistException;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
+import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.AdminViewController;
+import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.UserViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
@@ -10,6 +12,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.ArtistViewCont
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ModelFactoryController {
     private LoginViewController loginViewController;
@@ -90,7 +93,23 @@ public class ModelFactoryController {
       Metodo para cargar archivos serializados de cliente
        */
 
+    //-------------------------Admin functions---------------------------------------------------
+        //---------------------Artist functions------------------------------------------------
 
+    public List<Artist> getListArtist(){
+        return storify.getArtistTree().toList();
+    }
+
+    public boolean addArtist(String code, String name, String nationality, boolean isAGroup) throws ArtistException {
+        Artist newArtist= new Artist(code,name,nationality,isAGroup);
+        return storify.addArtist(newArtist);
+    }
+    public boolean deleteArtist(Artist deleteArtist) throws ArtistException {
+        return storify.deleteArtist(deleteArtist);
+    }
+    public boolean updateArtist(Artist artistUpdate) throws ArtistException {
+        return storify.updateArtist(artistUpdate);
+    }
 
     //------------------------ Serialization functions --------------------------------------//
 

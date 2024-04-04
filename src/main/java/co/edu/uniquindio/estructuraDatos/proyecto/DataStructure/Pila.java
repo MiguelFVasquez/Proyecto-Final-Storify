@@ -39,4 +39,3 @@ class Pila<T> {
         return cima.getData();
     }
 }
-

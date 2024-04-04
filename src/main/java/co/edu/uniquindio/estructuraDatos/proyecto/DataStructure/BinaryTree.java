@@ -1,6 +1,8 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.DataStructure;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class BinaryTree <T extends Comparable<T> > implements Iterable<T>{
@@ -152,6 +154,31 @@ public class BinaryTree <T extends Comparable<T> > implements Iterable<T>{
             n.imprimirDato();
         }
     }
+
+
+    /**
+     * Transforma el árbol binario en una lista en orden ascendente.
+     * @return Una lista que contiene los elementos del árbol en orden ascendente.
+     */
+    public List<T> toList() {
+        List<T> list = new ArrayList<>();
+        inordenToList(root, list);
+        return list;
+    }
+
+    /**
+     * Método privado que realiza un recorrido inorden y agrega los elementos a la lista.
+     * @param node Nodo actual en el recorrido.
+     * @param list Lista donde se agregarán los elementos.
+     */
+    private void inordenToList(Node<T> node, List<T> list) {
+        if (node != null) {
+            inordenToList(node.getPrev(), list);
+            list.add(node.getData());
+            inordenToList(node.getNext(), list);
+        }
+    }
+
 
     // Inicia el recorrido preorden en el árbol comenzando desde la raíz
     public void preorden() {

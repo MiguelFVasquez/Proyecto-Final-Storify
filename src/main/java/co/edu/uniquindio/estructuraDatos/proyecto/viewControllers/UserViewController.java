@@ -1,4 +1,4 @@
-package co.edu.uniquindio.estructuraDatos.proyecto.app;
+package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
