@@ -47,7 +47,7 @@ public class Artist implements Serializable, Comparable<Artist> {
         this.nationality = nationality;
     }
 
-    public Boolean getAlone() {
+    public Boolean getIsAlone() {
         return isAlone;
     }
 

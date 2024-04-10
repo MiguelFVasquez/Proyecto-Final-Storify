@@ -2,12 +2,15 @@ package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.AdminController;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.ArtistException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
 import javafx.animation.FadeTransition;
 import javafx.beans.Observable;
@@ -16,14 +19,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.image.Image;
+import org.w3c.dom.html.HTMLIsIndexElement;
 
 public class AdminViewController implements Initializable {
 
@@ -40,16 +45,7 @@ public class AdminViewController implements Initializable {
     private AnchorPane anchorSongs;
 
     @FXML
-    private Button btnAddArtist;
-
-    @FXML
-    private Button btnAddSong;
-
-    @FXML
     private Button btnArtists;
-
-    @FXML
-    private Button btnCleanUpArtist;
 
     @FXML
     private Button btnCleanUpSong;
@@ -61,6 +57,8 @@ public class AdminViewController implements Initializable {
     private Button btnSongs;
     //---------------Elementos de la cancion--------------------
     @FXML
+    private ComboBox<String> comboBoxArtist;
+    @FXML
     private ImageView imageViewSongPortait;
     @FXML
     private TextField txtNameSong;
@@ -71,36 +69,47 @@ public class AdminViewController implements Initializable {
     @FXML
     private TextField txtYearSong;
     @FXML
-    private TableView<?> tableViewSongs;
+    private TextField txtLinkSong;
     @FXML
-    private TableColumn<?, ?> ColumnCodeSong;
+    private TableView<Song> tableViewSongs;
     @FXML
-    private TableColumn<?, ?> ColumnNameSong;
+    private TableColumn<Song, String> ColumnCodeSong;
     @FXML
-    private TableColumn<?, ?> columnAlbum;
+    private TableColumn<Song,String > ColumnNameSong;
     @FXML
-    private TableColumn<?, ?> columnYear;
+    private TableColumn<Song, String> columnAlbum;
+    @FXML
+    private TableColumn<Song, String> columnYear;
+
+    @FXML
+    private Button btnSelectCover;
+    @FXML
+    private Button btnAddSong;
+
 
     //-----------Elementos del artista------
     @FXML
     private TextField txtNameArtist;
     @FXML
     private TextField txtNationalityArtist;
+
     @FXML
     private CheckBox checkGroupArtist;
     @FXML
     private TableView<Artist> tableViewArtists;
     @FXML
     private TableColumn<Artist, String> tableColumnCode;
-
     @FXML
     private TableColumn<Artist, Boolean> tableColumnGroup;
-
     @FXML
     private TableColumn<Artist, String>tableColumnName;
-
     @FXML
     private TableColumn<Artist, String> tableColumnNationality;
+
+    @FXML
+    private Button btnAddArtist;
+    @FXML
+    private Button btnCleanUpArtist;
 
     //------------Variables auxiliares---------------
     private Stage stage;
@@ -111,7 +120,7 @@ public class AdminViewController implements Initializable {
     private AdminController adminController;
     private Artist artistSelection;
     private ObservableList<Artist> artistsList= FXCollections.observableArrayList();
-
+    private ObservableList<String> namesArtist = FXCollections.observableArrayList();
 
     //-------------------Auxiliars functions-----------------------
     public void showMessage(String title, String header, String content, Alert.AlertType alertype) {
@@ -143,6 +152,7 @@ public class AdminViewController implements Initializable {
         artistsList.addAll(adminController.mfm.getListArtist());
         return artistsList;
     }
+
     private boolean verifyArtist(String name, String nationality){
         String notification="";
         if (name.isEmpty()){
@@ -169,7 +179,13 @@ public class AdminViewController implements Initializable {
         }
         return false;
     }
-
+    void showArtistsInfo() {
+        txtNameArtist.setText(artistSelection.getName());
+        txtNationalityArtist.setText(artistSelection.getNationality());
+        anchorSongs.setVisible( false );
+        anchorArtists.setVisible( true );
+    }
+//--------------------------EVENTOS DE LOS BOTONES-----------------------------------------------
 
     @FXML
     void addArtist(ActionEvent event) throws IOException {
@@ -182,6 +198,8 @@ public class AdminViewController implements Initializable {
                 adminController.mfm.userSerialization();
                 cleanUpArtist(event);
                 refreshTableViewArtist();
+                namesArtist.add(nameArtist);
+                System.out.printf("Combo box nombre de artistas: " + comboBoxArtist.getItems().toString() );
             }
         }
     }
@@ -192,11 +210,28 @@ public class AdminViewController implements Initializable {
         txtNationalityArtist.clear();
     }
 
+//------------------------------------------------SONGS----------------------------------------------
+    @FXML
+    void selectCoverSong(ActionEvent event) {
+        Stage stage = (Stage) btnSelectCover.getScene().getWindow();
+        // Cerrar la ventana
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Cover");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.gif");
+        fileChooser.getExtensionFilters().add(extFilter);
+        java.io.File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            Image image = new Image(file.toURI().toString());
+            imageViewSongPortait.setImage( image );
+        }
+    }
 
     @FXML
     void addSong(ActionEvent event) {
 
     }
+
     @FXML
     void cleanUpSong(ActionEvent event) {
 
@@ -212,10 +247,6 @@ public class AdminViewController implements Initializable {
     void showArtistsInfo(ActionEvent event) {
         anchorSongs.setVisible( false );
         anchorArtists.setVisible( true );
-    }
-    void showArtistsInfo() {
-        txtNameArtist.setText(artistSelection.getName());
-        txtNationalityArtist.setText(artistSelection.getNationality());
     }
 
     @FXML
@@ -287,6 +318,7 @@ public class AdminViewController implements Initializable {
                 //btnEliminarProducto.setDisable( true );
             }
         });
+        comboBoxArtist.setItems(namesArtist);
 
     }
 }

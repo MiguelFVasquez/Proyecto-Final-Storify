@@ -257,7 +257,7 @@ public class Storify implements IStorify {
         String name= artistUpdate.getName(); //El nombre es la identificación del artista por lo tanto no se puede cambiar;
         String newCode= artistUpdate.getCode();
         String newNationality= artistUpdate.getNationality();
-        boolean newStatus= artistUpdate.getAlone();
+        boolean newStatus= artistUpdate.getIsAlone();
         Artist artistAux= getArtist(name);
         if (artistAux==null){
             throw new ArtistException("El artista: '" + name+"' no ha sido encontrado");

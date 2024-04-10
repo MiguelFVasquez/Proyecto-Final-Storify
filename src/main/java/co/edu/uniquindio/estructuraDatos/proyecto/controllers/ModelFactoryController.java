@@ -100,6 +100,7 @@ public class ModelFactoryController {
         return storify.getArtistTree().toList();
     }
 
+
     public boolean addArtist(String code, String name, String nationality, boolean isAGroup) throws ArtistException {
         Artist newArtist= new Artist(code,name,nationality,isAGroup);
         return storify.addArtist(newArtist);
