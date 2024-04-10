@@ -78,7 +78,7 @@ public class AdminViewController implements Initializable {
     @FXML
     private TableColumn<Song,String > columnNameSong;
     @FXML
-    private TableColumn<Song, String> columnArtist;
+    private TableColumn<Song, Artist> columnArtist;
     @FXML
     private TableColumn<Song, String> columnYear;
 
@@ -424,11 +424,11 @@ public class AdminViewController implements Initializable {
         });
         comboBoxArtist.setItems(namesArtist);
         comboBoxGender.getItems().setAll(Gender.values());
-
+        refreshTableViewArtist();
         this.columnCodeSong.setCellValueFactory(new PropertyValueFactory<>("code"));
         this.columnNameSong.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.columnYear.setCellValueFactory(new PropertyValueFactory<>("year"));
-
+        this.columnArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
         tableViewSongs.getSelectionModel().selectedItemProperty().addListener( (obs , oldSelection , newSelection) -> {
             if ( newSelection != null ) {
                 songSelection = newSelection;
@@ -437,7 +437,7 @@ public class AdminViewController implements Initializable {
                 //btnEliminarProducto.setDisable( true );
             }
         });
-
+        refreshTableViewSong();
     }
 
 }

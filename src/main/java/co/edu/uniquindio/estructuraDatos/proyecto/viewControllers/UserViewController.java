@@ -3,10 +3,12 @@ package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.estructuraDatos.proyecto.controllers.UserController;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -15,7 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class UserViewController {
+public class UserViewController implements Initializable {
 
     @FXML
     private ResourceBundle resources;
@@ -51,6 +53,7 @@ public class UserViewController {
 
     private LoginViewController loginViewController;
     private AnchorPane anchorPane;
+    private UserController userController;
 
     public void setLoginViewController(LoginViewController loginViewController) {
         this.loginViewController = loginViewController;
@@ -88,7 +91,7 @@ public class UserViewController {
 
     @FXML
     void initialize() {
-        eventsControll();
+
     }
 
     void eventsControll(){
@@ -124,4 +127,10 @@ public class UserViewController {
         });
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.loginViewController= new LoginViewController();
+        this.userController= new UserController();
+        eventsControll();
+    }
 }

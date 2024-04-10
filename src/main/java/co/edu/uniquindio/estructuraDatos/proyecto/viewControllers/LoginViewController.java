@@ -118,7 +118,7 @@ public class LoginViewController {
 
         }else {
             if (verifyBlankSpaces(userName,password)) {
-                if (verifyUser(userName) ) {
+                if (verifyUser(userName)) {
                     if (loginController.mfm.logInUser(userName, password)) {
                         FXMLLoader loader = new FXMLLoader();
                         loader.setLocation(App.class.getResource("UserView.fxml"));
@@ -281,6 +281,8 @@ public class LoginViewController {
     void initialize() {
         tabSignUp.setDisable( true );
         this.loginController= new LoginController();
+        this.
+
         eventsControl();
 
     }

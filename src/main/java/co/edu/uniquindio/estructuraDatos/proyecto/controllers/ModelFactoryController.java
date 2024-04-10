@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -36,6 +37,12 @@ public class ModelFactoryController {
                 eINSTANCE = new ModelFactoryController();
             } catch (UserException e) {
                 throw new RuntimeException(e);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            } catch (ArtistException e) {
+                throw new RuntimeException(e);
+            } catch (SongException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -45,18 +52,37 @@ public class ModelFactoryController {
         return SingletonHolder.eINSTANCE;
     }
 
-    public ModelFactoryController() throws UserException {
+    public ModelFactoryController() throws UserException, MalformedURLException, ArtistException, SongException {
         //1. inicializar datos y luego guardarlo en archivos
         System.out.println("Invocacion clase singleton");
         initData();
     }
+    private Artist newArtist(){
+        String code= "jkdak00";
+        String name= "Eladio";
+        String nationality= "Puerto Rico";
+        boolean isAlone= true;
+        return new Artist(code,name,nationality,isAlone);
+    }
+    private Song newSong() throws MalformedURLException {
+        String code = "0003";
+        String name = "Todo Lit";
+        String rutaCover = "src\\main\\resources\\co\\edu\\uniquindio\\estructuraDatos\\proyecto\\images\\Eladio_Carrión_-_Sol_María.jpg";
+        Image cover = new Image(new File(rutaCover).toURI().toString()); // Crear objeto Image con la ruta de la imagen
+        String year = "2024";
+        String duration = "3:00";
+        Gender gender = Gender.Reggaeton;
+        URL link = new URL("https://www.youtube.com/watch?v=yTAh5-e2dRY&pp=ygUIdG9kbyBsaXQ%3D");
+        Artist artist = newArtist();
+        return new Song(code, name, cover, year, duration, gender, link, artist);
+    }
 
-    private void initData() throws UserException {
+    private void initData() throws UserException, MalformedURLException, ArtistException, SongException {
         storify = new Storify("SHUHENFY");
-
-
-
         User user1 = new User("Camilo","123","camilo@gmail.com");
+        Song song1= newSong();
+        storify.addArtist(song1.getArtist());
+        storify.addSong(song1);
         storify.addUser(user1);
     }
 
