@@ -6,6 +6,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Interfaces.IStorify;
+import javafx.scene.image.Image;
 
 import java.io.File;
 import java.net.URL;
@@ -214,7 +215,7 @@ public class Storify implements IStorify {
      * @param name
      * @return
      */
-    private Artist getArtist(String name){
+    public Artist getArtist(String name){
         Artist artistAux= null;
         for (Artist artist:artistTree) {
             if (artist.getName().equals(name)){
@@ -326,7 +327,7 @@ public class Storify implements IStorify {
     }
 
 
-    private Song getSong(String code){
+    public Song getSong(String code){
         Optional<Song> songOptional= this.songList.stream()
                 .filter(s ->s.getCode().equals(code))
                 .findFirst();
@@ -365,7 +366,7 @@ public class Storify implements IStorify {
         boolean updated = false;
         String code = songUpdate.getCode();//Este no podra ser cambiado ya que es el id de la canción
         String name = songUpdate.getName();
-        File newCover = songUpdate.getCover();
+        Image newCover = songUpdate.getCover();
         String newYear = songUpdate.getYear();
         String newDuration = songUpdate.getDuration();
         Gender newGender = songUpdate.getGender();

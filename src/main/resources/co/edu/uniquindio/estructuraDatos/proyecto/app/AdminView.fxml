@@ -113,7 +113,7 @@
                   <Font size="23.0" />
                </font>
             </Label>
-            <Label layoutX="68.0" layoutY="150.0" text="Album">
+            <Label layoutX="68.0" layoutY="150.0" text="Gender">
                <font>
                   <Font size="23.0" />
                </font>
@@ -139,11 +139,11 @@
                </font>
             </Label>
             <TextField fx:id="txtNameSong" layoutX="193.0" layoutY="121.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
-            <TextField fx:id="txtNameAlbumnSong" layoutX="193.0" layoutY="155.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
             <TextField fx:id="txtYearSong" layoutX="193.0" layoutY="223.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
             <TextField fx:id="txtDurationSong" layoutX="193.0" layoutY="257.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
             <TextField fx:id="txtLinkSong" layoutX="193.0" layoutY="292.0" prefHeight="25.0" prefWidth="332.0" styleClass="txtFields2" />
-            <ComboBox fx:id="comboBoxArtist" layoutX="192.0" layoutY="189.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #edb3a1; -fx-border-radius: 8;" />
+            <ComboBox fx:id="comboBoxArtist" layoutX="192.0" layoutY="189.0" prefHeight="26.0" prefWidth="332.0" style="-fx-background-color: transparent; -fx-border-color: #edb3a1; -fx-border-radius: 8;" />
+            <ComboBox fx:id="comboBoxGender" layoutX="192.0" layoutY="152.0" prefHeight="26.0" prefWidth="332.0" style="-fx-background-color: transparent; -fx-border-color: #edb3a1; -fx-border-radius: 8;" />
             <ImageView fx:id="imageViewSongPortait" fitHeight="181.0" fitWidth="241.0" layoutX="641.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/musica.png" />
@@ -156,9 +156,9 @@
             </Label>
             <TableView fx:id="tableViewSongs" layoutX="48.0" layoutY="395.0" prefHeight="239.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
                <columns>
-                  <TableColumn fx:id="ColumnCodeSong" prefWidth="243.0" styleClass="table-row-cell" text="Code" />
-                  <TableColumn fx:id="ColumnNameSong" minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
-                  <TableColumn fx:id="columnAlbum" minWidth="0.0" prefWidth="364.0" styleClass="table-row-cell" text="Album" />
+                  <TableColumn fx:id="columnCodeSong" prefWidth="243.0" styleClass="table-row-cell" text="Code" />
+                  <TableColumn fx:id="columnNameSong" minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
+                  <TableColumn fx:id="columnArtist" minWidth="0.0" prefWidth="364.0" styleClass="table-row-cell" text="Artist" />
                   <TableColumn fx:id="columnYear" minWidth="0.0" prefWidth="124.0" styleClass="table-row-cell" text="Year" />
                </columns>
             </TableView>

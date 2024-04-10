@@ -7,6 +7,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
+import javafx.scene.image.Image;
 import org.junit.Test;
 
 import java.io.File;
@@ -19,17 +20,18 @@ public class StorifyTest {
 
     //-------Intanciamos clases para probarlas
     private Song newSong() throws MalformedURLException {
-        String code= "0003";
-        String name= "Todo Lit";
+        String code = "0003";
+        String name = "Todo Lit";
         String rutaCover = "C:\\Users.txt\\Juan Miguel\\OneDrive - uqvirtual.edu.co\\5to semestre\\Programación\\Cover1.jpeg";
-        File cover = new File(rutaCover);
-        String year= "2024";
-        String duration= "3:00";
-        Gender gender= Gender.Reggaeton;
-        URL link= new URL("https://www.youtube.com/watch?v=yTAh5-e2dRY&pp=ygUIdG9kbyBsaXQ%3D");
-        Artist artist= newArtist();
-        return new Song(code,name,cover,year,duration,gender,link,artist);
+        Image cover = new Image(new File(rutaCover).toURI().toString()); // Crear objeto Image con la ruta de la imagen
+        String year = "2024";
+        String duration = "3:00";
+        Gender gender = Gender.Reggaeton;
+        URL link = new URL("https://www.youtube.com/watch?v=yTAh5-e2dRY&pp=ygUIdG9kbyBsaXQ%3D");
+        Artist artist = newArtist();
+        return new Song(code, name, cover, year, duration, gender, link, artist);
     }
+
     private Artist newArtist(){
         String code= "jkdak00";
         String name= "Eladio";

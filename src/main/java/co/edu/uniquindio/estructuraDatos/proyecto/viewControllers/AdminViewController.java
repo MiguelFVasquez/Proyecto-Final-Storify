@@ -1,19 +1,19 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.AdminController;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.ArtistException;
+import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
-import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
 import javafx.animation.FadeTransition;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +28,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.image.Image;
-import org.w3c.dom.html.HTMLIsIndexElement;
+
+import static co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender.*;
 
 public class AdminViewController implements Initializable {
 
@@ -65,7 +66,7 @@ public class AdminViewController implements Initializable {
     @FXML
     private TextField txtDurationSong;
     @FXML
-    private TextField txtNameAlbumnSong;
+    private ComboBox<Gender> comboBoxGender;
     @FXML
     private TextField txtYearSong;
     @FXML
@@ -73,11 +74,11 @@ public class AdminViewController implements Initializable {
     @FXML
     private TableView<Song> tableViewSongs;
     @FXML
-    private TableColumn<Song, String> ColumnCodeSong;
+    private TableColumn<Song, String> columnCodeSong;
     @FXML
-    private TableColumn<Song,String > ColumnNameSong;
+    private TableColumn<Song,String > columnNameSong;
     @FXML
-    private TableColumn<Song, String> columnAlbum;
+    private TableColumn<Song, String> columnArtist;
     @FXML
     private TableColumn<Song, String> columnYear;
 
@@ -119,7 +120,9 @@ public class AdminViewController implements Initializable {
     private LoginViewController loginViewController;
     private AdminController adminController;
     private Artist artistSelection;
+    private Song songSelection;
     private ObservableList<Artist> artistsList= FXCollections.observableArrayList();
+    private ObservableList<Song> songsList= FXCollections.observableArrayList();
     private ObservableList<String> namesArtist = FXCollections.observableArrayList();
 
     //-------------------Auxiliars functions-----------------------
@@ -141,17 +144,18 @@ public class AdminViewController implements Initializable {
         return code.toString();
     }
 
-    public void refreshTableViewArtist(){
+
+    //------------------------------Auxiliars artist's functions-----------------------------
+    private void refreshTableViewArtist(){
         artistsList.clear();
         tableViewArtists.getItems().clear();
         tableViewArtists.setItems(getArtistsList());
     }
-
-    //------------------------------Auxiliars artist's functions-----------------------------
     private ObservableList<Artist> getArtistsList(){
         artistsList.addAll(adminController.mfm.getListArtist());
         return artistsList;
     }
+
 
     private boolean verifyArtist(String name, String nationality){
         String notification="";
@@ -185,6 +189,82 @@ public class AdminViewController implements Initializable {
         anchorSongs.setVisible( false );
         anchorArtists.setVisible( true );
     }
+
+//--------------------------Auxiliars song's functios--------------------------------------------
+
+    private void refreshTableViewSong(){
+        songsList.clear();
+        tableViewSongs.getItems().clear();
+        tableViewSongs.setItems(getSongsList());
+    }
+    private ObservableList<Song> getSongsList(){
+        songsList.addAll(adminController.mfm.getSongList());
+        return songsList;
+    }
+
+    private void showSongInfo(){
+        txtNameSong.setText(songSelection.getName());
+        txtLinkSong.setText(songSelection.getLink().toString());
+        txtYearSong.setText(songSelection.getYear());
+        txtDurationSong.setText(songSelection.getDuration());
+        comboBoxArtist.getSelectionModel().select(songSelection.getArtist().getName());
+        comboBoxGender.getSelectionModel().select(songSelection.getGender());
+        imageViewSongPortait.setImage(songSelection.getCover());
+
+    }
+    private boolean verifySong(String name, Gender gender, String artist, String year, String duration, URL link, Image image){
+        String notification="";
+        if (name.isEmpty()){
+            notification+= "Type song's name\n";
+        }
+        if (gender.equals(null)){
+            notification+= "Select song's gender\n";
+        }
+        if (artist.equals(null)){
+            notification+= "Type song's artist\n";
+        }
+        if (year.isEmpty()){
+            notification+= "Type song's year\n";
+        }
+        if (duration.isEmpty()){
+            notification+="Type song's duration\n";
+        }
+        if (link.equals(null)){
+            notification+= "Type song's link\n";
+        }
+        if (image == null){
+            notification+= "Select song's image\n";
+        }
+        if (notification.equals("")) {
+            return true;
+        }
+        showMessage("Notification", "Invalid data", notification, Alert.AlertType.INFORMATION);
+        return false;
+    }
+
+    private URL obtenerURL() {
+        try {
+            // Intenta crear un objeto URL con el valor del TextField
+            return new URL(txtLinkSong.getText());
+        } catch (MalformedURLException e) {
+            // Manejo de la excepción en caso de que la URL sea inválida
+            e.printStackTrace();
+            return null; // Devuelve null si la URL no es válida
+        }
+    }
+
+    private boolean createSong(String code, String name, Gender gender, String year, String duration, URL link, Image image, Artist artist) {
+        try {
+            if (adminController.mfm.addSong(code, name, image, year, duration, gender, link, artist)) {
+                showMessage("Notification", "Song registered", "Song was registered successfully on artist: '" + artist.getName() + "' list ", Alert.AlertType.INFORMATION);
+            }
+        } catch (SongException Se) {
+            showMessage("Notification", "Song not registered" ,Se.getMessage(), Alert.AlertType.INFORMATION);
+        }
+        return false;
+    }
+
+
 //--------------------------EVENTOS DE LOS BOTONES-----------------------------------------------
 
     @FXML
@@ -228,13 +308,37 @@ public class AdminViewController implements Initializable {
     }
 
     @FXML
-    void addSong(ActionEvent event) {
+    void addSong(ActionEvent event) throws ArtistException, SongException {
+        String nameSong= txtNameSong.getText();
+        String year= txtYearSong.getText();
+        String duration= txtDurationSong.getText();
+        String artistName= comboBoxArtist.getSelectionModel().getSelectedItem();
+        Gender gender= comboBoxGender.getSelectionModel().getSelectedItem();
+        Image cover= imageViewSongPortait.getImage();
+        URL link= obtenerURL();
+        if (verifySong(nameSong,gender,artistName,year,duration,link,cover)){
+            String codeSong= generateCode(nameSong,artistName);
+            Artist artist= adminController.mfm.getArtist(artistName);
+            if (createSong(codeSong,nameSong,gender,year,duration,link,cover,artist)){
+                cleanUpSong(event);
+                refreshTableViewSong();
+                Song songAux= adminController.mfm.getSong(codeSong);
+                adminController.mfm.addSongToArtistList(artistName,songAux);
+            }
+        }
 
     }
 
     @FXML
     void cleanUpSong(ActionEvent event) {
-
+        txtNameSong.clear();
+        txtLinkSong.clear();
+        txtYearSong.clear();
+        txtDurationSong.clear();
+        comboBoxArtist.getSelectionModel().select(null);
+        comboBoxGender.getSelectionModel().select(null);
+        Image image = new Image("file:/home/floweers/5to/Estructura Datos/Proyecto-Final-Storify/src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/musica.png");
+        imageViewSongPortait.setImage(image);
     }
 
     @FXML
@@ -319,6 +423,21 @@ public class AdminViewController implements Initializable {
             }
         });
         comboBoxArtist.setItems(namesArtist);
+        comboBoxGender.getItems().setAll(Gender.values());
+
+        this.columnCodeSong.setCellValueFactory(new PropertyValueFactory<>("code"));
+        this.columnNameSong.setCellValueFactory(new PropertyValueFactory<>("name"));
+        this.columnYear.setCellValueFactory(new PropertyValueFactory<>("year"));
+
+        tableViewSongs.getSelectionModel().selectedItemProperty().addListener( (obs , oldSelection , newSelection) -> {
+            if ( newSelection != null ) {
+                songSelection = newSelection;
+                showSongInfo();
+            }else{
+                //btnEliminarProducto.setDisable( true );
+            }
+        });
 
     }
+
 }

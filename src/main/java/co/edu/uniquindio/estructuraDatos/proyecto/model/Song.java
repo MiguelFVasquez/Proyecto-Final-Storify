@@ -1,6 +1,7 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.model;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
+import javafx.scene.image.Image;
 
 import java.io.File;
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.Objects;
 public class Song implements Serializable {
     private String code;
     private String name;
-    private File cover; //Caratula
+    private Image cover; //Caratula
     private String year;
     private String duration;
     private Gender gender;
@@ -20,7 +21,7 @@ public class Song implements Serializable {
     public Song() {
     }
 
-    public Song(String code, String name, File cover, String year, String duration, Gender gender, URL link, Artist artist) {
+    public Song(String code, String name, Image cover, String year, String duration, Gender gender, URL link, Artist artist) {
         this.code = code;
         this.name = name;
         this.cover = cover;
@@ -31,7 +32,7 @@ public class Song implements Serializable {
         this.artist = artist;
     }
 
-    public Song(String code, String name, File cover, String year, String duration, Gender gender, URL link) {
+    public Song(String code, String name, Image cover, String year, String duration, Gender gender, URL link) {
         this.code = code;
         this.name = name;
         this.cover = cover;
@@ -58,11 +59,11 @@ public class Song implements Serializable {
         this.name = name;
     }
 
-    public File getCover() {
+    public Image getCover() {
         return cover;
     }
 
-    public void setCover(File cover) {
+    public void setCover(Image cover) {
         this.cover = cover;
     }
 

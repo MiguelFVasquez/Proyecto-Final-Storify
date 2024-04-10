@@ -1,7 +1,10 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.controllers;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.ArtistException;
+import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.AdminViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.UserViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
@@ -10,8 +13,11 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import co.edu.uniquindio.estructuraDatos.proyecto.persistence.Persistence;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.ArtistViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
+import javafx.scene.image.Image;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 public class ModelFactoryController {
@@ -99,8 +105,9 @@ public class ModelFactoryController {
     public List<Artist> getListArtist(){
         return storify.getArtistTree().toList();
     }
-
-
+    public Artist getArtist(String name){
+        return storify.getArtist(name);
+    }
     public boolean addArtist(String code, String name, String nationality, boolean isAGroup) throws ArtistException {
         Artist newArtist= new Artist(code,name,nationality,isAGroup);
         return storify.addArtist(newArtist);
@@ -110,6 +117,21 @@ public class ModelFactoryController {
     }
     public boolean updateArtist(Artist artistUpdate) throws ArtistException {
         return storify.updateArtist(artistUpdate);
+    }
+    public boolean addSongToArtistList(String name, Song songAdd) throws ArtistException, SongException {
+        return storify.addSongToArtistList(name,songAdd);
+    }
+        //------------------------Song's functions----------------------------------------
+    public List<Song> getSongList(){
+        return storify.getSongList();
+    }
+    public Song getSong(String code){
+        return storify.getSong(code);
+    }
+
+    public boolean addSong(String code, String name, Image cover, String year, String duration, Gender gender, URL link, Artist artist) throws SongException {
+        Song newSong= new Song(code, name, cover, year, duration,gender,link,artist);
+        return storify.addSong(newSong);
     }
 
     //------------------------ Serialization functions --------------------------------------//
