@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 public class ModelFactoryController {
     private LoginViewController loginViewController;
@@ -79,11 +80,10 @@ public class ModelFactoryController {
 
     private void initData() throws UserException, MalformedURLException, ArtistException, SongException {
         storify = new Storify("SHUHENFY");
-        User user1 = new User("Camilo","123","camilo@gmail.com");
         Song song1= newSong();
         storify.addArtist(song1.getArtist());
         storify.addSong(song1);
-        storify.addUser(user1);
+        cargarDatosDesdeArchivos(storify);
     }
 
     public void initLoginViewController(LoginViewController loginViewController){
@@ -107,7 +107,21 @@ public class ModelFactoryController {
         return storify.addUser(user);
     }
 
-    public boolean verifyUser(String userName){
+    public static void cargarDatosDesdeArchivos(Storify storify) {
+        try {
+            Persistence.loadDataFiles(storify);
+            storify.getUsersMap().putAll((Persistence.loadUsers()));
+            //storify.getSongList().addAll(Persistence.loadSongs());
+
+            System.out.println("Serializado de usuarios");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (UserException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+        public boolean verifyUser(String userName){
         return storify.verifyUser(userName);
     }
     public boolean verifyPassword(String password){
@@ -165,5 +179,4 @@ public class ModelFactoryController {
     public void userSerialization() throws IOException {
         Persistence.saveUsers( storify.getUsersMap() );
     }
-
 }

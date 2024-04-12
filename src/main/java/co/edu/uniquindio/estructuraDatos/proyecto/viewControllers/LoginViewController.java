@@ -1,9 +1,13 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
+import co.edu.uniquindio.estructuraDatos.proyecto.persistence.Persistence;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.AdminViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.app.App;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.UserViewController;
@@ -115,10 +119,10 @@ public class LoginViewController {
             stage.centerOnScreen();
             controller.show();
             this.stage.close();
-
+            cleanUp();
         }else {
             if (verifyBlankSpaces(userName,password)) {
-                if (verifyUser(userName)) {
+                if (verifyCredentials(userName,password)) {
                     if (loginController.mfm.logInUser(userName, password)) {
                         FXMLLoader loader = new FXMLLoader();
                         loader.setLocation(App.class.getResource("UserView.fxml"));
@@ -138,21 +142,44 @@ public class LoginViewController {
                     }
                 }else {
                     showMessage("Notification", "Invalid credentials",
-                            "credentials are invalid", Alert.AlertType.INFORMATION);
+                            "Credentials are invalid", Alert.AlertType.INFORMATION);
                 }
             }
-            cleanUp();
+
         }
+        cleanUp();
     }
 
-    private boolean verifyPassword(String password) {
-        return loginController.mfm.verifyPassword(password);
+    private boolean verifyCredentials(String userName, String password) {
+        // Obtener el mapa de usuarios cargados desde el archivo
+        HashMap<String, User> users = null;
+        try {
+            users = Persistence.loadUsers();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            showMessage("Error", "Error de archivo", "No se pudo cargar la base de datos de usuarios.", Alert.AlertType.ERROR);
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            showMessage("Error", "Error de E/S", "Ocurrió un error de E/S al cargar la base de datos de usuarios.", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        // Verificar si el usuario está en el mapa
+        if (users.containsKey(userName)) {
+            // Obtener el objeto usuario
+            User user = users.get(userName);
+            // Verificar si la contraseña coincide
+            if (user.getPassword().equals(password)) {
+                return true; // Las credenciales son válidas
+            }
+        }
+        return false; // Las credenciales son inválidas
     }
 
     public boolean verifyUser(String userName){
         return loginController.mfm.verifyUser(userName);
     }
-
 
 
     private boolean verifyBlankSpaces(String userName, String password) {

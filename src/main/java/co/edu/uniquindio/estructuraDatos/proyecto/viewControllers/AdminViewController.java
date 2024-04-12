@@ -308,7 +308,7 @@ public class AdminViewController implements Initializable {
     }
 
     @FXML
-    void addSong(ActionEvent event) throws ArtistException, SongException {
+    void addSong(ActionEvent event) throws ArtistException, SongException, IOException {
         String nameSong= txtNameSong.getText();
         String year= txtYearSong.getText();
         String duration= txtDurationSong.getText();
