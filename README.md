@@ -2,10 +2,9 @@
 
 ## ***TASKS**
 ### **TO DO**
-- Serializar usuarios
+-Serializar artistas
+-Serializaar canciones
 - Funcionamiento del tab registrar
-- Creación de artistas (AdminView)
-- Creación de sonidos (AdminView)
 - Visualización de portadas en UserView
 - Validación de campos de Register
 - 
@@ -22,6 +21,9 @@
 - Interfaz de inicio sesión de usuario
 - Cruds
 - Uso de colecciones
+- Serializar usuarios
+- Creación de artistas (AdminView)
+- Creación de sonidos (AdminView)
 
 
 ## OPTIONALS
