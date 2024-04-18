@@ -154,7 +154,7 @@ public class LoginViewController {
         // Obtener el mapa de usuarios cargados desde el archivo
         HashMap<String, User> users = null;
         try {
-            users = Persistence.loadUsers();
+            users = Persistence.cargarUsuarios();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             showMessage("Error", "Error de archivo", "No se pudo cargar la base de datos de usuarios.", Alert.AlertType.ERROR);
@@ -237,9 +237,9 @@ public class LoginViewController {
         String email = txtEmail.getText();
         if(verifyRegisterBlankSpaces(userName,password,email) && verifyPasswordRegister()){
             if(userRegist(userName,password,email)){
-                loginController.mfm.userSerialization();
+                loginController.mfm.saveDataTest();
+                loginController.mfm.saveResourceXML();
                 activeLogInTab( event );
-
             }
             cleanUp();
         }

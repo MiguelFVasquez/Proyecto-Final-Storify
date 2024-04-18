@@ -15,18 +15,11 @@ import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.ArtistViewCont
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
 import javafx.scene.image.Image;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 
 public class ModelFactoryController {
-    private LoginViewController loginViewController;
-    private UserViewController userViewController;
-    private ArtistViewController artistViewController;
-    private AdminViewController adminViewController;
     static Storify storify;
 
     private static class SingletonHolder {
@@ -36,16 +29,15 @@ public class ModelFactoryController {
         static {
             try {
                 eINSTANCE = new ModelFactoryController();
-            } catch (UserException e) {
-                throw new RuntimeException(e);
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            } catch (ArtistException e) {
-                throw new RuntimeException(e);
-            } catch (SongException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+
+    }
+
+    public static Storify getStorify() {
+        return storify;
     }
 
     // Método para obtener la instancia de nuestra clase
@@ -53,50 +45,26 @@ public class ModelFactoryController {
         return SingletonHolder.eINSTANCE;
     }
 
-    public ModelFactoryController() throws UserException, MalformedURLException, ArtistException, SongException {
-        //1. inicializar datos y luego guardarlo en archivos
-        System.out.println("Invocacion clase singleton");
-        initData();
-    }
-    private Artist newArtist(){
-        String code= "jkdak00";
-        String name= "Eladio";
-        String nationality= "Puerto Rico";
-        boolean isAlone= true;
-        return new Artist(code,name,nationality,isAlone);
-    }
-    private Song newSong() throws MalformedURLException {
-        String code = "0003";
-        String name = "Todo Lit";
-        String rutaCover = "src\\main\\resources\\co\\edu\\uniquindio\\estructuraDatos\\proyecto\\images\\Eladio_Carrión_-_Sol_María.jpg";
-        Image cover = new Image(new File(rutaCover).toURI().toString()); // Crear objeto Image con la ruta de la imagen
-        String year = "2024";
-        String duration = "3:00";
-        Gender gender = Gender.Reggaeton;
-        URL link = new URL("https://www.youtube.com/watch?v=yTAh5-e2dRY&pp=ygUIdG9kbyBsaXQ%3D");
-        Artist artist = newArtist();
-        return new Song(code, name, cover, year, duration, gender, link, artist);
+    public ModelFactoryController() throws IOException {
+        System.out.print("Invocación singleton");
+        try {
+            initData();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //loadDataFromFiles();
+        saveDataTest();
+        saveResourceXML();
+
+        if (storify==null) {
+            loadDataBase();
+            saveResourceXML();
+        }
+
     }
 
-    private void initData() throws UserException, MalformedURLException, ArtistException, SongException {
-        storify = new Storify("SHUHENFY");
-        Song song1= newSong();
-        storify.addArtist(song1.getArtist());
-        storify.addSong(song1);
-        cargarDatosDesdeArchivos(storify);
-    }
-
-    public void initLoginViewController(LoginViewController loginViewController){
-        this.loginViewController = loginViewController;
-    }
-    public void initUserViewController(UserViewController userViewController){
-        this.userViewController = userViewController;
-    }
-    public void initArtistViewController(ArtistViewController artistViewController){
-        this.artistViewController = artistViewController;
-    }
-    public void initAdminViewController(AdminViewController adminViewController){
-        this.adminViewController = adminViewController;
+    private void initData() throws IOException{
+        loadResourceStorifyXML();
     }
 
     //----------------------- USER FUNCTIONS --------------------------------------------//
@@ -105,20 +73,6 @@ public class ModelFactoryController {
 
         User user = new User(userName,password,emial);
         return storify.addUser(user);
-    }
-
-    public static void cargarDatosDesdeArchivos(Storify storify) {
-        try {
-            Persistence.loadDataFiles(storify);
-            storify.getUsersMap().putAll((Persistence.loadUsers()));
-            //storify.getSongList().addAll(Persistence.loadSongs());
-
-            System.out.println("Serializado de usuarios");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (UserException e) {
-            throw new RuntimeException(e);
-        }
     }
 
         public boolean verifyUser(String userName){
@@ -176,7 +130,35 @@ public class ModelFactoryController {
 
     //------------------------ Serialization functions --------------------------------------//
 
-    public void userSerialization() throws IOException {
-        Persistence.saveUsers( storify.getUsersMap() );
+    public void saveDataTest(){
+        try{
+            Persistence.saveUsers(getStorify().getUsersMap());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
+
+    public static void loadDataFromFiles(){
+        storify= new Storify("Shuhenfy");
+        try{
+            Persistence.cargarDatosArchivos(storify);
+            System.out.print("Serializado");
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private void loadDataBase() {
+        storify= new Storify();
+    }
+    public void saveResourceXML(){
+        Persistence.saveResourceStorifyXML(storify);
+    }
+
+    public static void loadResourceStorifyXML() throws IOException {
+        storify= Persistence.loadResourceStorifyXML();
+    }
+
 }

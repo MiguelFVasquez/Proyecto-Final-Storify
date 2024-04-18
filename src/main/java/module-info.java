@@ -15,4 +15,5 @@ module com.example.proyectofinal {
 
     exports co.edu.uniquindio.estructuraDatos.proyecto.model;
     exports co.edu.uniquindio.estructuraDatos.proyecto.test;
+    exports co.edu.uniquindio.estructuraDatos.proyecto.DataStructure;
 }

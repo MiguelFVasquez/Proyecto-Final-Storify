@@ -275,7 +275,7 @@ public class AdminViewController implements Initializable {
         if (verifyArtist(nameArtist,nationalityArtist)){
             String code= generateCode(nameArtist,nationalityArtist);
             if (createArtist(code,nameArtist,nationalityArtist,isAGroup)){
-                adminController.mfm.userSerialization();
+                adminController.mfm.saveResourceXML();
                 cleanUpArtist(event);
                 refreshTableViewArtist();
                 namesArtist.add(nameArtist);
@@ -324,6 +324,7 @@ public class AdminViewController implements Initializable {
                 refreshTableViewSong();
                 Song songAux= adminController.mfm.getSong(codeSong);
                 adminController.mfm.addSongToArtistList(artistName,songAux);
+                adminController.mfm.saveResourceXML();
             }
         }
 

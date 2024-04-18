@@ -1,4 +1,2 @@
-Camilo@@123@@camilo@gmail.com
-Orozco@@12@@orozco@gmail.com
-Flowers@@11@@flowers@gmail.com
-Juan@@10@@juan@gmail.com
+Camilo@@123@@camilo@gmail.com@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList@745039c9
+miguel@@1010@@miguel@gmail.com@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList@21427f0

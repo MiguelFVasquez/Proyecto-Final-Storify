@@ -178,6 +178,10 @@ public class BinaryTree <T extends Comparable<T> > implements Iterable<T>{
             inordenToList(node.getNext(), list);
         }
     }
+    public List<T> inOrderTraversal() {
+        // Usa el método toList existente para obtener una lista en orden ascendente
+        return toList();
+    }
 
 
     // Inicia el recorrido preorden en el árbol comenzando desde la raíz

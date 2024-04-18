@@ -9,6 +9,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Interfaces.IStorify;
 import javafx.scene.image.Image;
 
 import java.io.File;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,14 +24,13 @@ de los Artistas. Además tenga en cuenta que los usuarios se guardan en un HashM
 cada usuario es su username.
 *
 * */
-public class Storify implements IStorify {
+public class Storify implements IStorify, Serializable {
     private String nombre;
     private HashMap<String, User> usersMap;
     private BinaryTree<Artist> artistTree;
     private List<Song> songList;
 
     public Storify() {
-        this.nombre = nombre;
         this.usersMap = new HashMap<>();
         this.artistTree= new BinaryTree<>();
         this.songList= new ArrayList<>();
