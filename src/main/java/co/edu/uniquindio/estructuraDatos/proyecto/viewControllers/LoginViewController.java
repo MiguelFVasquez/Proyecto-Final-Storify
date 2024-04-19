@@ -152,19 +152,7 @@ public class LoginViewController {
 
     private boolean verifyCredentials(String userName, String password) {
         // Obtener el mapa de usuarios cargados desde el archivo
-        HashMap<String, User> users = null;
-        try {
-            users = Persistence.cargarUsuarios();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            showMessage("Error", "Error de archivo", "No se pudo cargar la base de datos de usuarios.", Alert.AlertType.ERROR);
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
-            showMessage("Error", "Error de E/S", "Ocurrió un error de E/S al cargar la base de datos de usuarios.", Alert.AlertType.ERROR);
-            return false;
-        }
-
+        HashMap<String, User> users =  loginController.mfm.getStorify().getUsersMap();;
         // Verificar si el usuario está en el mapa
         if (users.containsKey(userName)) {
             // Obtener el objeto usuario
@@ -176,11 +164,6 @@ public class LoginViewController {
         }
         return false; // Las credenciales son inválidas
     }
-
-    public boolean verifyUser(String userName){
-        return loginController.mfm.verifyUser(userName);
-    }
-
 
     private boolean verifyBlankSpaces(String userName, String password) {
         String notification = "";
@@ -237,7 +220,7 @@ public class LoginViewController {
         String email = txtEmail.getText();
         if(verifyRegisterBlankSpaces(userName,password,email) && verifyPasswordRegister()){
             if(userRegist(userName,password,email)){
-                loginController.mfm.saveDataTest();
+                //loginController.mfm.saveDataTest();
                 loginController.mfm.saveResourceXML();
                 activeLogInTab( event );
             }

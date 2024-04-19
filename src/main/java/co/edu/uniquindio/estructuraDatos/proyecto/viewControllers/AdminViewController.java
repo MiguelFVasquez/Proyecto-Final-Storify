@@ -1,6 +1,5 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,8 +27,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.image.Image;
-
-import static co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender.*;
 
 public class AdminViewController implements Initializable {
 
@@ -152,7 +149,7 @@ public class AdminViewController implements Initializable {
         tableViewArtists.setItems(getArtistsList());
     }
     private ObservableList<Artist> getArtistsList(){
-        artistsList.addAll(adminController.mfm.getListArtist());
+        artistsList.addAll(adminController.mfm.getStorify().getArtistTree().toList());
         return artistsList;
     }
 
@@ -192,14 +189,15 @@ public class AdminViewController implements Initializable {
 
 //--------------------------Auxiliars song's functios--------------------------------------------
 
+    private ObservableList<Song> getSongsList(){
+        songsList.addAll(adminController.mfm.getStorify().getSongList());
+        return songsList;
+    }
+
     private void refreshTableViewSong(){
         songsList.clear();
         tableViewSongs.getItems().clear();
         tableViewSongs.setItems(getSongsList());
-    }
-    private ObservableList<Song> getSongsList(){
-        songsList.addAll(adminController.mfm.getSongList());
-        return songsList;
     }
 
     private void showSongInfo(){
@@ -264,7 +262,16 @@ public class AdminViewController implements Initializable {
         return false;
     }
 
-
+    private void cleanSong(){
+        txtNameSong.clear();
+        txtLinkSong.clear();
+        txtYearSong.clear();
+        txtDurationSong.clear();
+        comboBoxArtist.getSelectionModel().select(null);
+        comboBoxGender.getSelectionModel().select(null);
+        Image image = new Image("file:/home/floweers/5to/Estructura Datos/Proyecto-Final-Storify/src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/musica.png");
+        imageViewSongPortait.setImage(image);
+    }
 //--------------------------EVENTOS DE LOS BOTONES-----------------------------------------------
 
     @FXML
@@ -275,10 +282,10 @@ public class AdminViewController implements Initializable {
         if (verifyArtist(nameArtist,nationalityArtist)){
             String code= generateCode(nameArtist,nationalityArtist);
             if (createArtist(code,nameArtist,nationalityArtist,isAGroup)){
-                adminController.mfm.saveResourceXML();
                 cleanUpArtist(event);
                 refreshTableViewArtist();
                 namesArtist.add(nameArtist);
+                adminController.mfm.saveResourceXML();
                 System.out.printf("Combo box nombre de artistas: " + comboBoxArtist.getItems().toString() );
             }
         }
@@ -316,11 +323,12 @@ public class AdminViewController implements Initializable {
         Gender gender= comboBoxGender.getSelectionModel().getSelectedItem();
         Image cover= imageViewSongPortait.getImage();
         URL link= obtenerURL();
+
         if (verifySong(nameSong,gender,artistName,year,duration,link,cover)){
             String codeSong= generateCode(nameSong,artistName);
             Artist artist= adminController.mfm.getArtist(artistName);
             if (createSong(codeSong,nameSong,gender,year,duration,link,cover,artist)){
-                cleanUpSong(event);
+                cleanSong();
                 refreshTableViewSong();
                 Song songAux= adminController.mfm.getSong(codeSong);
                 adminController.mfm.addSongToArtistList(artistName,songAux);
@@ -392,6 +400,7 @@ public class AdminViewController implements Initializable {
     }
     @FXML
     void initialize() {
+        adminController= new AdminController();
         anchorSongs.setVisible( false );
         eventsControl();
     }
@@ -423,9 +432,6 @@ public class AdminViewController implements Initializable {
                 //btnEliminarProducto.setDisable( true );
             }
         });
-        comboBoxArtist.setItems(namesArtist);
-        comboBoxGender.getItems().setAll(Gender.values());
-        refreshTableViewArtist();
         this.columnCodeSong.setCellValueFactory(new PropertyValueFactory<>("code"));
         this.columnNameSong.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.columnYear.setCellValueFactory(new PropertyValueFactory<>("year"));
@@ -439,6 +445,9 @@ public class AdminViewController implements Initializable {
             }
         });
         refreshTableViewSong();
+        comboBoxArtist.setItems(namesArtist);
+        comboBoxGender.getItems().setAll(Gender.values());
+        refreshTableViewArtist();
     }
 
 }

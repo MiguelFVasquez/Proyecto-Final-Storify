@@ -5,14 +5,12 @@ import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
-import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.AdminViewController;
-import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.UserViewController;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import co.edu.uniquindio.estructuraDatos.proyecto.persistence.Persistence;
-import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.ArtistViewController;
-import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
+import co.edu.uniquindio.estructuraDatos.proyecto.threads.ThreadLoadXML;
+import co.edu.uniquindio.estructuraDatos.proyecto.threads.ThreadSaveXML;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
@@ -29,7 +27,7 @@ public class ModelFactoryController {
         static {
             try {
                 eINSTANCE = new ModelFactoryController();
-            } catch (IOException e) {
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -45,26 +43,25 @@ public class ModelFactoryController {
         return SingletonHolder.eINSTANCE;
     }
 
-    public ModelFactoryController() throws IOException {
+    public ModelFactoryController() throws InterruptedException {
         System.out.print("Invocación singleton");
         try {
             initData();
-        } catch (IOException e) {
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        //loadDataFromFiles();
-        saveDataTest();
         saveResourceXML();
 
         if (storify==null) {
             loadDataBase();
             saveResourceXML();
         }
-
     }
+    private void initData() throws InterruptedException{
+        ThreadLoadXML loadXML= new ThreadLoadXML();
+        loadXML.start();
+        loadXML.join();
 
-    private void initData() throws IOException{
-        loadResourceStorifyXML();
     }
 
     //----------------------- USER FUNCTIONS --------------------------------------------//
@@ -153,11 +150,19 @@ public class ModelFactoryController {
     private void loadDataBase() {
         storify= new Storify();
     }
-    public void saveResourceXML(){
+
+    /**
+     * Guarda el archivo serializado
+     */
+    public static void saveResourceXML(){
         Persistence.saveResourceStorifyXML(storify);
     }
 
-    public static void loadResourceStorifyXML() throws IOException {
+    /**
+     * Carga el archivo serializado
+     * @
+     */
+    public static void loadResourceStorifyXML()  {
         storify= Persistence.loadResourceStorifyXML();
     }
 

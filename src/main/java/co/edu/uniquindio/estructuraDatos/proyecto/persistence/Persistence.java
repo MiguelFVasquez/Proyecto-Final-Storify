@@ -140,7 +140,7 @@ public class Persistence {
     }
 
 
-    public static Storify loadResourceStorifyXML() throws IOException {
+    public static Storify loadResourceStorifyXML() {
 
         Storify storify= null;
 
