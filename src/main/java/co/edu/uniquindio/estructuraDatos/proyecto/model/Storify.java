@@ -1,6 +1,7 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.model;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.BinaryTree;
+import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.ArtistException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
@@ -388,6 +389,24 @@ public class Storify implements IStorify, Serializable {
         }
         return updated;
     }
+
+    //----------------------------METODOS DE BUSQUEDA------------------------------------
+
+    /**
+     * Metodo que retorna la lista de canciones del artista
+     * @param artistName
+     * @return
+     * @throws ArtistException
+     */
+   public List<Song> searchSongByArtistName(String artistName) throws ArtistException{
+        DoublyLinkedList<Song> songList= new DoublyLinkedList<>();
+        for (Artist artistAux: artistTree){
+            if (artistAux.getName().equals(artistName)){
+                songList=artistAux.getSongList();
+            }
+        }
+        return songList.toList();
+   }
 
 
 }

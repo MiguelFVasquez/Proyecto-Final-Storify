@@ -1,6 +1,8 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.DataStructure;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class DoublyLinkedList<T> implements Iterable<T> {
@@ -184,6 +186,15 @@ public class DoublyLinkedList<T> implements Iterable<T> {
         distanciaMaximaRecursiva(current.getNext(), x, (Integer) (current.getData()) == x ? 0 : currentDistance + 1, maxDistance);
     }
 
+    public List<T> toList() {
+        List<T> list = new ArrayList<>(); // Crea una lista para contener los elementos
+        Node<T> current = first; // Comienza desde el primer nodo
+        while (current != null) {
+            list.add(current.getData()); // Añade los datos del nodo actual a la lista
+            current = current.getNext(); // Avanza al siguiente nodo
+        }
+        return list; // Devuelve la lista con todos los elementos de la lista doblemente enlazada
+    }
     @Override
     public Iterator<T> iterator() {
         return new LinkedListIterator();

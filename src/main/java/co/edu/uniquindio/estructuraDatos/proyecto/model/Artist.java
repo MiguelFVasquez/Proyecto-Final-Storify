@@ -112,6 +112,9 @@ public class Artist implements Serializable, Comparable<Artist> {
         return flag;
     }
 
+
+
+
     @Override
     public String toString() {
         return  name;
