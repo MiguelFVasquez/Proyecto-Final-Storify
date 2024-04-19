@@ -2,6 +2,7 @@ package co.edu.uniquindio.estructuraDatos.proyecto.persistence;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.BinaryTree;
 import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList;
+import co.edu.uniquindio.estructuraDatos.proyecto.controllers.ModelFactoryController;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
@@ -13,6 +14,7 @@ import javafx.scene.image.Image;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
@@ -31,12 +33,17 @@ public class Persistence {
             storify.getUsersMap().putAll(usuariosCargados);
         }
 
-        // Cargar datos de artistas
-//        BinaryTree<Artist> artistasCargados = cargarArtistas();
-//        if (artistasCargados != null && artistasCargados.size() > 0) {
-//            // Agregar artistas al sistema de la casa de subasta
-//            storify.setArbolArtistas(artistasCargados);
-//        }
+         //Cargar datos de artistas
+        BinaryTree<Artist> artistasCargados = loadArtist();
+        if (artistasCargados != null /*&& artistasCargados.size() > 0*/) {
+            // Agregar artistas al sistema de la casa de subasta
+            storify.setArtistTree(artistasCargados);
+        }
+        //Cargar datos de canciones
+        List<Song> listaCanciones= loadSong();
+        if (listaCanciones != null) {
+            storify.setSongList(listaCanciones);
+        }
 
         // Puedes agregar la carga de más datos de otras clases (Anuncios, Compras, Productos) aquí
         // según sea necesario
@@ -82,6 +89,72 @@ public class Persistence {
 
 
     //---------------------------SONG----------------------
+    public static void saveSongs(List<Song> canciones) throws IOException {
+        StringBuilder contenido = new StringBuilder();
+
+        // Iterar sobre cada canción en la lista
+        for (Song cancion : canciones) {
+            // Construir la línea con la información de la canción
+            contenido.append(cancion.getCode()).append("@@")
+                    .append(cancion.getName()).append("@@")
+                    .append(cancion.getCover()).append("@@")  // Ajusta la representación según sea necesario
+                    .append(cancion.getYear()).append("@@")
+                    .append(cancion.getDuration()).append("@@")
+                    .append(cancion.getGender()).append("@@")
+                    .append(cancion.getLink()).append("@@")
+                    .append(cancion.getArtist().getName()).append("\n");  // Utiliza el código del artista
+
+        }
+        // Guardar el contenido en el archivo usando la función guardarArchivo
+        UtilFile.guardarArchivo(ROUTE_SONGS_FILE, contenido.toString(), false);
+    }
+
+    public static List<Song> loadSong() throws IOException {
+        List<Song> songs = new ArrayList<>();
+        List<String> content = UtilFile.leerArchivo(ROUTE_SONGS_FILE);
+
+        // Iterar sobre cada línea del archivo
+        for (String linea : content) {
+            // Dividir la línea usando "@@" como delimitador
+            String[] partes = linea.split("@@");
+
+            if (partes.length >= 8) {
+                // Crear un objeto Song
+                Song cancion = new Song();
+                cancion.setCode(partes[0]);  // code
+                cancion.setName(partes[1]);  // name
+                cancion.setCover(cargarImagen(partes[2]));  // cover (debes adaptarlo para manejar la clase Image)
+                cancion.setYear(partes[3]);  // year
+                cancion.setDuration(partes[4]);  // duration
+                cancion.setGender(Gender.valueOf(partes[5]));  // gender
+                try {
+                    cancion.setLink(new URL(partes[6]));  // link
+                } catch (MalformedURLException e) {
+                    System.err.println("URL no válida en la línea: " + linea);
+                    continue;  // Salta esta canción si la URL no es válida
+                }
+
+                // Asumimos que hay un método cargarArtista() que devuelve un objeto Artist a partir de un código de artista
+                Artist artista = ModelFactoryController.getStorify().getArtist(partes[7]);  // artist (cargar el artista desde un método específico)
+                if (artista != null) {
+                    cancion.setArtist(artista);
+                }
+
+                // Agregar la canción a la lista
+                songs.add(cancion);
+            }
+        }
+
+        return songs;
+    }
+
+    public static Image cargarImagen(String ruta) {
+        // Cargar la imagen desde la ruta especificada
+        Image imagen = new Image(ruta);
+        return imagen;  // Devuelve el objeto Image
+    }
+
+
     //--------------------------Artist---------------------
     //Metodo para guardar los artistas en el archivo txt
     public static void saveArtist(BinaryTree<Artist> arbolArtistas) throws IOException {
@@ -96,8 +169,8 @@ public class Persistence {
             contenido.append(artista.getCode()).append("@@")
                     .append(artista.getName()).append("@@")
                     .append(artista.getNationality()).append("@@")
-                    .append(artista.getIsAlone()).append("\n");
-                    //.append(artista.getSongList()).append("\n");
+                    .append(artista.getIsAlone()).append("@@")
+                    .append(artista.getSongList()).append("\n");
         }
 
         // Guardar el contenido en el archivo usando la función guardarArchivo

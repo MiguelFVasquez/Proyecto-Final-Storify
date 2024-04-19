@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelFactoryController {
@@ -50,7 +51,8 @@ public class ModelFactoryController {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        saveResourceXML();
+        saveDataTest();
+        //saveResourceXML();
 
         if (storify==null) {
             loadDataBase();
@@ -58,9 +60,11 @@ public class ModelFactoryController {
         }
     }
     private void initData() throws InterruptedException{
-        ThreadLoadXML loadXML= new ThreadLoadXML();
-        loadXML.start();
-        loadXML.join();
+//        ThreadLoadXML loadXML= new ThreadLoadXML();
+//        loadXML.start();
+//        loadXML.join();
+        loadDataFromFiles();
+
 
     }
 
@@ -96,6 +100,15 @@ public class ModelFactoryController {
     public List<Artist> getListArtist(){
         return storify.getArtistTree().toList();
     }
+
+    public List<String> getNamesArtistList(){
+        List<String> names= new ArrayList<>();
+        for (Artist a : getListArtist()){
+            names.add(a.getName());
+        }
+        return names;
+    }
+
     public Artist getArtist(String name){
         return storify.getArtist(name);
     }
@@ -130,9 +143,12 @@ public class ModelFactoryController {
     public void saveDataTest(){
         try{
             Persistence.saveUsers(getStorify().getUsersMap());
+            Persistence.saveArtist(getStorify().getArtistTree());
+            Persistence.saveSongs(getStorify().getSongList());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
 
     }
 

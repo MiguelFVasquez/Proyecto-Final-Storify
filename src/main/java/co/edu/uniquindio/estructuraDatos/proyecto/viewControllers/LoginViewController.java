@@ -220,7 +220,7 @@ public class LoginViewController {
         String email = txtEmail.getText();
         if(verifyRegisterBlankSpaces(userName,password,email) && verifyPasswordRegister()){
             if(userRegist(userName,password,email)){
-                //loginController.mfm.saveDataTest();
+                loginController.mfm.saveDataTest();
                 loginController.mfm.saveResourceXML();
                 activeLogInTab( event );
             }

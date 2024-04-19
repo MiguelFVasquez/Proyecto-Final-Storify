@@ -12,6 +12,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
+import co.edu.uniquindio.estructuraDatos.proyecto.persistence.Persistence;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -130,6 +131,8 @@ public class AdminViewController implements Initializable {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+
     public static String generateCode(String word1, String word2) {
         String combinedWords = word1 + word2;
         Random random = new Random();
@@ -143,14 +146,18 @@ public class AdminViewController implements Initializable {
 
 
     //------------------------------Auxiliars artist's functions-----------------------------
-    private void refreshTableViewArtist(){
+    private void refreshTableViewArtist() throws IOException {
         artistsList.clear();
         tableViewArtists.getItems().clear();
         tableViewArtists.setItems(getArtistsList());
     }
-    private ObservableList<Artist> getArtistsList(){
-        artistsList.addAll(adminController.mfm.getStorify().getArtistTree().toList());
+    private ObservableList<Artist> getArtistsList() throws IOException {
+        artistsList.addAll(Persistence.loadArtist().toList());
         return artistsList;
+    }
+    private ObservableList<String> getNamesArtist(){
+        namesArtist.addAll(adminController.mfm.getNamesArtistList());
+        return namesArtist;
     }
 
 
@@ -286,6 +293,7 @@ public class AdminViewController implements Initializable {
                 refreshTableViewArtist();
                 namesArtist.add(nameArtist);
                 adminController.mfm.saveResourceXML();
+                adminController.mfm.saveDataTest();
                 System.out.printf("Combo box nombre de artistas: " + comboBoxArtist.getItems().toString() );
             }
         }
@@ -333,6 +341,7 @@ public class AdminViewController implements Initializable {
                 Song songAux= adminController.mfm.getSong(codeSong);
                 adminController.mfm.addSongToArtistList(artistName,songAux);
                 adminController.mfm.saveResourceXML();
+                Persistence.saveSongs(adminController.mfm.getStorify().getSongList());
             }
         }
 
@@ -445,9 +454,13 @@ public class AdminViewController implements Initializable {
             }
         });
         refreshTableViewSong();
-        comboBoxArtist.setItems(namesArtist);
+        comboBoxArtist.setItems(getNamesArtist());
         comboBoxGender.getItems().setAll(Gender.values());
-        refreshTableViewArtist();
+        try {
+            refreshTableViewArtist();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
