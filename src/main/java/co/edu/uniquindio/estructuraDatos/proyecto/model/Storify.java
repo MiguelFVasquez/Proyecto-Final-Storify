@@ -408,5 +408,9 @@ public class Storify implements IStorify, Serializable {
         return songList.toList();
    }
 
+    public List<Song> searchY(String artistName,String songName, Gender gender, String year){
+       List<Song> songList= new ArrayList<>();
 
+       return songList;
+    }
 }
