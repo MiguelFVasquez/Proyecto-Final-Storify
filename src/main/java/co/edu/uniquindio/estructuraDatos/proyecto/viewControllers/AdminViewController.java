@@ -275,7 +275,7 @@ public class AdminViewController implements Initializable {
         txtDurationSong.clear();
         comboBoxArtist.getSelectionModel().select(null);
         comboBoxGender.getSelectionModel().select(null);
-        Image image = new Image("file:/home/floweers/5to/Estructura Datos/Proyecto-Final-Storify/src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/musica.png");
+        Image image = new Image("src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/musica.png");
         imageViewSongPortait.setImage(image);
     }
 //--------------------------EVENTOS DE LOS BOTONES-----------------------------------------------
@@ -336,7 +336,7 @@ public class AdminViewController implements Initializable {
             Artist artist= adminController.mfm.getArtist(artistName);
             if (!createSong(codeSong,nameSong,gender,year,duration,link,cover,artist)){
                 Song songAux= adminController.mfm.getSong(codeSong);
-                //adminController.mfm.addSongToArtistList(artistName,songAux);
+                adminController.mfm.addSongToArtistList(artistName,songAux);
                 //adminController.mfm.saveResourceXML();
                 adminController.mfm.saveDataTest();
                 System.out.printf("Lista de canciones: " + getSongsList());

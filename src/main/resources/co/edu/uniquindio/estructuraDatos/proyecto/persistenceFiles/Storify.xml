@@ -10,44 +10,6 @@
      <void property="artist">
       <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
        <void property="code">
-        <string> ar iiPlCr</string>
-       </void>
-       <void property="name">
-        <string>Eladio Carrion</string>
-       </void>
-       <void property="nationality">
-        <string>Pr</string>
-       </void>
-       <void property="songList">
-        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
-       </void>
-      </object>
-     </void>
-     <void property="code">
-      <string>n3AE oini </string>
-     </void>
-     <void property="duration">
-      <string>3</string>
-     </void>
-     <void property="gender">
-      <object class="java.lang.Enum" method="valueOf">
-       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
-       <string>Reggaeton</string>
-      </object>
-     </void>
-     <void property="name">
-      <string>3 AM</string>
-     </void>
-     <void property="year">
-      <string>2019</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
-     <void property="artist">
-      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
-       <void property="code">
         <string>lMran AnMe</string>
        </void>
        <void property="name">
@@ -62,7 +24,7 @@
       </object>
      </void>
      <void property="code">
-      <string>ar CaMiceu</string>
+      <string>ummmaalaml</string>
      </void>
      <void property="duration">
       <string>3</string>
@@ -74,10 +36,48 @@
       </object>
      </void>
      <void property="name">
-      <string>Carencia de cordura</string>
+      <string>Tu manta</string>
      </void>
      <void property="year">
       <string>2023</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+       <void property="code">
+        <string> ar iiPlCr</string>
+       </void>
+       <void property="name">
+        <string>Eladio Carrion</string>
+       </void>
+       <void property="nationality">
+        <string>Pr</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string>lo riEoirr</string>
+     </void>
+     <void property="duration">
+      <string>4</string>
+     </void>
+     <void property="gender">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
+       <string>Reggaeton</string>
+      </object>
+     </void>
+     <void property="name">
+      <string>El malo</string>
+     </void>
+     <void property="year">
+      <string>2024</string>
      </void>
     </object>
    </void>
