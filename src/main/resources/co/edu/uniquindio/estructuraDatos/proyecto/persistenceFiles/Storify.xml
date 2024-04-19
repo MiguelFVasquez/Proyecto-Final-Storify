@@ -4,6 +4,46 @@
   <void property="nombre">
    <string>Shuhenfy</string>
   </void>
+  <void property="songList">
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+       <void property="code">
+        <string> ar iiPlCr</string>
+       </void>
+       <void property="name">
+        <string>Eladio Carrion</string>
+       </void>
+       <void property="nationality">
+        <string>Pr</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string>n3AE oini </string>
+     </void>
+     <void property="duration">
+      <string>3</string>
+     </void>
+     <void property="gender">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
+       <string>Reggaeton</string>
+      </object>
+     </void>
+     <void property="name">
+      <string>3 AM</string>
+     </void>
+     <void property="year">
+      <string>2019</string>
+     </void>
+    </object>
+   </void>
+  </void>
   <void property="usersMap">
    <void method="put">
     <string>miguel</string>

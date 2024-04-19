@@ -85,7 +85,6 @@ public class AdminViewController implements Initializable {
     @FXML
     private Button btnAddSong;
 
-
     //-----------Elementos del artista------
     @FXML
     private TextField txtNameArtist;
@@ -197,7 +196,7 @@ public class AdminViewController implements Initializable {
 //--------------------------Auxiliars song's functios--------------------------------------------
 
     private ObservableList<Song> getSongsList(){
-        songsList.addAll(adminController.mfm.getStorify().getSongList());
+        songsList.addAll(adminController.mfm.getSongList());
         return songsList;
     }
 
@@ -289,12 +288,12 @@ public class AdminViewController implements Initializable {
         if (verifyArtist(nameArtist,nationalityArtist)){
             String code= generateCode(nameArtist,nationalityArtist);
             if (createArtist(code,nameArtist,nationalityArtist,isAGroup)){
-                cleanUpArtist(event);
-                refreshTableViewArtist();
                 namesArtist.add(nameArtist);
-                adminController.mfm.saveResourceXML();
+                //adminController.mfm.saveResourceXML();
                 adminController.mfm.saveDataTest();
                 System.out.printf("Combo box nombre de artistas: " + comboBoxArtist.getItems().toString() );
+                cleanUpArtist(event);
+                refreshTableViewArtist();
             }
         }
     }
@@ -323,7 +322,7 @@ public class AdminViewController implements Initializable {
     }
 
     @FXML
-    void addSong(ActionEvent event) throws ArtistException, SongException, IOException {
+    void addSong(ActionEvent event) throws ArtistException, SongException {
         String nameSong= txtNameSong.getText();
         String year= txtYearSong.getText();
         String duration= txtDurationSong.getText();
@@ -335,13 +334,14 @@ public class AdminViewController implements Initializable {
         if (verifySong(nameSong,gender,artistName,year,duration,link,cover)){
             String codeSong= generateCode(nameSong,artistName);
             Artist artist= adminController.mfm.getArtist(artistName);
-            if (createSong(codeSong,nameSong,gender,year,duration,link,cover,artist)){
+            if (!createSong(codeSong,nameSong,gender,year,duration,link,cover,artist)){
+                Song songAux= adminController.mfm.getSong(codeSong);
+                //adminController.mfm.addSongToArtistList(artistName,songAux);
+                //adminController.mfm.saveResourceXML();
+                adminController.mfm.saveDataTest();
+                System.out.printf("Lista de canciones: " + getSongsList());
                 cleanSong();
                 refreshTableViewSong();
-                Song songAux= adminController.mfm.getSong(codeSong);
-                adminController.mfm.addSongToArtistList(artistName,songAux);
-                adminController.mfm.saveResourceXML();
-                Persistence.saveSongs(adminController.mfm.getStorify().getSongList());
             }
         }
 
@@ -410,7 +410,7 @@ public class AdminViewController implements Initializable {
     @FXML
     void initialize() {
         adminController= new AdminController();
-        anchorSongs.setVisible( false );
+        anchorSongs.setVisible( true );
         eventsControl();
     }
 
@@ -427,7 +427,7 @@ public class AdminViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.adminController= new AdminController();
-
+        System.out.printf("Lista canciones: "+ adminController.mfm.getSongList());
         this.tableColumnCode.setCellValueFactory(new PropertyValueFactory<>("code"));
         this.tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.tableColumnNationality.setCellValueFactory(new PropertyValueFactory<>("nationality"));

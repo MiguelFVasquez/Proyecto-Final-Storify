@@ -2,6 +2,7 @@ package co.edu.uniquindio.estructuraDatos.proyecto.persistence;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.BinaryTree;
 import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList;
+import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList;
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.ModelFactoryController;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
@@ -97,7 +98,7 @@ public class Persistence {
             // Construir la línea con la información de la canción
             contenido.append(cancion.getCode()).append("@@")
                     .append(cancion.getName()).append("@@")
-                    .append(cancion.getCover()).append("@@")  // Ajusta la representación según sea necesario
+                    .append(cancion.getCover().getUrl()).append("@@")  // Ajusta la representación según sea necesario
                     .append(cancion.getYear()).append("@@")
                     .append(cancion.getDuration()).append("@@")
                     .append(cancion.getGender()).append("@@")
@@ -193,7 +194,7 @@ public class Persistence {
                 artista.setName(partes[1]);  // name
                 artista.setNationality(partes[2]);  // nationality
                 artista.setAlone(Boolean.parseBoolean(partes[3]));  // isAlone
-
+                artista.setSongList(new DoublyLinkedList<>());
                 // Agregar el artista al BinaryTree
                 arbolArtistas.insertar(artista);
             }

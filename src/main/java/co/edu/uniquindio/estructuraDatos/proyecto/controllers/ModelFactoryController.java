@@ -52,7 +52,7 @@ public class ModelFactoryController {
             throw new RuntimeException(e);
         }
         saveDataTest();
-        //saveResourceXML();
+        saveResourceXML();
 
         if (storify==null) {
             loadDataBase();
@@ -64,6 +64,7 @@ public class ModelFactoryController {
 //        loadXML.start();
 //        loadXML.join();
         loadDataFromFiles();
+        //loadResourceStorifyXML();
 
 
     }

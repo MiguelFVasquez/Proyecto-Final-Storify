@@ -291,7 +291,6 @@ public class LoginViewController {
     void initialize() {
         tabSignUp.setDisable( true );
         this.loginController= new LoginController();
-        this.
 
         eventsControl();
 

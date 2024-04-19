@@ -1,2 +1,2 @@
-.OACng.rtn@@C.R.O@@Argentina@@false@@null
-tWonrnsWog@@Wos@@Argentina@@false@@null
+ ar iiPlCr@@Eladio Carrion@@Pr@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@6c93d467
+lMran AnMe@@Milo j@@Argentina@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@12105665
