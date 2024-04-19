@@ -408,9 +408,39 @@ public class Storify implements IStorify, Serializable {
         return songList.toList();
    }
 
+    /**
+     * Metodo de busqueda para encontrar una lsta de canciones que cumplen con TODOS los atributos de busqueda
+     * @param artistName
+     * @param songName
+     * @param gender
+     * @param year
+     * @return
+     */
     public List<Song> searchY(String artistName,String songName, Gender gender, String year){
        List<Song> songList= new ArrayList<>();
-
+       for(Artist artistAux: artistTree){
+            if (!artistAux.searchY(artistName,songName,gender,year).isEmpty()){
+                songList=artistAux.searchY(artistName,songName,gender,year);
+            }
+       }
        return songList;
+    }
+
+    /**
+     * Metodo que obtiene la lista de canciones que cumplan con minimo un atributo de busqueda
+     * @param artistName
+     * @param songName
+     * @param gender
+     * @param year
+     * @return
+     */
+    public List<Song> searchO(String artistName,String songName, Gender gender, String year){
+        List<Song> songList= new ArrayList<>();
+        for(Artist artistAux: artistTree){
+            if (!artistAux.searchO(artistName,songName,gender,year).isEmpty()){
+                songList=artistAux.searchO(artistName,songName,gender,year);
+            }
+        }
+        return songList;
     }
 }

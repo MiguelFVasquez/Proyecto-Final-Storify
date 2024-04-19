@@ -2,8 +2,11 @@ package co.edu.uniquindio.estructuraDatos.proyecto.model;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Artist implements Serializable, Comparable<Artist> {
     private String code;
@@ -112,7 +115,25 @@ public class Artist implements Serializable, Comparable<Artist> {
         return flag;
     }
 
+    public List<Song> searchY(String artistName, String songName, Gender gender, String year){
+        List<Song> songListA=new ArrayList<>();
+        for (Song songAux: songList) {
+            if (songAux.verifyInfoY(artistName,songName,gender,year)){
+                songListA.add(songAux);
+            }
+        }
+        return songListA;
+    }
 
+    public List<Song> searchO(String artistName, String songName, Gender gender, String year){
+        List<Song> songListA=new ArrayList<>();
+        for (Song songAux: songList) {
+            if (songAux.verifyInfoO(artistName,songName,gender,year)){
+                songListA.add(songAux);
+            }
+        }
+        return songListA;
+    }
 
 
     @Override

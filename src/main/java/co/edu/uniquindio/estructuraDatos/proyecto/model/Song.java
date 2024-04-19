@@ -123,4 +123,19 @@ public class Song implements Serializable {
     public boolean verifyCode(String code){
         return this.getCode().equals(code);
     }
+
+    public boolean verifyInfoY(String artistName,String songName, Gender gender, String year){
+        if (this.artist.getName().equals(artistName) && this.name.equals(songName) && this.gender==gender && this.year.equals(year)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean verifyInfoO(String artistName,String songName, Gender gender, String year){
+        if (this.artist.getName().equals(artistName) || this.name.equals(songName) || this.gender==gender || this.year.equals(year)){
+            return true;
+        }
+        return false;
+    }
+
 }
