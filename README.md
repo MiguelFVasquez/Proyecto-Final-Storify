@@ -2,12 +2,8 @@
 
 ## ***TASKS**
 ### **TO DO**
--Serializar artistas
--Serializaar canciones
 - Funcionamiento del tab registrar
-- Visualización de portadas en UserView
-- Validación de campos de Register
-- 
+- Visualización de portadas en UserView 
 ### DOING
 - Validar ingreso de usuarios creados
 - Validación de campos de Login
