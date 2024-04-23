@@ -282,8 +282,25 @@ public class LoginViewController {
 
 
     @FXML
-    void rescuePassword(ActionEvent event) {
+    void rescuePassword(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation( App.class.getResource( "RescuePassView.fxml" ) );
+        AnchorPane anchorPane = loader.load();
+        RescuePassViewController controller = loader.getController();
+        Stage stage = new Stage();
+        Scene scene = new Scene(  anchorPane);
+        controller.init( stage );
+        stage.setScene(  scene);
 
+
+        stage.initStyle( StageStyle.TRANSPARENT );
+        stage.centerOnScreen();
+
+        FadeTransition fadeIn = new FadeTransition( Duration.seconds(1) , anchorPane);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+        fadeIn.play();
+        stage.show();
     }
     
     //--------------------------------------UTILITARY FUNCTIONS

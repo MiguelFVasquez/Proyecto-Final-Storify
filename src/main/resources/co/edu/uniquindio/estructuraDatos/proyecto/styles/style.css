@@ -124,6 +124,9 @@
 .shadow{
     -fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.5), 6,0,0,0);
 }
+.tool-bar{
+ -fx-spacing: 15px;
+}
 
 
 
