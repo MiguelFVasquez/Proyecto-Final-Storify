@@ -1,7 +1,8 @@
-# WORKING ON PROJECT: Shuh3n
+# WORKING ON PROJECT: 
 
 ## ***TASKS**
 ### **TO DO**
+- Organizar eliminacion de datos de textfields **RescuePassView**
 - Funcionamiento del tab registrar
 - Visualización de portadas en UserView 
 ### DOING
