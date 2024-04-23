@@ -292,7 +292,16 @@ public class LoginViewController {
         controller.init( stage );
         stage.setScene(  scene);
 
+        anchorPane.setOnMousePressed( (MouseEvent event2) ->{
+            x = event2.getSceneX();
+            y= event2.getSceneY();
+        });
 
+        anchorPane.setOnMouseDragged((MouseEvent event2) -> {
+            stage.setX( event2.getScreenX()-x );
+            stage.setY( event2.getScreenY()-y );
+        });
+        controller.setAnchorPane(anchorPane);
         stage.initStyle( StageStyle.TRANSPARENT );
         stage.centerOnScreen();
 
@@ -300,7 +309,7 @@ public class LoginViewController {
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
         fadeIn.play();
-        stage.show();
+        controller.show();
     }
     
     //--------------------------------------UTILITARY FUNCTIONS
