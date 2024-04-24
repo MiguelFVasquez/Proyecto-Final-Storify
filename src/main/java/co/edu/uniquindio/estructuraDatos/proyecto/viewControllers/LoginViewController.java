@@ -17,10 +17,13 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -361,6 +364,24 @@ public class LoginViewController {
                     "-fx-border-color:    #a3c0f5; " +
                     "-fx-border-radius: 18px ");
             scaleOut.play();});
+
+        txtName.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    txtPassword.requestFocus();
+                    txtPassword.selectEnd();
+                }
+            }
+        });
+        txtPassword.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    btnLogin.fire();
+                }
+            }
+        });
     }
 
     public void show() {

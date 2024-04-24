@@ -42,6 +42,10 @@ public class UserViewController implements Initializable {
 
     @FXML
     private AnchorPane anchorHome;
+    @FXML
+    private AnchorPane anchorSearch;
+    @FXML
+    private AnchorPane anchorLibrary;
 
     @FXML
     private StackPane stackFS1;
@@ -87,8 +91,10 @@ public class UserViewController implements Initializable {
     @FXML
     void showHomeInfo(ActionEvent event) {
         labelTitle.setText( "Home" );
-        showReleasesSongs(getSongs());
-
+        anchorHome.setVisible( true );
+        anchorLibrary.setVisible( false );
+        anchorSearch.setVisible( false );
+        showReleasesSongs( getSongs() );
 
     }
     private void showReleasesSongs(List<Song> songs){
@@ -122,12 +128,18 @@ public class UserViewController implements Initializable {
     @FXML
     void showLibraryInfo(ActionEvent event) {
         labelTitle.setText( "Library" );
+        anchorLibrary.setVisible( true );
+        anchorSearch.setVisible( false );
+        anchorHome.setVisible( false );
 
     }
 
     @FXML
     void showSearchInfo(ActionEvent event) {
         labelTitle.setText( "Search" );
+        anchorSearch.setVisible( true );
+        anchorLibrary.setVisible( false );
+        anchorHome.setVisible( false );
     }
     @FXML
     void logOut(ActionEvent event) {
@@ -139,7 +151,8 @@ public class UserViewController implements Initializable {
 
     @FXML
     void initialize() {
-
+        showReleasesSongs(getSongs());
+        anchorHome.setVisible( true );
     }
 
     void eventsControll(){
