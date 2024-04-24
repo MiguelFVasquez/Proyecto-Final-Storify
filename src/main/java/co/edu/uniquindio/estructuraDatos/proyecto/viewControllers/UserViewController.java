@@ -1,5 +1,6 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,11 +87,32 @@ public class UserViewController implements Initializable {
     @FXML
     void showHomeInfo(ActionEvent event) {
         labelTitle.setText( "Home" );
-
+        showReleasesSongs(getSongs());
 
 
     }
+    private void showReleasesSongs(List<Song> songs){
+        if(songs.size() != 0){
+            for (int i = 0; i < songs.size(); i++) {
+                if(i==0 && songs.get( i ) != null){
+                    lblFS1.setText( songs.get( i ).getName() );
+                    String imageUrl = "/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/portait.jpg";
+                    InputStream inputStream = getClass().getResourceAsStream(imageUrl);
+                    if (inputStream != null) {
+                        Image aux = new Image(inputStream);
+                        imageFS1.setImage( aux );
+                        imageFS1.setFitWidth( 180 );
+                        imageFS1.setFitHeight( 150 );
+                    } else {
+                        System.out.println("No se pudo cargar la imagen desde la URL: " + imageUrl);
+                    }
 
+                }
+
+            }
+        }
+
+    }
 
 
     public List<Song> getSongs(){

@@ -114,7 +114,7 @@
             <Label layoutX="519.0" layoutY="229.0" text="Label" />
             <Label layoutX="710.0" layoutY="229.0" text="Label" />
             <Label layoutX="904.0" layoutY="229.0" text="Label" />
-            <Label fx:id="lblFS1" layoutX="135.0" layoutY="229.0" text="Label" />
+            <Label fx:id="lblFS1" alignment="CENTER" layoutX="135.0" layoutY="229.0" text="Label" textAlignment="CENTER" />
             <Label layoutX="59.0" layoutY="7.0" text="New releases for you">
                <font>
                   <Font size="34.0" />

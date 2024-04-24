@@ -333,7 +333,10 @@ public class AdminViewController implements Initializable {
                 e.printStackTrace();
             }
             String imageUrl = "/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/" + nameFile;
-            InputStream inputStream = Files.newInputStream(Path.of(absolutePath + nameFile));
+            //InputStream inputStream = Files.newInputStream(Path.of(absolutePath + nameFile));
+
+
+            InputStream inputStream = getClass().getResourceAsStream(imageUrl);
             Image image = new Image(inputStream);
             imageViewSongPortait.setImage(image);
         }
