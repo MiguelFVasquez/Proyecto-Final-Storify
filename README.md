@@ -1,17 +1,16 @@
-# WORKING ON PROJECT: Shuh3n
+# WORKING ON PROJECT:
 
 ## ***TASKS**
 ### **TO DO**
-- Organizar eliminacion de datos de textfields **RescuePassView**
 - Funcionamiento del tab registrar
-- Visualización de portadas en UserView 
+
 ### DOING
+- Visualización de portadas en UserView 
 - Validar ingreso de usuarios creados
 - Validación de campos de Login
 - Funcionalidad de botones Tab register
-- Gridpane's de UserView. ((Navegación))
-- GridPane's de AdminView ((Navegación))
 ### DONE
+- Organizar eliminacion de datos de textfields **RescuePassView**
 - Funcionalidad de botones tab login
 - Mejoramiento de Hover and Selected CSS
 - Navegación de tab login y Register 
