@@ -1,8 +1,12 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -121,6 +125,7 @@ public class AdminViewController implements Initializable {
     private ObservableList<Artist> artistsList= FXCollections.observableArrayList();
     private ObservableList<Song> songsList= FXCollections.observableArrayList();
     private ObservableList<String> namesArtist = FXCollections.observableArrayList();
+
 
     //-------------------Auxiliars functions-----------------------
     public void showMessage(String title, String header, String content, Alert.AlertType alertype) {
@@ -275,7 +280,7 @@ public class AdminViewController implements Initializable {
         txtDurationSong.clear();
         comboBoxArtist.getSelectionModel().select(null);
         comboBoxGender.getSelectionModel().select(null);
-        Image image = new Image("src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/musica.png");
+        Image image = new Image("/co/edu/uniquindio/estructuraDatos/proyecto/images/musica.png");
         imageViewSongPortait.setImage(image);
     }
 //--------------------------EVENTOS DE LOS BOTONES-----------------------------------------------
@@ -306,7 +311,7 @@ public class AdminViewController implements Initializable {
 
 //------------------------------------------------SONGS----------------------------------------------
     @FXML
-    void selectCoverSong(ActionEvent event) {
+    void selectCoverSong(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnSelectCover.getScene().getWindow();
         // Cerrar la ventana
 
@@ -316,8 +321,21 @@ public class AdminViewController implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
         java.io.File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
-            Image image = new Image(file.toURI().toString());
-            imageViewSongPortait.setImage( image );
+
+            String absolutePath = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/";
+            String nameFile = file.getName();
+
+            try {
+                Path destiny = Path.of(absolutePath + nameFile);
+                Files.copy(file.toPath(), destiny, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Archivo copiado correctamente a: " + destiny);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String imageUrl = "/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/" + nameFile;
+            InputStream inputStream = Files.newInputStream(Path.of(absolutePath + nameFile));
+            Image image = new Image(inputStream);
+            imageViewSongPortait.setImage(image);
         }
     }
 

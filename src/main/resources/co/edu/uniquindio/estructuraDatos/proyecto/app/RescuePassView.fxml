@@ -10,7 +10,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="548.0" prefWidth="600.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.RescuePassViewController">
    <children>
       <AnchorPane layoutX="24.0" layoutY="27.0" prefHeight="175.0" prefWidth="548.0" style="-fx-background-radius: 8px;" stylesheets="@../styles/style.css">
@@ -29,7 +28,7 @@
             <Font name="System Bold" size="96.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorFirst" layoutY="216.0" prefHeight="250.0" prefWidth="600.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="anchorFirst" layoutY="216.0" prefHeight="270.0" prefWidth="600.0" style="-fx-background-color: white;">
          <children>
             <TextField fx:id="txtNameAcc" layoutX="85.0" layoutY="74.0" prefHeight="50.0" prefWidth="430.0" promptText="Name" styleClass="txtFields" />
             <Label layoutX="85.0" layoutY="38.0" text="Enter your account name">
@@ -40,7 +39,7 @@
             <Button fx:id="btnSubmit" layoutX="451.0" layoutY="150.0" mnemonicParsing="false" onAction="#searchEmail" prefHeight="27.0" prefWidth="66.0" styleClass="btnGreen" text="Submit" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorSecond" layoutY="216.0" prefHeight="250.0" prefWidth="600.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="anchorSecond" layoutY="216.0" prefHeight="270.0" prefWidth="600.0" style="-fx-background-color: white;">
          <children>
             <Label layoutX="85.0" layoutY="109.0" text="Enter the code">
                <font>
@@ -61,6 +60,7 @@
                   <TextField fx:id="txtcode5" prefHeight="50.0" prefWidth="56.0" styleClass="txtFields2" />
               </items>
             </ToolBar>
+            <Button fx:id="btnBack" layoutX="85.0" layoutY="220.0" mnemonicParsing="false" onAction="#showAnchorFirst" styleClass="btnRed" text="Back" />
          </children>
       </AnchorPane>
       <Button fx:id="btnClose" layoutX="24.0" layoutY="492.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="40.0" prefWidth="56.0" style="-fx-background-color: #E74C3C; -fx-border-color: transparent; -fx-background-radius: 8px;">

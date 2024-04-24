@@ -8,10 +8,13 @@ import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -32,6 +35,9 @@ public class RescuePassViewController {
 
     @FXML
     private Button btnClose;
+
+    @FXML
+    private Button btBack;
 
     @FXML
     private Button btnSubmit;
@@ -85,7 +91,18 @@ public class RescuePassViewController {
 
     @FXML
     void searchEmail(ActionEvent event) {
+        txtNameAcc.clear();
         anchorSecond.setVisible( true );
+    }
+
+    @FXML
+    void showAnchorFirst(ActionEvent event) {
+        anchorSecond.setVisible( false );
+        txtcode1.clear();
+        txtcode2.clear();
+        txtcode3.clear();
+        txtcode4.clear();
+        txtcode5.clear();
     }
 
     @FXML
@@ -102,14 +119,13 @@ public class RescuePassViewController {
     }
     public void eventsManager(){
         btnSubmit.setDisable( true );
+
         UnaryOperator<TextFormatter.Change> numberFilter = change -> {
             if (change.getControlNewText().matches("\\d")) {
                 return change;
             } else {
                 change.setText(""); // else make no change
-                change.setRange(change.getRangeStart(), change.getRangeStart());
                 return change;
-
             }
         };
 
@@ -128,24 +144,37 @@ public class RescuePassViewController {
         txtcode2.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() == 1) {
                 txtcode3.requestFocus();
+            }else{
+                txtcode1.requestFocus();
+                txtcode1.selectEnd();
+
             }
         });
 
         txtcode3.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() == 1) {
                 txtcode4.requestFocus();
+            }else{
+                txtcode2.requestFocus();
+                txtcode2.selectEnd();
+
             }
         });
 
         txtcode4.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() == 1) {
                 txtcode5.requestFocus();
+            }else{
+                txtcode3.requestFocus();
+                txtcode3.selectEnd();
             }
         });
 
         txtcode5.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() == 1) {
-
+            }else{
+                txtcode4.requestFocus();
+                txtcode4.selectEnd();
             }
         });
     }

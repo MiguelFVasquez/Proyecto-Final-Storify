@@ -1,19 +1,24 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.UserController;
-import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -26,14 +31,26 @@ public class UserViewController implements Initializable {
     private URL location;
 
     @FXML
-    private GridPane gridPaneHome;
+    private Label lblFS1;
+
+    @FXML
+    private Label lblFS2;
 
     @FXML
     private Button btnLogOut;
 
     @FXML
-    private GridPane gridPaneSearch;
+    private AnchorPane anchorHome;
 
+    @FXML
+    private StackPane stackFS1;
+    @FXML
+    private StackPane stackFS2;
+
+    @FXML
+    private ImageView imageFS1;
+    @FXML
+    private ImageView imageFS2;
 
     @FXML
     private Label labelTitle;
@@ -69,6 +86,15 @@ public class UserViewController implements Initializable {
     @FXML
     void showHomeInfo(ActionEvent event) {
         labelTitle.setText( "Home" );
+
+
+
+    }
+
+
+
+    public List<Song> getSongs(){
+        return userController.mfm.getSongList();
     }
 
     @FXML
