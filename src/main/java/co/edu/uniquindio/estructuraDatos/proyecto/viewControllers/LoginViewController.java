@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -30,7 +31,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-public class LoginViewController {
+public class LoginViewController implements Initializable {
 
     @FXML
     private ResourceBundle resources;
@@ -60,7 +61,7 @@ public class LoginViewController {
     private TextField txtEmail;
 
     @FXML
-    private TextField txtName;
+    public TextField txtName;
 
     @FXML
     private TextField txtNameRegister;
@@ -88,8 +89,13 @@ public class LoginViewController {
     private Stage stage;
     private double x;
     private double y;
+    private String LogInName;
 
     private AnchorPane anchorPane;
+
+    public String getLogInName(){
+        return txtName.getText();
+    }
 
     public void setAnchorPane(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
@@ -393,4 +399,11 @@ public class LoginViewController {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        tabSignUp.setDisable( true );
+        this.loginController= new LoginController();
+        loginController.mfm.initLoginViewController(this);
+        eventsControl();
+    }
 }

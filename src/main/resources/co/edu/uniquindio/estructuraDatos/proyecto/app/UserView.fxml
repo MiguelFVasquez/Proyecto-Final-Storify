@@ -250,6 +250,8 @@
                   <Font size="34.0" />
                </font>
             </Label>
+            <Button fx:id="btnLike" layoutX="385.0" layoutY="534.0" mnemonicParsing="false" onAction="#addSongToUserList" prefHeight="18.0" prefWidth="115.0" style="-fx-background-color: #61C64C; -fx-cursor: hand;" text="Like" textFill="WHITE" />
+            <Button fx:id="btnDeshacer" layoutX="909.0" layoutY="534.0" mnemonicParsing="false" onAction="#regresarAccion" style="-fx-background-color: #757171; -fx-cursor: hand;" text="Deshacer" textFill="WHITE" />
          </children>
       </AnchorPane>
    </children>

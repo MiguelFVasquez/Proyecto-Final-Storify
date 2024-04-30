@@ -11,6 +11,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import co.edu.uniquindio.estructuraDatos.proyecto.persistence.Persistence;
 import co.edu.uniquindio.estructuraDatos.proyecto.threads.ThreadLoadXML;
 import co.edu.uniquindio.estructuraDatos.proyecto.threads.ThreadSaveXML;
+import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class ModelFactoryController {
     static Storify storify;
+    private LoginViewController loginViewController;
 
     private static class SingletonHolder {
         // El constructor de Singleton puede ser llamado desde aquí al ser protected
@@ -68,32 +70,29 @@ public class ModelFactoryController {
 
 
     }
-
+    //-----------------------Initialization de los controllers---------------
+    public void initLoginViewController(LoginViewController loginViewController){
+        this.loginViewController= loginViewController;
+    }
     //----------------------- USER FUNCTIONS --------------------------------------------//
 
     public boolean registerUser(String userName, String password, String emial)throws UserException{
-
         User user = new User(userName,password,emial);
         return storify.addUser(user);
-    }
-
-        public boolean verifyUser(String userName){
-        return storify.verifyUser(userName);
-    }
-    public boolean verifyPassword(String password){
-        return storify.verifyPassword(password);
     }
 
     public boolean logInUser(String userName, String password){
         return storify.logIn(userName,password);
     }
-    public User getUser(String userName){
-        return storify.getUser(userName);
+    public String getUserName(){
+        return loginViewController.getLogInName();
     }
-
-      /*
-      Metodo para cargar archivos serializados de cliente
-       */
+    public boolean addSongToUserList(String username, Song songToAdd) throws UserException, SongException {
+        return storify.addSongToUserList(username,songToAdd);
+    }
+    public boolean removeSongFromUserList(String username, Song songToRemove) throws UserException, SongException {
+        return storify.removeSongFromUserList(username,songToRemove);
+    }
 
     //-------------------------Admin functions---------------------------------------------------
         //---------------------Artist functions------------------------------------------------

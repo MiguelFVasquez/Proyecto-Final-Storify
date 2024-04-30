@@ -5,13 +5,17 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.UserController;
+import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
+import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -65,9 +69,13 @@ public class UserViewController implements Initializable {
 
     @FXML
     private Button btnLibrary;
-
     @FXML
     private Button btnSearch;
+    @FXML
+    private Button btnLike;
+    @FXML
+    private Button btnDeshacer;
+
     private Stage stage;
 
     private Double x;
@@ -76,15 +84,55 @@ public class UserViewController implements Initializable {
     private LoginViewController loginViewController;
     private AnchorPane anchorPane;
     private UserController userController;
+    private Song songSelection;
 
     public void setLoginViewController(LoginViewController loginViewController) {
         this.loginViewController = loginViewController;
     }
 
+    private Stack<String> stateStack;
+    private Stack<Song> songsStack;
+
     public void setAnchorPane(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
     }
+    //------------------------------UTILITIES-----------------------------------
+    private void showMessage(String title, String header, String content, Alert.AlertType alertype) {
+        Alert alert = new Alert(alertype);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
+    private boolean addSong(String userName, Song songToAdd){
+        try {
+            if (userController.mfm.addSongToUserList(userName,songToAdd)){
+                showMessage("Notification", "Song add to list", "The song: '" + songSelection.getName() +"' was add to list successfully", Alert.AlertType.INFORMATION);
+                return true;
+            }
+        } catch (UserException uE) {
+            showMessage("Error", "Error adding song to user list", uE.getMessage(), Alert.AlertType.ERROR);
+        } catch (SongException sE) {
+            showMessage("Error", "Error adding song to user list", sE.getMessage(), Alert.AlertType.ERROR);
+        }
+        return false;
+    }
+    //Se pasa la cancion que se desea eliminar
+    private void removeSong(String userName, Song songToRemove){
+        try{
+            if (userController.mfm.removeSongFromUserList(userName,songToRemove)){
+                showMessage("Notification", "Song removed from list", "The song: '" + songToRemove.getName() +" ' was removed from list successfully", Alert.AlertType.INFORMATION );
+                stateStack.push("Elimino");
+            }
+        } catch (UserException e) {
+            showMessage("Error", "Error deleting song from list", e.getMessage(), Alert.AlertType.ERROR);
+        } catch (SongException e) {
+            showMessage("Error", "Error deleting song from list", e.getMessage(), Alert.AlertType.ERROR);
+        }
+
+
+    }
 
 
     //------------------------------FUNCTIONS OF SHOW-------------------------------------------------------------------
@@ -146,9 +194,38 @@ public class UserViewController implements Initializable {
         loginViewController.show();
         this.stage.close();
     }
+//----------------------------Funcionalidades del usuario----------------------------------
+    @FXML
+    void addSongToUserList(ActionEvent event) {
+        String userName= userController.mfm.getUserName();
+        if(songSelection!=null){
+            Song songToAdd = songSelection; //Se debe de seleccionar una canción para poderla añadir
+            if(addSong(userName,songToAdd)){
+                stateStack.push("Agrego");
+                songsStack.push(songSelection);
+            }
+        }else {
+            showMessage("Song selection", "Song don't selected", "Please, to add a song, selecet one", Alert.AlertType.INFORMATION);
+        }
+    }
 
+    @FXML
+    void regresarAccion(ActionEvent event) {
+        String userName= userController.mfm.getUserName();
+        if(stateStack.isEmpty()){
+            showMessage("Notification", "Nothing to undo", "There isn't nothing to undo", Alert.AlertType.INFORMATION);
+        }else {
+            if (stateStack.pop().equals("Agrego")){ //Si agrego una cancion, la función deshacer lo que hace es eliminarla
+                Song songToRemove= songsStack.pop();
+                removeSong(userName,songToRemove);
+            }else { //SI elimino la canción , lo que hara la funcón es agregarla
+                songSelection= songsStack.pop(); // La canción seleccionada pasa a ser la ultima adicipon de la cola y procede a agregarse
+                addSongToUserList(event);
+            }
+        }
+    }
 
-
+    //------------------------------------INITIALIZATION-------------------------
     @FXML
     void initialize() {
         showReleasesSongs(getSongs());
@@ -192,6 +269,9 @@ public class UserViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.loginViewController= new LoginViewController();
         this.userController= new UserController();
+        songsStack= new Stack<>();
+        stateStack= new Stack<>();
+
         eventsControll();
     }
 }
