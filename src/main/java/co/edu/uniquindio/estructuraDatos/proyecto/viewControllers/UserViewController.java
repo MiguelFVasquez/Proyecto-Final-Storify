@@ -92,6 +92,7 @@ public class UserViewController implements Initializable {
 
     private Stack<String> stateStack;
     private Stack<Song> songsStack;
+    private Stack<Song> songsDeleteStack;
 
     public void setAnchorPane(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
@@ -218,12 +219,14 @@ public class UserViewController implements Initializable {
             if (stateStack.pop().equals("Agrego")){ //Si agrego una cancion, la función deshacer lo que hace es eliminarla
                 Song songToRemove= songsStack.pop();
                 removeSong(userName,songToRemove);
+                songsDeleteStack.push(songToRemove); //Añade la cancion a una nueva pila, donde se guardan las canciones eliminadas para poder acceder a ellas depues cuando se haga el rehacer
             }else { //SI elimino la canción , lo que hara la funcón es agregarla
                 songSelection= songsStack.pop(); // La canción seleccionada pasa a ser la ultima adicipon de la cola y procede a agregarse
                 addSongToUserList(event);
             }
         }
     }
+
 
     //------------------------------------INITIALIZATION-------------------------
     @FXML
@@ -271,6 +274,7 @@ public class UserViewController implements Initializable {
         this.userController= new UserController();
         songsStack= new Stack<>();
         stateStack= new Stack<>();
+        songsDeleteStack= new Stack<>();
 
         eventsControll();
     }
