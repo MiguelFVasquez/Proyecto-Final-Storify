@@ -1,8 +1,7 @@
-# WORKING ON PROJECT: Florez
+# WORKING ON PROJECT: 
 
 ## ***TASKS**
 ### **TO DO**
-- Implementar hilos
 - Seleccionar una canción y añadirla a la lista de usuario
 - Reproducir una canción
 - Avanzar en la fila para reproducir la siguiente canción
@@ -25,6 +24,7 @@
 - Creación de artistas (AdminView)
 - Creación de sonidos (AdminView)
 - Diagrama UML
+- Implementar hilos
 
 
 ## OPTIONALS
