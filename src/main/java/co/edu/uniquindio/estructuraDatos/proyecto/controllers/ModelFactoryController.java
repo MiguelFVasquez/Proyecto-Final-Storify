@@ -22,6 +22,7 @@ import java.util.List;
 public class ModelFactoryController {
     static Storify storify;
     private LoginViewController loginViewController;
+    private RescuePassController rescuePassController;
 
     private static class SingletonHolder {
         // El constructor de Singleton puede ser llamado desde aquí al ser protected
@@ -74,6 +75,9 @@ public class ModelFactoryController {
     public void initLoginViewController(LoginViewController loginViewController){
         this.loginViewController= loginViewController;
     }
+    public void initRescuePassControler(RescuePassController rescuePassController){
+        this.rescuePassController = rescuePassController;
+    }
     //----------------------- USER FUNCTIONS --------------------------------------------//
 
     public boolean registerUser(String userName, String password, String emial)throws UserException{
@@ -92,6 +96,33 @@ public class ModelFactoryController {
     }
     public boolean removeSongFromUserList(String username, Song songToRemove) throws UserException, SongException {
         return storify.removeSongFromUserList(username,songToRemove);
+    }
+
+    public void validateDataRecoverPassword(String userName) throws UserException {
+        storify.validateDataRecoverPassword(userName);
+    }
+    public User rescuePassword(String userName) throws UserException{
+        return storify.rescuePassword(userName);
+    }
+
+    public String generateCode(int longitud){
+        return storify.generateCode(longitud);
+    }
+
+    public void sendRescueEmail(User user, String code){
+        storify.sendRescueEmail(user,code);
+    }
+
+    public void chancePassword(User user, String verifyCode, String code, String newPassword) throws UserException {
+        if(verifyCode.equals(code)){
+            if(newPassword.isBlank() || newPassword.equals("")){
+                throw new UserException("Ingrese los campos para cambiar su contraseña");
+            }
+            user.setPassword(newPassword);
+            saveDataTest();
+        }else {
+            throw new UserException("El codigo ingresado no coincide con el enviado");
+        }
     }
 
     //-------------------------Admin functions---------------------------------------------------
@@ -148,8 +179,14 @@ public class ModelFactoryController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
 
-
+    public void saveUsers(){
+        try {
+            Persistence.saveUsers(getStorify().getUsersMap());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void loadDataFromFiles(){

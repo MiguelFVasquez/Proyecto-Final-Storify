@@ -7,15 +7,13 @@ import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Interfaces.IStorify;
+import co.edu.uniquindio.estructuraDatos.proyecto.utilities.EmailUtil;
 import javafx.scene.image.Image;
 
 import java.io.File;
 import java.io.Serializable;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /*
 * La tienda guarda su catálogo de música agrupando las Canciones en sus respectivos autores en forma
@@ -190,6 +188,67 @@ public class Storify implements IStorify, Serializable {
             }
         }
         return flag;
+    }
+
+//--------------- METODOS RECUPERAR CONTRASENIA USUARIO-------------------
+
+    /**
+     * Metodo que valida los datos para recuperar contrasñea
+     * @param user
+     * @throws UserException
+     */
+    public void validateDataRecoverPassword(String userName) throws UserException {
+        if(userName == null || userName.isBlank()){
+            throw new UserException("Por favor ingrese su usuario");
+        }
+    }
+
+    /**
+     * Metodo que busca el usuario con su nombre para recuperar la contraseña
+     * @param userName
+     * @return
+     * @throws UserException
+     */
+    public User rescuePassword(String userName) throws UserException {
+        for(Map.Entry<String,User> entry : usersMap.entrySet()){
+            String users = entry.getKey();
+            User user = entry.getValue();
+            if(users.equals(userName)){
+                return user;
+            }
+        }
+        throw new UserException("El usuerio ingresado no corresponde a ningun cliente");
+    }
+
+    /**
+     * Genera el codigo que se le envia al correo al usuario para que este recupere su contrasenia
+     * @param longitud
+     * @return
+     */
+    public String generateCode(int longitud) {
+        if (longitud == 0) {
+            return "";
+        } else {
+            Random random = new Random();
+            int num = random.nextInt(10);
+            return num + generateCode(longitud - 1);
+        }
+    }
+
+    /**
+     * Envia el correo al usuario mediante un hilo aparte para que no se interrumpa
+     * @param user El usuario al que se enviará el correo electrónico
+     * @param code El código de recuperación de contraseña
+     * @param customMessage El mensaje personalizado que se incluirá en el correo electrónico
+     * @param imagePath La ruta de la imagen que se adjuntará como logo
+     */
+    public void sendRescueEmail(User user, String code) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                EmailUtil.sendEmail(user.getEmail(), "Cambio de contraseña", "El código que debe ingresar es: " + code);
+            }
+        }).start();
     }
 
 //---------------METODOS ARTISTA------------------------------------------

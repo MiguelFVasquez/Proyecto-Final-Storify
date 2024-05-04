@@ -8,6 +8,7 @@ module com.example.proyectofinal {
     requires junit;
     requires java.mail;
     requires jdk.xml.dom;
+    requires activation;
 
     opens co.edu.uniquindio.estructuraDatos.proyecto.app to javafx.graphics, javafx.fxml;
     opens co.edu.uniquindio.estructuraDatos.proyecto.model to javafx.base;
