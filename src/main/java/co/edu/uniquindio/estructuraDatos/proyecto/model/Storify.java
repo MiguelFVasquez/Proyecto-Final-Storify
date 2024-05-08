@@ -246,7 +246,9 @@ public class Storify implements IStorify, Serializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                EmailUtil.sendEmail(user.getEmail(), "Cambio de contraseña", "El código que debe ingresar es: " + code);
+                EmailUtil.sendEmail(user.getEmail(), "Cambio de contraseña", "Querido "+ user.getUserName() + ",\n"
+                                                                               + "\nPor favor, use este codigo para restablecer su contraseña:\n" +
+                                                                                 code);
             }
         }).start();
     }

@@ -87,7 +87,7 @@
     <string>miguel</string>
     <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.User">
      <void property="email">
-      <string>miguel@gmail.com</string>
+      <string>florezvasquezjuanmiguel@gmail.com</string>
      </void>
      <void property="password">
       <string>1010</string>
