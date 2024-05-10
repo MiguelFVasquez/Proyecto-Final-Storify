@@ -10,7 +10,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Interfaces.IStorify;
 import co.edu.uniquindio.estructuraDatos.proyecto.utilities.EmailUtil;
 import javafx.scene.image.Image;
 
-import java.io.File;
+import javax.print.DocFlavor;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.*;
@@ -194,7 +194,7 @@ public class Storify implements IStorify, Serializable {
 
     /**
      * Metodo que valida los datos para recuperar contrasñea
-     * @param user
+     *
      * @throws UserException
      */
     public void validateDataRecoverPassword(String userName) throws UserException {
@@ -239,8 +239,8 @@ public class Storify implements IStorify, Serializable {
      * Envia el correo al usuario mediante un hilo aparte para que no se interrumpa
      * @param user El usuario al que se enviará el correo electrónico
      * @param code El código de recuperación de contraseña
-     * @param customMessage El mensaje personalizado que se incluirá en el correo electrónico
-     * @param imagePath La ruta de la imagen que se adjuntará como logo
+     * //@param customMessage El mensaje personalizado que se incluirá en el correo electrónico
+     * //@param imagePath La ruta de la imagen que se adjuntará como logo
      */
     public void sendRescueEmail(User user, String code) {
         new Thread(new Runnable() {
@@ -502,5 +502,60 @@ public class Storify implements IStorify, Serializable {
             }
         }
         return songList;
+    }
+
+    /**
+     * Metodo para obtener el genero más escuchado en general, de toda la tienda
+     *
+     * @return
+     */
+    public Gender getMostListenedGender(){
+        Map<Gender, Integer> genderCount = new HashMap<>();
+
+        // Recopilar los géneros más escuchados de todos los usuarios
+        for (User user : usersMap.values()) {
+            Gender mostListenedGender = user.getMostListenedGender(); //Se obtiene el mas escuchado de cada usuario
+            genderCount.put(mostListenedGender, genderCount.getOrDefault(mostListenedGender, 0) + 1);
+        }
+
+        // Encontrar el género con el recuento más alto
+        Gender mostListenedGender = null;
+        int maxCount = 0;
+
+        for (Map.Entry<Gender, Integer> entry : genderCount.entrySet()) {
+            Gender genre = entry.getKey();
+            int count = entry.getValue();
+
+            if (count > maxCount) {
+                maxCount = count;
+                mostListenedGender = genre;
+            }
+        }
+        return mostListenedGender;
+    }
+
+    /**
+     * Metodo para obtener el artista mas escuchado de todos los usuarios
+     * @return
+     */
+    public Artist getMostListenedArtist(){
+        Map<Artist, Integer> artistCount= new HashMap<>();
+        for (User userAux: usersMap.values() ){
+            Artist mostListenedArtist= userAux.getMostListenedArtist(); //Obtener el artista mas escuchado de cada usuario
+            artistCount.put(mostListenedArtist, artistCount.getOrDefault(mostListenedArtist,0)+1);
+        }
+        //Encontrar el artista mas escuchado
+        Artist mostListenedArtisit= null;
+        int maxCount= 0;
+        for (Map.Entry<Artist,Integer> entry : artistCount.entrySet()){
+            Artist artistAux= entry.getKey();
+            int count = entry.getValue();
+
+            if (count>maxCount){
+                maxCount=count;
+                mostListenedArtisit = artistAux;
+            }
+        }
+        return mostListenedArtisit;
     }
 }

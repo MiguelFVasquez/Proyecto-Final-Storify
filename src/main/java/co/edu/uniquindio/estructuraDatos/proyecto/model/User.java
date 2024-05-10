@@ -2,8 +2,11 @@ package co.edu.uniquindio.estructuraDatos.proyecto.model;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /*Usuario se conoce su username (único), contraseña, email, además el usuario tiene una
 lista propia de Canciones, dicha lista es una Lista circular.
@@ -100,7 +103,51 @@ public class User implements Serializable {
         return flag;
     }
 
+    public Gender getMostListenedGender() {
+        Map<Gender, Integer> genderCount = new HashMap<>();
 
+        // Iterar sobre la lista de canciones y contar cada género
+        for (Song songAux : songList) {
+            Gender gender = songAux.getGender();
+            genderCount.put(gender, genderCount.getOrDefault(gender, 0) + 1);
+        }
+
+        // Encontrar el género con el recuento más alto
+        Gender mostLikedGender = null;
+        int maxCount = 0;
+
+        for (Map.Entry<Gender, Integer> entry : genderCount.entrySet()) {
+            Gender gender = entry.getKey();
+            int count = entry.getValue();
+
+            if (count > maxCount) {
+                maxCount = count;
+                mostLikedGender = gender;
+            }
+        }
+        return mostLikedGender;
+    }
+
+    public Artist getMostListenedArtist() {
+        Map<Artist, Integer> artistCount = new HashMap<>();
+
+        for (Song songAux : songList){
+            Artist artist= songAux.getArtist();
+            artistCount.put(artist,artistCount.getOrDefault(artist,0) +1);
+        }
+        //Artista con mas apariciones
+        Artist mostLikedArtist= null;
+        int maxCount=0;
+        for (Map.Entry<Artist,Integer> entry : artistCount.entrySet()){
+            Artist artist= entry.getKey();
+            int count= entry.getValue();
+            if (count>maxCount){
+                maxCount=count;
+                mostLikedArtist= artist;
+            }
+        }
+        return mostLikedArtist;
+    }
 
 }
 

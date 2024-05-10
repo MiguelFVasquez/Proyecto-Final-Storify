@@ -25,6 +25,7 @@
 - Creación de sonidos (AdminView)
 - Diagrama UML
 - Implementar hilos
+- Funcionalidad par obtener el artista y el genero mas escuchado de toda la tienda
 
 
 ## OPTIONALS
