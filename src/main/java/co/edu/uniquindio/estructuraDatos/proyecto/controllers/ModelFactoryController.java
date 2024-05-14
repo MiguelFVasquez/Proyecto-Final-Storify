@@ -9,8 +9,6 @@ import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import co.edu.uniquindio.estructuraDatos.proyecto.persistence.Persistence;
-import co.edu.uniquindio.estructuraDatos.proyecto.threads.ThreadLoadXML;
-import co.edu.uniquindio.estructuraDatos.proyecto.threads.ThreadSaveXML;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
 import javafx.scene.image.Image;
 
@@ -113,16 +111,10 @@ public class ModelFactoryController {
         storify.sendRescueEmail(user,code);
     }
 
-    public void chancePassword(User user, String verifyCode, String code, String newPassword) throws UserException {
-        if(verifyCode.equals(code)){
-            if(newPassword.isBlank() || newPassword.equals("")){
-                throw new UserException("Ingrese los campos para cambiar su contraseña");
-            }
-            user.setPassword(newPassword);
-            saveDataTest();
-        }else {
-            throw new UserException("El codigo ingresado no coincide con el enviado");
-        }
+    public void changePassword(User user, String newPassword) throws UserException {
+        user.setPassword(newPassword);
+        saveDataTest();
+
     }
 
     //-------------------------Admin functions---------------------------------------------------

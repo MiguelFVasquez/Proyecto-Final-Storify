@@ -5,23 +5,19 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
-import co.edu.uniquindio.estructuraDatos.proyecto.controllers.LoginController;
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.RescuePassController;
-import co.edu.uniquindio.estructuraDatos.proyecto.controllers.UserController;
+import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -41,6 +37,9 @@ public class RescuePassViewController {
     private AnchorPane anchorFirst;
 
     @FXML
+    private AnchorPane anchorNewPass;
+
+    @FXML
     private Button btnClose;
 
     @FXML
@@ -50,10 +49,21 @@ public class RescuePassViewController {
     private Button btnSubmit;
 
     @FXML
+    private Button btnSubmitCode;
+
+    @FXML
+    private Button btnSubmitPass;
+
+    @FXML
     private TextField txtNameAcc;
 
     @FXML
     private TextField txtcode1;
+    @FXML
+    private TextField txtNewPass;
+
+    @FXML
+    private TextField txtNewPassConfirm;
 
     @FXML
     private TextField txtcode2;
@@ -70,6 +80,9 @@ public class RescuePassViewController {
     private RescuePassController rescuePassController;
     private Storify storify;
     private Stage stage;
+
+    private String clientName;
+    private String code;
     private AnchorPane anchorPane;
 
     public void init(Stage stage2) {
@@ -85,6 +98,61 @@ public class RescuePassViewController {
 
     }
 
+    @FXML
+    void changePassword(ActionEvent event) throws UserException {
+
+        String pass1 = txtNewPass.getText();
+        String pass2 = txtNewPassConfirm.getText();
+
+        if(!pass1.isEmpty() && !pass2.isEmpty() ){
+            if(pass1.equals( pass2 )){
+                User user = getUserFromUsername( clientName );
+                changePasswordClient( user,pass1 );
+                txtNewPass.clear();txtNewPassConfirm.clear();
+                showMessage( "Notification" ,"Password changed",
+                        "Password has been changed successfully" , Alert.AlertType.INFORMATION );
+                stage.close();
+            }else{
+                showMessage( "Notification", "Passwords doesn't match" ,
+                        "Try again", Alert.AlertType.INFORMATION);
+            }
+        }else{
+            showMessage( "Notification", "Enter a password" ,"", Alert.AlertType.INFORMATION);
+        }
+
+    }
+
+    public void changePasswordClient(User clientName , String pass1) throws UserException {
+        rescuePassController.mfm.changePassword(clientName  , pass1);
+    }
+
+    @FXML
+    void verifyCodeRescue(ActionEvent event){
+        String aux = "";
+        aux += txtcode1.getText();
+        aux += txtcode2.getText();
+        aux += txtcode3.getText();
+        aux += txtcode4.getText();
+        aux += txtcode5.getText();
+
+        if(aux.equals( code )){
+            showMessage( "Notification" , "Code successfully entered",
+                    "Now enter your new password", Alert.AlertType.INFORMATION);
+            anchorNewPass.setVisible( true );
+        }else{
+            showMessage( "Notification" , "Incorrect code",
+                    "Try again your code", Alert.AlertType.INFORMATION);
+            clearCodeSpaces();
+        }
+    }
+
+    void clearCodeSpaces(){
+        txtcode1.clear();
+        txtcode2.clear();
+        txtcode3.clear();
+        txtcode4.clear();
+        txtcode5.clear();
+    }
 
     @FXML
     void closeWindow(ActionEvent event) {
@@ -112,9 +180,11 @@ public class RescuePassViewController {
 
     @FXML
     void initialize() {
+        btnSubmitCode.setDisable( true );
         this.rescuePassController = new RescuePassController();
         eventsManager();
         anchorSecond.setVisible(false);
+        anchorNewPass.setVisible( false );
         txtNameAcc.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -122,6 +192,14 @@ public class RescuePassViewController {
             }
         });
 
+    }
+
+    private void verifySpaces(TextField txt1, TextField txt2,TextField txt3, TextField txt4,TextField txt5,  Button btn) {
+        if (!txt1.getText().isEmpty() && !txt2.getText().isEmpty() && !txt3.getText().isEmpty() && !txt4.getText().isEmpty()&& !txt5.getText().isEmpty()) {
+            btn.setDisable(false); // Habilitar el botón si ambos campos están llenos
+        } else {
+            btn.setDisable(true); // Deshabilitar el botón si algún campo está vacío
+        }
     }
 
     public void eventsManager() {
@@ -146,6 +224,7 @@ public class RescuePassViewController {
             if (newValue.length() == 1) {
                 txtcode2.requestFocus();
             }
+            verifySpaces( txtcode1, txtcode2,txtcode3,txtcode4,txtcode5, btnSubmitCode );
         });
 
         txtcode2.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -154,8 +233,9 @@ public class RescuePassViewController {
             } else {
                 txtcode1.requestFocus();
                 txtcode1.selectEnd();
-
             }
+            verifySpaces( txtcode1, txtcode2,txtcode3,txtcode4,txtcode5, btnSubmitCode );
+
         });
 
         txtcode3.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -164,8 +244,9 @@ public class RescuePassViewController {
             } else {
                 txtcode2.requestFocus();
                 txtcode2.selectEnd();
-
             }
+            verifySpaces( txtcode1, txtcode2,txtcode3,txtcode4,txtcode5, btnSubmitCode );
+
         });
 
         txtcode4.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -175,6 +256,8 @@ public class RescuePassViewController {
                 txtcode3.requestFocus();
                 txtcode3.selectEnd();
             }
+            verifySpaces( txtcode1, txtcode2,txtcode3,txtcode4,txtcode5, btnSubmitCode );
+
         });
 
         txtcode5.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -183,7 +266,10 @@ public class RescuePassViewController {
                 txtcode4.requestFocus();
                 txtcode4.selectEnd();
             }
+            verifySpaces( txtcode1, txtcode2,txtcode3,txtcode4,txtcode5, btnSubmitCode );
+
         });
+
     }
 
     public void setAnchorPane(AnchorPane anchorPane) {
@@ -193,12 +279,14 @@ public class RescuePassViewController {
     @FXML
     void searchEmail(ActionEvent event) {
         String userName = txtNameAcc.getText();
+        clientName = userName;
         if (verifyBlankSpaces(userName)) {
             if (verifyCredentials(userName)) {
                 String userEmail = getEmailFromUsername(userName);
                 if(userEmail != null){
                     // Si se encontró el correo electrónico, generar y enviar el código de recuperación
                     String code = rescuePassController.mfm.generateCode(5); // Generar código de recuperación de 5 dígitos
+                    this.code = code;
                     User user = getUserFromUsername(userName);
                     rescuePassController.mfm.sendRescueEmail(user, code); // Enviar correo electrónico con el código
                     showMessage("Notification", "Code sent", "Code has been sent to your email", Alert.AlertType.INFORMATION);
