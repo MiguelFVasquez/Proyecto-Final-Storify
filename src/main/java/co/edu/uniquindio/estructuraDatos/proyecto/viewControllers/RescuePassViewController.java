@@ -13,11 +13,14 @@ import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -117,7 +120,7 @@ public class RescuePassViewController {
                         "Try again", Alert.AlertType.INFORMATION);
             }
         }else{
-            showMessage( "Notification", "Enter a password" ,"", Alert.AlertType.INFORMATION);
+            showMessage( "Notification", "Blank Spaces" ,"Enter a password", Alert.AlertType.INFORMATION);
         }
 
     }
@@ -269,6 +272,31 @@ public class RescuePassViewController {
             verifySpaces( txtcode1, txtcode2,txtcode3,txtcode4,txtcode5, btnSubmitCode );
 
         });
+        txtNameAcc.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    btnSubmit.fire(); // Accionar el botón
+                }
+            }
+        });
+        txtNewPass.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    txtNewPassConfirm.requestFocus();
+                }
+            }
+        });
+        txtNewPassConfirm.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    btnSubmitPass.fire();
+                }
+            }
+        });
+
 
     }
 
