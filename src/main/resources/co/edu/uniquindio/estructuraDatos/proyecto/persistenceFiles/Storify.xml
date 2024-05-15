@@ -8,7 +8,7 @@
    <void method="add">
     <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
      <void property="artist">
-      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist" id="Artist0">
        <void property="code">
         <string>lMran AnMe</string>
        </void>
@@ -30,7 +30,7 @@
       <string>3</string>
      </void>
      <void property="gender">
-      <object class="java.lang.Enum" method="valueOf">
+      <object class="java.lang.Enum" id="Gender0" method="valueOf">
        <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
        <string>Pop</string>
       </object>
@@ -75,6 +75,28 @@
      </void>
      <void property="name">
       <string>El malo</string>
+     </void>
+     <void property="year">
+      <string>2024</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object idref="Artist0"/>
+     </void>
+     <void property="code">
+      <string>iliaiijgig</string>
+     </void>
+     <void property="duration">
+      <string>60</string>
+     </void>
+     <void property="gender">
+      <object idref="Gender0"/>
+     </void>
+     <void property="name">
+      <string>Santiago</string>
      </void>
      <void property="year">
       <string>2024</string>

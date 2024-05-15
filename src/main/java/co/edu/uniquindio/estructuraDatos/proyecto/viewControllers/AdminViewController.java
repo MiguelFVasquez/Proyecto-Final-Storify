@@ -379,14 +379,6 @@ public class AdminViewController implements Initializable {
             // Crear el Image y el ImageView
             Image image = new Image("file:" + imagePath);
             imageViewSongPortait.setImage( image );
-
-            // Mostrar la imagen en una nueva ventana
-//            VBox root = new VBox(imageView);
-//            Scene scene = new Scene(root, 400, 400);
-//            Stage imageStage = new Stage();
-//            imageStage.setTitle("Mostrar Imagen");
-//            imageStage.setScene(scene);
-//            imageStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

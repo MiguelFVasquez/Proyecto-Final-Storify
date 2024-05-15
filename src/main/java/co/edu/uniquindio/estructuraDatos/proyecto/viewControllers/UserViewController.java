@@ -149,24 +149,35 @@ public class UserViewController implements Initializable {
     private void showReleasesSongs(List<Song> songs){
         if(songs.size() != 0){
             for (int i = 0; i < songs.size(); i++) {
-                if(i==0 && songs.get( i ) != null){
-                    lblFS1.setText( songs.get( i ).getName() );
-                    String imageUrl = "/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/portait.jpg";
-                    InputStream inputStream = getClass().getResourceAsStream(imageUrl);
-                    if (inputStream != null) {
-                        Image aux = new Image(inputStream);
-                        imageFS1.setImage( aux );
-                        imageFS1.setFitWidth( 180 );
-                        imageFS1.setFitHeight( 150 );
-                    } else {
-                        System.out.println("No se pudo cargar la imagen desde la URL: " + imageUrl);
-                    }
+                if(i==2 && songs.get( i ) != null){
+                    Song songAux = songs.get( i );
+                    lblFS1.setText( songAux.getName() );
 
+                    if (songAux.getCover() != null) {
+                        System.out.println(songAux.getCover().getUrl());
+                        displayImage( songAux, imageFS1 );
+
+                    } else {
+                        System.out.println("No se pudo cargar la imagen desde la URL: " );
+                    }
                 }
 
             }
         }
 
+    }
+    private void displayImage(Song song, ImageView imageView) {
+
+        try {
+            // Crear el Image y el ImageView
+            Image image = song.getCover();
+            imageView.setImage( image );
+            imageView.setFitWidth( 180 );
+            imageView.setFitHeight( 150 );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -231,8 +242,7 @@ public class UserViewController implements Initializable {
     //------------------------------------INITIALIZATION-------------------------
     @FXML
     void initialize() {
-        showReleasesSongs(getSongs());
-        anchorHome.setVisible( true );
+
     }
 
     void eventsControll(){
@@ -272,6 +282,8 @@ public class UserViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.loginViewController= new LoginViewController();
         this.userController= new UserController();
+        anchorHome.setVisible( false );
+        btnHome.fire();
         songsStack= new Stack<>();
         stateStack= new Stack<>();
         songsDeleteStack= new Stack<>();
