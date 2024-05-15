@@ -1,5 +1,6 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -313,32 +314,81 @@ public class AdminViewController implements Initializable {
     @FXML
     void selectCoverSong(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnSelectCover.getScene().getWindow();
-        // Cerrar la ventana
+//        // Cerrar la ventana
+//
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Select Cover");
+//        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.gif");
+//        fileChooser.getExtensionFilters().add(extFilter);
+//        java.io.File file = fileChooser.showOpenDialog(stage);
+//        if (file != null) {
+//
+//            String absolutePath = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/";
+//            String nameFile = file.getName();
+//
+//            try {
+//                Path destiny = Path.of(absolutePath + nameFile);
+//                Files.copy(file.toPath(), destiny, StandardCopyOption.REPLACE_EXISTING);
+//                System.out.println("Archivo copiado correctamente a: " + destiny);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
+        // Configurar el FileChooser
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Cover");
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.gif");
-        fileChooser.getExtensionFilters().add(extFilter);
-        java.io.File file = fileChooser.showOpenDialog(stage);
-        if (file != null) {
+        fileChooser.setTitle("Seleccionar Imagen");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg")
+        );
 
-            String absolutePath = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/";
-            String nameFile = file.getName();
+        // Mostrar el diálogo de selección de archivo
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null) {
+            // Definir el directorio de destino dentro del proyecto
+            String destinationDir = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/";
+
+            // Crear el directorio si no existe
+            Path destinationDirPath = Path.of(destinationDir);
+            if (!Files.exists(destinationDirPath)) {
+                try {
+                    Files.createDirectories(destinationDirPath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // Crear el destino como un Path
+            Path destinationPath = destinationDirPath.resolve(selectedFile.getName());
 
             try {
-                Path destiny = Path.of(absolutePath + nameFile);
-                Files.copy(file.toPath(), destiny, StandardCopyOption.REPLACE_EXISTING);
-                System.out.println("Archivo copiado correctamente a: " + destiny);
+                // Copiar el archivo seleccionado al destino
+                Files.copy(selectedFile.toPath(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Imagen copiada a: " + destinationPath.toString());
+
+                // Cargar la imagen y mostrarla
+                displayImage(destinationPath.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String imageUrl = "/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/" + nameFile;
-            //InputStream inputStream = Files.newInputStream(Path.of(absolutePath + nameFile));
+        }
 
+    }
+    private void displayImage(String imagePath) {
+        try {
+            // Crear el Image y el ImageView
+            Image image = new Image("file:" + imagePath);
+            imageViewSongPortait.setImage( image );
 
-            InputStream inputStream = getClass().getResourceAsStream(imageUrl);
-            Image image = new Image(inputStream);
-            imageViewSongPortait.setImage(image);
+            // Mostrar la imagen en una nueva ventana
+//            VBox root = new VBox(imageView);
+//            Scene scene = new Scene(root, 400, 400);
+//            Stage imageStage = new Stage();
+//            imageStage.setTitle("Mostrar Imagen");
+//            imageStage.setScene(scene);
+//            imageStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
