@@ -215,37 +215,37 @@
             <String fx:value="shadow" />
          </styleClass>
          <children>
-            <StackPane fx:id="stackFS1" disable="true" layoutX="59.0" layoutY="57.0" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: red;">
+            <StackPane fx:id="stackFS1" layoutX="43.0" layoutY="62.0" prefHeight="180.0" prefWidth="190.0">
                <children>
-                  <ImageView fx:id="imageFS1" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageFS1" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="TOP_CENTER" />
+                  <Label fx:id="lblFS1" alignment="CENTER" text="Label" textAlignment="CENTER" StackPane.alignment="BOTTOM_CENTER" />
                </children>
             </StackPane>
-            <StackPane fx:id="stackFS2" disable="true" layoutX="251.0" layoutY="57.0" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: red;">
+            <StackPane fx:id="stackFS2" layoutX="239.0" layoutY="62.0" prefHeight="180.0" prefWidth="190.0">
                <children>
-                  <ImageView fx:id="imageFS2" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageFS2" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="TOP_CENTER" />
+                  <Label fx:id="lblFS2" text="Label" StackPane.alignment="BOTTOM_CENTER" />
                </children>
             </StackPane>
-            <StackPane disable="true" layoutX="442.0" layoutY="57.0" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: red;">
+            <StackPane layoutX="435.0" layoutY="62.0" prefHeight="180.0" prefWidth="190.0">
                <children>
-                  <ImageView fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageFS3" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="TOP_CENTER" />
+                  <Label fx:id="lblFS3" text="Label" StackPane.alignment="BOTTOM_CENTER" />
                </children>
             </StackPane>
-            <StackPane disable="true" layoutX="634.0" layoutY="57.0" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: red;">
+            <StackPane layoutX="631.0" layoutY="62.0" prefHeight="180.0" prefWidth="190.0">
                <children>
-                  <ImageView fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageFS4" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="TOP_CENTER" />
+                  <Label fx:id="lblFS4" text="Label" StackPane.alignment="BOTTOM_CENTER" />
                </children>
             </StackPane>
-            <StackPane disable="true" layoutX="828.0" layoutY="57.0" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: red;">
+            <StackPane layoutX="828.0" layoutY="62.0" prefHeight="180.0" prefWidth="190.0">
                <children>
-                  <ImageView fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageFS5" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="TOP_CENTER" />
+                  <Label fx:id="lblFS5" text="Label" StackPane.alignment="BOTTOM_CENTER" />
                </children>
             </StackPane>
-            <Label fx:id="lblFS2" layoutX="327.0" layoutY="229.0" text="Label" />
-            <Label layoutX="519.0" layoutY="229.0" text="Label" />
-            <Label layoutX="710.0" layoutY="229.0" text="Label" />
-            <Label layoutX="904.0" layoutY="229.0" text="Label" />
-            <Label fx:id="lblFS1" alignment="CENTER" layoutX="135.0" layoutY="229.0" text="Label" textAlignment="CENTER" />
-            <Label layoutX="59.0" layoutY="7.0" text="New releases for you">
+            <Label layoutX="43.0" layoutY="7.0" text="New releases for you">
                <font>
                   <Font size="34.0" />
                </font>

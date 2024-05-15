@@ -128,5 +128,11 @@
  -fx-spacing: 15px;
 }
 
+.roundedImageView {
+    -fx-background-radius: 10px; /* Cambia el valor según el grado de redondeo que desees */
+    -fx-background-color: transparent; /* Para asegurar que el fondo sea transparente */
+}
+
+
 
 

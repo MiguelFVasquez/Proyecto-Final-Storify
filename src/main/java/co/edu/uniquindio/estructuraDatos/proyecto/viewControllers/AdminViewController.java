@@ -202,12 +202,12 @@ public class AdminViewController implements Initializable {
 //--------------------------Auxiliars song's functios--------------------------------------------
 
     private ObservableList<Song> getSongsList(){
+        songsList.clear();
         songsList.addAll(adminController.mfm.getSongList());
         return songsList;
     }
 
     private void refreshTableViewSong(){
-        songsList.clear();
         tableViewSongs.getItems().clear();
         tableViewSongs.setItems(getSongsList());
     }
@@ -274,16 +274,6 @@ public class AdminViewController implements Initializable {
         return false;
     }
 
-    private void cleanSong(){
-        txtNameSong.clear();
-        txtLinkSong.clear();
-        txtYearSong.clear();
-        txtDurationSong.clear();
-        comboBoxArtist.getSelectionModel().select(null);
-        comboBoxGender.getSelectionModel().select(null);
-        Image image = new Image("/co/edu/uniquindio/estructuraDatos/proyecto/images/musica.png");
-        imageViewSongPortait.setImage(image);
-    }
 //--------------------------EVENTOS DE LOS BOTONES-----------------------------------------------
 
     @FXML
@@ -403,7 +393,7 @@ public class AdminViewController implements Initializable {
                 //adminController.mfm.saveResourceXML();
                 adminController.mfm.saveDataTest();
                 System.out.printf("Lista de canciones: " + getSongsList());
-                cleanSong();
+                cleanUpSong( event );
                 refreshTableViewSong();
             }
         }
@@ -418,7 +408,7 @@ public class AdminViewController implements Initializable {
         txtDurationSong.clear();
         comboBoxArtist.getSelectionModel().select(null);
         comboBoxGender.getSelectionModel().select(null);
-        Image image = new Image("file:/home/floweers/5to/Estructura Datos/Proyecto-Final-Storify/src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/musica.png");
+        Image image = new Image("file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/musica.png");
         imageViewSongPortait.setImage(image);
     }
 

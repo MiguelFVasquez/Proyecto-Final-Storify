@@ -12,9 +12,11 @@ import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,6 +26,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -34,12 +38,6 @@ public class UserViewController implements Initializable {
 
     @FXML
     private URL location;
-
-    @FXML
-    private Label lblFS1;
-
-    @FXML
-    private Label lblFS2;
 
     @FXML
     private Button btnLogOut;
@@ -58,8 +56,34 @@ public class UserViewController implements Initializable {
 
     @FXML
     private ImageView imageFS1;
+
     @FXML
     private ImageView imageFS2;
+
+    @FXML
+    private ImageView imageFS3;
+
+    @FXML
+    private ImageView imageFS4;
+
+    @FXML
+    private ImageView imageFS5;
+
+    @FXML
+    private Label lblFS1;
+
+    @FXML
+    private Label lblFS2;
+
+    @FXML
+    private Label lblFS3;
+
+    @FXML
+    private Label lblFS4;
+
+    @FXML
+    private Label lblFS5;
+
 
     @FXML
     private Label labelTitle;
@@ -147,20 +171,46 @@ public class UserViewController implements Initializable {
 
     }
     private void showReleasesSongs(List<Song> songs){
+
         if(songs.size() != 0){
             for (int i = 0; i < songs.size(); i++) {
-                if(i==2 && songs.get( i ) != null){
-                    Song songAux = songs.get( i );
-                    lblFS1.setText( songAux.getName() );
+                Song songAux = songs.get( i );
 
-                    if (songAux.getCover() != null) {
-                        System.out.println(songAux.getCover().getUrl());
-                        displayImage( songAux, imageFS1 );
+                switch (i){
 
-                    } else {
-                        System.out.println("No se pudo cargar la imagen desde la URL: " );
-                    }
+                    case 0:
+                        assert songAux != null;
+
+                        lblFS1.setText( songAux.getName() );
+                        System.out.println( songAux.getCover().getUrl() );
+                        displayImage( songAux , imageFS1 );
+                        break;
+                    case 1:
+                        lblFS2.setText( songAux.getName() );
+                        System.out.println( songAux.getCover().getUrl() );
+                        displayImage( songAux , imageFS2 );
+                        break;
+
+                    case 2:
+                        lblFS3.setText( songAux.getName() );
+                        System.out.println( songAux.getCover().getUrl() );
+                        displayImage( songAux , imageFS3 );
+                        break;
+
+                    case 3:
+                        lblFS4.setText( songAux.getName() );
+                        System.out.println( songAux.getCover().getUrl() );
+                        displayImage( songAux , imageFS4 );
+                        break;
+
+                    case 4:
+                        lblFS5.setText( songAux.getName() );
+                        System.out.println( songAux.getCover().getUrl() );
+                        displayImage( songAux , imageFS5 );
+                        break;
+
                 }
+
 
             }
         }
@@ -172,8 +222,13 @@ public class UserViewController implements Initializable {
             // Crear el Image y el ImageView
             Image image = song.getCover();
             imageView.setImage( image );
-            imageView.setFitWidth( 180 );
-            imageView.setFitHeight( 150 );
+            imageView.setFitWidth(200 );
+            imageView.setFitHeight( 160 );
+//
+//            Rectangle clip = new Rectangle(imageView.getFitWidth(), imageView.getFitHeight());
+//            clip.setArcWidth(20); // Cambia este valor según el grado de redondeo que desees
+//            clip.setArcHeight(20);
+//            imageView.setClip( clip );
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -240,12 +295,32 @@ public class UserViewController implements Initializable {
 
 
     //------------------------------------INITIALIZATION-------------------------
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.loginViewController= new LoginViewController();
+        this.userController= new UserController();
+        anchorHome.setVisible( false );
+        btnHome.fire();
+        songsStack= new Stack<>();
+        stateStack= new Stack<>();
+        songsDeleteStack= new Stack<>();
+
+        eventsControll();
+        imageFS1.smoothProperty();
+        imageFS2.smoothProperty();
+        imageFS3.smoothProperty();
+        imageFS4.smoothProperty();
+        imageFS5.smoothProperty();
+    }
+
+
     @FXML
     void initialize() {
 
     }
 
     void eventsControll(){
+
         btnLogOut.setOnMouseEntered(event -> btnLogOut.setStyle("-fx-background-color: rgba(0, 0, 0, 0.1); -fx-text-fill: black;"));
         btnLogOut.setOnMouseExited(event -> btnLogOut.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
         btnHome.setOnMouseEntered(event -> btnHome.setStyle("-fx-background-color: rgba(0, 0, 0, 0.1); -fx-text-fill: black;"));
@@ -256,7 +331,79 @@ public class UserViewController implements Initializable {
         btnLibrary.setOnMouseExited(event -> btnLibrary.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
 
 
+        //----------------------------------------------ANIMATIONS------------------------------------------------------
+
+
+        // Manejar eventos de mouse
+        imageFS1.setOnMouseEntered((MouseEvent e) -> {
+            imageFS1.setCursor( Cursor.HAND );
+            animationScaleIn(imageFS1);
+        });
+
+        imageFS1.setOnMouseExited((MouseEvent e) -> {
+            imageFS1.setCursor( Cursor.DEFAULT );
+            animationScaleOut(imageFS1);
+
+        });
+        imageFS2.setOnMouseEntered((MouseEvent e) -> {
+            imageFS2.setCursor( Cursor.HAND );
+            animationScaleIn( imageFS2 );
+        });
+
+        imageFS2.setOnMouseExited((MouseEvent e) -> {
+            imageFS2.setCursor( Cursor.DEFAULT );
+            animationScaleOut( imageFS2 );
+        });
+        imageFS3.setOnMouseEntered((MouseEvent e) -> {
+            imageFS3.setCursor( Cursor.HAND );
+            animationScaleIn( imageFS3 );
+        });
+
+        imageFS3.setOnMouseExited((MouseEvent e) -> {
+            imageFS3.setCursor( Cursor.DEFAULT );
+            animationScaleOut( imageFS3 );
+        });
+        imageFS4.setOnMouseEntered((MouseEvent e) -> {
+            imageFS4.setCursor( Cursor.HAND );
+            animationScaleIn( imageFS4 );
+        });
+
+        imageFS4.setOnMouseExited((MouseEvent e) -> {
+            imageFS4.setCursor( Cursor.DEFAULT );
+            animationScaleOut( imageFS4 );
+        });
+        imageFS5.setOnMouseEntered((MouseEvent e) -> {
+            imageFS5.setCursor( Cursor.HAND );
+            animationScaleIn( imageFS5 );
+        });
+
+        imageFS5.setOnMouseExited((MouseEvent e) -> {
+            imageFS5.setCursor( Cursor.DEFAULT );
+            animationScaleOut( imageFS5 );
+        });
+
     }
+
+    void animationScaleIn(ImageView imageView){
+        ScaleTransition scaleIn = new ScaleTransition(Duration.millis(200), imageView);
+        scaleIn.setFromX(1.0);
+        scaleIn.setFromY(1.0);
+        scaleIn.setToX(1.1);
+        scaleIn.setToY(1.1);
+        scaleIn.play();
+
+
+    }
+
+    void animationScaleOut(ImageView imageView){
+        ScaleTransition scaleOut = new ScaleTransition(Duration.millis(200), imageView);
+        scaleOut.setFromX(1.1);
+        scaleOut.setFromY(1.1);
+        scaleOut.setToX(1.0);
+        scaleOut.setToY(1.0);
+        scaleOut.play();
+    }
+
     public void init(Stage stage2) {
         this.stage = stage2;
     }
@@ -278,16 +425,5 @@ public class UserViewController implements Initializable {
         });
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.loginViewController= new LoginViewController();
-        this.userController= new UserController();
-        anchorHome.setVisible( false );
-        btnHome.fire();
-        songsStack= new Stack<>();
-        stateStack= new Stack<>();
-        songsDeleteStack= new Stack<>();
 
-        eventsControll();
-    }
 }

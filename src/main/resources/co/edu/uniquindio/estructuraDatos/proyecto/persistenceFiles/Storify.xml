@@ -87,19 +87,85 @@
       <object idref="Artist0"/>
      </void>
      <void property="code">
-      <string>iliaiijgig</string>
+      <string> ijjnlnMob</string>
      </void>
      <void property="duration">
-      <string>60</string>
+      <string>186</string>
      </void>
      <void property="gender">
       <object idref="Gender0"/>
      </void>
      <void property="name">
-      <string>Santiago</string>
+      <string>Una bala</string>
      </void>
      <void property="year">
-      <string>2024</string>
+      <string>2023</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object idref="Artist0"/>
+     </void>
+     <void property="code">
+      <string>gMljMoo o1</string>
+     </void>
+     <void property="duration">
+      <string>188</string>
+     </void>
+     <void property="gender">
+      <object idref="Gender0"/>
+     </void>
+     <void property="name">
+      <string>Dom1ngo</string>
+     </void>
+     <void property="year">
+      <string>2023</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object idref="Artist0"/>
+     </void>
+     <void property="code">
+      <string>ljcnRMoiRi</string>
+     </void>
+     <void property="duration">
+      <string>167</string>
+     </void>
+     <void property="gender">
+      <object idref="Gender0"/>
+     </void>
+     <void property="name">
+      <string>Rincón</string>
+     </void>
+     <void property="year">
+      <string>2023</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object idref="Artist0"/>
+     </void>
+     <void property="code">
+      <string>irFMu utoj</string>
+     </void>
+     <void property="duration">
+      <string>132</string>
+     </void>
+     <void property="gender">
+      <object idref="Gender0"/>
+     </void>
+     <void property="name">
+      <string>Fruto</string>
+     </void>
+     <void property="year">
+      <string>2023</string>
      </void>
     </object>
    </void>
