@@ -1,5 +1,6 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Stack;
 
+import co.edu.uniquindio.estructuraDatos.proyecto.app.App;
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.UserController;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
@@ -15,13 +17,17 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -29,6 +35,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class UserViewController implements Initializable {
@@ -53,6 +60,12 @@ public class UserViewController implements Initializable {
     private StackPane stackFS1;
     @FXML
     private StackPane stackFS2;
+    @FXML
+    private StackPane stackFS3;
+    @FXML
+    private StackPane stackFS4;
+    @FXML
+    private StackPane stackFS5;
 
     @FXML
     private ImageView imageFS1;
@@ -109,6 +122,7 @@ public class UserViewController implements Initializable {
     private AnchorPane anchorPane;
     private UserController userController;
     private Song songSelection;
+    private OptionsViewController optionsViewController;
 
     public void setLoginViewController(LoginViewController loginViewController) {
         this.loginViewController = loginViewController;
@@ -311,6 +325,24 @@ public class UserViewController implements Initializable {
         imageFS3.smoothProperty();
         imageFS4.smoothProperty();
         imageFS5.smoothProperty();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation( App.class.getResource( "OptionsView.fxml" ) );
+        AnchorPane anchorPane = null;
+        try {
+            anchorPane = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException( e );
+        }
+        OptionsViewController controller = loader.getController();
+        this.optionsViewController = controller;
+        Stage stage = new Stage();
+        Scene scene = new Scene(  anchorPane);
+        controller.init( stage );
+        stage.setScene(  scene);
+
+        stage.initStyle( StageStyle.UNDECORATED );
+
     }
 
 
@@ -335,57 +367,116 @@ public class UserViewController implements Initializable {
 
 
         // Manejar eventos de mouse
-        imageFS1.setOnMouseEntered((MouseEvent e) -> {
-            imageFS1.setCursor( Cursor.HAND );
-            animationScaleIn(imageFS1);
+        stackFS1.setOnMouseEntered((MouseEvent e) -> {
+            stackFS1.setCursor( Cursor.HAND );
+            animationScaleIn(stackFS1);
         });
 
-        imageFS1.setOnMouseExited((MouseEvent e) -> {
-            imageFS1.setCursor( Cursor.DEFAULT );
-            animationScaleOut(imageFS1);
+        stackFS1.setOnMouseExited((MouseEvent e) -> {
+            stackFS1.setCursor( Cursor.DEFAULT );
+            animationScaleOut(stackFS1);
 
         });
-        imageFS2.setOnMouseEntered((MouseEvent e) -> {
-            imageFS2.setCursor( Cursor.HAND );
-            animationScaleIn( imageFS2 );
+        stackFS2.setOnMouseEntered((MouseEvent e) -> {
+            stackFS2.setCursor( Cursor.HAND );
+            animationScaleIn( stackFS2 );
         });
 
-        imageFS2.setOnMouseExited((MouseEvent e) -> {
-            imageFS2.setCursor( Cursor.DEFAULT );
-            animationScaleOut( imageFS2 );
+        stackFS2.setOnMouseExited((MouseEvent e) -> {
+            stackFS2.setCursor( Cursor.DEFAULT );
+            animationScaleOut( stackFS2 );
         });
-        imageFS3.setOnMouseEntered((MouseEvent e) -> {
-            imageFS3.setCursor( Cursor.HAND );
-            animationScaleIn( imageFS3 );
-        });
-
-        imageFS3.setOnMouseExited((MouseEvent e) -> {
-            imageFS3.setCursor( Cursor.DEFAULT );
-            animationScaleOut( imageFS3 );
-        });
-        imageFS4.setOnMouseEntered((MouseEvent e) -> {
-            imageFS4.setCursor( Cursor.HAND );
-            animationScaleIn( imageFS4 );
+        stackFS3.setOnMouseEntered((MouseEvent e) -> {
+            stackFS3.setCursor( Cursor.HAND );
+            animationScaleIn( stackFS3 );
         });
 
-        imageFS4.setOnMouseExited((MouseEvent e) -> {
-            imageFS4.setCursor( Cursor.DEFAULT );
-            animationScaleOut( imageFS4 );
+        stackFS3.setOnMouseExited((MouseEvent e) -> {
+            stackFS3.setCursor( Cursor.DEFAULT );
+            animationScaleOut( stackFS3 );
         });
-        imageFS5.setOnMouseEntered((MouseEvent e) -> {
-            imageFS5.setCursor( Cursor.HAND );
-            animationScaleIn( imageFS5 );
+        stackFS4.setOnMouseEntered((MouseEvent e) -> {
+            stackFS4.setCursor( Cursor.HAND );
+            animationScaleIn( stackFS4 );
         });
 
-        imageFS5.setOnMouseExited((MouseEvent e) -> {
-            imageFS5.setCursor( Cursor.DEFAULT );
-            animationScaleOut( imageFS5 );
+        stackFS4.setOnMouseExited((MouseEvent e) -> {
+            stackFS4.setCursor( Cursor.DEFAULT );
+            animationScaleOut( stackFS4 );
         });
+        stackFS5.setOnMouseEntered((MouseEvent e) -> {
+            stackFS5.setCursor( Cursor.HAND );
+            animationScaleIn( stackFS5 );
+        });
+
+        stackFS5.setOnMouseExited((MouseEvent e) -> {
+            stackFS5.setCursor( Cursor.DEFAULT );
+            animationScaleOut( stackFS5 );
+        });
+
+        stackFS1.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.SECONDARY) { // Verificar si el clic es con el botón derecho
+                // Obtener las coordenadas del clic y posicionar la ventana
+                optionsViewController.getStage().setX( event.getScreenX() );
+                optionsViewController.getStage().setY( event.getScreenY() );
+                optionsViewController.show();
+            }
+        });
+        stackFS2.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.SECONDARY) { // Verificar si el clic es con el botón derecho
+                // Obtener las coordenadas del clic y posicionar la ventana
+                optionsViewController.getStage().setX( event.getScreenX() );
+                optionsViewController.getStage().setY( event.getScreenY() );
+                optionsViewController.show();
+            }
+        });
+        stackFS3.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.SECONDARY) { // Verificar si el clic es con el botón derecho
+                // Obtener las coordenadas del clic y posicionar la ventana
+                optionsViewController.getStage().setX( event.getScreenX() );
+                optionsViewController.getStage().setY( event.getScreenY() );
+                optionsViewController.show();
+            }
+        });
+        stackFS4.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.SECONDARY) { // Verificar si el clic es con el botón derecho
+                // Obtener las coordenadas del clic y posicionar la ventana
+                optionsViewController.getStage().setX( event.getScreenX() );
+                optionsViewController.getStage().setY( event.getScreenY() );
+                optionsViewController.show();
+            }
+        });
+        stackFS5.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.SECONDARY) { // Verificar si el clic es con el botón derecho
+                // Obtener las coordenadas del clic y posicionar la ventana
+                optionsViewController.getStage().setX( event.getScreenX() );
+                optionsViewController.getStage().setY( event.getScreenY() );
+                optionsViewController.show();
+            }
+        });
+
 
     }
+    void loadOptionsView(){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation( App.class.getResource( "OptionsView.fxml" ) );
+        AnchorPane anchorPane = null;
+        try {
+            anchorPane = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException( e );
+        }
+        OptionsViewController controller = loader.getController();
+        this.optionsViewController = controller;
+        Stage stage = new Stage();
+        Scene scene = new Scene(  anchorPane);
+        controller.init( stage );
+        stage.setScene(  scene);
 
-    void animationScaleIn(ImageView imageView){
-        ScaleTransition scaleIn = new ScaleTransition(Duration.millis(200), imageView);
+        stage.initStyle( StageStyle.UNDECORATED );
+    }
+    void animationScaleIn(StackPane stack){
+        ScaleTransition scaleIn = new ScaleTransition(Duration.millis(200), stack);
         scaleIn.setFromX(1.0);
         scaleIn.setFromY(1.0);
         scaleIn.setToX(1.1);
@@ -395,8 +486,8 @@ public class UserViewController implements Initializable {
 
     }
 
-    void animationScaleOut(ImageView imageView){
-        ScaleTransition scaleOut = new ScaleTransition(Duration.millis(200), imageView);
+    void animationScaleOut(StackPane stack){
+        ScaleTransition scaleOut = new ScaleTransition(Duration.millis(200), stack);
         scaleOut.setFromX(1.1);
         scaleOut.setFromY(1.1);
         scaleOut.setToX(1.0);
@@ -417,6 +508,11 @@ public class UserViewController implements Initializable {
         anchorPane.setOnMousePressed( (MouseEvent event) ->{
             x = event.getSceneX();
             y= event.getSceneY();
+
+            if(optionsViewController!=null){
+                optionsViewController.close();
+            }
+
         });
 
         anchorPane.setOnMouseDragged((MouseEvent event) -> {

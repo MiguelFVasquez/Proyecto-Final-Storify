@@ -1,2 +1,2 @@
- ar iiPlCr@@Eladio Carrion@@Pr@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@59803892
-lMran AnMe@@Milo j@@Argentina@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@5e11b846
+ ar iiPlCr@@Eladio Carrion@@Pr@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@2616a436
+lMran AnMe@@Milo j@@Argentina@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@294d60cf
