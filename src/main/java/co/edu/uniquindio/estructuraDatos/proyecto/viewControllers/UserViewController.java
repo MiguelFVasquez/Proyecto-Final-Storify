@@ -68,6 +68,12 @@ public class UserViewController implements Initializable {
     private StackPane stackFS5;
 
     @FXML
+    private StackPane stackA1;
+
+    @FXML
+    private StackPane stackA2;
+
+    @FXML
     private ImageView imageFS1;
 
     @FXML
@@ -81,6 +87,10 @@ public class UserViewController implements Initializable {
 
     @FXML
     private ImageView imageFS5;
+    @FXML
+    private ImageView imageSA1;
+    @FXML
+    private ImageView imageSA2;
 
     @FXML
     private Label lblFS1;
@@ -97,6 +107,10 @@ public class UserViewController implements Initializable {
     @FXML
     private Label lblFS5;
 
+    @FXML
+    private Label lblSA1;
+    @FXML
+    private Label lblSA2;
 
     @FXML
     private Label labelTitle;
@@ -230,6 +244,7 @@ public class UserViewController implements Initializable {
         }
 
     }
+
     private void displayImage(Song song, ImageView imageView) {
 
         try {
