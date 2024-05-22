@@ -17,7 +17,7 @@
 <AnchorPane prefHeight="715.0" prefWidth="1365.0" styleClass="background-login" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.UserViewController">
    <children>
       <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="715.0" layoutX="-23.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="shadow" width="227.0" />
-      <ImageView fitHeight="189.0" fitWidth="222.0" layoutX="-2.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="189.0" fitWidth="222.0" layoutX="8.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/logo.jpg" />
          </image>
@@ -272,6 +272,60 @@
             </Label>
             <Button fx:id="btnLike" layoutX="385.0" layoutY="534.0" mnemonicParsing="false" onAction="#addSongToUserList" prefHeight="18.0" prefWidth="115.0" style="-fx-background-color: #61C64C; -fx-cursor: hand;" text="Like" textFill="WHITE" />
             <Button fx:id="btnDeshacer" layoutX="909.0" layoutY="534.0" mnemonicParsing="false" onAction="#regresarAccion" style="-fx-background-color: #757171; -fx-cursor: hand;" text="Deshacer" textFill="WHITE" />
+            <StackPane fx:id="stackA1" layoutX="43.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+               <children>
+                  <ImageView fx:id="imageSA1" fitHeight="163.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
+                  <Label fx:id="lblSA1" prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                     <font>
+                        <Font name="Calibri" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane fx:id="stackA2" layoutX="285.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+               <children>
+                  <Label fx:id="lblSA2" prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="Calibri" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="imageA2" fitHeight="142.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane layoutX="531.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <ImageView fitHeight="142.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <StackPane layoutX="774.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+               <children>
+                  <ImageView fitHeight="142.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </StackPane>
+            <Label layoutX="43.0" layoutY="266.0" text="Best of artists">
+               <font>
+                  <Font name="Calibri Light Italic" size="34.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
