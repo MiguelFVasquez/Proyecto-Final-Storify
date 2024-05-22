@@ -3,6 +3,7 @@ package co.edu.uniquindio.estructuraDatos.proyecto.model;
 import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
+import javafx.scene.image.Image;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,18 +13,28 @@ public class Artist implements Serializable, Comparable<Artist> {
     private String code;
     private String name;
     private String nationality;
+    private Image photo;
     private Boolean isAlone;
     private DoublyLinkedList<Song> songList;
 
     public Artist() {
     }
 
-    public Artist(String code, String name, String nationality, Boolean isAlone) {
+    public Artist(String code, String name, String nationality, Image photo, Boolean isAlone) {
         this.code = code;
         this.name = name;
         this.nationality = nationality;
+        this.photo = photo;
         this.isAlone = isAlone;
         this.songList = new DoublyLinkedList<>();
+    }
+
+    public Image getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Image photo) {
+        this.photo = photo;
     }
 
     public String getCode() {

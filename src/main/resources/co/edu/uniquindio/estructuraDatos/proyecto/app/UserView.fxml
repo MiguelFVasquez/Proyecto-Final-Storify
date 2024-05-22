@@ -215,19 +215,19 @@
             <String fx:value="shadow" />
          </styleClass>
          <children>
-            <StackPane fx:id="stackFS1" alignment="BOTTOM_LEFT" layoutX="43.0" layoutY="62.0" prefHeight="180.0" prefWidth="190.0">
+            <StackPane fx:id="stackFS1" alignment="BOTTOM_LEFT" layoutX="43.0" layoutY="62.0" prefHeight="200.0" prefWidth="190.0">
                <children>
                   <Label fx:id="lblFS1" alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="160.0" text="Label" StackPane.alignment="BOTTOM_CENTER">
                      <font>
                         <Font name="Calibri" size="12.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="imageFS1" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="TOP_CENTER" />
+                  <ImageView fx:id="imageFS1" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="CENTER" />
                </children>
             </StackPane>
-            <StackPane fx:id="stackFS2" layoutX="239.0" layoutY="62.0" prefHeight="180.0" prefWidth="190.0">
+            <StackPane fx:id="stackFS2" layoutX="239.0" layoutY="62.0" prefHeight="200.0" prefWidth="190.0">
                <children>
-                  <ImageView fx:id="imageFS2" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="TOP_CENTER" />
+                  <ImageView fx:id="imageFS2" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="CENTER" />
                   <Label fx:id="lblFS2" prefHeight="17.0" prefWidth="160.0" text="Label" StackPane.alignment="BOTTOM_CENTER">
                      <font>
                         <Font name="Calibri" size="12.0" />
@@ -235,9 +235,9 @@
                   </Label>
                </children>
             </StackPane>
-            <StackPane fx:id="stackFS3" layoutX="435.0" layoutY="62.0" prefHeight="180.0" prefWidth="190.0">
+            <StackPane fx:id="stackFS3" layoutX="435.0" layoutY="62.0" prefHeight="200.0" prefWidth="190.0">
                <children>
-                  <ImageView fx:id="imageFS3" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="TOP_CENTER" />
+                  <ImageView fx:id="imageFS3" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="CENTER" />
                   <Label fx:id="lblFS3" alignment="TOP_LEFT" prefHeight="17.0" prefWidth="161.0" text="Label" StackPane.alignment="BOTTOM_CENTER">
                      <font>
                         <Font name="Calibri" size="12.0" />
@@ -245,9 +245,9 @@
                   </Label>
                </children>
             </StackPane>
-            <StackPane fx:id="stackFS4" layoutX="631.0" layoutY="62.0" prefHeight="180.0" prefWidth="190.0">
+            <StackPane fx:id="stackFS4" layoutX="631.0" layoutY="62.0" prefHeight="200.0" prefWidth="190.0">
                <children>
-                  <ImageView fx:id="imageFS4" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="TOP_CENTER" />
+                  <ImageView fx:id="imageFS4" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="CENTER" />
                   <Label fx:id="lblFS4" prefHeight="17.0" prefWidth="160.0" text="Label" StackPane.alignment="BOTTOM_CENTER">
                      <font>
                         <Font name="Calibri" size="12.0" />
@@ -255,9 +255,9 @@
                   </Label>
                </children>
             </StackPane>
-            <StackPane fx:id="stackFS5" layoutX="828.0" layoutY="62.0" prefHeight="180.0" prefWidth="190.0">
+            <StackPane fx:id="stackFS5" layoutX="828.0" layoutY="62.0" prefHeight="200.0" prefWidth="190.0">
                <children>
-                  <ImageView fx:id="imageFS5" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="TOP_CENTER" />
+                  <ImageView fx:id="imageFS5" fitHeight="160.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="CENTER" />
                   <Label fx:id="lblFS5" prefHeight="17.0" prefWidth="160.0" text="Label" StackPane.alignment="BOTTOM_CENTER">
                      <font>
                         <Font name="Calibri" size="12.0" />
@@ -272,12 +272,12 @@
             </Label>
             <Button fx:id="btnLike" layoutX="385.0" layoutY="534.0" mnemonicParsing="false" onAction="#addSongToUserList" prefHeight="18.0" prefWidth="115.0" style="-fx-background-color: #61C64C; -fx-cursor: hand;" text="Like" textFill="WHITE" />
             <Button fx:id="btnDeshacer" layoutX="909.0" layoutY="534.0" mnemonicParsing="false" onAction="#regresarAccion" style="-fx-background-color: #757171; -fx-cursor: hand;" text="Deshacer" textFill="WHITE" />
-            <StackPane fx:id="stackA1" layoutX="43.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+            <StackPane fx:id="stackA1" layoutX="43.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="imageSA1" fitHeight="163.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
+                  <ImageView fx:id="imageSA1" fitHeight="170.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
                   <Label fx:id="lblSA1" prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
                      <padding>
-                        <Insets left="10.0" />
+                        <Insets left="14.0" />
                      </padding>
                      <StackPane.margin>
                         <Insets />
@@ -288,17 +288,17 @@
                   </Label>
                </children>
             </StackPane>
-            <StackPane fx:id="stackA2" layoutX="285.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+            <StackPane fx:id="stackA2" layoutX="285.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Label fx:id="lblSA2" prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
                      <padding>
-                        <Insets left="10.0" />
+                        <Insets left="14.0" />
                      </padding>
                      <font>
                         <Font name="Calibri" size="12.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="imageA2" fitHeight="142.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageSA2" fitHeight="170.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </StackPane>
             <StackPane layoutX="531.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">

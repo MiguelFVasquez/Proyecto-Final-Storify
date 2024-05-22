@@ -170,6 +170,7 @@ public class Persistence {
             contenido.append(artista.getCode()).append("@@")
                     .append(artista.getName()).append("@@")
                     .append(artista.getNationality()).append("@@")
+                    .append(artista.getPhoto().getUrl()).append("@@")
                     .append(artista.getIsAlone()).append("@@")
                     .append(artista.getSongList()).append("\n");
         }
@@ -193,7 +194,8 @@ public class Persistence {
                 artista.setCode(partes[0]);  // code
                 artista.setName(partes[1]);  // name
                 artista.setNationality(partes[2]);  // nationality
-                artista.setAlone(Boolean.parseBoolean(partes[3]));  // isAlone
+                artista.setPhoto(cargarImagen( partes[3] ));
+                artista.setAlone(Boolean.parseBoolean(partes[4]));  // isAlone
                 artista.setSongList(new DoublyLinkedList<>());
                 // Agregar el artista al BinaryTree
                 arbolArtistas.insertar(artista);

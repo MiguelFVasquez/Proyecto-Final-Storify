@@ -1,2 +1,2 @@
- ar iiPlCr@@Eladio Carrion@@Pr@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@17cd9e44
-lMran AnMe@@Milo j@@Argentina@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@7800d1d5
+ ar iiPlCr@@Eladio Carrion@@Pr@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/eladio.jpg@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@28ba371e
+lMran AnMe@@Milo j@@Argentina@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/milito.jpg@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@4bbd5ea

@@ -36,8 +36,9 @@ public class StorifyTest {
         String code= "jkdak00";
         String name= "Eladio";
         String nationality= "Puerto Rico";
+        Image image = new Image( "file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/eladio.jpg" );
         boolean isAlone= true;
-        return new Artist(code,name,nationality,isAlone);
+        return new Artist(code,name,nationality,image,isAlone);
     }
     //-------------Metodos de prueba(test)------------------------
 

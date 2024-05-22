@@ -135,8 +135,8 @@ public class ModelFactoryController {
     public Artist getArtist(String name){
         return storify.getArtist(name);
     }
-    public boolean addArtist(String code, String name, String nationality, boolean isAGroup) throws ArtistException {
-        Artist newArtist= new Artist(code,name,nationality,isAGroup);
+    public boolean addArtist(String code, String name, String nationality, Image image , boolean isAGroup) throws ArtistException {
+        Artist newArtist= new Artist(code,name,nationality,image,isAGroup);
         return storify.addArtist(newArtist);
     }
     public boolean deleteArtist(Artist deleteArtist) throws ArtistException {

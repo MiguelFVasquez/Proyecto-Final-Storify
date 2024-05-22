@@ -1,9 +1,7 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Stack;
@@ -12,6 +10,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.app.App;
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.UserController;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -19,7 +18,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -30,10 +28,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -66,6 +61,10 @@ public class UserViewController implements Initializable {
     private StackPane stackFS4;
     @FXML
     private StackPane stackFS5;
+    @FXML
+    private StackPane stackA1;
+    @FXML
+    private StackPane stackA2;
 
     @FXML
     private ImageView imageFS1;
@@ -81,6 +80,10 @@ public class UserViewController implements Initializable {
 
     @FXML
     private ImageView imageFS5;
+    @FXML
+    private ImageView imageSA1;
+    @FXML
+    private ImageView imageSA2;
 
     @FXML
     private Label lblFS1;
@@ -96,6 +99,10 @@ public class UserViewController implements Initializable {
 
     @FXML
     private Label lblFS5;
+    @FXML
+    private Label lblSA1;
+    @FXML
+    private Label lblSA2;
 
 
     @FXML
@@ -182,6 +189,7 @@ public class UserViewController implements Initializable {
         anchorLibrary.setVisible( false );
         anchorSearch.setVisible( false );
         showReleasesSongs( getSongs() );
+        showArtist( getArtists() );
 
     }
     private void showReleasesSongs(List<Song> songs){
@@ -197,30 +205,30 @@ public class UserViewController implements Initializable {
 
                         lblFS1.setText( songAux.getName() );
                         System.out.println( songAux.getCover().getUrl() );
-                        displayImage( songAux , imageFS1 );
+                        displayImageSong( songAux , imageFS1 );
                         break;
                     case 1:
                         lblFS2.setText( songAux.getName() );
                         System.out.println( songAux.getCover().getUrl() );
-                        displayImage( songAux , imageFS2 );
+                        displayImageSong( songAux , imageFS2 );
                         break;
 
                     case 2:
                         lblFS3.setText( songAux.getName() );
                         System.out.println( songAux.getCover().getUrl() );
-                        displayImage( songAux , imageFS3 );
+                        displayImageSong( songAux , imageFS3 );
                         break;
 
                     case 3:
                         lblFS4.setText( songAux.getName() );
                         System.out.println( songAux.getCover().getUrl() );
-                        displayImage( songAux , imageFS4 );
+                        displayImageSong( songAux , imageFS4 );
                         break;
 
                     case 4:
                         lblFS5.setText( songAux.getName() );
                         System.out.println( songAux.getCover().getUrl() );
-                        displayImage( songAux , imageFS5 );
+                        displayImageSong( songAux , imageFS5 );
                         break;
 
                 }
@@ -230,14 +238,61 @@ public class UserViewController implements Initializable {
         }
 
     }
-    private void displayImage(Song song, ImageView imageView) {
+    private void showArtist(List<Artist> artists) {
+        if ( !artists.isEmpty() ) {
+            for (int i = 0; i < artists.size(); i++) {
+                Artist artistAux = artists.get( i );
+
+                switch (i) {
+                    case 0:
+                        assert artistAux != null;
+
+                        lblSA1.setText( artistAux.getName() );
+                        System.out.println( artistAux.getPhoto().getUrl() );
+                        displayImageArtists( artistAux , imageSA1 );
+                        break;
+                    case 1:
+                        lblSA2.setText( artistAux.getName() );
+                        System.out.println( artistAux.getPhoto().getUrl() );
+                        displayImageArtists( artistAux , imageSA2 );
+                        break;
+
+                    case 2:
+                        break;
+
+                    case 3:
+                        break;
+
+                }
+            }
+        }
+    }
+    private void displayImageSong(Song song, ImageView imageView) {
 
         try {
             // Crear el Image y el ImageView
             Image image = song.getCover();
             imageView.setImage( image );
-            imageView.setFitWidth(200 );
+            imageView.setFitWidth(183 );
             imageView.setFitHeight( 160 );
+//
+//            Rectangle clip = new Rectangle(imageView.getFitWidth(), imageView.getFitHeight());
+//            clip.setArcWidth(20); // Cambia este valor según el grado de redondeo que desees
+//            clip.setArcHeight(20);
+//            imageView.setClip( clip );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void displayImageArtists(Artist artist, ImageView imageView) {
+
+        try {
+            // Crear el Image y el ImageView
+            Image image = artist.getPhoto();
+            imageView.setImage( image );
+            imageView.setFitWidth(190 );
+            imageView.setFitHeight( 170 );
 //
 //            Rectangle clip = new Rectangle(imageView.getFitWidth(), imageView.getFitHeight());
 //            clip.setArcWidth(20); // Cambia este valor según el grado de redondeo que desees
@@ -252,6 +307,9 @@ public class UserViewController implements Initializable {
 
     public List<Song> getSongs(){
         return userController.mfm.getSongList();
+    }
+    public List<Artist> getArtists(){
+        return userController.mfm.getListArtist();
     }
 
     @FXML
@@ -363,56 +421,118 @@ public class UserViewController implements Initializable {
         btnLibrary.setOnMouseExited(event -> btnLibrary.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
 
 
+
+
+
         //----------------------------------------------ANIMATIONS------------------------------------------------------
 
 
         // Manejar eventos de mouse
         stackFS1.setOnMouseEntered((MouseEvent e) -> {
             stackFS1.setCursor( Cursor.HAND );
+            stackFS1.setStyle("-fx-background-color: rgb(237, 179, 161, 0.2); " +
+                    "-fx-text-fill: black; " +
+                    "-fx-background-radius: 5px;");
             animationScaleIn(stackFS1);
         });
 
         stackFS1.setOnMouseExited((MouseEvent e) -> {
             stackFS1.setCursor( Cursor.DEFAULT );
+            stackFS1.setStyle("-fx-background-color: transparent; " +
+                    "-fx-text-fill: black;");
             animationScaleOut(stackFS1);
 
         });
         stackFS2.setOnMouseEntered((MouseEvent e) -> {
             stackFS2.setCursor( Cursor.HAND );
+            stackFS2.setStyle("-fx-background-color: rgb(237, 179, 161, 0.2); " +
+                    "-fx-text-fill: black; " +
+                    "-fx-background-radius: 5px;");
+
             animationScaleIn( stackFS2 );
         });
 
         stackFS2.setOnMouseExited((MouseEvent e) -> {
             stackFS2.setCursor( Cursor.DEFAULT );
+            stackFS2.setStyle("-fx-background-color: transparent; " +
+                    "-fx-text-fill: black;");
             animationScaleOut( stackFS2 );
         });
         stackFS3.setOnMouseEntered((MouseEvent e) -> {
             stackFS3.setCursor( Cursor.HAND );
+            stackFS3.setStyle("-fx-background-color: rgb(237, 179, 161, 0.2); " +
+                    "-fx-text-fill: black; " +
+                    "-fx-background-radius: 5px;");
             animationScaleIn( stackFS3 );
         });
 
         stackFS3.setOnMouseExited((MouseEvent e) -> {
             stackFS3.setCursor( Cursor.DEFAULT );
+            stackFS3.setStyle("-fx-background-color: transparent; " +
+                    "-fx-text-fill: black;");
             animationScaleOut( stackFS3 );
         });
         stackFS4.setOnMouseEntered((MouseEvent e) -> {
             stackFS4.setCursor( Cursor.HAND );
+            stackFS4.setStyle("-fx-background-color: rgb(237, 179, 161, 0.2); " +
+                    "-fx-text-fill: black; " +
+                    "-fx-background-radius: 5px;");
             animationScaleIn( stackFS4 );
         });
 
         stackFS4.setOnMouseExited((MouseEvent e) -> {
             stackFS4.setCursor( Cursor.DEFAULT );
+            stackFS4.setStyle("-fx-background-color: transparent; " +
+                    "-fx-text-fill: black;");
             animationScaleOut( stackFS4 );
         });
         stackFS5.setOnMouseEntered((MouseEvent e) -> {
             stackFS5.setCursor( Cursor.HAND );
+            stackFS5.setStyle("-fx-background-color: rgb(237, 179, 161, 0.2); " +
+                    "-fx-text-fill: black; " +
+                    "-fx-background-radius: 5px;");
             animationScaleIn( stackFS5 );
         });
 
         stackFS5.setOnMouseExited((MouseEvent e) -> {
             stackFS5.setCursor( Cursor.DEFAULT );
+            stackFS5.setStyle("-fx-background-color: transparent; " +
+                    "-fx-text-fill: black;");
             animationScaleOut( stackFS5 );
         });
+
+        stackA1.setOnMouseEntered((MouseEvent e) -> {
+            stackA1.setCursor( Cursor.HAND );
+            stackA1.setStyle("-fx-background-color: rgb(163, 192, 245, 0.3); " +
+                    "-fx-text-fill: black; " +
+                    "-fx-background-radius: 5px;");
+
+            animationScaleIn( stackA1 );
+        });
+
+        stackA1.setOnMouseExited((MouseEvent e) -> {
+            stackA1.setCursor( Cursor.DEFAULT );
+            stackA1.setStyle("-fx-background-color: transparent; " +
+                    "-fx-text-fill: black;");
+
+            animationScaleOut( stackA1 );
+        });
+        stackA2.setOnMouseEntered((MouseEvent e) -> {
+            stackA2.setCursor( Cursor.HAND );
+            stackA2.setStyle("-fx-background-color: rgb(163, 192, 245, 0.3); " +
+                    "-fx-text-fill: black; " +
+                    "-fx-background-radius: 5px;");
+            animationScaleIn( stackA2 );
+        });
+
+        stackA2.setOnMouseExited((MouseEvent e) -> {
+            stackA2.setCursor( Cursor.DEFAULT );
+            stackA2.setStyle("-fx-background-color: transparent; " +
+                    "-fx-text-fill: black;");
+            animationScaleOut( stackA2 );
+        });
+
+
 
         stackFS1.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.SECONDARY) { // Verificar si el clic es con el botón derecho

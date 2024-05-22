@@ -52,51 +52,6 @@
             <Image url="@../images/AdminLogo.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="anchorArtists" layoutX="285.0" layoutY="41.0" prefHeight="661.0" prefWidth="1038.0">
-         <styleClass>
-            <String fx:value="white-bg" />
-            <String fx:value="shadow" />
-         </styleClass>
-         <children>
-            <Button fx:id="btnAddArtist" layoutX="397.0" layoutY="247.0" mnemonicParsing="false" onAction="#addArtist" prefHeight="27.0" prefWidth="69.0" style="-fx-background-color: #a3c0f5; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Add" />
-            <Button fx:id="btnCleanUpArtist" layoutX="35.0" layoutY="247.0" mnemonicParsing="false" onAction="#cleanUpArtist" prefHeight="27.0" prefWidth="69.0" style="-fx-border-radius: 8;" styleClass="btnRed" text="Clean up" />
-            <Label layoutX="35.0" layoutY="14.0" text="Artists">
-               <font>
-                  <Font name="System Bold" size="70.0" />
-               </font>
-            </Label>
-            <Label layoutX="36.0" layoutY="96.0" text="Information of artist">
-               <font>
-                  <Font name="System Italic" size="26.0" />
-               </font>
-            </Label>
-            <Label layoutX="36.0" layoutY="158.0" text="Name">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Label>
-            <Label layoutX="36.0" layoutY="196.0" text="Nationality">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtNationalityArtist" layoutX="179.0" layoutY="201.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
-            <TextField fx:id="txtNameArtist" layoutX="179.0" layoutY="163.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
-            <CheckBox fx:id="checkGroupArtist" layoutX="527.0" layoutY="180.0" mnemonicParsing="false" selected="true" style="-fx-border-radius: 8; -fx-background-color: transparent; -fx-border-color: #a3c0f5;" text="It's a group?">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </CheckBox>
-            <TableView fx:id="tableViewArtists" layoutX="42.0" layoutY="331.0" prefHeight="305.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
-              <columns>
-                <TableColumn fx:id="tableColumnCode" prefWidth="243.0" styleClass="table-row-cell" text="Code" />
-                <TableColumn fx:id="tableColumnName" minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
-                  <TableColumn fx:id="tableColumnNationality" minWidth="0.0" prefWidth="364.0" styleClass="table-row-cell" text="Nationality" />
-                  <TableColumn fx:id="tableColumnGroup" minWidth="0.0" prefWidth="124.0" styleClass="table-row-cell" text="Group?" />
-              </columns>
-            </TableView>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="anchorSongs" layoutX="285.0" layoutY="41.0" prefHeight="661.0" prefWidth="1038.0">
          <styleClass>
             <String fx:value="white-bg" />
@@ -165,6 +120,54 @@
             <Button fx:id="btnAddSong" layoutX="437.0" layoutY="331.0" mnemonicParsing="false" onAction="#addSong" prefHeight="38.0" prefWidth="89.0" styleClass="btnBlue" text="Add" />
             <Button fx:id="btnCleanUpSong" layoutX="68.0" layoutY="337.0" mnemonicParsing="false" onAction="#cleanUpSong" prefHeight="38.0" prefWidth="89.0" styleClass="btnRed" text="Clean Up" />
             <Button fx:id="btnSelectCover" layoutX="657.0" layoutY="299.0" mnemonicParsing="false" onAction="#selectCoverSong" prefHeight="38.0" prefWidth="150.0" styleClass="btnBlue" text="Select cover" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorArtists" layoutX="285.0" layoutY="41.0" prefHeight="661.0" prefWidth="1038.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <Button fx:id="btnAddArtist" layoutX="397.0" layoutY="247.0" mnemonicParsing="false" onAction="#addArtist" prefHeight="27.0" prefWidth="69.0" style="-fx-background-color: #a3c0f5; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Add" />
+            <Button fx:id="btnCleanUpArtist" layoutX="35.0" layoutY="247.0" mnemonicParsing="false" onAction="#cleanUpArtist" prefHeight="27.0" prefWidth="69.0" style="-fx-border-radius: 8;" styleClass="btnRed" text="Clean up" />
+            <Label layoutX="35.0" layoutY="14.0" text="Artists">
+               <font>
+                  <Font name="System Bold" size="70.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="96.0" text="Information of artist">
+               <font>
+                  <Font name="System Italic" size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="158.0" text="Name">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="196.0" text="Nationality">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNationalityArtist" layoutX="179.0" layoutY="201.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
+            <TextField fx:id="txtNameArtist" layoutX="179.0" layoutY="163.0" prefHeight="27.0" prefWidth="287.0" style="-fx-background-color: transparent; -fx-border-color: #a3c0f5; -fx-border-radius: 5;" />
+            <CheckBox fx:id="checkGroupArtist" layoutX="527.0" layoutY="180.0" mnemonicParsing="false" selected="true" style="-fx-border-radius: 8; -fx-background-color: transparent; -fx-border-color: #a3c0f5;" text="It's a group?">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </CheckBox>
+            <TableView fx:id="tableViewArtists" layoutX="42.0" layoutY="331.0" prefHeight="305.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
+              <columns>
+                <TableColumn fx:id="tableColumnCode" prefWidth="243.0" styleClass="table-row-cell" text="Code" />
+                <TableColumn fx:id="tableColumnName" minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
+                  <TableColumn fx:id="tableColumnNationality" minWidth="0.0" prefWidth="364.0" styleClass="table-row-cell" text="Nationality" />
+                  <TableColumn fx:id="tableColumnGroup" minWidth="0.0" prefWidth="124.0" styleClass="table-row-cell" text="Group?" />
+              </columns>
+            </TableView>
+            <ImageView fx:id="imageViewArtist" fitHeight="150.0" fitWidth="200.0" layoutX="711.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="795.0" layoutY="79.0" text="Photo" />
+            <Button fx:id="btnSelectPhotoArtist" layoutX="785.0" layoutY="252.0" mnemonicParsing="false" onAction="#selectPhotoArtist" styleClass="btnBlue" text="Select" />
          </children>
       </AnchorPane>
       <Button fx:id="btnLogOut" alignment="CENTER" layoutX="-4.0" layoutY="656.0" mnemonicParsing="false" onAction="#logOut" prefHeight="57.0" prefWidth="245.0" style="-fx-background-color: TRANSPARENT;" text="Log out">

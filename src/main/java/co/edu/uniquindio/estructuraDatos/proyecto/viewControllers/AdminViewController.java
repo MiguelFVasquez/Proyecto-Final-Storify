@@ -2,7 +2,6 @@ package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -65,6 +64,8 @@ public class AdminViewController implements Initializable {
     @FXML
     private ImageView imageViewSongPortait;
     @FXML
+    private ImageView imageViewArtist;
+    @FXML
     private TextField txtNameSong;
     @FXML
     private TextField txtDurationSong;
@@ -87,6 +88,8 @@ public class AdminViewController implements Initializable {
 
     @FXML
     private Button btnSelectCover;
+    @FXML
+    private Button btnSelectPhotoArtist;
     @FXML
     private Button btnAddSong;
 
@@ -181,9 +184,9 @@ public class AdminViewController implements Initializable {
         return false;
     }
 
-    private boolean createArtist(String code,String name, String nationality, boolean isAGroup){
+    private boolean createArtist(String code, String name, String nationality, Image image , boolean isAGroup){
         try {
-            if (adminController.mfm.addArtist(code,name,nationality,isAGroup)){
+            if (adminController.mfm.addArtist(code,name,nationality, image, isAGroup)){
                 showMessage("Notification", "Artist registered","Artist was registered successfully", Alert.AlertType.INFORMATION);
                 return true;
             }
@@ -281,17 +284,20 @@ public class AdminViewController implements Initializable {
         String nameArtist= txtNameArtist.getText();
         String nationalityArtist= txtNationalityArtist.getText();
         boolean isAGroup= checkGroupArtist.isSelected();
-        if (verifyArtist(nameArtist,nationalityArtist)){
-            String code= generateCode(nameArtist,nationalityArtist);
-            if (createArtist(code,nameArtist,nationalityArtist,isAGroup)){
-                namesArtist.add(nameArtist);
-                //adminController.mfm.saveResourceXML();
-                adminController.mfm.saveDataTest();
-                System.out.printf("Combo box nombre de artistas: " + comboBoxArtist.getItems().toString() );
-                cleanUpArtist(event);
-                refreshTableViewArtist();
+        if(imageViewArtist.getImage()!=null){
+            if (verifyArtist(nameArtist,nationalityArtist)){
+                String code= generateCode(nameArtist,nationalityArtist);
+                if (createArtist(code,nameArtist,nationalityArtist, imageViewArtist.getImage(), isAGroup)){
+                    namesArtist.add(nameArtist);
+                    //adminController.mfm.saveResourceXML();
+                    adminController.mfm.saveDataTest();
+                    System.out.printf("Combo box nombre de artistas: " + comboBoxArtist.getItems().toString() );
+                    cleanUpArtist(event);
+                    refreshTableViewArtist();
+                }
             }
         }
+
     }
 
     @FXML
@@ -304,25 +310,6 @@ public class AdminViewController implements Initializable {
     @FXML
     void selectCoverSong(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnSelectCover.getScene().getWindow();
-//        // Cerrar la ventana
-//
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.setTitle("Select Cover");
-//        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.gif");
-//        fileChooser.getExtensionFilters().add(extFilter);
-//        java.io.File file = fileChooser.showOpenDialog(stage);
-//        if (file != null) {
-//
-//            String absolutePath = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/";
-//            String nameFile = file.getName();
-//
-//            try {
-//                Path destiny = Path.of(absolutePath + nameFile);
-//                Files.copy(file.toPath(), destiny, StandardCopyOption.REPLACE_EXISTING);
-//                System.out.println("Archivo copiado correctamente a: " + destiny);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
 
         // Configurar el FileChooser
         FileChooser fileChooser = new FileChooser();
@@ -357,18 +344,62 @@ public class AdminViewController implements Initializable {
                 System.out.println("Imagen copiada a: " + destinationPath.toString());
 
                 // Cargar la imagen y mostrarla
-                displayImage(destinationPath.toString());
+                displayImage(destinationPath.toString(), imageViewSongPortait);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
     }
-    private void displayImage(String imagePath) {
+    @FXML
+    void selectPhotoArtist(ActionEvent event) throws IOException {
+        Stage stage = (Stage) btnSelectPhotoArtist.getScene().getWindow();
+
+        // Configurar el FileChooser
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar Imagen");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg")
+        );
+
+        // Mostrar el diálogo de selección de archivo
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null) {
+            // Definir el directorio de destino dentro del proyecto
+            String destinationDir = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/";
+
+            // Crear el directorio si no existe
+            Path destinationDirPath = Path.of(destinationDir);
+            if (!Files.exists(destinationDirPath)) {
+                try {
+                    Files.createDirectories(destinationDirPath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // Crear el destino como un Path
+            Path destinationPath = destinationDirPath.resolve(selectedFile.getName());
+
+            try {
+                // Copiar el archivo seleccionado al destino
+                Files.copy(selectedFile.toPath(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Imagen copiada a: " + destinationPath.toString());
+
+                // Cargar la imagen y mostrarla
+                displayImage(destinationPath.toString(), imageViewArtist);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void displayImage(String imagePath, ImageView imageView) {
         try {
             // Crear el Image y el ImageView
             Image image = new Image("file:" + imagePath);
-            imageViewSongPortait.setImage( image );
+            imageView.setImage( image );
         } catch (Exception e) {
             e.printStackTrace();
         }
