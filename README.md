@@ -5,6 +5,7 @@
 - Reproducir una canción
 - Avanzar en la fila para reproducir la siguiente canción
 - Implementar colas ¿?
+- Corregir actualizacion de canciones en la home del user
 
 ### DOING
 - Visualización de portadas en UserView
