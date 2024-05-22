@@ -1,4 +1,4 @@
-# WORKING ON PROJECT: Shuh3n
+# WORKING ON PROJECT: 
 ## ***TASKS**
 ### **TO DO**
 - Seleccionar una canción y añadirla a la lista de usuario
