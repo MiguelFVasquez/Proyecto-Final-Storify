@@ -301,20 +301,20 @@
                   <ImageView fx:id="imageSA2" fitHeight="170.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </StackPane>
-            <StackPane layoutX="531.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+            <StackPane fx:id="stackA3" layoutX="531.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
+                  <Label fx:id="lblSA3" prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <ImageView fitHeight="142.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageSA3" fitHeight="142.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </StackPane>
-            <StackPane layoutX="774.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+            <StackPane fx:id="stackA4" layoutX="774.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="142.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
+                  <ImageView fx:id="imageSA4" fitHeight="142.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lblSA4" prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
                      <padding>
                         <Insets left="10.0" />
                      </padding>

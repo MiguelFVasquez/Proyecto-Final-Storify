@@ -65,6 +65,10 @@ public class UserViewController implements Initializable {
     private StackPane stackA1;
     @FXML
     private StackPane stackA2;
+    @FXML
+    private StackPane stackA3;
+    @FXML
+    private StackPane stackA4;
 
     @FXML
     private ImageView imageFS1;
@@ -84,6 +88,10 @@ public class UserViewController implements Initializable {
     private ImageView imageSA1;
     @FXML
     private ImageView imageSA2;
+    @FXML
+    private ImageView imageSA3;
+    @FXML
+    private ImageView imageSA4;
 
     @FXML
     private Label lblFS1;
@@ -103,7 +111,10 @@ public class UserViewController implements Initializable {
     private Label lblSA1;
     @FXML
     private Label lblSA2;
-
+    @FXML
+    private Label lblSA3;
+    @FXML
+    private Label lblSA4;
 
     @FXML
     private Label labelTitle;
@@ -193,12 +204,12 @@ public class UserViewController implements Initializable {
 
     }
     private void showReleasesSongs(List<Song> songs){
-
+        int n= 0;
         if(songs.size() != 0){
-            for (int i = 0; i < songs.size(); i++) {
+            for (int i = songs.size()-1; i>=0; i--) {
                 Song songAux = songs.get( i );
 
-                switch (i){
+                switch (n){
 
                     case 0:
                         assert songAux != null;
@@ -232,18 +243,22 @@ public class UserViewController implements Initializable {
                         break;
 
                 }
-
+                if(n==4){
+                    break;
+                }
+                n++;
 
             }
         }
 
     }
     private void showArtist(List<Artist> artists) {
+        int n= 0;
         if ( !artists.isEmpty() ) {
-            for (int i = 0; i < artists.size(); i++) {
+            for (int i = artists.size()-1; i >= 0; i--) {
                 Artist artistAux = artists.get( i );
 
-                switch (i) {
+                switch (n) {
                     case 0:
                         assert artistAux != null;
 
@@ -258,12 +273,19 @@ public class UserViewController implements Initializable {
                         break;
 
                     case 2:
+                        lblSA3.setText( artistAux.getName() );
+                        System.out.println( artistAux.getPhoto().getUrl() );
+                        displayImageArtists( artistAux , imageSA3 );
                         break;
 
                     case 3:
+                        lblSA4.setText( artistAux.getName() );
+                        System.out.println( artistAux.getPhoto().getUrl() );
+                        displayImageArtists( artistAux , imageSA4 );
                         break;
 
                 }
+                n++;
             }
         }
     }
@@ -530,6 +552,35 @@ public class UserViewController implements Initializable {
             stackA2.setStyle("-fx-background-color: transparent; " +
                     "-fx-text-fill: black;");
             animationScaleOut( stackA2 );
+        });
+
+        stackA3.setOnMouseEntered((MouseEvent e) -> {
+            stackA3.setCursor( Cursor.HAND );
+            stackA3.setStyle("-fx-background-color: rgb(163, 192, 245, 0.3); " +
+                    "-fx-text-fill: black; " +
+                    "-fx-background-radius: 5px;");
+            animationScaleIn( stackA3 );
+        });
+
+        stackA3.setOnMouseExited((MouseEvent e) -> {
+            stackA3.setCursor( Cursor.DEFAULT );
+            stackA3.setStyle("-fx-background-color: transparent; " +
+                    "-fx-text-fill: black;");
+            animationScaleOut( stackA3 );
+        });
+        stackA4.setOnMouseEntered((MouseEvent e) -> {
+            stackA4.setCursor( Cursor.HAND );
+            stackA4.setStyle("-fx-background-color: rgb(163, 192, 245, 0.3); " +
+                    "-fx-text-fill: black; " +
+                    "-fx-background-radius: 5px;");
+            animationScaleIn( stackA4 );
+        });
+
+        stackA4.setOnMouseExited((MouseEvent e) -> {
+            stackA4.setCursor( Cursor.DEFAULT );
+            stackA4.setStyle("-fx-background-color: transparent; " +
+                    "-fx-text-fill: black;");
+            animationScaleOut( stackA4 );
         });
 
 

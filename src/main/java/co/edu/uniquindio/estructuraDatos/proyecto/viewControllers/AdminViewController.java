@@ -304,6 +304,8 @@ public class AdminViewController implements Initializable {
     void cleanUpArtist(ActionEvent event) {
         txtNameArtist.clear();
         txtNationalityArtist.clear();
+        checkGroupArtist.setSelected( false );
+        imageViewArtist.setImage( null );
     }
 
 //------------------------------------------------SONGS----------------------------------------------

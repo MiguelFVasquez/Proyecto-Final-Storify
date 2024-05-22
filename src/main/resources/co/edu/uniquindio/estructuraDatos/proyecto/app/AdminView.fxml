@@ -165,7 +165,8 @@
                   <TableColumn fx:id="tableColumnGroup" minWidth="0.0" prefWidth="124.0" styleClass="table-row-cell" text="Group?" />
               </columns>
             </TableView>
-            <ImageView fx:id="imageViewArtist" fitHeight="150.0" fitWidth="200.0" layoutX="711.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+            <FontAwesomeIconView glyphName="USER" layoutX="759.0" layoutY="227.0" size="140" wrappingWidth="104.0" />
+            <ImageView fx:id="imageViewArtist" fitHeight="150.0" fitWidth="200.0" layoutX="710.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="795.0" layoutY="79.0" text="Photo" />
             <Button fx:id="btnSelectPhotoArtist" layoutX="785.0" layoutY="252.0" mnemonicParsing="false" onAction="#selectPhotoArtist" styleClass="btnBlue" text="Select" />
          </children>

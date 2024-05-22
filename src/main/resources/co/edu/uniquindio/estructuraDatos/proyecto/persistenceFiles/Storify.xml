@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.11" class="java.beans.XMLDecoder">
+<java version="17.0.10" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Storify" id="Storify0">
   <void property="nombre">
    <string>Shuhenfy</string>
@@ -166,6 +166,44 @@
      </void>
      <void property="year">
       <string>2023</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+       <void property="code">
+        <string>aoUidacycm</string>
+       </void>
+       <void property="name">
+        <string>My chemical romance</string>
+       </void>
+       <void property="nationality">
+        <string>Estados Unidos</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string>yye c eW t</string>
+     </void>
+     <void property="duration">
+      <string>314</string>
+     </void>
+     <void property="gender">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
+       <string>Rock</string>
+      </object>
+     </void>
+     <void property="name">
+      <string>Welcome to the black parade</string>
+     </void>
+     <void property="year">
+      <string>2009</string>
      </void>
     </object>
    </void>
