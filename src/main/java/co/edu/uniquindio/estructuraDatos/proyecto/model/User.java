@@ -58,14 +58,15 @@ public class User implements Serializable {
     public void setSongList(CircularLinkedList<Song> songList) {
         this.songList = songList;
     }
-    private boolean verifySong(String code){
+    public boolean verifySong(String code){
         boolean flag=false;
-        for (Song songAux: songList) {
-            if (songAux.verifyCode(code)){
-                flag=true;
-                break;
+            for (Song songAux: songList) {
+                if (songAux.verifyCode(code)){
+                    flag=true;
+                    break;
+                }
             }
-        }
+
         return flag;
     }
 

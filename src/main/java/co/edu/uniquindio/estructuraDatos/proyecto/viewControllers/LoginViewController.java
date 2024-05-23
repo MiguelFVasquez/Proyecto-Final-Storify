@@ -142,8 +142,10 @@ public class LoginViewController implements Initializable {
                         UserViewController controller = loader.getController();
                         Stage stage = new Stage();
                         stage.setScene(new Scene(anchorPane, 1365, 715));
-                        controller.init(stage);
+                        User user = loginController.mfm.getUser( txtName.getText() );
 
+                        controller.setUser( user );
+                        controller.init(stage);
                         controller.setAnchorPane(anchorPane);
                         controller.setLoginViewController(this);
 

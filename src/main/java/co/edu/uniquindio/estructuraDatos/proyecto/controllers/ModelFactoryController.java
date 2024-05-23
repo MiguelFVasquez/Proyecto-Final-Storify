@@ -1,5 +1,6 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.controllers;
 
+import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.ArtistException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
@@ -21,6 +22,8 @@ public class ModelFactoryController {
     static Storify storify;
     private LoginViewController loginViewController;
     private RescuePassController rescuePassController;
+
+
 
     private static class SingletonHolder {
         // El constructor de Singleton puede ser llamado desde aquí al ser protected
@@ -80,7 +83,12 @@ public class ModelFactoryController {
 
     public boolean registerUser(String userName, String password, String emial)throws UserException{
         User user = new User(userName,password,emial);
+        user.setSongList( new CircularLinkedList<>() );
         return storify.addUser(user);
+    }
+
+    public User getUser(String name){
+        return storify.getUser( name );
     }
 
     public boolean logInUser(String userName, String password){
@@ -116,6 +124,10 @@ public class ModelFactoryController {
         saveDataTest();
 
     }
+
+//    public void addFavSong(User user, Song songSelected) throws SongException {
+//        user.addSongToList( songSelected );
+//    }
 
     //-------------------------Admin functions---------------------------------------------------
         //---------------------Artist functions------------------------------------------------
@@ -155,6 +167,9 @@ public class ModelFactoryController {
     public Song getSong(String code){
         return storify.getSong(code);
     }
+    public Song getSongByName(String code){
+        return storify.getSongByName(code);
+    }
 
     public boolean addSong(String code, String name, Image cover, String year, String duration, Gender gender, URL link, Artist artist) throws SongException {
         Song newSong= new Song(code, name, cover, year, duration,gender,link,artist);
@@ -165,6 +180,7 @@ public class ModelFactoryController {
 
     public void saveDataTest(){
         try{
+            Persistence.saveUsers2( getStorify().getUsersMap() );
             Persistence.saveUsers(getStorify().getUsersMap());
             Persistence.saveArtist(getStorify().getArtistTree());
             Persistence.saveSongs(getStorify().getSongList());
@@ -175,6 +191,7 @@ public class ModelFactoryController {
 
     public void saveUsers(){
         try {
+            Persistence.saveUsers2( getStorify().getUsersMap() );
             Persistence.saveUsers(getStorify().getUsersMap());
         } catch (IOException e) {
             throw new RuntimeException(e);

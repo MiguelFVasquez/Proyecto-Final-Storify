@@ -13,14 +13,14 @@ import co.edu.uniquindio.estructuraDatos.proyecto.util.UtilFile;
 import co.edu.uniquindio.estructuraDatos.proyecto.utilities.FileUtil;
 import javafx.scene.image.Image;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
 public class Persistence {
     public static final String ROUTE_USER_FILE = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Users.txt";
+    public static final String ROUTE_USER_FILE2 = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Users2.txt";
     public static final String ROUTE_ARTIST_FILE = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Artist.txt";
     public static final String ROUTE_SONGS_FILE = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Songs.txt";
     public static final String ROUTE_MODEL_STORIFY = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Storify.xml";
@@ -28,7 +28,7 @@ public class Persistence {
 
     public static void cargarDatosArchivos(Storify storify) throws IOException {
         // Cargar datos de usuarios
-        HashMap<String, User> usuariosCargados = cargarUsuarios();
+        HashMap<String, User> usuariosCargados = loadUsers2();
         if (!usuariosCargados.isEmpty()) {
             // Agregar usuarios al sistema de la casa de subasta
             storify.getUsersMap().putAll(usuariosCargados);
@@ -86,6 +86,24 @@ public class Persistence {
             }
         }
         return usuarios;
+    }
+
+    public static void saveUsers2(HashMap<String, User> usersMap) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ROUTE_USER_FILE2))) {
+            outputStream.writeObject(usersMap);
+        } catch (IOException e) {
+            System.err.println("Error al serializar la lista de ventas: " + e.getMessage());
+        }
+    }
+    public static HashMap<String, User> loadUsers2() {
+        HashMap<String, User> aux= new HashMap<>();
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ROUTE_USER_FILE2))) {
+            aux = (HashMap<String, User>) inputStream.readObject();
+            System.out.println("Lista de ventas deserializada correctamente desde el archivo: " + ROUTE_USER_FILE2);
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error al deserializar la lista de ventas desde el archivo: " + e.getMessage());
+        }
+        return aux;
     }
 
 

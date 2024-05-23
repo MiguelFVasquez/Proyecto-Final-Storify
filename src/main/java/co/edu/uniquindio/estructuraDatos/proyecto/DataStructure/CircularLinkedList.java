@@ -1,9 +1,10 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.DataStructure;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class CircularLinkedList<T> implements Iterable<T> {
+public class CircularLinkedList<T> implements Iterable<T> , Serializable {
     private Node<T> first;
     private int size;
 

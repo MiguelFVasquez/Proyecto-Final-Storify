@@ -10,7 +10,9 @@ import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +21,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -183,6 +187,8 @@ public class UserViewController implements Initializable {
     private boolean isFilteredName = true;
     private boolean isFilteredTime = true;
 
+    private User user;
+
     public void setLoginViewController(LoginViewController loginViewController) {
         this.loginViewController = loginViewController;
     }
@@ -190,6 +196,14 @@ public class UserViewController implements Initializable {
     private Stack<String> stateStack;
     private Stack<Song> songsStack;
     private Stack<Song> songsDeleteStack;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public void setAnchorPane(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
@@ -394,6 +408,7 @@ public class UserViewController implements Initializable {
     @FXML
     void logOut(ActionEvent event) {
         loginViewController.show();
+        optionsViewController.close();
         this.stage.close();
     }
 
@@ -530,6 +545,8 @@ public class UserViewController implements Initializable {
         Stage stage = new Stage();
         Scene scene = new Scene(  anchorPane);
         controller.init( stage );
+        controller.setUserViewController( this );
+
         stage.setScene(  scene);
 
         stage.initStyle( StageStyle.UNDECORATED );
@@ -703,12 +720,25 @@ public class UserViewController implements Initializable {
 
 
 
+
+
         stackFS1.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.SECONDARY) { // Verificar si el clic es con el botón derecho
                 // Obtener las coordenadas del clic y posicionar la ventana
                 optionsViewController.getStage().setX( event.getScreenX() );
                 optionsViewController.getStage().setY( event.getScreenY() );
+
+                Song song = userController.mfm.getSongByName(lblFS1.getText());
+                optionsViewController.setUser( this.user );
+                optionsViewController.setSongSelected( song );
+                if(user.verifySong( song.getCode() )){
+                    optionsViewController.setFavorite( true );
+                }else{
+                    optionsViewController.setFavorite( false );
+
+                }
                 optionsViewController.show();
+                optionsViewController.song();
             }
         });
         stackFS2.setOnMouseClicked(event -> {
@@ -716,7 +746,17 @@ public class UserViewController implements Initializable {
                 // Obtener las coordenadas del clic y posicionar la ventana
                 optionsViewController.getStage().setX( event.getScreenX() );
                 optionsViewController.getStage().setY( event.getScreenY() );
+                Song song = userController.mfm.getSongByName(lblFS2.getText());
+                optionsViewController.setUser( this.user );
+                optionsViewController.setSongSelected( song );
+                if(user.verifySong( song.getCode() )){
+                    optionsViewController.setFavorite( true );
+                }else{
+                    optionsViewController.setFavorite( false );
+
+                }
                 optionsViewController.show();
+                optionsViewController.song();
             }
         });
         stackFS3.setOnMouseClicked(event -> {
@@ -724,7 +764,17 @@ public class UserViewController implements Initializable {
                 // Obtener las coordenadas del clic y posicionar la ventana
                 optionsViewController.getStage().setX( event.getScreenX() );
                 optionsViewController.getStage().setY( event.getScreenY() );
+                Song song = userController.mfm.getSongByName(lblFS3.getText());
+                optionsViewController.setUser( this.user );
+                optionsViewController.setSongSelected( song );
+                if(user.verifySong( song.getCode() )){
+                    optionsViewController.setFavorite( true );
+                }else{
+                    optionsViewController.setFavorite( false );
+
+                }
                 optionsViewController.show();
+                optionsViewController.song();
             }
         });
         stackFS4.setOnMouseClicked(event -> {
@@ -732,7 +782,17 @@ public class UserViewController implements Initializable {
                 // Obtener las coordenadas del clic y posicionar la ventana
                 optionsViewController.getStage().setX( event.getScreenX() );
                 optionsViewController.getStage().setY( event.getScreenY() );
+                Song song = userController.mfm.getSongByName(lblFS4.getText());
+                optionsViewController.setUser( this.user );
+                optionsViewController.setSongSelected( song );
+                if(user.verifySong( song.getCode() )){
+                    optionsViewController.setFavorite( true );
+                }else{
+                    optionsViewController.setFavorite( false );
+
+                }
                 optionsViewController.show();
+                optionsViewController.song();
             }
         });
         stackFS5.setOnMouseClicked(event -> {
@@ -740,7 +800,17 @@ public class UserViewController implements Initializable {
                 // Obtener las coordenadas del clic y posicionar la ventana
                 optionsViewController.getStage().setX( event.getScreenX() );
                 optionsViewController.getStage().setY( event.getScreenY() );
+                Song song = userController.mfm.getSongByName(lblFS5.getText());
+                optionsViewController.setUser( this.user );
+                optionsViewController.setSongSelected( song );
+                if(user.verifySong( song.getCode() )){
+                    optionsViewController.setFavorite( true );
+                }else{
+                    optionsViewController.setFavorite( false );
+
+                }
                 optionsViewController.show();
+                optionsViewController.song();
             }
         });
 
@@ -763,24 +833,7 @@ public class UserViewController implements Initializable {
 
 
     }
-    void loadOptionsView(){
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation( App.class.getResource( "OptionsView.fxml" ) );
-        AnchorPane anchorPane = null;
-        try {
-            anchorPane = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException( e );
-        }
-        OptionsViewController controller = loader.getController();
-        this.optionsViewController = controller;
-        Stage stage = new Stage();
-        Scene scene = new Scene(  anchorPane);
-        controller.init( stage );
-        stage.setScene(  scene);
 
-        stage.initStyle( StageStyle.UNDECORATED );
-    }
     void animationScaleIn(StackPane stack){
         ScaleTransition scaleIn = new ScaleTransition(Duration.millis(200), stack);
         scaleIn.setFromX(1.0);

@@ -386,11 +386,21 @@ public class Storify implements IStorify, Serializable {
         return this.songList.stream()
                 .anyMatch(s -> s.getCode().equals(code));
     }
+    private boolean verifySongByName(String name) {
+        return this.songList.stream()
+                .anyMatch(s -> s.getName().equals(name));
+    }
 
 
     public Song getSong(String code){
         Optional<Song> songOptional= this.songList.stream()
                 .filter(s ->s.getCode().equals(code))
+                .findFirst();
+        return songOptional.orElse(null);
+    }
+    public Song getSongByName(String name){
+        Optional<Song> songOptional= this.songList.stream()
+                .filter(s ->s.getName().equals(name))
                 .findFirst();
         return songOptional.orElse(null);
     }
