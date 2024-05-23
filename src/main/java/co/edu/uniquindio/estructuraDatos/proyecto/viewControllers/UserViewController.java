@@ -14,6 +14,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.Style;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -130,6 +131,13 @@ public class UserViewController implements Initializable {
     @FXML
     private Button btnDeshacer;
 
+    @FXML
+    private Button btnTime;
+    @FXML
+    private Button btnName;
+    @FXML
+    private Button btnArtist;
+
 
     @FXML
     private TableColumn<Song, Image> colummImageSearch;
@@ -171,6 +179,9 @@ public class UserViewController implements Initializable {
     private Song songSelection;
     private OptionsViewController optionsViewController;
     private ObservableList<Song> listSongs = FXCollections.observableArrayList();
+    private boolean isFilteredArtist = true;
+    private boolean isFilteredName = true;
+    private boolean isFilteredTime = true;
 
     public void setLoginViewController(LoginViewController loginViewController) {
         this.loginViewController = loginViewController;
@@ -384,6 +395,76 @@ public class UserViewController implements Initializable {
     void logOut(ActionEvent event) {
         loginViewController.show();
         this.stage.close();
+    }
+
+    @FXML
+    void showSongsByArtist(ActionEvent event) {
+        if (isFilteredArtist) {
+            isFilteredName= true;
+            isFilteredTime = true;
+            btnName.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnTime.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnArtist.setStyle(
+                    " -fx-background-color: #a3c0f5; " +
+                    "-fx-text-fill: black;" +
+                    "-fx-border-color: black;");
+        } else {
+            btnArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+        }
+        isFilteredArtist = !isFilteredArtist;
+    }
+
+    @FXML
+    void showSongsByName(ActionEvent event) {
+        if (isFilteredName) {
+            isFilteredTime= true;
+            isFilteredArtist = true;
+            btnTime.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnName.setStyle(
+                    " -fx-background-color: #a3c0f5; " +
+                            "-fx-text-fill: black;" +
+                            "-fx-border-color: black;");
+        } else {
+            btnName.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+        }
+        isFilteredName = !isFilteredName;
+    }
+
+    @FXML
+    void showSongsByTime(ActionEvent event) {
+        if (isFilteredTime) {
+            isFilteredName= true;
+            isFilteredArtist = true;
+
+            btnName.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnTime.setStyle(
+                    " -fx-background-color: #a3c0f5; " +
+                            "-fx-text-fill: black;" +
+                            "-fx-border-color: black;");
+        } else {
+            btnTime.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+        }
+        isFilteredTime = !isFilteredTime;
     }
 //----------------------------Funcionalidades del usuario----------------------------------
     @FXML

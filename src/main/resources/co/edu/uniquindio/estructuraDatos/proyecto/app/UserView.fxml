@@ -13,6 +13,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -70,6 +73,27 @@
             <Font name="Calibri Bold" size="60.0" />
          </font>
       </Label>
+      <AnchorPane fx:id="anchorSearch" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <TextField layoutX="212.0" layoutY="34.0" prefHeight="30.0" prefWidth="609.0" styleClass="txtFields2" />
+            <FontAwesomeIconView fill="#a3c0f5" glyphName="SEARCH" layoutX="827.0" layoutY="58.0" size="30" stroke="#4a4a4a" textAlignment="JUSTIFY" />
+            <TableView fx:id="tableViewSearch" layoutX="148.0" layoutY="112.0" prefHeight="418.0" prefWidth="771.0">
+              <columns>
+                <TableColumn fx:id="colummImageSearch" prefWidth="60.0" />
+                <TableColumn fx:id="columnNameSearch" minWidth="0.0" prefWidth="214.0" text="Name" />
+                  <TableColumn fx:id="columnArtistSearch" prefWidth="235.0" text="Artist's name" />
+                  <TableColumn fx:id="columnTimeSearch" prefWidth="270.0" text="Duration" />
+              </columns>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TableView>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="anchorHome" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
          <styleClass>
             <String fx:value="white-bg" />
@@ -195,40 +219,43 @@
             <String fx:value="shadow" />
          </styleClass>
          <children>
-            <Label layoutX="27.0" layoutY="14.0" text="Liked Songs">
+            <Label layoutX="27.0" layoutY="20.0" text="Liked Songs">
                <font>
-                  <Font size="35.0" />
+                  <Font name="Calibri Light" size="35.0" />
                </font>
+               <graphic>
+                  <FontAwesomeIconView glyphName="HEART" size="30">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.30000001192092896" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIconView>
+               </graphic>
             </Label>
             <TableView fx:id="tableViewLikedSongs" layoutX="27.0" layoutY="77.0" prefHeight="473.0" prefWidth="1010.0">
                <columns>
-                  <TableColumn fx:id="columnImage" prefWidth="50.0" text="C1" />
+                  <TableColumn fx:id="columnImage" prefWidth="50.0" />
                   <TableColumn fx:id="columnName" minWidth="0.0" prefWidth="345.0" text="Name" />
                   <TableColumn fx:id="columnNameArtist" prefWidth="341.0" text="Artist's name" />
                   <TableColumn fx:id="columnTime" prefWidth="272.0" text="Duration" />
                </columns>
             </TableView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="anchorSearch" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
-         <styleClass>
-            <String fx:value="white-bg" />
-            <String fx:value="shadow" />
-         </styleClass>
-         <children>
-            <TextField layoutX="212.0" layoutY="34.0" prefHeight="30.0" prefWidth="609.0" styleClass="txtFields2" />
-            <FontAwesomeIconView fill="#a3c0f5" glyphName="SEARCH" layoutX="827.0" layoutY="58.0" size="30" stroke="#4a4a4a" textAlignment="JUSTIFY" />
-            <TableView fx:id="tableViewSearch" layoutX="148.0" layoutY="112.0" prefHeight="418.0" prefWidth="771.0">
-              <columns>
-                <TableColumn fx:id="colummImageSearch" prefWidth="60.0" />
-                <TableColumn fx:id="columnNameSearch" minWidth="0.0" prefWidth="214.0" text="Name" />
-                  <TableColumn fx:id="columnArtistSearch" prefWidth="235.0" text="Artist's name" />
-                  <TableColumn fx:id="columnTimeSearch" prefWidth="270.0" text="Duration" />
-              </columns>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </TableView>
+            <Button fx:id="btnArtist" layoutX="952.0" layoutY="41.0" mnemonicParsing="false" onAction="#showSongsByArtist" styleClass="btnBlue" text="Artists" />
+            <Button fx:id="btnTime" layoutX="844.0" layoutY="41.0" mnemonicParsing="false" onAction="#showSongsByTime" styleClass="btnBlue" text="Time" />
+            <Button fx:id="btnName" layoutX="895.0" layoutY="41.0" mnemonicParsing="false" onAction="#showSongsByName" styleClass="btnBlue" text="Name" />
+            <FontAwesomeIconView fill="#00b2ff" glyphName="LIST" layoutX="1012.0" layoutY="63.0" size="20" />
          </children>
       </AnchorPane>
    </children>
