@@ -2,9 +2,7 @@ package co.edu.uniquindio.estructuraDatos.proyecto.viewControllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Stack;
+import java.util.*;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.app.App;
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.UserController;
@@ -14,15 +12,16 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -131,6 +130,36 @@ public class UserViewController implements Initializable {
     @FXML
     private Button btnDeshacer;
 
+
+    @FXML
+    private TableColumn<Song, Image> colummImageSearch;
+
+    @FXML
+    private TableColumn<?, ?> columnArtistSearch;
+
+    @FXML
+    private TableColumn<?, ?> columnImage;
+
+    @FXML
+    private TableColumn<?, ?> columnName;
+
+    @FXML
+    private TableColumn<?, ?> columnNameArtist;
+
+    @FXML
+    private TableColumn<?, ?> columnNameSearch;
+
+    @FXML
+    private TableColumn<?, ?> columnTime;
+
+    @FXML
+    private TableColumn<Song, String> columnTimeSearch;
+    @FXML
+    private TableView<?> tableViewLikedSongs;
+
+    @FXML
+    private TableView<Song> tableViewSearch;
+
     private Stage stage;
 
     private Double x;
@@ -141,6 +170,7 @@ public class UserViewController implements Initializable {
     private UserController userController;
     private Song songSelection;
     private OptionsViewController optionsViewController;
+    private ObservableList<Song> listSongs = FXCollections.observableArrayList();
 
     public void setLoginViewController(LoginViewController loginViewController) {
         this.loginViewController = loginViewController;
@@ -423,6 +453,13 @@ public class UserViewController implements Initializable {
 
         stage.initStyle( StageStyle.UNDECORATED );
 
+        this.colummImageSearch.setCellValueFactory(new PropertyValueFactory<>("cover"));
+        this.columnArtistSearch.setCellValueFactory(new PropertyValueFactory<>("artist"));
+        this.columnNameSearch.setCellValueFactory(new PropertyValueFactory<>("name"));
+        this.columnTimeSearch.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        refreshTableViewSearch();
+
+
     }
 
 
@@ -626,6 +663,23 @@ public class UserViewController implements Initializable {
             }
         });
 
+        colummImageSearch.setCellFactory(column -> new TableCell<Song, Image>() {
+            private final ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(Image image, boolean empty) {
+                super.updateItem(image, empty);
+                if (empty || image == null) {
+                    setGraphic(null);
+                } else {
+                    imageView.setImage(image);
+                    imageView.setFitHeight(50); // Ajusta el tamaño de la imagen según sea necesario
+                    imageView.setFitWidth(50);  // Ajusta el tamaño de la imagen según sea necesario
+                    setGraphic(imageView);
+                }
+            }
+        });
+
 
     }
     void loadOptionsView(){
@@ -690,6 +744,18 @@ public class UserViewController implements Initializable {
             stage.setX( event.getScreenX()-x );
             stage.setY( event.getScreenY()-y );
         });
+    }
+
+    private ObservableList<Song> getSongsObservable() {
+        listSongs.addAll( getSongs());
+        return listSongs;
+    }
+
+    void refreshTableViewSearch() {
+        listSongs.clear();
+        tableViewSearch.getItems().clear();
+        tableViewSearch.setItems( getSongsObservable() );
+
     }
 
 

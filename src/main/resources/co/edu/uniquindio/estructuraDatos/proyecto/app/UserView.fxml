@@ -5,6 +5,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -68,147 +70,6 @@
             <Font name="Calibri Bold" size="60.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorSearch" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
-         <styleClass>
-            <String fx:value="white-bg" />
-            <String fx:value="shadow" />
-         </styleClass>
-         <children>
-            <TextField layoutX="43.0" layoutY="35.0" prefHeight="30.0" prefWidth="609.0" styleClass="txtFields2" />
-            <FontAwesomeIconView fill="#a3c0f5" glyphName="SEARCH" layoutX="658.0" layoutY="59.0" size="30" stroke="#4a4a4a" textAlignment="JUSTIFY" />
-            <Label layoutX="43.0" layoutY="75.0" text="Browse all">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <AnchorPane layoutX="95.0" layoutY="131.0" prefHeight="189.0" prefWidth="214.0" style="-fx-background-radius: 15; -fx-background-color: grey;">
-               <styleClass>
-                  <String fx:value="white-bg" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="316.0" layoutY="131.0" prefHeight="189.0" prefWidth="214.0" style="-fx-background-radius: 15; -fx-background-color: grey;">
-               <styleClass>
-                  <String fx:value="white-bg" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="538.0" layoutY="131.0" prefHeight="189.0" prefWidth="214.0" style="-fx-background-radius: 15; -fx-background-color: grey;">
-               <styleClass>
-                  <String fx:value="white-bg" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="758.0" layoutY="131.0" prefHeight="189.0" prefWidth="214.0" style="-fx-background-radius: 15; -fx-background-color: grey;">
-               <styleClass>
-                  <String fx:value="white-bg" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="95.0" layoutY="345.0" prefHeight="189.0" prefWidth="214.0" style="-fx-background-radius: 15; -fx-background-color: grey;">
-               <styleClass>
-                  <String fx:value="white-bg" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="316.0" layoutY="345.0" prefHeight="189.0" prefWidth="214.0" style="-fx-background-radius: 15; -fx-background-color: grey;">
-               <styleClass>
-                  <String fx:value="white-bg" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="538.0" layoutY="345.0" prefHeight="189.0" prefWidth="214.0" style="-fx-background-radius: 15; -fx-background-color: grey;">
-               <styleClass>
-                  <String fx:value="white-bg" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="758.0" layoutY="345.0" prefHeight="189.0" prefWidth="214.0" style="-fx-background-radius: 15; -fx-background-color: grey;">
-               <styleClass>
-                  <String fx:value="white-bg" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="anchorLibrary" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
-         <styleClass>
-            <String fx:value="white-bg" />
-            <String fx:value="shadow" />
-         </styleClass>
-         <children>
-            <Label layoutX="27.0" layoutY="14.0" text="Liked Songs">
-               <font>
-                  <Font size="35.0" />
-               </font>
-            </Label>
-            <AnchorPane layoutX="21.0" layoutY="65.0" prefHeight="200.0" prefWidth="214.0" style="-fx-background-radius: 15;">
-               <styleClass>
-                  <String fx:value="background-login" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="241.0" layoutY="65.0" prefHeight="200.0" prefWidth="214.0" style="-fx-background-radius: 15;">
-               <styleClass>
-                  <String fx:value="background-login" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="462.0" layoutY="65.0" prefHeight="200.0" prefWidth="214.0" style="-fx-background-radius: 15;">
-               <styleClass>
-                  <String fx:value="background-login" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="682.0" layoutY="65.0" prefHeight="200.0" prefWidth="214.0" style="-fx-background-radius: 15;">
-               <styleClass>
-                  <String fx:value="background-login" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <Label layoutX="952.0" layoutY="204.0" text="Show more" underline="true">
-               <font>
-                  <Font name="System Italic" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="27.0" layoutY="286.0" text="Albums">
-               <font>
-                  <Font size="35.0" />
-               </font>
-            </Label>
-            <AnchorPane layoutX="21.0" layoutY="337.0" prefHeight="200.0" prefWidth="214.0" style="-fx-background-radius: 15; -fx-background-color: grey;">
-               <styleClass>
-                  <String fx:value="white-bg" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="241.0" layoutY="337.0" prefHeight="200.0" prefWidth="214.0" style="-fx-background-radius: 15; -fx-background-color: grey;">
-               <styleClass>
-                  <String fx:value="white-bg" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="462.0" layoutY="337.0" prefHeight="200.0" prefWidth="214.0" style="-fx-background-radius: 15; -fx-background-color: grey;">
-               <styleClass>
-                  <String fx:value="white-bg" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <AnchorPane layoutX="682.0" layoutY="337.0" prefHeight="200.0" prefWidth="214.0" style="-fx-background-radius: 15; -fx-background-color: grey;">
-               <styleClass>
-                  <String fx:value="white-bg" />
-                  <String fx:value="shadow" />
-               </styleClass>
-            </AnchorPane>
-            <FontAwesomeIconView fill="#b3a8ff" glyphName="PLUS" layoutX="955.0" layoutY="193.0" selectionFill="#4400ff" size="80" />
-            <FontAwesomeIconView fill="#b3a8ff" glyphName="PLUS" layoutX="955.0" layoutY="465.0" selectionFill="#4400ff" size="80" />
-            <Label layoutX="952.0" layoutY="476.0" text="Show more" underline="true">
-               <font>
-                  <Font name="System Italic" size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="anchorHome" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
          <styleClass>
             <String fx:value="white-bg" />
@@ -326,6 +187,48 @@
                   <Font name="Calibri Light Italic" size="34.0" />
                </font>
             </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorLibrary" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <Label layoutX="27.0" layoutY="14.0" text="Liked Songs">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tableViewLikedSongs" layoutX="27.0" layoutY="77.0" prefHeight="473.0" prefWidth="1010.0">
+               <columns>
+                  <TableColumn fx:id="columnImage" prefWidth="50.0" text="C1" />
+                  <TableColumn fx:id="columnName" minWidth="0.0" prefWidth="345.0" text="Name" />
+                  <TableColumn fx:id="columnNameArtist" prefWidth="341.0" text="Artist's name" />
+                  <TableColumn fx:id="columnTime" prefWidth="272.0" text="Duration" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorSearch" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <TextField layoutX="212.0" layoutY="34.0" prefHeight="30.0" prefWidth="609.0" styleClass="txtFields2" />
+            <FontAwesomeIconView fill="#a3c0f5" glyphName="SEARCH" layoutX="827.0" layoutY="58.0" size="30" stroke="#4a4a4a" textAlignment="JUSTIFY" />
+            <TableView fx:id="tableViewSearch" layoutX="148.0" layoutY="112.0" prefHeight="418.0" prefWidth="771.0">
+              <columns>
+                <TableColumn fx:id="colummImageSearch" prefWidth="60.0" />
+                <TableColumn fx:id="columnNameSearch" minWidth="0.0" prefWidth="214.0" text="Name" />
+                  <TableColumn fx:id="columnArtistSearch" prefWidth="235.0" text="Artist's name" />
+                  <TableColumn fx:id="columnTimeSearch" prefWidth="270.0" text="Duration" />
+              </columns>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TableView>
          </children>
       </AnchorPane>
    </children>

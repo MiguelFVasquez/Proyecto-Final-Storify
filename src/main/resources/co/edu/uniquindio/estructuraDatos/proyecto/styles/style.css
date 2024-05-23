@@ -100,16 +100,22 @@
 .table-view .column-header-background {
     -fx-background-color: transparent;
     -fx-border-color: #a3c0f5;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 0 0 1 0; /* Espesor del borde inferior */
+
+
 }
 
 .table-view .column-header {
     -fx-font-weight: bold;
+    -fx-background-color: transparent;
+
 }
 
 .table-row-cell {
     -fx-background-color: #f8f8f8;
     -fx-text-fill: #333333;
-    -fx-border-width: 0 1 2 0; /* Espesor del borde inferior */
+    -fx-border-width: 0 1 1 0; /* Espesor del borde inferior */
     -fx-border-color: #a3c0f5;
 }
 

@@ -1,17 +1,21 @@
-# WORKING ON PROJECT: Shuh3n
+# WORKING ON PROJECT: 
 ## ***TASKS**
 ### **TO DO**
 - Seleccionar una canción y añadirla a la lista de usuario
 - Reproducir una canción
 - Avanzar en la fila para reproducir la siguiente canción
 - Implementar colas ¿?
-- Corregir actualizacion de canciones en la home del user
+- Funcionamiento al presionar en caratulas de albumes 
+- Motor de búsqueda O Y y Artistas
+- Filtros en ventana library
+
 
 ### DOING
 - Visualización de portadas en UserView
 - Validación de campos de Login
 - Funcionalidad de botones Tab register
 ### DONE
+- Corregir actualizacion de canciones en la home del user
 - Organizar eliminacion de datos de textfields **RescuePassView**
 - Funcionalidad de botones tab login
 - Validar ingreso de usuarios creados
