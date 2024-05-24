@@ -1,6 +1,8 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.DataStructure;
 
-public class Node<T> {
+import java.io.Serializable;
+
+public class Node<T> implements Serializable {
 
     public T data;
     public Node<T> next;

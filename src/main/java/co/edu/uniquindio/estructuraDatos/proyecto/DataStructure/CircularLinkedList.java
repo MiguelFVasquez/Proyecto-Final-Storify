@@ -1,7 +1,11 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.DataStructure;
 
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class CircularLinkedList<T> implements Iterable<T> , Serializable {
@@ -135,4 +139,22 @@ public class CircularLinkedList<T> implements Iterable<T> , Serializable {
             return data;
         }
     }
+    public List<Song> toList(){
+        List<Song> list = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            Song song = (Song) get( i );
+            if(song!=null){
+                list.add( song );
+            }
+
+        }
+        return list;
+    }
+    public void toCircular(List<T> list){
+        for (int i = 0; i < list.size(); i++) {
+            add( (T) list.get( i ) );
+        }
+    }
+
+
 }

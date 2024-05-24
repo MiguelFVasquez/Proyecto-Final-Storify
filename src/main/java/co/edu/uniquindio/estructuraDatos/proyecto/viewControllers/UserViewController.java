@@ -12,17 +12,13 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.css.Style;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -144,13 +140,13 @@ public class UserViewController implements Initializable {
 
 
     @FXML
-    private TableColumn<Song, Image> colummImageSearch;
+    private TableColumn<Song, String> colummImageSearch;
 
     @FXML
     private TableColumn<?, ?> columnArtistSearch;
 
     @FXML
-    private TableColumn<?, ?> columnImage;
+    private TableColumn<Song, String> columnImage;
 
     @FXML
     private TableColumn<?, ?> columnName;
@@ -166,8 +162,9 @@ public class UserViewController implements Initializable {
 
     @FXML
     private TableColumn<Song, String> columnTimeSearch;
+
     @FXML
-    private TableView<?> tableViewLikedSongs;
+    private TableView<Song> tableViewLikedSongs;
 
     @FXML
     private TableView<Song> tableViewSearch;
@@ -183,6 +180,7 @@ public class UserViewController implements Initializable {
     private Song songSelection;
     private OptionsViewController optionsViewController;
     private ObservableList<Song> listSongs = FXCollections.observableArrayList();
+    private ObservableList<Song> listFavoritesSongs = FXCollections.observableArrayList();
     private boolean isFilteredArtist = true;
     private boolean isFilteredName = true;
     private boolean isFilteredTime = true;
@@ -270,30 +268,25 @@ public class UserViewController implements Initializable {
                         assert songAux != null;
 
                         lblFS1.setText( songAux.getName() );
-                        System.out.println( songAux.getCover().getUrl() );
                         displayImageSong( songAux , imageFS1 );
                         break;
                     case 1:
                         lblFS2.setText( songAux.getName() );
-                        System.out.println( songAux.getCover().getUrl() );
                         displayImageSong( songAux , imageFS2 );
                         break;
 
                     case 2:
                         lblFS3.setText( songAux.getName() );
-                        System.out.println( songAux.getCover().getUrl() );
                         displayImageSong( songAux , imageFS3 );
                         break;
 
                     case 3:
                         lblFS4.setText( songAux.getName() );
-                        System.out.println( songAux.getCover().getUrl() );
                         displayImageSong( songAux , imageFS4 );
                         break;
 
                     case 4:
                         lblFS5.setText( songAux.getName() );
-                        System.out.println( songAux.getCover().getUrl() );
                         displayImageSong( songAux , imageFS5 );
                         break;
 
@@ -318,24 +311,20 @@ public class UserViewController implements Initializable {
                         assert artistAux != null;
 
                         lblSA1.setText( artistAux.getName() );
-                        System.out.println( artistAux.getPhoto().getUrl() );
                         displayImageArtists( artistAux , imageSA1 );
                         break;
                     case 1:
                         lblSA2.setText( artistAux.getName() );
-                        System.out.println( artistAux.getPhoto().getUrl() );
                         displayImageArtists( artistAux , imageSA2 );
                         break;
 
                     case 2:
                         lblSA3.setText( artistAux.getName() );
-                        System.out.println( artistAux.getPhoto().getUrl() );
                         displayImageArtists( artistAux , imageSA3 );
                         break;
 
                     case 3:
                         lblSA4.setText( artistAux.getName() );
-                        System.out.println( artistAux.getPhoto().getUrl() );
                         displayImageArtists( artistAux , imageSA4 );
                         break;
 
@@ -348,7 +337,7 @@ public class UserViewController implements Initializable {
 
         try {
             // Crear el Image y el ImageView
-            Image image = song.getCover();
+            Image image = new Image( song.getCover());
             imageView.setImage( image );
             imageView.setFitWidth(183 );
             imageView.setFitHeight( 160 );
@@ -366,7 +355,7 @@ public class UserViewController implements Initializable {
 
         try {
             // Crear el Image y el ImageView
-            Image image = artist.getPhoto();
+            Image image = new Image( artist.getPhoto());
             imageView.setImage( image );
             imageView.setFitWidth(190 );
             imageView.setFitHeight( 170 );
@@ -385,6 +374,9 @@ public class UserViewController implements Initializable {
     public List<Song> getSongs(){
         return userController.mfm.getSongList();
     }
+    public List<Song> getFavoritesSongs(){
+        return user.getSongToList();
+    }
     public List<Artist> getArtists(){
         return userController.mfm.getListArtist();
     }
@@ -395,6 +387,7 @@ public class UserViewController implements Initializable {
         anchorLibrary.setVisible( true );
         anchorSearch.setVisible( false );
         anchorHome.setVisible( false );
+        refreshTableViewFavorites();
 
     }
 
@@ -555,8 +548,12 @@ public class UserViewController implements Initializable {
         this.columnArtistSearch.setCellValueFactory(new PropertyValueFactory<>("artist"));
         this.columnNameSearch.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.columnTimeSearch.setCellValueFactory(new PropertyValueFactory<>("duration"));
-        refreshTableViewSearch();
 
+        this.columnImage.setCellValueFactory(new PropertyValueFactory<>("cover"));
+        this.columnNameArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
+        this.columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        this.columnTime.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        refreshTableViewSearch();
 
     }
 
@@ -814,22 +811,42 @@ public class UserViewController implements Initializable {
             }
         });
 
-        colummImageSearch.setCellFactory(column -> new TableCell<Song, Image>() {
+        colummImageSearch.setCellFactory(column -> new TableCell<Song, String>() {
             private final ImageView imageView = new ImageView();
 
             @Override
-            protected void updateItem(Image image, boolean empty) {
-                super.updateItem(image, empty);
-                if (empty || image == null) {
+            protected void updateItem(String url, boolean empty) {
+                super.updateItem(url, empty);
+                if (empty || url == null) {
                     setGraphic(null);
                 } else {
-                    imageView.setImage(image);
+
+                    imageView.setImage(new Image( url ));
                     imageView.setFitHeight(50); // Ajusta el tamaño de la imagen según sea necesario
                     imageView.setFitWidth(50);  // Ajusta el tamaño de la imagen según sea necesario
                     setGraphic(imageView);
                 }
             }
         });
+        columnImage.setCellFactory( column -> new TableCell<Song, String>() {
+
+            private final ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(String url , boolean empty) {
+                super.updateItem( url , empty );
+                if ( empty || url == null ) {
+                    setGraphic( null );
+                } else {
+
+                    imageView.setImage( new Image( url ) );
+                    imageView.setFitHeight( 50 ); // Ajusta el tamaño de la imagen según sea necesario
+                    imageView.setFitWidth( 50 );  // Ajusta el tamaño de la imagen según sea necesario
+                    setGraphic( imageView );
+                }
+            }
+
+        } );
 
 
     }
@@ -884,11 +901,21 @@ public class UserViewController implements Initializable {
         listSongs.addAll( getSongs());
         return listSongs;
     }
+    private ObservableList<Song> getSongsFavorites() {
+        listFavoritesSongs.addAll(getFavoritesSongs() );
+        return listFavoritesSongs;
+    }
 
     void refreshTableViewSearch() {
         listSongs.clear();
         tableViewSearch.getItems().clear();
         tableViewSearch.setItems( getSongsObservable() );
+
+    }
+    void refreshTableViewFavorites() {
+        listFavoritesSongs.clear();
+        tableViewLikedSongs.getItems().clear();
+        tableViewLikedSongs.setItems( getSongsFavorites() );
 
     }
 

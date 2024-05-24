@@ -29,7 +29,7 @@ public class StorifyTest {
         Gender gender = Gender.Reggaeton;
         URL link = new URL("https://www.youtube.com/watch?v=yTAh5-e2dRY&pp=ygUIdG9kbyBsaXQ%3D");
         Artist artist = newArtist();
-        return new Song(code, name, cover, year, duration, gender, link, artist);
+        return new Song(code, name, new File(rutaCover).toURI().toString(), year, duration, gender, link, artist);
     }
 
     private Artist newArtist(){
@@ -38,7 +38,7 @@ public class StorifyTest {
         String nationality= "Puerto Rico";
         Image image = new Image( "file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/eladio.jpg" );
         boolean isAlone= true;
-        return new Artist(code,name,nationality,image,isAlone);
+        return new Artist(code,name,nationality,"file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/eladio.jpg",isAlone);
     }
     //-------------Metodos de prueba(test)------------------------
 

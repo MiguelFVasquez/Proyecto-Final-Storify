@@ -1,7 +1,7 @@
-ummmaalaml@@Tu manta@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/MIilo-111-Cover.png@@2023@@3@@Pop@@https://youtu.be/p840nrvFBjg?si=LcKqbl5hF14IXdHA@@Milo j
-lo riEoirr@@El malo@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/Eladio_Carrión_-_Sol_María.jpg@@2024@@4@@Reggaeton@@https://youtu.be/pDJoAB9kpzY?si=IdPjccx94TxS4pPm@@Eladio Carrion
- ijjnlnMob@@Una bala@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/UnaBalaCover.jpg@@2023@@186@@Pop@@https://youtu.be/-KK0gXX36J0?si=00GB6bc7taCW5AwP@@Milo j
-gMljMoo o1@@Dom1ngo@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/Dom1ngoCover.png@@2023@@188@@Pop@@https://youtu.be/WM8Scz4u4eQ?si=IKKVm-_bgtWzyAeI@@Milo j
-ljcnRMoiRi@@Rincón@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/RinconCover.jpg@@2023@@167@@Pop@@https://youtu.be/Qip3xXCTzh4?si=5k7v4cHofTqO04_O@@Milo j
-irFMu utoj@@Fruto@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/FrutoMiloCover.jpg@@2023@@132@@Pop@@https://youtu.be/Hi2mv_55hR4?si=n7HSapB8K9STt7eq@@Milo j
-yye c eW t@@Welcome to the black parade@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/chr.jpg@@2009@@314@@Rock@@https://youtu.be/RRKJiM9Njr8?si=94YU11xDo5lm-zUn@@My chemical romance
+ummmaalaml@@Tu manta@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/MIilo-111-Cover.png@@2023@@3@@Pop@@https://youtu.be/p840nrvFBjg?si=LcKqbl5hF14IXdHA@@Milo
+lo riEoirr@@El malo@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/Eladio_Carrión_-_Sol_María.jpg@@2024@@4@@Reggaeton@@https://youtu.be/pDJoAB9kpzY?si=IdPjccx94TxS4pPm@@Milo
+ ijjnlnMob@@Una bala@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/UnaBalaCover.jpg@@2023@@186@@Pop@@https://youtu.be/-KK0gXX36J0?si=00GB6bc7taCW5AwP@@Milo
+gMljMoo o1@@Dom1ngo@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/Dom1ngoCover.png@@2023@@188@@Pop@@https://youtu.be/WM8Scz4u4eQ?si=IKKVm-_bgtWzyAeI@@Milo
+ljcnRMoiRi@@Rincón@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/RinconCover.jpg@@2023@@167@@Pop@@https://youtu.be/Qip3xXCTzh4?si=5k7v4cHofTqO04_O@@Milo
+irFMu utoj@@Fruto@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/FrutoMiloCover.jpg@@2023@@132@@Pop@@https://youtu.be/Hi2mv_55hR4?si=n7HSapB8K9STt7eq@@Milo
+yye c eW t@@Welcome to the black parade@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/chr.jpg@@2009@@314@@Rock@@https://youtu.be/RRKJiM9Njr8?si=94YU11xDo5lm-zUn@@Milo

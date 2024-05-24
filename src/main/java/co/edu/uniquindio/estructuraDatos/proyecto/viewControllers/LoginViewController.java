@@ -143,7 +143,6 @@ public class LoginViewController implements Initializable {
                         Stage stage = new Stage();
                         stage.setScene(new Scene(anchorPane, 1365, 715));
                         User user = loginController.mfm.getUser( txtName.getText() );
-
                         controller.setUser( user );
                         controller.init(stage);
                         controller.setAnchorPane(anchorPane);
@@ -152,6 +151,7 @@ public class LoginViewController implements Initializable {
                         stage.initStyle(StageStyle.TRANSPARENT);
                         stage.centerOnScreen();
                         controller.show();
+                        controller.refreshTableViewFavorites();
                         this.stage.close();
                     }
                 }else {

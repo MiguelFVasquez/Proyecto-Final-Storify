@@ -1,7 +1,6 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.persistence;
 
 import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.BinaryTree;
-import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList;
 import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList;
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.ModelFactoryController;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
@@ -10,7 +9,6 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import co.edu.uniquindio.estructuraDatos.proyecto.util.UtilFile;
-import co.edu.uniquindio.estructuraDatos.proyecto.utilities.FileUtil;
 import javafx.scene.image.Image;
 
 import java.io.*;
@@ -22,6 +20,7 @@ public class Persistence {
     public static final String ROUTE_USER_FILE = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Users.txt";
     public static final String ROUTE_USER_FILE2 = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Users2.txt";
     public static final String ROUTE_ARTIST_FILE = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Artist.txt";
+    public static final String ROUTE_ARTIST_FILE2 = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Artists2.txt";
     public static final String ROUTE_SONGS_FILE = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Songs.txt";
     public static final String ROUTE_MODEL_STORIFY = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Storify.xml";
 
@@ -29,13 +28,18 @@ public class Persistence {
     public static void cargarDatosArchivos(Storify storify) throws IOException {
         // Cargar datos de usuarios
         HashMap<String, User> usuariosCargados = loadUsers2();
+//        for (Map.Entry<String, User> entry : usuariosCargados.entrySet()) {
+//            User user = entry.getValue();
+//            System.out.println(user.getAuxPersistence());
+//            user.getSongListCircular().toCircular( user.getAuxPersistence() );
+//        }
         if (!usuariosCargados.isEmpty()) {
             // Agregar usuarios al sistema de la casa de subasta
             storify.getUsersMap().putAll(usuariosCargados);
         }
 
          //Cargar datos de artistas
-        BinaryTree<Artist> artistasCargados = loadArtist();
+        BinaryTree<Artist> artistasCargados = loadArtistS2();
         if (artistasCargados != null /*&& artistasCargados.size() > 0*/) {
             // Agregar artistas al sistema de la casa de subasta
             storify.setArtistTree(artistasCargados);
@@ -59,7 +63,7 @@ public class Persistence {
             content.append(user.getUserName()).append("@@");
             content.append(user.getPassword()).append("@@");
             content.append(user.getEmail()).append("@@");
-            content.append(user.getSongList()).append("\n");
+            content.append(user.getSongToList()).append("\n");
         }
         UtilFile.guardarArchivo(ROUTE_USER_FILE, content.toString(), false);
     }
@@ -92,16 +96,17 @@ public class Persistence {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ROUTE_USER_FILE2))) {
             outputStream.writeObject(usersMap);
         } catch (IOException e) {
-            System.err.println("Error al serializar la lista de ventas: " + e.getMessage());
+            System.err.println("Error al serializar la lista de usuarios: " + e.getMessage());
         }
     }
+
     public static HashMap<String, User> loadUsers2() {
         HashMap<String, User> aux= new HashMap<>();
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ROUTE_USER_FILE2))) {
             aux = (HashMap<String, User>) inputStream.readObject();
-            System.out.println("Lista de ventas deserializada correctamente desde el archivo: " + ROUTE_USER_FILE2);
+            System.out.println(" Lista de users deserializada correctamente desde el archivo: " + ROUTE_USER_FILE2);
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Error al deserializar la lista de ventas desde el archivo: " + e.getMessage());
+            System.err.println("Error al deserializar la lista de users desde el archivo: " + e.getMessage());
         }
         return aux;
     }
@@ -116,12 +121,13 @@ public class Persistence {
             // Construir la línea con la información de la canción
             contenido.append(cancion.getCode()).append("@@")
                     .append(cancion.getName()).append("@@")
-                    .append(cancion.getCover().getUrl()).append("@@")  // Ajusta la representación según sea necesario
+                    .append(cancion.getCover()).append("@@")  // Ajusta la representación según sea necesario
                     .append(cancion.getYear()).append("@@")
                     .append(cancion.getDuration()).append("@@")
                     .append(cancion.getGender()).append("@@")
                     .append(cancion.getLink()).append("@@")
-                    .append(cancion.getArtist().getName()).append("\n");  // Utiliza el código del artista
+                    //.append(cancion.getArtist().getName()).append("\n");  // Utiliza el código del artista
+                    .append("Milo").append("\n");  // Utiliza el código del artista
 
         }
         // Guardar el contenido en el archivo usando la función guardarArchivo
@@ -142,7 +148,7 @@ public class Persistence {
                 Song cancion = new Song();
                 cancion.setCode(partes[0]);  // code
                 cancion.setName(partes[1]);  // name
-                cancion.setCover(cargarImagen(partes[2]));  // cover (debes adaptarlo para manejar la clase Image)
+                cancion.setCover((partes[2]));  // cover (debes adaptarlo para manejar la clase Image)
                 cancion.setYear(partes[3]);  // year
                 cancion.setDuration(partes[4]);  // duration
                 cancion.setGender(Gender.valueOf(partes[5]));  // gender
@@ -188,13 +194,19 @@ public class Persistence {
             contenido.append(artista.getCode()).append("@@")
                     .append(artista.getName()).append("@@")
                     .append(artista.getNationality()).append("@@")
-                    .append(artista.getPhoto().getUrl()).append("@@")
+                    .append(artista.getPhoto()).append("@@")
                     .append(artista.getIsAlone()).append("@@")
                     .append(artista.getSongList()).append("\n");
         }
 
         // Guardar el contenido en el archivo usando la función guardarArchivo
         UtilFile.guardarArchivo(ROUTE_ARTIST_FILE, contenido.toString(), false);
+    } public static void saveArtist2(BinaryTree<Artist> arbolArtistas) throws IOException {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ROUTE_ARTIST_FILE2))) {
+            outputStream.writeObject(arbolArtistas);
+        } catch (IOException e) {
+            System.err.println("Error al serializar la lista de artistas: " + e.getMessage());
+        }
     }
     //Metodo que carga los artistas desde el archivo
     public static BinaryTree<Artist> loadArtist() throws IOException {
@@ -212,7 +224,7 @@ public class Persistence {
                 artista.setCode(partes[0]);  // code
                 artista.setName(partes[1]);  // name
                 artista.setNationality(partes[2]);  // nationality
-                artista.setPhoto(cargarImagen( partes[3] ));
+                artista.setPhoto(partes[3]);
                 artista.setAlone(Boolean.parseBoolean(partes[4]));  // isAlone
                 artista.setSongList(new DoublyLinkedList<>());
                 // Agregar el artista al BinaryTree
@@ -221,6 +233,16 @@ public class Persistence {
         }
 
         return arbolArtistas;
+    }
+    public static BinaryTree<Artist> loadArtistS2() throws IOException {
+        BinaryTree<Artist> aux = new BinaryTree<>();
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ROUTE_ARTIST_FILE2))) {
+            aux = (BinaryTree<Artist>) inputStream.readObject();
+            System.out.println(" Lista de artistas deserializada correctamente desde el archivo: " + ROUTE_ARTIST_FILE2);
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error al deserializar la lista de artistas desde el archivo: " + e.getMessage());
+        }
+        return aux;
     }
 
     //----------------------------------STORIFY XML-------------------------------------

@@ -147,7 +147,7 @@ public class ModelFactoryController {
     public Artist getArtist(String name){
         return storify.getArtist(name);
     }
-    public boolean addArtist(String code, String name, String nationality, Image image , boolean isAGroup) throws ArtistException {
+    public boolean addArtist(String code, String name, String nationality, String image , boolean isAGroup) throws ArtistException {
         Artist newArtist= new Artist(code,name,nationality,image,isAGroup);
         return storify.addArtist(newArtist);
     }
@@ -171,7 +171,7 @@ public class ModelFactoryController {
         return storify.getSongByName(code);
     }
 
-    public boolean addSong(String code, String name, Image cover, String year, String duration, Gender gender, URL link, Artist artist) throws SongException {
+    public boolean addSong(String code, String name, String cover, String year, String duration, Gender gender, URL link, Artist artist) throws SongException {
         Song newSong= new Song(code, name, cover, year, duration,gender,link,artist);
         return storify.addSong(newSong);
     }
@@ -183,6 +183,7 @@ public class ModelFactoryController {
             Persistence.saveUsers2( getStorify().getUsersMap() );
             Persistence.saveUsers(getStorify().getUsersMap());
             Persistence.saveArtist(getStorify().getArtistTree());
+            Persistence.saveArtist2( getStorify().getArtistTree() );
             Persistence.saveSongs(getStorify().getSongList());
         } catch (IOException e) {
             throw new RuntimeException(e);

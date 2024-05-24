@@ -1,8 +1,9 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.DataStructure;
 
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 
-class Pila<T> {
+class Pila<T> implements Serializable {
     private Node<T> cima;
 
     public Pila() {

@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Song implements Serializable {
     private String code;
     private String name;
-    private Image cover; //Caratula
+    private String cover; //Caratula
     private String year;
     private String duration;
     private Gender gender;
@@ -21,7 +21,7 @@ public class Song implements Serializable {
     public Song() {
     }
 
-    public Song(String code, String name, Image cover, String year, String duration, Gender gender, URL link, Artist artist) {
+    public Song(String code, String name, String cover, String year, String duration, Gender gender, URL link, Artist artist) {
         this.code = code;
         this.name = name;
         this.cover = cover;
@@ -32,7 +32,7 @@ public class Song implements Serializable {
         this.artist = artist;
     }
 
-    public Song(String code, String name, Image cover, String year, String duration, Gender gender, URL link) {
+    public Song(String code, String name, String cover, String year, String duration, Gender gender, URL link) {
         this.code = code;
         this.name = name;
         this.cover = cover;
@@ -59,11 +59,11 @@ public class Song implements Serializable {
         this.name = name;
     }
 
-    public Image getCover() {
+    public String getCover() {
         return cover;
     }
 
-    public void setCover(Image cover) {
+    public void setCover(String cover) {
         this.cover = cover;
     }
 

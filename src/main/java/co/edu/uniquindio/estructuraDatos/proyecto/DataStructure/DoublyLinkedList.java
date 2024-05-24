@@ -1,11 +1,12 @@
 package co.edu.uniquindio.estructuraDatos.proyecto.DataStructure;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class DoublyLinkedList<T> implements Iterable<T> {
+public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
     private Node<T> first;
     private Node<T> last;
     private int size;

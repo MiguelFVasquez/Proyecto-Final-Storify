@@ -13,14 +13,14 @@ public class Artist implements Serializable, Comparable<Artist> {
     private String code;
     private String name;
     private String nationality;
-    private Image photo;
+    private String photo;
     private Boolean isAlone;
     private DoublyLinkedList<Song> songList;
 
     public Artist() {
     }
 
-    public Artist(String code, String name, String nationality, Image photo, Boolean isAlone) {
+    public Artist(String code, String name, String nationality, String photo, Boolean isAlone) {
         this.code = code;
         this.name = name;
         this.nationality = nationality;
@@ -29,11 +29,11 @@ public class Artist implements Serializable, Comparable<Artist> {
         this.songList = new DoublyLinkedList<>();
     }
 
-    public Image getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Image photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 

@@ -89,6 +89,7 @@ public class OptionsViewController {
         if(!isFavorite){
             optionsController.mfm.addSongToUserList(user.getUserName(), this.songSelected);
             showTooltip( "Sond added to your favorites", stage );
+            optionsController.mfm.saveDataTest();
             isFavorite= true;
             song();
 
@@ -97,6 +98,7 @@ public class OptionsViewController {
             optionsController.mfm.removeSongFromUserList( user.getUserName(), this.songSelected);
             showTooltip( "Sond removed from your's favorites", stage );
             isFavorite= false;
+            optionsController.mfm.saveDataTest();
             song();
 
         }
@@ -167,8 +169,10 @@ public class OptionsViewController {
     public void song(){
         if(isFavorite){
             btnLike.setText( "Unlike" );
+
         }else{
             btnLike.setText( "Like" );
+
         }
     }
 

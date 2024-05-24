@@ -6,6 +6,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /*Usuario se conoce su username (único), contraseña, email, además el usuario tiene una
@@ -17,6 +18,8 @@ public class User implements Serializable {
     private String password;
     private String email;
     private CircularLinkedList<Song> songList;
+
+
 
     public User() {
     }
@@ -51,6 +54,10 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public List<Song> getSongToList() {
+        return songList.toList();
+    }
+
     public CircularLinkedList<Song> getSongList() {
         return songList;
     }
@@ -63,6 +70,8 @@ public class User implements Serializable {
             for (Song songAux: songList) {
                 if (songAux.verifyCode(code)){
                     flag=true;
+
+
                     break;
                 }
             }
@@ -100,6 +109,7 @@ public class User implements Serializable {
         }else {
             flag=true;
             songList.delete(songDelete);
+
         }
         return flag;
     }

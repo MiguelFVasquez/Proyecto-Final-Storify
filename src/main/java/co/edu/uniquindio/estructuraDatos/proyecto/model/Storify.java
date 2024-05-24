@@ -437,7 +437,7 @@ public class Storify implements IStorify, Serializable {
         boolean updated = false;
         String code = songUpdate.getCode();//Este no podra ser cambiado ya que es el id de la canción
         String name = songUpdate.getName();
-        Image newCover = songUpdate.getCover();
+        String newCover = songUpdate.getCover();
         String newYear = songUpdate.getYear();
         String newDuration = songUpdate.getDuration();
         Gender newGender = songUpdate.getGender();

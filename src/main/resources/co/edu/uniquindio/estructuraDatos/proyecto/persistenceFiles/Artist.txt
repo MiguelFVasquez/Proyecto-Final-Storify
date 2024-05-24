@@ -1,3 +1,1 @@
- ar iiPlCr@@Eladio Carrion@@Pr@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/eladio.jpg@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@279a0c92
-lMran AnMe@@Milo j@@Argentina@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/milito.jpg@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@59dd8d51
-aoUidacycm@@My chemical romance@@Estados Unidos@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/chr.jpg@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@5c1fbf02
+loAongnntg@@Milo J@@Argentino@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/HOlaaaa.png@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@8f8aca6

@@ -184,7 +184,7 @@ public class AdminViewController implements Initializable {
         return false;
     }
 
-    private boolean createArtist(String code, String name, String nationality, Image image , boolean isAGroup){
+    private boolean createArtist(String code, String name, String nationality, String image , boolean isAGroup){
         try {
             if (adminController.mfm.addArtist(code,name,nationality, image, isAGroup)){
                 showMessage("Notification", "Artist registered","Artist was registered successfully", Alert.AlertType.INFORMATION);
@@ -198,6 +198,7 @@ public class AdminViewController implements Initializable {
     void showArtistsInfo() {
         txtNameArtist.setText(artistSelection.getName());
         txtNationalityArtist.setText(artistSelection.getNationality());
+        imageViewArtist.setImage( new Image( artistSelection.getPhoto() ) );
         anchorSongs.setVisible( false );
         anchorArtists.setVisible( true );
     }
@@ -222,7 +223,7 @@ public class AdminViewController implements Initializable {
         txtDurationSong.setText(songSelection.getDuration());
         comboBoxArtist.getSelectionModel().select(songSelection.getArtist().getName());
         comboBoxGender.getSelectionModel().select(songSelection.getGender());
-        imageViewSongPortait.setImage(songSelection.getCover());
+        imageViewSongPortait.setImage(new Image( songSelection.getCover() ));
 
     }
     private boolean verifySong(String name, Gender gender, String artist, String year, String duration, URL link, Image image){
@@ -266,7 +267,7 @@ public class AdminViewController implements Initializable {
         }
     }
 
-    private boolean createSong(String code, String name, Gender gender, String year, String duration, URL link, Image image, Artist artist) {
+    private boolean createSong(String code, String name, Gender gender, String year, String duration, URL link, String image, Artist artist) {
         try {
             if (adminController.mfm.addSong(code, name, image, year, duration, gender, link, artist)) {
                 showMessage("Notification", "Song registered", "Song was registered successfully on artist: '" + artist.getName() + "' list ", Alert.AlertType.INFORMATION);
@@ -287,7 +288,7 @@ public class AdminViewController implements Initializable {
         if(imageViewArtist.getImage()!=null){
             if (verifyArtist(nameArtist,nationalityArtist)){
                 String code= generateCode(nameArtist,nationalityArtist);
-                if (createArtist(code,nameArtist,nationalityArtist, imageViewArtist.getImage(), isAGroup)){
+                if (createArtist(code,nameArtist,nationalityArtist, imageViewArtist.getImage().getUrl(), isAGroup)){
                     namesArtist.add(nameArtist);
                     //adminController.mfm.saveResourceXML();
                     adminController.mfm.saveDataTest();
@@ -420,7 +421,7 @@ public class AdminViewController implements Initializable {
         if (verifySong(nameSong,gender,artistName,year,duration,link,cover)){
             String codeSong= generateCode(nameSong,artistName);
             Artist artist= adminController.mfm.getArtist(artistName);
-            if (!createSong(codeSong,nameSong,gender,year,duration,link,cover,artist)){
+            if (!createSong(codeSong,nameSong,gender,year,duration,link,cover.getUrl().toString(),artist)){
                 Song songAux= adminController.mfm.getSong(codeSong);
                 adminController.mfm.addSongToArtistList(artistName,songAux);
                 //adminController.mfm.saveResourceXML();
