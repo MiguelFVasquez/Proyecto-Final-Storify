@@ -18,17 +18,24 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import co.edu.uniquindio.estructuraDatos.proyecto.persistence.Persistence;
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.image.Image;
@@ -98,7 +105,6 @@ public class AdminViewController implements Initializable {
     private TextField txtNameArtist;
     @FXML
     private TextField txtNationalityArtist;
-
     @FXML
     private CheckBox checkGroupArtist;
     @FXML
@@ -111,11 +117,16 @@ public class AdminViewController implements Initializable {
     private TableColumn<Artist, String>tableColumnName;
     @FXML
     private TableColumn<Artist, String> tableColumnNationality;
-
     @FXML
     private Button btnAddArtist;
     @FXML
+    private Button btnEditArtist;
+    @FXML
     private Button btnCleanUpArtist;
+    @FXML
+    private Button btnConfirmChangesArtist;
+    @FXML
+    private Button btnCancelChanges;
 
     //------------Variables auxiliares---------------
     private Stage stage;
@@ -152,6 +163,48 @@ public class AdminViewController implements Initializable {
         return code.toString();
     }
 
+    private void showPopUp(String s , Stage stage) {
+        // Crear el contenido del "Tooltip"
+        Popup popup = new Popup();
+
+        // Crear el contenido del Popup
+        Text text = new Text(s);
+        StackPane content = new StackPane(text);
+        content.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);" +
+                "    -fx-padding: 10px;" +
+                "    -fx-border-color: black;" +
+                "    -fx-border-radius: 5px;" +
+                "    -fx-background-radius: 5px;" +
+                "    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 0, 0);" +
+                "    -fx-text-fill: white;");
+        popup.getContent().add(content);
+        text.setFill( Color.WHITE);
+
+        // Obtener el centro del Stage
+        double centerX = stage.getX() + stage.getWidth() / 2;
+        double centerY = stage.getY() + stage.getHeight() / 2;
+
+        // Mostrar el Popup para calcular sus dimensiones
+        popup.show(stage);
+        // Ahora que el Popup está mostrado, podemos obtener su ancho y alto
+        double popupWidth = popup.getWidth();
+        double popupHeight = popup.getHeight();
+        // Ocultarlo nuevamente para reposicionarlo correctamente
+        popup.hide();
+
+        // Posicionar el Popup en el centro del Stage
+        double popupX = centerX - popupWidth / 2;
+        double popupY = centerY - popupHeight / 2;
+
+        // Mostrar el Popup en la posición calculada
+        popup.show(stage, popupX, popupY);
+
+        // Cerrar automáticamente el Popup después de 3 segundos
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(e -> popup.hide());
+        delay.play();
+    }
+
 
     //------------------------------Auxiliars artist's functions-----------------------------
     private void refreshTableViewArtist() throws IOException {
@@ -160,7 +213,7 @@ public class AdminViewController implements Initializable {
         tableViewArtists.setItems(getArtistsList());
     }
     private ObservableList<Artist> getArtistsList() throws IOException {
-        artistsList.addAll(Persistence.loadArtist().toList());
+        artistsList.addAll(adminController.mfm.getListArtist());
         return artistsList;
     }
     private ObservableList<String> getNamesArtist(){
@@ -169,7 +222,7 @@ public class AdminViewController implements Initializable {
     }
 
 
-    private boolean verifyArtist(String name, String nationality){
+    private boolean verifySpacesArtist(String name, String nationality){
         String notification="";
         if (name.isEmpty()){
             notification+="Type artist's name\n";
@@ -196,9 +249,7 @@ public class AdminViewController implements Initializable {
         return false;
     }
     void showArtistsInfo() {
-        txtNameArtist.setText(artistSelection.getName());
-        txtNationalityArtist.setText(artistSelection.getNationality());
-        imageViewArtist.setImage( new Image( artistSelection.getPhoto() ) );
+
         anchorSongs.setVisible( false );
         anchorArtists.setVisible( true );
     }
@@ -285,8 +336,8 @@ public class AdminViewController implements Initializable {
         String nameArtist= txtNameArtist.getText();
         String nationalityArtist= txtNationalityArtist.getText();
         boolean isAGroup= checkGroupArtist.isSelected();
-        if(imageViewArtist.getImage()!=null){
-            if (verifyArtist(nameArtist,nationalityArtist)){
+        if(verifySpacesArtist(nameArtist,nationalityArtist)){
+            if ( imageViewArtist.getImage()!=null){
                 String code= generateCode(nameArtist,nationalityArtist);
                 if (createArtist(code,nameArtist,nationalityArtist, imageViewArtist.getImage().getUrl(), isAGroup)){
                     namesArtist.add(nameArtist);
@@ -296,6 +347,8 @@ public class AdminViewController implements Initializable {
                     cleanUpArtist(event);
                     refreshTableViewArtist();
                 }
+            }else{
+                showMessage( "Notification" , "Invalid data", "Please select a photo", Alert.AlertType.INFORMATION );
             }
         }
 
@@ -303,11 +356,76 @@ public class AdminViewController implements Initializable {
 
     @FXML
     void cleanUpArtist(ActionEvent event) {
+        createArtistForm();
         txtNameArtist.clear();
         txtNationalityArtist.clear();
         checkGroupArtist.setSelected( false );
         imageViewArtist.setImage( null );
     }
+
+    @FXML
+    void editInfoArtists(ActionEvent event) {
+        txtNationalityArtist.setEditable( true );
+        checkGroupArtist.setDisable( false );
+        btnSelectPhotoArtist.setDisable(false );
+
+        btnAddArtist.setVisible( false );
+        btnCleanUpArtist.setVisible( false );
+        btnConfirmChangesArtist.setVisible( true );
+        btnCancelChanges.setVisible( true );
+
+        showPopUp( "Now you can edit the info of the artist on the fields at the top" , stage);
+    }
+    @FXML
+    void updateInfoArtist(ActionEvent event) throws ArtistException, IOException {
+        String name = txtNameArtist.getText();
+        String nacionality = txtNationalityArtist.getText();
+        boolean check = checkGroupArtist.isSelected();
+        String cover = imageViewArtist.getImage().getUrl();
+        if(verifySpacesArtist( name, nacionality )){
+            Artist artist = new Artist(generateCode(name, nacionality), name, nacionality, cover, check);
+            updateArtist( artist );
+            tableViewArtists.getSelectionModel().clearSelection();
+            cleanUpArtist( event );
+            refreshTableViewArtist();
+            adminController.mfm.saveDataTest();
+
+
+        }
+
+    }
+    void createArtistForm(){
+        txtNameArtist.setEditable( true );
+        txtNationalityArtist.setEditable( true );
+        checkGroupArtist.setDisable( false );
+        btnSelectPhotoArtist.setDisable(false );
+
+        tableViewArtists.getSelectionModel().clearSelection();
+        btnAddArtist.setVisible( true );
+        btnCleanUpArtist.setVisible( true );
+        btnConfirmChangesArtist.setVisible( false );
+        btnCancelChanges.setVisible( false );
+    }
+
+    private void updateArtist(Artist artist) throws ArtistException {
+
+        boolean flag = adminController.mfm.updateArtist( artist );
+        if(flag){
+                showMessage( "Notification", "Artist's information changed" ,
+                        "The infomation of" + artistSelection.getName()+" has been changed", Alert.AlertType.INFORMATION );
+        }else{
+            showMessage( "Notification", "Artist's  information not changed" ,
+                    "The infomation of" + artistSelection.getName()+" hasn't changed", Alert.AlertType.INFORMATION );
+        }
+
+    }
+
+    @FXML
+    void cancelInfoUpdate(ActionEvent event) {
+        createArtistForm();
+    }
+
+
 
 //------------------------------------------------SONGS----------------------------------------------
     @FXML
@@ -421,7 +539,7 @@ public class AdminViewController implements Initializable {
         if (verifySong(nameSong,gender,artistName,year,duration,link,cover)){
             String codeSong= generateCode(nameSong,artistName);
             Artist artist= adminController.mfm.getArtist(artistName);
-            if (!createSong(codeSong,nameSong,gender,year,duration,link,cover.getUrl().toString(),artist)){
+            if (!createSong(codeSong,nameSong,gender,year,duration,link, cover.getUrl() ,artist)){
                 Song songAux= adminController.mfm.getSong(codeSong);
                 adminController.mfm.addSongToArtistList(artistName,songAux);
                 //adminController.mfm.saveResourceXML();
@@ -513,6 +631,8 @@ public class AdminViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        cleanUpArtist( new ActionEvent() );
+        btnEditArtist.setDisable( true );
         this.adminController= new AdminController();
         System.out.printf("Lista canciones: "+ adminController.mfm.getSongList());
         this.tableColumnCode.setCellValueFactory(new PropertyValueFactory<>("code"));
@@ -523,9 +643,11 @@ public class AdminViewController implements Initializable {
         tableViewArtists.getSelectionModel().selectedItemProperty().addListener( (obs , oldSelection , newSelection) -> {
             if ( newSelection != null ) {
                 artistSelection = newSelection;
-                showArtistsInfo();
+                showArtistInfo();
+                btnEditArtist.setDisable( false );
             }else{
-                //btnEliminarProducto.setDisable( true );
+                createArtistForm();
+                btnEditArtist.setDisable( true );
             }
         });
         this.columnCodeSong.setCellValueFactory(new PropertyValueFactory<>("code"));
@@ -549,5 +671,16 @@ public class AdminViewController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+    void showArtistInfo(){
+        txtNameArtist.setEditable( false );
+        txtNationalityArtist.setEditable( false );
+        checkGroupArtist.setDisable( true );
+        btnSelectPhotoArtist.setDisable(true );
+        txtNameArtist.setText(artistSelection.getName());
+        txtNationalityArtist.setText(artistSelection.getNationality());
+        checkGroupArtist.setSelected( artistSelection.getIsAlone() );
+        imageViewArtist.setImage( new Image( artistSelection.getPhoto() ) );
+    }
+
 
 }

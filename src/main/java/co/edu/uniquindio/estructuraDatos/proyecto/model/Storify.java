@@ -320,6 +320,7 @@ public class Storify implements IStorify, Serializable {
         String newCode= artistUpdate.getCode();
         String newNationality= artistUpdate.getNationality();
         boolean newStatus= artistUpdate.getIsAlone();
+        String cover = artistUpdate.getPhoto();
         Artist artistAux= getArtist(name);
         if (artistAux==null){
             throw new ArtistException("El artista: '" + name+"' no ha sido encontrado");
@@ -329,6 +330,7 @@ public class Storify implements IStorify, Serializable {
             artistAux.setCode(newCode);
             artistAux.setNationality(newNationality);
             artistAux.setAlone(newStatus);
+            artistAux.setPhoto( cover );
         }
         return updated;
     }

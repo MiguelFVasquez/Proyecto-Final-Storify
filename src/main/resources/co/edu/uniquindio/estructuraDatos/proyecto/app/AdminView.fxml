@@ -13,6 +13,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -128,8 +129,8 @@
             <String fx:value="shadow" />
          </styleClass>
          <children>
-            <Button fx:id="btnAddArtist" layoutX="397.0" layoutY="247.0" mnemonicParsing="false" onAction="#addArtist" prefHeight="27.0" prefWidth="69.0" style="-fx-background-color: #a3c0f5; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Add" />
-            <Button fx:id="btnCleanUpArtist" layoutX="35.0" layoutY="247.0" mnemonicParsing="false" onAction="#cleanUpArtist" prefHeight="27.0" prefWidth="69.0" style="-fx-border-radius: 8;" styleClass="btnRed" text="Clean up" />
+            <Button fx:id="btnAddArtist" layoutX="397.0" layoutY="261.0" mnemonicParsing="false" onAction="#addArtist" prefHeight="27.0" prefWidth="69.0" style="-fx-background-color: #a3c0f5; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Add" />
+            <Button fx:id="btnCleanUpArtist" layoutX="36.0" layoutY="261.0" mnemonicParsing="false" onAction="#cleanUpArtist" prefHeight="27.0" prefWidth="69.0" style="-fx-border-radius: 8;" styleClass="btnRed" text="Clean up" />
             <Label layoutX="35.0" layoutY="14.0" text="Artists">
                <font>
                   <Font name="System Bold" size="70.0" />
@@ -157,7 +158,7 @@
                   <Font size="19.0" />
                </font>
             </CheckBox>
-            <TableView fx:id="tableViewArtists" layoutX="42.0" layoutY="331.0" prefHeight="305.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
+            <TableView fx:id="tableViewArtists" layoutX="35.0" layoutY="331.0" prefHeight="271.0" prefWidth="955.0" styleClass="table" stylesheets="@../styles/style.css">
               <columns>
                 <TableColumn fx:id="tableColumnCode" prefWidth="243.0" styleClass="table-row-cell" text="Code" />
                 <TableColumn fx:id="tableColumnName" minWidth="0.0" prefWidth="223.0" styleClass="table-row-cell" text="Name" />
@@ -166,9 +167,20 @@
               </columns>
             </TableView>
             <FontAwesomeIconView glyphName="USER" layoutX="759.0" layoutY="227.0" size="140" wrappingWidth="104.0" />
-            <ImageView fx:id="imageViewArtist" fitHeight="150.0" fitWidth="200.0" layoutX="710.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="795.0" layoutY="79.0" text="Photo" />
-            <Button fx:id="btnSelectPhotoArtist" layoutX="785.0" layoutY="252.0" mnemonicParsing="false" onAction="#selectPhotoArtist" styleClass="btnBlue" text="Select" />
+            <StackPane layoutX="711.0" layoutY="102.0" prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="imageViewArtist" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
+               </children>
+            </StackPane>
+            <Label layoutX="789.0" layoutY="74.0" text="Photo">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnSelectPhotoArtist" layoutX="786.0" layoutY="261.0" mnemonicParsing="false" onAction="#selectPhotoArtist" styleClass="btnBlue" text="Select" />
+            <Button fx:id="btnEditArtist" layoutX="36.0" layoutY="611.0" mnemonicParsing="false" onAction="#editInfoArtists" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #FFC300; -fx-background-radius: 5; -fx-border-color: black; -fx-border-radius: 5;" text="Edit" />
+            <Button fx:id="btnCancelChanges" layoutX="36.0" layoutY="261.0" mnemonicParsing="false" onAction="#cancelInfoUpdate" prefHeight="27.0" prefWidth="104.0" style="-fx-border-radius: 8;" styleClass="btnRed" text="Cancel changes" />
+            <Button fx:id="btnConfirmChangesArtist" layoutX="370.0" layoutY="261.0" mnemonicParsing="false" onAction="#updateInfoArtist" prefHeight="27.0" prefWidth="96.0" styleClass="btnGreen" text="Confirm" />
          </children>
       </AnchorPane>
       <Button fx:id="btnLogOut" alignment="CENTER" layoutX="-4.0" layoutY="656.0" mnemonicParsing="false" onAction="#logOut" prefHeight="57.0" prefWidth="245.0" style="-fx-background-color: TRANSPARENT;" text="Log out">
