@@ -8,6 +8,9 @@
 - Funcionamiento al presionar en caratulas de albumes 
 - Motor de búsqueda O Y y Artistas
 - Filtros en ventana library
+- Edita canción ADminView
+- Editar Artista en AdminView
+
 
 
 ### DOING
