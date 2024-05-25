@@ -462,6 +462,34 @@ public class Storify implements IStorify, Serializable {
         return updated;
     }
 
+    public boolean updateSongArtist(Song songUpdate, Artist artist) throws SongException {
+        boolean updated = false;
+        String code = songUpdate.getCode();//Este no podra ser cambiado ya que es el id de la canción
+        String name = songUpdate.getName();
+        String newCover = songUpdate.getCover();
+        String newYear = songUpdate.getYear();
+        String newDuration = songUpdate.getDuration();
+        Gender newGender = songUpdate.getGender();
+        URL newLink = songUpdate.getLink();
+        Artist newArtist = songUpdate.getArtist();
+
+        Song song;
+        for (int i = 0; i < artist.getSongList().getSize(); i++) {
+            Song songAux =artist.getSongList().get( i );
+            if(code.equals( songAux.getCode())){
+                updated=true;
+                songAux.setName(name);
+                songAux.setCover(newCover);
+                songAux.setYear(newYear);
+                songAux.setDuration(newDuration);
+                songAux.setGender(newGender);
+                songAux.setLink(newLink);
+                songAux.setArtist(newArtist);
+            }
+        }
+        return updated;
+    }
+
     //----------------------------METODOS DE BUSQUEDA------------------------------------
 
     /**

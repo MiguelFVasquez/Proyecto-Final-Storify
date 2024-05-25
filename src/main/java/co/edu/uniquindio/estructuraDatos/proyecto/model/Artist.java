@@ -6,6 +6,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import javafx.scene.image.Image;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,6 +126,8 @@ public class Artist implements Serializable, Comparable<Artist> {
         }
         return flag;
     }
+
+
 
     public List<Song> searchY(String artistName, String songName, Gender gender, String year){
         List<Song> songListA=new ArrayList<>();
