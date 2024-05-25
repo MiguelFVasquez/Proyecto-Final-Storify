@@ -1,4 +1,4 @@
-# WORKING ON PROJECT: Shuh3n
+# WORKING ON PROJECT: 
 ## ***TASKS**
 ### **TO DO**
 - Seleccionar una canción y añadirla a la lista de usuario
@@ -8,8 +8,7 @@
 - Funcionamiento al presionar en caratulas de albumes 
 - Motor de búsqueda O Y y Artistas
 - Filtros en ventana library
-- Edita canción ADminView
-- Editar Artista en AdminView
+
 
 
 
@@ -18,6 +17,8 @@
 - Validación de campos de Login
 - Funcionalidad de botones Tab register
 ### DONE
+- Edita canción ADminView
+- Editar Artista en AdminView
 - Corregir actualizacion de canciones en la home del user
 - Organizar eliminacion de datos de textfields **RescuePassView**
 - Funcionalidad de botones tab login

@@ -50,24 +50,5 @@
     </object>
    </void>
   </void>
-  <void property="usersMap">
-   <void method="put">
-    <string>Moly</string>
-    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.User">
-     <void property="email">
-      <string>asd</string>
-     </void>
-     <void property="password">
-      <string>11</string>
-     </void>
-     <void property="songList">
-      <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList"/>
-     </void>
-     <void property="userName">
-      <string>Moly</string>
-     </void>
-    </object>
-   </void>
-  </void>
  </object>
 </java>

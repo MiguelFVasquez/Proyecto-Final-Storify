@@ -393,6 +393,46 @@ public class LoginViewController implements Initializable {
                 }
             }
         });
+
+        txtNameRegister.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    txtPasswordRegister.requestFocus();
+                    txtPasswordRegister.selectEnd();
+                }
+            }
+        });
+        txtPasswordRegister.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    txtPasswordConfirRegister.requestFocus();
+                    txtPasswordConfirRegister.selectEnd();
+                }
+            }
+        });
+        txtPasswordConfirRegister.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                    txtEmail.requestFocus();
+                    txtEmail.selectEnd();
+                }
+            }
+        });
+        txtEmail.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+                   btnRegister.fire();
+                }
+            }
+        });
+
+
+
+
     }
 
     public void show() {
