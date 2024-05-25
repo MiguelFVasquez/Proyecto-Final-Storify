@@ -50,6 +50,8 @@ public class UserViewController implements Initializable {
     private AnchorPane anchorSearch;
     @FXML
     private AnchorPane anchorLibrary;
+    @FXML
+    private AnchorPane anchorPlayer;
 
     @FXML
     private StackPane stackFS1;
@@ -92,6 +94,10 @@ public class UserViewController implements Initializable {
     private ImageView imageSA3;
     @FXML
     private ImageView imageSA4;
+    @FXML
+    private ImageView imagePlayer;
+    @FXML
+    private ImageView imageBtnPlay;
 
     @FXML
     private Label lblFS1;
@@ -115,12 +121,15 @@ public class UserViewController implements Initializable {
     private Label lblSA3;
     @FXML
     private Label lblSA4;
-
     @FXML
     private Label labelTitle;
+    @FXML
+    private Label lblPlayer;
 
     @FXML
     private Button btnHome;
+    @FXML
+    private Button btnPlay;
 
     @FXML
     private Button btnLibrary;
@@ -186,6 +195,7 @@ public class UserViewController implements Initializable {
     private boolean isFilteredTime = true;
 
     private User user;
+    private boolean playing= false;
 
     public void setLoginViewController(LoginViewController loginViewController) {
         this.loginViewController = loginViewController;
@@ -505,6 +515,17 @@ public class UserViewController implements Initializable {
             }
         }
     }
+    @FXML
+    void playSong(ActionEvent event){
+        if(playing){
+            imageBtnPlay.setImage( new Image( "file:"+ "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/1.png" ) );
+            playing = false;
+        }else{
+            imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
+            playing = true;
+
+        }
+    }
 
 
     //------------------------------------INITIALIZATION-------------------------
@@ -513,6 +534,7 @@ public class UserViewController implements Initializable {
         this.loginViewController= new LoginViewController();
         this.userController= new UserController();
         anchorHome.setVisible( false );
+        anchorPlayer.setVisible( false );
         btnHome.fire();
         songsStack= new Stack<>();
         stateStack= new Stack<>();
@@ -737,6 +759,16 @@ public class UserViewController implements Initializable {
                 optionsViewController.show();
                 optionsViewController.song();
             }
+            if(event.getButton()== MouseButton.PRIMARY){
+                anchorPlayer.setVisible( true );
+                Song song = userController.mfm.getSongByName(lblFS1.getText());
+                lblPlayer.setText( song.getName() );
+
+                displayImageSongPlayer(song);
+                imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
+                playing = true;
+            }
+
         });
         stackFS2.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.SECONDARY) { // Verificar si el clic es con el botón derecho
@@ -754,6 +786,9 @@ public class UserViewController implements Initializable {
                 }
                 optionsViewController.show();
                 optionsViewController.song();
+            }
+            if(event.getButton()== MouseButton.PRIMARY){
+                displayInfoPlayer( lblFS2 );
             }
         });
         stackFS3.setOnMouseClicked(event -> {
@@ -773,6 +808,9 @@ public class UserViewController implements Initializable {
                 optionsViewController.show();
                 optionsViewController.song();
             }
+            if(event.getButton()== MouseButton.PRIMARY){
+                displayInfoPlayer( lblFS3 );
+            }
         });
         stackFS4.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.SECONDARY) { // Verificar si el clic es con el botón derecho
@@ -790,6 +828,8 @@ public class UserViewController implements Initializable {
                 }
                 optionsViewController.show();
                 optionsViewController.song();
+            }if(event.getButton()== MouseButton.PRIMARY){
+                displayInfoPlayer( lblFS4 );
             }
         });
         stackFS5.setOnMouseClicked(event -> {
@@ -808,6 +848,9 @@ public class UserViewController implements Initializable {
                 }
                 optionsViewController.show();
                 optionsViewController.song();
+            }
+            if(event.getButton()== MouseButton.PRIMARY){
+                displayInfoPlayer( lblFS5 );
             }
         });
 
@@ -849,6 +892,34 @@ public class UserViewController implements Initializable {
         } );
 
 
+    }
+
+    private void displayInfoPlayer(Label label){
+        anchorPlayer.setVisible( true );
+        Song song = userController.mfm.getSongByName(label.getText());
+        lblPlayer.setText( song.getName() );
+
+        displayImageSongPlayer(song);
+        imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
+        playing = true;
+    }
+
+    private void displayImageSongPlayer(Song song) {
+        try {
+            // Crear el Image y el ImageView
+            Image image = new Image( song.getCover());
+            imagePlayer.setImage( image );
+            imagePlayer.setFitWidth(125 );
+            imagePlayer.setFitHeight( 106 );
+//
+//            Rectangle clip = new Rectangle(imageView.getFitWidth(), imageView.getFitHeight());
+//            clip.setArcWidth(20); // Cambia este valor según el grado de redondeo que desees
+//            clip.setArcHeight(20);
+//            imageView.setClip( clip );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void animationScaleIn(StackPane stack){

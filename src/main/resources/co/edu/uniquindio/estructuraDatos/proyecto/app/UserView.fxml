@@ -258,5 +258,55 @@
             <FontAwesomeIconView fill="#00b2ff" glyphName="LIST" layoutX="1012.0" layoutY="63.0" size="20" />
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="anchorPlayer" layoutX="8.0" layoutY="358.0" prefHeight="214.0" prefWidth="198.0">
+         <children>
+            <AnchorPane layoutX="19.0" layoutY="100.0" prefHeight="125.0" prefWidth="150.0">
+               <styleClass>
+                  <String fx:value="white-bg" />
+                  <String fx:value="shadow" />
+               </styleClass>
+               <children>
+                  <StackPane layoutX="9.0" prefHeight="127.0" prefWidth="133.0">
+                     <children>
+                        <ImageView fx:id="imagePlayer" fitHeight="106.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" StackPane.alignment="BOTTOM_CENTER">
+                           <image>
+                              <Image url="@../images/portait.jpg" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblPlayer" text="Label" StackPane.alignment="TOP_CENTER">
+                           <StackPane.margin>
+                              <Insets top="2.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="4.0" layoutY="220.0" prefHeight="41.0" prefWidth="180.0" style="-fx-background-color: #00053D; -fx-border-color: fff; -fx-border-radius: 8;">
+               <styleClass>
+                  <String fx:value="white-bg" />
+                  <String fx:value="shadow" />
+               </styleClass>
+               <children>
+                  <ImageView fx:id="imageBtnPlay" fitHeight="40.0" fitWidth="35.0" layoutX="73.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/playerItems/1.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnPlay" layoutX="73.0" layoutY="6.0" mnemonicParsing="false" onAction="#playSong" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" />
+                  <ImageView accessibleRole="BUTTON" fitHeight="35.0" fitWidth="35.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/playerItems/5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView accessibleRole="BUTTON" fitHeight="40.0" fitWidth="35.0" layoutX="125.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/playerItems/4.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

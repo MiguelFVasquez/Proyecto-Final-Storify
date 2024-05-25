@@ -4,6 +4,52 @@
   <void property="nombre">
    <string>Shuhenfy</string>
   </void>
+  <void property="songList">
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+       <void property="code">
+        <string>JgrotgloM </string>
+       </void>
+       <void property="name">
+        <string>Milo J</string>
+       </void>
+       <void property="nationality">
+        <string>Argentino</string>
+       </void>
+       <void property="photo">
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/milito.jpg</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string>NCAiERRSAN</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/carenciasCordura.jpg</string>
+     </void>
+     <void property="duration">
+      <string>117</string>
+     </void>
+     <void property="gender">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
+       <string>Pop</string>
+      </object>
+     </void>
+     <void property="name">
+      <string>CARENCIAS DE CONDURA</string>
+     </void>
+     <void property="year">
+      <string>2023</string>
+     </void>
+    </object>
+   </void>
+  </void>
   <void property="usersMap">
    <void method="put">
     <string>Moly</string>
