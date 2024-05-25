@@ -1,1 +1,1 @@
-tMnnAeAlri@@Milo J@@Argentino@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/HOlaaaa.png@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@674afe99
+JgrotgloM @@Milo J@@Argentino@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/milito.jpg@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@3e001365

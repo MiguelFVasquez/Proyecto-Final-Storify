@@ -7,6 +7,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -99,6 +100,12 @@ public class AdminViewController implements Initializable {
     private Button btnSelectPhotoArtist;
     @FXML
     private Button btnAddSong;
+    @FXML
+    private Button btnCancelChangesSong;
+    @FXML
+    private Button btnConfirmChangesSong;
+    @FXML
+    private Button btnEditSong;
 
     //-----------Elementos del artista------
     @FXML
@@ -268,6 +275,14 @@ public class AdminViewController implements Initializable {
     }
 
     private void showSongInfo(){
+        txtNameSong.setEditable( false );
+        comboBoxGender.setDisable( true);
+        comboBoxArtist.setDisable( true);
+        txtYearSong.setEditable( false );
+        txtDurationSong.setEditable( false );
+        txtLinkSong.setEditable( false );
+        btnSelectCover.setDisable( true );
+
         txtNameSong.setText(songSelection.getName());
         txtLinkSong.setText(songSelection.getLink().toString());
         txtYearSong.setText(songSelection.getYear());
@@ -277,15 +292,15 @@ public class AdminViewController implements Initializable {
         imageViewSongPortait.setImage(new Image( songSelection.getCover() ));
 
     }
-    private boolean verifySong(String name, Gender gender, String artist, String year, String duration, URL link, Image image){
+    private boolean verifySong(String name, Gender gender, String artist, String year, String duration, String link, Image image){
         String notification="";
         if (name.isEmpty()){
             notification+= "Type song's name\n";
         }
-        if (gender.equals(null)){
+        if (gender == null){
             notification+= "Select song's gender\n";
         }
-        if (artist.equals(null)){
+        if (artist == null || artist.isEmpty() ){
             notification+= "Type song's artist\n";
         }
         if (year.isEmpty()){
@@ -294,7 +309,7 @@ public class AdminViewController implements Initializable {
         if (duration.isEmpty()){
             notification+="Type song's duration\n";
         }
-        if (link.equals(null)){
+        if (link == (null) || link.isEmpty()){
             notification+= "Type song's link\n";
         }
         if (image == null){
@@ -318,7 +333,7 @@ public class AdminViewController implements Initializable {
         }
     }
 
-    private boolean createSong(String code, String name, Gender gender, String year, String duration, URL link, String image, Artist artist) {
+    private void createSong(String code, String name, Gender gender, String year, String duration, URL link, String image, Artist artist) {
         try {
             if (adminController.mfm.addSong(code, name, image, year, duration, gender, link, artist)) {
                 showMessage("Notification", "Song registered", "Song was registered successfully on artist: '" + artist.getName() + "' list ", Alert.AlertType.INFORMATION);
@@ -326,7 +341,7 @@ public class AdminViewController implements Initializable {
         } catch (SongException Se) {
             showMessage("Notification", "Song not registered" ,Se.getMessage(), Alert.AlertType.INFORMATION);
         }
-        return false;
+
     }
 
 //--------------------------EVENTOS DE LOS BOTONES-----------------------------------------------
@@ -407,6 +422,23 @@ public class AdminViewController implements Initializable {
         btnCancelChanges.setVisible( false );
     }
 
+    void createSongForm(){
+        txtNameSong.setEditable( true );
+        comboBoxGender.setDisable( false );
+        comboBoxArtist.setDisable( false );
+        txtYearSong.setEditable( true );
+        txtDurationSong.setEditable( true );
+        txtLinkSong.setEditable( true );
+        btnSelectCover.setDisable( false );
+
+
+        tableViewSongs.getSelectionModel().clearSelection();
+        btnAddSong.setVisible( true );
+        btnCleanUpSong.setVisible( true );
+        btnConfirmChangesSong.setVisible( false );
+        btnCancelChangesSong.setVisible( false );
+    }
+
     private void updateArtist(Artist artist) throws ArtistException {
 
         boolean flag = adminController.mfm.updateArtist( artist );
@@ -424,6 +456,71 @@ public class AdminViewController implements Initializable {
     void cancelInfoUpdate(ActionEvent event) {
         createArtistForm();
     }
+    @FXML
+    void cancelInfoSongUpdate(ActionEvent event) {
+        cleanUpSong( event );
+    }
+    @FXML
+    void updateInfoSong(ActionEvent event) throws SongException {
+        String nameSong= txtNameSong.getText();
+        String year= txtYearSong.getText();
+        String duration= txtDurationSong.getText();
+        String artistName= comboBoxArtist.getSelectionModel().getSelectedItem();
+        Gender gender = comboBoxGender.getSelectionModel().getSelectedItem();
+        Image cover= imageViewSongPortait.getImage();
+        String links = txtLinkSong.getText();
+        if(verifySong( nameSong,gender,artistName,year,duration,links,cover )){
+            URL link= obtenerURL();
+            if(link!=null){
+                Artist artist= adminController.mfm.getArtist(artistName);
+                uptadeSong( songSelection.getCode() , nameSong , gender , year , duration , link , cover.getUrl() , artist );
+                Song songAux = adminController.mfm.getSong( songSelection.getCode() );
+                adminController.mfm.updateArtistSong( artistName , songAux );
+                //adminController.mfm.saveResourceXML();
+                adminController.mfm.saveDataTest();
+                cleanUpSong( event );
+                refreshTableViewSong();
+            }else{
+                showMessage( "Notification", "Invalid link",
+                    "Please enter a valid link", Alert.AlertType.INFORMATION );
+            }
+
+            }
+
+
+    }
+
+    private void uptadeSong(String code , String nameSong , Gender gender , String year , String duration , URL link , String url , Artist artist) throws SongException {
+        if(adminController.mfm.updateSong(code, nameSong, gender,year,duration,link, url, artist)){
+            showMessage( "Notification", "Info changed" , "The info of the song has been changed", Alert.AlertType.INFORMATION );
+
+        }else{
+            showMessage( "Notification", "Info no changed" , "The info of the song hasn't changed", Alert.AlertType.INFORMATION );
+        }
+    }
+
+    @FXML
+    void editInfoSong(ActionEvent event) {
+        txtNameSong.setEditable( true );
+        comboBoxGender.setDisable( false);
+        comboBoxArtist.setDisable( false);
+        txtYearSong.setEditable( true );
+        txtDurationSong.setEditable( true );
+        txtLinkSong.setEditable( true );
+        btnSelectCover.setDisable( false );
+
+
+        btnCleanUpSong.setVisible( false );
+        btnAddSong.setVisible( false );
+        btnConfirmChangesSong.setVisible( true );
+        btnCancelChangesSong.setVisible( true );
+
+        showPopUp( "Now you can edit the info of the song on the fields at the top" , stage);
+    }
+
+
+
+
 
 
 
@@ -532,34 +629,45 @@ public class AdminViewController implements Initializable {
         String year= txtYearSong.getText();
         String duration= txtDurationSong.getText();
         String artistName= comboBoxArtist.getSelectionModel().getSelectedItem();
-        Gender gender= comboBoxGender.getSelectionModel().getSelectedItem();
-        Image cover= imageViewSongPortait.getImage();
-        URL link= obtenerURL();
 
-        if (verifySong(nameSong,gender,artistName,year,duration,link,cover)){
-            String codeSong= generateCode(nameSong,artistName);
-            Artist artist= adminController.mfm.getArtist(artistName);
-            if (!createSong(codeSong,nameSong,gender,year,duration,link, cover.getUrl() ,artist)){
-                Song songAux= adminController.mfm.getSong(codeSong);
-                adminController.mfm.addSongToArtistList(artistName,songAux);
+        Gender gender = comboBoxGender.getValue();
+
+        System.out.println("asdasd");
+        Image cover= imageViewSongPortait.getImage();
+        String linkS = txtLinkSong.getText();
+        if (verifySong(nameSong,gender,artistName,year,duration,linkS,cover)){
+            URL link= obtenerURL();
+            if(link!=null){
+                String codeSong= generateCode(nameSong,artistName);
+                Artist artist= adminController.mfm.getArtist(artistName);
+                createSong( codeSong , nameSong , gender , year , duration , link , cover.getUrl() , artist );
+                Song songAux = adminController.mfm.getSong( codeSong );
+                adminController.mfm.addSongToArtistList( artistName , songAux );
                 //adminController.mfm.saveResourceXML();
                 adminController.mfm.saveDataTest();
-                System.out.printf("Lista de canciones: " + getSongsList());
+                System.out.printf( "Lista de canciones: " + getSongsList() );
                 cleanUpSong( event );
                 refreshTableViewSong();
+            }else{
+                showMessage( "Notification", "Invalid link",
+                        "Please enter a valid link", Alert.AlertType.INFORMATION );
             }
-        }
 
+        }
     }
+
+
 
     @FXML
     void cleanUpSong(ActionEvent event) {
+        createSongForm();
         txtNameSong.clear();
         txtLinkSong.clear();
         txtYearSong.clear();
         txtDurationSong.clear();
-        comboBoxArtist.getSelectionModel().select(null);
-        comboBoxGender.getSelectionModel().select(null);
+        comboBoxGender.setValue( null );
+        comboBoxArtist.setValue( null );
+
         Image image = new Image("file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/musica.png");
         imageViewSongPortait.setImage(image);
     }
@@ -631,9 +739,20 @@ public class AdminViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cleanUpArtist( new ActionEvent() );
-        btnEditArtist.setDisable( true );
         this.adminController= new AdminController();
+
+        comboBoxArtist.setItems(getNamesArtist());
+        comboBoxGender.getItems().addAll( Gender.values() );
+
+        cleanUpArtist( new ActionEvent() );
+        createSongForm();
+
+        btnEditArtist.setDisable( true );
+        btnEditSong.setDisable( true );
+
+
+
+
         System.out.printf("Lista canciones: "+ adminController.mfm.getSongList());
         this.tableColumnCode.setCellValueFactory(new PropertyValueFactory<>("code"));
         this.tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -654,17 +773,25 @@ public class AdminViewController implements Initializable {
         this.columnNameSong.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.columnYear.setCellValueFactory(new PropertyValueFactory<>("year"));
         this.columnArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
+
         tableViewSongs.getSelectionModel().selectedItemProperty().addListener( (obs , oldSelection , newSelection) -> {
             if ( newSelection != null ) {
                 songSelection = newSelection;
                 showSongInfo();
+                btnAddSong.setDisable( true );
+
+                btnEditSong.setDisable( false );
             }else{
-                //btnEliminarProducto.setDisable( true );
+                songSelection = null;
+                btnAddSong.setDisable( false );
+                createSongForm();
+                btnEditSong.setDisable( true );
+
             }
         });
         refreshTableViewSong();
-        comboBoxArtist.setItems(getNamesArtist());
-        comboBoxGender.getItems().setAll(Gender.values());
+
+
         try {
             refreshTableViewArtist();
         } catch (IOException e) {

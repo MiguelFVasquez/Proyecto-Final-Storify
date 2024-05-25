@@ -22,6 +22,7 @@ public class Persistence {
     public static final String ROUTE_ARTIST_FILE = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Artist.txt";
     public static final String ROUTE_ARTIST_FILE2 = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Artists2.txt";
     public static final String ROUTE_SONGS_FILE = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Songs.txt";
+    public static final String ROUTE_SONGS_FILE2 = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Songs2.txt";
     public static final String ROUTE_MODEL_STORIFY = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Storify.xml";
 
 
@@ -45,7 +46,7 @@ public class Persistence {
             storify.setArtistTree(artistasCargados);
         }
         //Cargar datos de canciones
-        List<Song> listaCanciones= loadSong();
+        List<Song> listaCanciones= loadSongs2();
         if (listaCanciones != null) {
             storify.setSongList(listaCanciones);
         }
@@ -134,6 +135,27 @@ public class Persistence {
         UtilFile.guardarArchivo(ROUTE_SONGS_FILE, contenido.toString(), false);
     }
 
+    public static void saveSongs2(List<Song> songList) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ROUTE_SONGS_FILE2))) {
+            outputStream.writeObject(songList);
+        } catch (IOException e) {
+            System.err.println("Error al serializar la lista de canciones: " + e.getMessage());
+        }
+    }
+
+    public static List<Song> loadSongs2() throws IOException {
+        List<Song> aux = new ArrayList<>();
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ROUTE_SONGS_FILE2))) {
+            aux = (List<Song>) inputStream.readObject();
+            System.out.println(" Lista de canciones deserializada correctamente desde el archivo: " + ROUTE_SONGS_FILE2);
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error al deserializar la lista de canciones desde el archivo: " + e.getMessage());
+        }
+        return aux;
+    }
+
+
+
     public static List<Song> loadSong() throws IOException {
         List<Song> songs = new ArrayList<>();
         List<String> content = UtilFile.leerArchivo(ROUTE_SONGS_FILE);
@@ -201,13 +223,20 @@ public class Persistence {
 
         // Guardar el contenido en el archivo usando la función guardarArchivo
         UtilFile.guardarArchivo(ROUTE_ARTIST_FILE, contenido.toString(), false);
-    } public static void saveArtist2(BinaryTree<Artist> arbolArtistas) throws IOException {
+    }
+
+
+    public static void saveArtist2(BinaryTree<Artist> arbolArtistas) throws IOException {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ROUTE_ARTIST_FILE2))) {
             outputStream.writeObject(arbolArtistas);
         } catch (IOException e) {
             System.err.println("Error al serializar la lista de artistas: " + e.getMessage());
         }
     }
+
+
+
+
     //Metodo que carga los artistas desde el archivo
     public static BinaryTree<Artist> loadArtist() throws IOException {
         BinaryTree<Artist> arbolArtistas = new BinaryTree<>();
@@ -234,6 +263,8 @@ public class Persistence {
 
         return arbolArtistas;
     }
+
+
     public static BinaryTree<Artist> loadArtistS2() throws IOException {
         BinaryTree<Artist> aux = new BinaryTree<>();
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ROUTE_ARTIST_FILE2))) {

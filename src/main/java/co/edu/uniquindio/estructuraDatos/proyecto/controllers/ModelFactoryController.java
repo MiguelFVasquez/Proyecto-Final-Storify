@@ -25,6 +25,7 @@ public class ModelFactoryController {
 
 
 
+
     private static class SingletonHolder {
         // El constructor de Singleton puede ser llamado desde aquí al ser protected
         private final static ModelFactoryController eINSTANCE;
@@ -160,6 +161,12 @@ public class ModelFactoryController {
     public boolean addSongToArtistList(String name, Song songAdd) throws ArtistException, SongException {
         return storify.addSongToArtistList(name,songAdd);
     }
+
+    public boolean updateArtistSong(String artistName , Song songAux) throws SongException {
+        return storify.updateSongArtist( songAux, getArtist( artistName ) );
+    }
+
+
         //------------------------Song's functions----------------------------------------
     public List<Song> getSongList(){
         return storify.getSongList();
@@ -176,6 +183,11 @@ public class ModelFactoryController {
         return storify.addSong(newSong);
     }
 
+    public boolean updateSong(String code , String nameSong , Gender gender , String year , String duration , URL link , String url , Artist artist) throws SongException {
+        Song updateSong = new Song(code, nameSong,url,year,duration,gender,link,artist);
+        return storify.updateSong( updateSong );
+    }
+
     //------------------------ Serialization functions --------------------------------------//
 
     public void saveDataTest(){
@@ -185,6 +197,7 @@ public class ModelFactoryController {
             Persistence.saveArtist(getStorify().getArtistTree());
             Persistence.saveArtist2( getStorify().getArtistTree() );
             Persistence.saveSongs(getStorify().getSongList());
+            Persistence.saveSongs2( getStorify().getSongList() );
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
