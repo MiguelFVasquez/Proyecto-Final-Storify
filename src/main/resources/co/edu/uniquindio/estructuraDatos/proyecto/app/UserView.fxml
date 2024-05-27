@@ -155,7 +155,6 @@
                   <Font name="Calibri Light Italic" size="34.0" />
                </font>
             </Label>
-            <Button fx:id="btnLike" layoutX="385.0" layoutY="534.0" mnemonicParsing="false" onAction="#addSongToUserList" prefHeight="18.0" prefWidth="115.0" style="-fx-background-color: #61C64C; -fx-cursor: hand;" text="Like" textFill="WHITE" />
             <Button fx:id="btnDeshacer" layoutX="909.0" layoutY="534.0" mnemonicParsing="false" onAction="#regresarAccion" style="-fx-background-color: #757171; -fx-cursor: hand;" text="Deshacer" textFill="WHITE" />
             <StackPane fx:id="stackA1" layoutX="43.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -213,51 +212,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorLibrary" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
-         <styleClass>
-            <String fx:value="white-bg" />
-            <String fx:value="shadow" />
-         </styleClass>
-         <children>
-            <Label layoutX="27.0" layoutY="20.0" text="Liked Songs">
-               <font>
-                  <Font name="Calibri Light" size="35.0" />
-               </font>
-               <graphic>
-                  <FontAwesomeIconView glyphName="HEART" size="30">
-                     <fill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="1.0" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.30000001192092896" blue="1.0" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </fill>
-                  </FontAwesomeIconView>
-               </graphic>
-            </Label>
-            <TableView fx:id="tableViewLikedSongs" layoutX="27.0" layoutY="77.0" prefHeight="473.0" prefWidth="1010.0">
-               <columns>
-                  <TableColumn fx:id="columnImage" prefWidth="60.0" />
-                  <TableColumn fx:id="columnName" minWidth="0.0" prefWidth="332.0" text="Name" />
-                  <TableColumn fx:id="columnNameArtist" prefWidth="341.0" text="Artist's name" />
-                  <TableColumn fx:id="columnTime" prefWidth="272.0" text="Duration" />
-               </columns>
-            </TableView>
-            <Button fx:id="btnArtist" layoutX="952.0" layoutY="41.0" mnemonicParsing="false" onAction="#showSongsByArtist" styleClass="btnBlue" text="Artists" />
-            <Button fx:id="btnTime" layoutX="844.0" layoutY="41.0" mnemonicParsing="false" onAction="#showSongsByTime" styleClass="btnBlue" text="Time" />
-            <Button fx:id="btnName" layoutX="895.0" layoutY="41.0" mnemonicParsing="false" onAction="#showSongsByName" styleClass="btnBlue" text="Name" />
-            <FontAwesomeIconView fill="#00b2ff" glyphName="LIST" layoutX="1012.0" layoutY="63.0" size="20" />
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="anchorPlayer" layoutX="8.0" layoutY="358.0" prefHeight="214.0" prefWidth="198.0">
          <children>
             <AnchorPane layoutX="19.0" layoutY="100.0" prefHeight="125.0" prefWidth="150.0">
@@ -306,6 +260,53 @@
                   </ImageView>
                </children>
             </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorLibrary" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <Label layoutX="27.0" layoutY="20.0" text="Liked Songs">
+               <font>
+                  <Font name="Calibri Light" size="35.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView glyphName="HEART" size="30">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.30000001192092896" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIconView>
+               </graphic>
+            </Label>
+            <TableView fx:id="tableViewLikedSongs" layoutX="28.0" layoutY="78.0" prefHeight="443.0" prefWidth="1010.0">
+               <columns>
+                  <TableColumn fx:id="columnImage" prefWidth="60.0" />
+                  <TableColumn fx:id="columnName" minWidth="0.0" prefWidth="214.0" text="Name" />
+                  <TableColumn fx:id="columnNameArtist" prefWidth="327.0" text="Artist's name" />
+                  <TableColumn fx:id="columnTime" prefWidth="135.0" text="Duration" />
+                  <TableColumn fx:id="columnYear" prefWidth="272.0" text="Year" />
+               </columns>
+            </TableView>
+            <Button fx:id="btnArtist" layoutX="952.0" layoutY="41.0" mnemonicParsing="false" onAction="#showSongsByArtist" styleClass="btnBlue" text="Artists" />
+            <Button fx:id="btnTime" layoutX="844.0" layoutY="41.0" mnemonicParsing="false" onAction="#showSongsByTime" styleClass="btnBlue" text="Time" />
+            <Button fx:id="btnName" layoutX="895.0" layoutY="41.0" mnemonicParsing="false" onAction="#showSongsByName" styleClass="btnBlue" text="Name" />
+            <FontAwesomeIconView fill="#00b2ff" glyphName="LIST" layoutX="1012.0" layoutY="63.0" size="20" />
+            <Button fx:id="btnUnlike" layoutX="28.0" layoutY="533.0" mnemonicParsing="false" onAction="#removeFavoriteSongUser" styleClass="btnGreen" text="Unlike" />
          </children>
       </AnchorPane>
    </children>
