@@ -147,6 +147,8 @@ public class UserViewController implements Initializable {
     private Button btnArtist;
     @FXML
     private Button btnUnlike;
+    @FXML
+    private Button btnYear;
 
 
     @FXML
@@ -197,6 +199,8 @@ public class UserViewController implements Initializable {
     private boolean isFilteredArtist = true;
     private boolean isFilteredName = true;
     private boolean isFilteredTime = true;
+    private boolean isFilteredYear= true;
+
 
     private User user;
     private boolean playing= false;
@@ -423,6 +427,8 @@ public class UserViewController implements Initializable {
         if (isFilteredArtist) {
             isFilteredName= true;
             isFilteredTime = true;
+            isFilteredYear = true;
+
             btnName.setStyle("-fx-background-color: transparent;" +
                     "    -fx-text-fill: black;" +
                     "    -fx-border-color: #a3c0f5;");
@@ -433,12 +439,42 @@ public class UserViewController implements Initializable {
                     " -fx-background-color: #a3c0f5; " +
                     "-fx-text-fill: black;" +
                     "-fx-border-color: black;");
+            getSongsByArtist();
         } else {
             btnArtist.setStyle("-fx-background-color: transparent;" +
                     "    -fx-text-fill: black;" +
                     "    -fx-border-color: #a3c0f5;");
+            refreshTableViewFavorites();
         }
         isFilteredArtist = !isFilteredArtist;
+    }
+
+    @FXML
+    void showSongsByYear(ActionEvent event){
+        if (isFilteredYear) {
+            isFilteredName= true;
+            isFilteredTime = true;
+            isFilteredArtist = true;
+
+            btnYear.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnYear.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnYear.setStyle(
+                    " -fx-background-color: #a3c0f5; " +
+                            "-fx-text-fill: black;" +
+                            "-fx-border-color: black;");
+            getSongsByYear();
+
+        } else {
+            btnYear.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            refreshTableViewFavorites();
+        }
+        isFilteredYear = !isFilteredYear;
     }
 
     @FXML
@@ -446,6 +482,7 @@ public class UserViewController implements Initializable {
         if (isFilteredName) {
             isFilteredTime= true;
             isFilteredArtist = true;
+            isFilteredYear = true;
             btnTime.setStyle("-fx-background-color: transparent;" +
                     "    -fx-text-fill: black;" +
                     "    -fx-border-color: #a3c0f5;");
@@ -456,10 +493,13 @@ public class UserViewController implements Initializable {
                     " -fx-background-color: #a3c0f5; " +
                             "-fx-text-fill: black;" +
                             "-fx-border-color: black;");
+            getSongsByName();
+
         } else {
             btnName.setStyle("-fx-background-color: transparent;" +
                     "    -fx-text-fill: black;" +
                     "    -fx-border-color: #a3c0f5;");
+            refreshTableViewFavorites();
         }
         isFilteredName = !isFilteredName;
     }
@@ -469,6 +509,7 @@ public class UserViewController implements Initializable {
         if (isFilteredTime) {
             isFilteredName= true;
             isFilteredArtist = true;
+            isFilteredYear = true;
 
             btnName.setStyle("-fx-background-color: transparent;" +
                     "    -fx-text-fill: black;" +
@@ -480,13 +521,61 @@ public class UserViewController implements Initializable {
                     " -fx-background-color: #a3c0f5; " +
                             "-fx-text-fill: black;" +
                             "-fx-border-color: black;");
+            getSongsByTime();
         } else {
             btnTime.setStyle("-fx-background-color: transparent;" +
                     "    -fx-text-fill: black;" +
                     "    -fx-border-color: #a3c0f5;");
+            refreshTableViewFavorites();
         }
         isFilteredTime = !isFilteredTime;
     }
+
+    private void getSongsByName() {
+        List<Song> aux = getSongs();
+        aux.sort((song1, song2) -> song1.getName().compareToIgnoreCase(song2.getName()));
+        listSongs.clear();
+        listSongs.addAll( aux );
+        tableViewLikedSongs.getItems().clear();
+        tableViewLikedSongs.setItems( listSongs );
+    }
+
+    private void getSongsByYear(){
+        List<Song> aux = getSongs();
+        aux.sort((song1, song2) -> Integer.compare(Integer.parseInt(song2.getYear()), Integer.parseInt(song1.getYear())));
+        listSongs.clear();
+        listSongs.addAll( aux );
+        tableViewLikedSongs.getItems().clear();
+        tableViewLikedSongs.setItems( listSongs );
+    }
+    private void getSongsByTime(){
+        List<Song> aux = getSongs();
+        aux.sort((song1, song2) -> Integer.compare(Integer.parseInt(song2.getDuration()), Integer.parseInt(song1.getDuration())));
+        listSongs.clear();
+        listSongs.addAll( aux );
+        tableViewLikedSongs.getItems().clear();
+        tableViewLikedSongs.setItems( listSongs );
+    }
+
+    private void getSongsByArtist(){
+        List<Song> aux = getSongs();
+        aux.sort((song1, song2) -> {
+            int artistComparison = song1.getArtist().getName().compareToIgnoreCase( song2.getArtist().getName() );
+            if ( artistComparison != 0 ) {
+                return artistComparison; // Ordenar por nombre de artista
+            }else{
+                return song1.getName().compareToIgnoreCase(song2.getName()); // Si tienen el mismo artista, ordenar por nombre de canción
+            }
+        });
+        listSongs.clear();
+        listSongs.addAll( aux );
+        tableViewLikedSongs.getItems().clear();
+        tableViewLikedSongs.setItems( listSongs );
+    }
+
+
+
+
 //----------------------------Funcionalidades del usuario----------------------------------
 
 
@@ -594,6 +683,7 @@ public class UserViewController implements Initializable {
         this.columnNameArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
         this.columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.columnTime.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        this.columnYear.setCellValueFactory(new PropertyValueFactory<>("year"));
         refreshTableViewSearch();
 
     }

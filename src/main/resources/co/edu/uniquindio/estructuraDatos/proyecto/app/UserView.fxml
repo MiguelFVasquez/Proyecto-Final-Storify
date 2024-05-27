@@ -27,7 +27,7 @@
             <Image url="@../images/logo.jpg" />
          </image>
       </ImageView>
-      <VBox layoutY="252.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="214.0" prefWidth="204.0" style="-fx-spacing: 12;">
+      <VBox layoutX="5.0" layoutY="215.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="214.0" prefWidth="204.0" style="-fx-spacing: 12;">
          <children>
             <Button fx:id="btnHome" mnemonicParsing="false" onAction="#showHomeInfo" prefHeight="59.0" prefWidth="210.0" style="-fx-background-color: transparent;" text="Home" textAlignment="CENTER">
                <font>
@@ -307,6 +307,7 @@
             <Button fx:id="btnName" layoutX="895.0" layoutY="41.0" mnemonicParsing="false" onAction="#showSongsByName" styleClass="btnBlue" text="Name" />
             <FontAwesomeIconView fill="#00b2ff" glyphName="LIST" layoutX="1012.0" layoutY="63.0" size="20" />
             <Button fx:id="btnUnlike" layoutX="28.0" layoutY="533.0" mnemonicParsing="false" onAction="#removeFavoriteSongUser" styleClass="btnGreen" text="Unlike" />
+            <Button fx:id="btnYear" layoutX="793.0" layoutY="42.0" mnemonicParsing="false" onAction="#showSongsByYear" styleClass="btnBlue" text="Year" />
          </children>
       </AnchorPane>
    </children>

@@ -36,7 +36,7 @@
       <string>117</string>
      </void>
      <void property="gender">
-      <object class="java.lang.Enum" method="valueOf">
+      <object class="java.lang.Enum" id="Gender0" method="valueOf">
        <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
        <string>Pop</string>
       </object>
@@ -46,6 +46,91 @@
      </void>
      <void property="year">
       <string>2023</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+       <void property="code">
+        <string>AJrlnitnni</string>
+       </void>
+       <void property="name">
+        <string>Milo J</string>
+       </void>
+       <void property="nationality">
+        <string>Argentino</string>
+       </void>
+       <void property="photo">
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/milito.jpg</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string>nccJnJnniM</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/RinconCover.jpg</string>
+     </void>
+     <void property="duration">
+      <string>107</string>
+     </void>
+     <void property="gender">
+      <object idref="Gender0"/>
+     </void>
+     <void property="name">
+      <string>Rincón</string>
+     </void>
+     <void property="year">
+      <string>2023</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+       <void property="code">
+        <string>FnoeFdaski</string>
+       </void>
+       <void property="name">
+        <string>Forrest Frank</string>
+       </void>
+       <void property="nationality">
+        <string>Estadounidense</string>
+       </void>
+       <void property="photo">
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/forrestFrank.jpg</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string> syFrnKn  </string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/lowKeyCover.jpg</string>
+     </void>
+     <void property="duration">
+      <string>90</string>
+     </void>
+     <void property="gender">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
+       <string>Gospel</string>
+      </object>
+     </void>
+     <void property="name">
+      <string>Low Key</string>
+     </void>
+     <void property="year">
+      <string>2024</string>
      </void>
     </object>
    </void>
