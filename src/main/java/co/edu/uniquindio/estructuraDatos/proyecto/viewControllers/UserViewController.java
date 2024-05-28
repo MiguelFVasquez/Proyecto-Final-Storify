@@ -32,6 +32,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -212,6 +213,8 @@ public class UserViewController implements Initializable {
 
     private User user;
     private boolean playing= false;
+    private WebView webView;
+    private Song selectedSong;
 
     public void setLoginViewController(LoginViewController loginViewController) {
         this.loginViewController = loginViewController;
@@ -427,7 +430,14 @@ public class UserViewController implements Initializable {
     void logOut(ActionEvent event) {
         loginViewController.show();
         optionsViewController.close();
+        logout();
         this.stage.close();
+    }
+
+    private void logout() {
+        if (playing) {
+            playSongVideo(selectedSong.getName(), false); // Pausar el video antes de cerrar sesión
+        }
     }
 
     @FXML
@@ -605,13 +615,25 @@ public class UserViewController implements Initializable {
     }
     @FXML
     void playSong(ActionEvent event){
-        if(playing){
-            imageBtnPlay.setImage( new Image( "file:"+ "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/1.png" ) );
+        if (playing) {
+            imageBtnPlay.setImage(new Image("file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/1.png"));
+            playSongVideo(selectedSong.getName(),false); //Pause video
             playing = false;
-        }else{
-            imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
+        } else {
+            imageBtnPlay.setImage(new Image("file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png"));
+            playSongVideo(selectedSong.getName(),true);//Reanudar video
             playing = true;
+        }
+    }
 
+    private void playSongVideo(String songName, Boolean play) {
+        Song song = userController.mfm.getSongByName(songName); // Obtener la canción por su nombre
+        if (song != null) {
+            String videoUrl = song.getLink().toString(); // Obtener el enlace de YouTube de la canción
+            System.out.println((play ? "Reproduciendo" : "Pausando") + " canción: " + songName + " con URL: " + videoUrl); // Mensaje de depuración
+            userController.mfm.playSong(webView,videoUrl,play); // Reproducir el video en una nueva ventana de JavaFX
+        } else {
+            System.out.println("La canción no fue encontrada.");
         }
     }
 
@@ -638,6 +660,13 @@ public class UserViewController implements Initializable {
         this.userController= new UserController();
         anchorHome.setVisible( false );
         anchorPlayer.setVisible( false );
+        webView = new WebView();
+        webView.setPrefSize(125, 106); // Ajustar el tamaño del WebView
+        anchorPlayer.setTopAnchor(webView, 0.0);
+        anchorPlayer.setBottomAnchor(webView, 0.0);
+        anchorPlayer.setLeftAnchor(webView, 0.0);
+        anchorPlayer.setRightAnchor(webView, 0.0);
+
         btnHome.fire();
         songsStack= new Stack<>();
         stateStack= new Stack<>();
@@ -878,10 +907,10 @@ public class UserViewController implements Initializable {
             }
             if(event.getButton()== MouseButton.PRIMARY){
                 anchorPlayer.setVisible( true );
-                Song song = userController.mfm.getSongByName(lblFS1.getText());
-                lblPlayer.setText( song.getName() );
+                selectedSong = userController.mfm.getSongByName(lblFS1.getText());
+                lblPlayer.setText( selectedSong.getName() );
 
-                displayImageSongPlayer(song);
+                displayImageSongPlayer(selectedSong);
                 imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
                 playing = true;
             }
@@ -905,7 +934,13 @@ public class UserViewController implements Initializable {
                 optionsViewController.song();
             }
             if(event.getButton()== MouseButton.PRIMARY){
-                displayInfoPlayer( lblFS2 );
+                anchorPlayer.setVisible( true );
+                selectedSong = userController.mfm.getSongByName(lblFS2.getText());
+                lblPlayer.setText( selectedSong.getName() );
+
+                displayImageSongPlayer(selectedSong);
+                imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
+                playing = true;
             }
         });
         stackFS3.setOnMouseClicked(event -> {
@@ -926,7 +961,13 @@ public class UserViewController implements Initializable {
                 optionsViewController.song();
             }
             if(event.getButton()== MouseButton.PRIMARY){
-                displayInfoPlayer( lblFS3 );
+                anchorPlayer.setVisible( true );
+                selectedSong = userController.mfm.getSongByName(lblFS3.getText());
+                lblPlayer.setText( selectedSong.getName() );
+
+                displayImageSongPlayer(selectedSong);
+                imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
+                playing = true;
             }
         });
         stackFS4.setOnMouseClicked(event -> {
@@ -946,7 +987,13 @@ public class UserViewController implements Initializable {
                 optionsViewController.show();
                 optionsViewController.song();
             }if(event.getButton()== MouseButton.PRIMARY){
-                displayInfoPlayer( lblFS4 );
+                anchorPlayer.setVisible( true );
+                selectedSong = userController.mfm.getSongByName(lblFS4.getText());
+                lblPlayer.setText( selectedSong.getName() );
+
+                displayImageSongPlayer(selectedSong);
+                imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
+                playing = true;
             }
         });
         stackFS5.setOnMouseClicked(event -> {
@@ -967,7 +1014,13 @@ public class UserViewController implements Initializable {
                 optionsViewController.song();
             }
             if(event.getButton()== MouseButton.PRIMARY){
-                displayInfoPlayer( lblFS5 );
+                anchorPlayer.setVisible( true );
+                selectedSong = userController.mfm.getSongByName(lblFS5.getText());
+                lblPlayer.setText( selectedSong.getName() );
+
+                displayImageSongPlayer(selectedSong);
+                imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
+                playing = true;
             }
         });
 
@@ -1058,12 +1111,13 @@ public class UserViewController implements Initializable {
 
     private void displayInfoPlayer(Label label){
         anchorPlayer.setVisible( true );
-        Song song = userController.mfm.getSongByName(label.getText());
-        lblPlayer.setText( song.getName() );
+        selectedSong = userController.mfm.getSongByName(label.getText());
+        lblPlayer.setText( selectedSong.getName() );
 
-        displayImageSongPlayer(song);
+        displayImageSongPlayer(selectedSong);
         imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
         playing = true;
+        playSongVideo(selectedSong.getName(),true); // Reproducir el video de la canción seleccionada
     }
 
     private void displayImageSongPlayer(Song song) {

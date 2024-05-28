@@ -12,6 +12,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import co.edu.uniquindio.estructuraDatos.proyecto.persistence.Persistence;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
 import javafx.scene.image.Image;
+import javafx.scene.web.WebView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -135,6 +136,10 @@ public class ModelFactoryController {
     }
     public List<Song> searchO(String newValue) {
         return storify.searchO( newValue, newValue, Gender.valueOf( newValue ) , newValue );
+    }
+
+    public void playSong(WebView webView, String url, Boolean play){
+        storify.playSong(webView, url,play);
     }
 
     //-------------------------Admin functions---------------------------------------------------

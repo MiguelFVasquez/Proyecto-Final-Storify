@@ -8,7 +8,10 @@ import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Interfaces.IStorify;
 import co.edu.uniquindio.estructuraDatos.proyecto.utilities.EmailUtil;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.scene.image.Image;
+import javafx.scene.web.WebView;
 
 import javax.print.DocFlavor;
 import java.io.Serializable;
@@ -608,4 +611,25 @@ public class Storify implements IStorify, Serializable {
         }
         return mostListenedArtisit;
     }
+
+    //===================== METODOS PARA REPRODUCIR MUSICA ================================ //
+
+    // Método para reproducir una canción en YouTube usando WebView
+    public void playSong(WebView webView, String videoUrl, boolean play) {
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() {
+                Platform.runLater(() -> {
+                    String url = play ? videoUrl.replace("watch?v=", "embed/") + "?autoplay=1" : "";
+                    webView.getEngine().load(url);
+                });
+                return null;
+            }
+        };
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true); // Para que el hilo se detenga cuando se cierre la aplicación
+        thread.start();
+    }
+
 }

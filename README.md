@@ -9,6 +9,7 @@
 - Motor de búsqueda O Y y Artistas
 - Filtros en ventana library
 - Revisar motor de busqueda ((ERROR COLLECTIONS))
+- Mejorar reproductor de musica (Pausar y reanudar)
 
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.10" class="java.beans.XMLDecoder">
+<java version="17.0.11" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Storify" id="Storify0">
   <void property="nombre">
    <string>Shuhenfy</string>
@@ -93,6 +93,50 @@
      </void>
     </object>
    </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+       <void property="code">
+        <string>nnitieissi</string>
+       </void>
+       <void property="name">
+        <string>Twenty One Pilots</string>
+       </void>
+       <void property="nationality">
+        <string>Estadounidense</string>
+       </void>
+       <void property="photo">
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/ab67616100005174274df4dfcb960867eccedfb5.jpg</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string>twagTPTTno</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/ab67616d00001e029cf15c7323fb85b7112197d5.jpg</string>
+     </void>
+     <void property="duration">
+      <string>180</string>
+     </void>
+     <void property="gender">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
+       <string>Rock</string>
+      </object>
+     </void>
+     <void property="name">
+      <string>Navigating</string>
+     </void>
+     <void property="year">
+      <string>2024</string>
+     </void>
+    </object>
+   </void>
   </void>
   <void property="usersMap">
    <void method="put">
@@ -109,6 +153,23 @@
      </void>
      <void property="userName">
       <string>Santiago</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Camilo</string>
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.User">
+     <void property="email">
+      <string>jalbaranmontoya@gmail.com</string>
+     </void>
+     <void property="password">
+      <string>12</string>
+     </void>
+     <void property="songList">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList"/>
+     </void>
+     <void property="userName">
+      <string>Camilo</string>
      </void>
     </object>
    </void>
