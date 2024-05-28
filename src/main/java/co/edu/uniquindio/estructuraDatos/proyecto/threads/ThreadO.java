@@ -20,6 +20,6 @@ public class ThreadO extends Thread {
 
     @Override
     public void run() {
-        storify.searchO(artistName,songName,gender,year);
+        storify.searchO(artistName,songName,  gender ,year);
     }
 }

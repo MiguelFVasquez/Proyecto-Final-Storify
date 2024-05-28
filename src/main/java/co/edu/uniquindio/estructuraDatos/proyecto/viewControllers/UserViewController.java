@@ -14,10 +14,12 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -154,42 +156,44 @@ public class UserViewController implements Initializable {
     private Button btnUnlike;
     @FXML
     private Button btnYear;
-    @FXML
-    private Button btnSearchSong;
 
 
     @FXML
     private TableColumn<Song, String> colummImageSearch;
 
     @FXML
-    private TableColumn<?, ?> columnArtistSearch;
+    private TableColumn<Song, Artist> columnArtistSearch;
 
     @FXML
     private TableColumn<Song, String> columnImage;
 
     @FXML
-    private TableColumn<?, ?> columnName;
+    private TableColumn<Song, String> columnName;
 
     @FXML
-    private TableColumn<?, ?> columnYear;
+    private TableColumn<Song, String> columnYear;
 
     @FXML
-    private TableColumn<?, ?> columnNameArtist;
+    private TableColumn<Song, Artist> columnNameArtist;
 
     @FXML
-    private TableColumn<?, ?> columnNameSearch;
+    private TableColumn<Song, String> columnNameSearch;
 
     @FXML
-    private TableColumn<?, ?> columnTime;
+    private TableColumn<Song, String> columnTime;
 
     @FXML
     private TableColumn<Song, String> columnTimeSearch;
 
     @FXML
-    private TableView<Song> tableViewLikedSongs;
+    private TableColumn<Song, String> columnYearSearch;
+
 
     @FXML
-    private TableView<Song> tableViewSearch;
+    private TableView<Song> tableViewLikedSongs = new TableView<>();
+
+    @FXML
+    private TableView<Song> tableViewSearch = new TableView<>();
 
     private Stage stage;
 
@@ -202,6 +206,8 @@ public class UserViewController implements Initializable {
     private Song songSelection;
     private OptionsViewController optionsViewController;
     private ObservableList<Song> listSongs = FXCollections.observableArrayList();
+
+
     private ObservableList<Song> listSongs2 = FXCollections.observableArrayList();
     private ObservableList<Song> listFavoritesSongs = FXCollections.observableArrayList();
     private ObservableList<Song> listFavoritesSongs2 = FXCollections.observableArrayList();
@@ -552,27 +558,27 @@ public class UserViewController implements Initializable {
     private void getSongsByName() {
         List<Song> aux = getFavoritesSongs();
         aux.sort((song1, song2) -> song1.getName().compareToIgnoreCase(song2.getName()));
-        listSongs.clear();
-        listSongs.addAll( aux );
+        listFavoritesSongs.clear();
+        listFavoritesSongs.addAll( aux );
         tableViewLikedSongs.getItems().clear();
-        tableViewLikedSongs.setItems( listSongs );
+        tableViewLikedSongs.getItems().addAll( listFavoritesSongs );
     }
 
     private void getSongsByYear(){
         List<Song> aux = getFavoritesSongs();
         aux.sort((song1, song2) -> Integer.compare(Integer.parseInt(song2.getYear()), Integer.parseInt(song1.getYear())));
-        listSongs.clear();
-        listSongs.addAll( aux );
+        listFavoritesSongs.clear();
+        listFavoritesSongs.addAll( aux );
         tableViewLikedSongs.getItems().clear();
-        tableViewLikedSongs.setItems( listSongs );
+        tableViewLikedSongs.getItems().addAll( listFavoritesSongs );
     }
     private void getSongsByTime(){
         List<Song> aux = getFavoritesSongs();
         aux.sort((song1, song2) -> Integer.compare(Integer.parseInt(song2.getDuration()), Integer.parseInt(song1.getDuration())));
-        listSongs.clear();
-        listSongs.addAll( aux );
+        listFavoritesSongs.clear();
+        listFavoritesSongs.addAll( aux );
         tableViewLikedSongs.getItems().clear();
-        tableViewLikedSongs.setItems( listSongs );
+        tableViewLikedSongs.getItems().addAll( listFavoritesSongs );
     }
 
     private void getSongsByArtist(){
@@ -585,10 +591,10 @@ public class UserViewController implements Initializable {
                 return song1.getName().compareToIgnoreCase(song2.getName()); // Si tienen el mismo artista, ordenar por nombre de canción
             }
         });
-        listSongs.clear();
-        listSongs.addAll( aux );
+        listFavoritesSongs.clear();
+        listFavoritesSongs.addAll( aux );
         tableViewLikedSongs.getItems().clear();
-        tableViewLikedSongs.setItems( listSongs );
+        tableViewLikedSongs.getItems().addAll( listFavoritesSongs );
     }
 
 
@@ -715,6 +721,7 @@ public class UserViewController implements Initializable {
         this.columnArtistSearch.setCellValueFactory(new PropertyValueFactory<>("artist"));
         this.columnNameSearch.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.columnTimeSearch.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        this.columnYearSearch.setCellValueFactory(new PropertyValueFactory<>("year"));
 
         this.columnImage.setCellValueFactory(new PropertyValueFactory<>("cover"));
         this.columnNameArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
@@ -1067,44 +1074,51 @@ public class UserViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 // Aquí se ejecuta la acción cuando el texto cambia
-                if(!newValue.isEmpty()){
+                if (!newValue.isEmpty()) {
                     try {
-
                         List<Song> aux = searchInfo(newValue);
-                        if ( aux != null && !aux.isEmpty() ) {
-                            System.out.println( aux.get( 0 ).getName() );
+                        System.out.println("Nuevo valor de búsqueda: " + newValue);
+                        if (aux != null && !aux.isEmpty()) {
+                            System.out.println("Primera canción en aux: " + aux.get(0).getName());
 
-                            listFavoritesSongs2.clear();
-                            listFavoritesSongs2.addAll( aux );
-                            System.out.println(listFavoritesSongs2);
+                            Platform.runLater(() -> {
+                                listSongs.clear();
+                                listSongs.addAll(aux);
+                                System.out.println("Contenido de listSongs después de añadir aux: " + listSongs);
+
+                                // Actualizar la TableView
+                                tableViewSearch.getItems().clear();
+                                tableViewSearch.getItems().addAll(listSongs);
+                                System.out.println("TableView actualizada con listSongs.");
+                            });
+                        }else{
                             tableViewSearch.getItems().clear();
-                            tableViewSearch.setItems( listFavoritesSongs2 );
-                        }
 
+                        }
                     } catch (ArtistException e) {
-                        throw new RuntimeException( e );
+                        throw new RuntimeException(e);
                     }
-                }else{
-                    refreshTableViewSearch();
+                } else {
+                    Platform.runLater(() -> {
+                        refreshTableViewSearch();
+                    });
                 }
             }
         });
 
 
-    }
-
-    @FXML
-    void searchInfoSong(ActionEvent event) throws ArtistException {
 
     }
+
+
 
     private List<Song> searchInfo(String newValue) throws ArtistException {
         List<Song> list= userController.mfm.searchArtist(newValue);
-        //List<Song> list2 = userController.mfm.searchO( newValue );
+        List<Song> list2 = userController.mfm.searchO( newValue );
 
-//        if(list2 != null || !list2.isEmpty()){
-//            list.addAll( list2 );
-//        }
+        if(list2 != null || !list2.isEmpty()){
+            list.addAll( list2 );
+        }
 
         return list;
     }

@@ -135,7 +135,16 @@ public class ModelFactoryController {
         return storify.searchSongByArtistName( newValue );
     }
     public List<Song> searchO(String newValue) {
-        return storify.searchO( newValue, newValue, Gender.valueOf( newValue ) , newValue );
+
+        try {
+            String newValue2 = newValue.substring(0, 1).toUpperCase() + newValue.substring(1);
+            Gender gender1 = Gender.valueOf(newValue2);  // Verifica si gender es un valor válido en el Enum Gender
+            return storify.searchO( newValue, newValue, gender1 , newValue );
+
+        } catch (IllegalArgumentException e) {
+            System.err.println("Valor no válido en el Enum Gender: " + newValue);
+        }
+        return storify.searchO( newValue, newValue, null , newValue );
     }
 
     public void playSong(WebView webView, String url, Boolean play){

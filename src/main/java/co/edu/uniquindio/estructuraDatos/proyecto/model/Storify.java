@@ -507,12 +507,12 @@ public class Storify implements IStorify, Serializable {
    public List<Song> searchSongByArtistName(String artistName) throws ArtistException{
         DoublyLinkedList<Song> songList= new DoublyLinkedList<>();
         for (Artist artistAux: artistTree){
-            if (artistAux.getName().equals(artistName)){
+            if ( artistAux.getName().equalsIgnoreCase( artistName )){
                 System.out.println("Debería mostrar el artista");
                 songList=artistAux.getSongList();
             }
             else{
-                if(artistAux.getName().contains( artistName )){
+                if(artistAux.getName().toLowerCase().contains( artistName.toLowerCase() )){
                     System.out.println("Debería mostrar artistas relacionados");
                     songList=artistAux.getSongList();
                 }
@@ -551,7 +551,7 @@ public class Storify implements IStorify, Serializable {
         List<Song> songList= new ArrayList<>();
         for(Artist artistAux: artistTree){
             if (!artistAux.searchO(artistName,songName,gender,year).isEmpty()){
-                songList=artistAux.searchO(artistName,songName,gender,year);
+                songList.addAll( artistAux.searchO(artistName,songName,gender,year));
             }
         }
         return songList;

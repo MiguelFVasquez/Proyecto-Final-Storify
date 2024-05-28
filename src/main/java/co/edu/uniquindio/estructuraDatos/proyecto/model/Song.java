@@ -132,10 +132,20 @@ public class Song implements Serializable {
     }
 
     public boolean verifyInfoO(String artistName,String songName, Gender gender, String year){
-        if (this.artist.getName().equals(artistName) || this.name.equals(songName) || this.gender==gender || this.year.equals(year)
-        || this.name.contains( songName ) || this.year.contains( year )){
-            return true;
+        if(gender==null){
+            if (this.artist.getName().equals(artistName) || this.name.equalsIgnoreCase(songName) || this.year.equalsIgnoreCase(year)
+                    || this.name.toLowerCase().contains( songName.toLowerCase() ) || this.year.toLowerCase().contains( year.toLowerCase() )){
+                return true;
+            }
+        }else{
+            if (this.artist.getName().equals(artistName) || this.name.equalsIgnoreCase(songName) || this.year.equalsIgnoreCase(year)
+                    || this.gender==gender || this.name.toLowerCase().contains( songName.toLowerCase() ) ||
+                    this.year.toLowerCase().contains( year.toLowerCase() )){
+                return true;
+            }
         }
+
+
         return false;
     }
 

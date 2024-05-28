@@ -301,14 +301,14 @@
               <columns>
                 <TableColumn fx:id="colummImageSearch" prefWidth="60.0" />
                 <TableColumn fx:id="columnNameSearch" minWidth="0.0" prefWidth="214.0" text="Name" />
-                  <TableColumn fx:id="columnArtistSearch" prefWidth="235.0" text="Artist's name" />
-                  <TableColumn fx:id="columnTimeSearch" prefWidth="270.0" text="Duration" />
+                  <TableColumn fx:id="columnArtistSearch" prefWidth="212.0" text="Artist's name" />
+                  <TableColumn fx:id="columnTimeSearch" minWidth="0.0" prefWidth="142.0" text="Duration" />
+                  <TableColumn fx:id="columnYearSearch" prefWidth="141.66668701171875" text="Year" />
               </columns>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </TableView>
-            <Button fx:id="btnSearchSong" layoutX="893.0" layoutY="61.0" mnemonicParsing="false" onAction="#searchInfoSong" text="Button" />
          </children>
       </AnchorPane>
    </children>
