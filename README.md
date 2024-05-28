@@ -3,6 +3,7 @@
 ## ***TASKS**
 
 ### **TO DO**
+- Reproducir canciones desde searchView, artistView y libraryView
 - Documentar código
 - Java DOC
 
