@@ -1,3 +1,6 @@
 MDN AJJARC@@CARENCIAS DE CORDURA@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/carenciasDeCorduraCover.png@@2023@@120@@Pop@@https://youtu.be/hfABkoRgNRg?si=c9dyzMzVhupiZk7s@@Milo
 iónilcoJMJ@@Rincón@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/riconCover.png@@2023@@107@@Pop@@https://youtu.be/Qip3xXCTzh4?si=-AgrSQ6k-Z3swo3u@@Milo
 FFoeLowrwe@@Low Key@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/lk.png@@2024@@90@@Gospel@@https://youtu.be/0cdniMLLmjw?si=_3fxB2b4gGB6lOBp@@Milo
+JJM oll YY@@ALWAYS@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/alwaysCover.png@@2024@@98@@Gospel@@https://youtu.be/XSuV2osXSLE?si=XOu2JLF2-loG_2s2@@Milo
+oeayv iret@@Pólvora de Ayer@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/polvoraAyerCover.png@@2024@@118@@Ranchera@@https://youtu.be/E8fP0NmJcT4?si=K6E1OGSCc1Xxm86h@@Milo
+ar C e rnP@@Corazón de Piedra@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/corazonPiedraCover.png@@2024@@104@@Corridos@@https://youtu.be/4zLh1QI4bMA?si=W8Rb2d0hYGt-7tyE@@Milo

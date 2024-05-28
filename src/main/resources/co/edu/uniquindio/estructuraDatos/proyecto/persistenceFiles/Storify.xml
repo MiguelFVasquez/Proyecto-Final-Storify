@@ -121,13 +121,142 @@
       <string>90</string>
      </void>
      <void property="gender">
-      <object class="java.lang.Enum" method="valueOf">
+      <object class="java.lang.Enum" id="Gender1" method="valueOf">
        <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
        <string>Gospel</string>
       </object>
      </void>
      <void property="name">
       <string>Low Key</string>
+     </void>
+     <void property="year">
+      <string>2024</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+       <void property="code">
+        <string>kurouduads</string>
+       </void>
+       <void property="name">
+        <string>Forrest Frank</string>
+       </void>
+       <void property="nationality">
+        <string>Estadounidense</string>
+       </void>
+       <void property="photo">
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/forrestFrankPHOTO.png</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string>JJM oll YY</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/alwaysCover.png</string>
+     </void>
+     <void property="duration">
+      <string>98</string>
+     </void>
+     <void property="gender">
+      <object idref="Gender1"/>
+     </void>
+     <void property="name">
+      <string>ALWAYS</string>
+     </void>
+     <void property="year">
+      <string>2024</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+       <void property="code">
+        <string>itcnddhii </string>
+       </void>
+       <void property="name">
+        <string>Christian Nodal</string>
+       </void>
+       <void property="nationality">
+        <string>Mexicano</string>
+       </void>
+       <void property="photo">
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/nodalPH.png</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string>oeayv iret</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/polvoraAyerCover.png</string>
+     </void>
+     <void property="duration">
+      <string>118</string>
+     </void>
+     <void property="gender">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
+       <string>Ranchera</string>
+      </object>
+     </void>
+     <void property="name">
+      <string>Pólvora de Ayer</string>
+     </void>
+     <void property="year">
+      <string>2024</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+       <void property="code">
+        <string>aeooinXXiM</string>
+       </void>
+       <void property="name">
+        <string>Xavi</string>
+       </void>
+       <void property="nationality">
+        <string>Mexicano</string>
+       </void>
+       <void property="photo">
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/xaviPH.png</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string>ar C e rnP</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/corazonPiedraCover.png</string>
+     </void>
+     <void property="duration">
+      <string>104</string>
+     </void>
+     <void property="gender">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
+       <string>Corridos</string>
+      </object>
+     </void>
+     <void property="name">
+      <string>Corazón de Piedra</string>
      </void>
      <void property="year">
       <string>2024</string>

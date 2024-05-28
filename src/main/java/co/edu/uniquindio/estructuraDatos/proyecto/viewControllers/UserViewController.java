@@ -215,6 +215,12 @@ public class UserViewController implements Initializable {
     @FXML
     private Button btnName;
     @FXML
+    private Button btnNameArtist;
+    @FXML
+    private Button btnTimeArtist;
+    @FXML
+    private Button btnYearArtist;
+    @FXML
     private Button btnArtist;
     @FXML
     private Button btnUnlike;
@@ -295,6 +301,11 @@ public class UserViewController implements Initializable {
     private boolean isFilteredTime = true;
     private boolean isFilteredYear= true;
 
+    private boolean isFilteredArtist2 = true;
+    private boolean isFilteredName2 = true;
+    private boolean isFilteredTime2 = true;
+    private boolean isFilteredYear2 = true;
+
 
     private User user;
     private boolean playing= false;
@@ -303,6 +314,7 @@ public class UserViewController implements Initializable {
     private boolean showingToolTip = false;
     private Song songArtistSelection;
     private Song songSearch;
+    private Artist artistSelected;
 
     public void setLoginViewController(LoginViewController loginViewController) {
         this.loginViewController = loginViewController;
@@ -700,6 +712,8 @@ public class UserViewController implements Initializable {
         isFilteredYear = !isFilteredYear;
     }
 
+
+
     @FXML
     void showSongsByName(ActionEvent event) {
         if (isFilteredName) {
@@ -730,6 +744,9 @@ public class UserViewController implements Initializable {
         isFilteredName = !isFilteredName;
     }
 
+
+
+
     @FXML
     void showSongsByTime(ActionEvent event) {
         if (isFilteredTime) {
@@ -759,6 +776,7 @@ public class UserViewController implements Initializable {
         }
         isFilteredTime = !isFilteredTime;
     }
+
 
     private void getSongsByName() {
         List<Song> aux = getFavoritesSongs();
@@ -802,6 +820,123 @@ public class UserViewController implements Initializable {
         tableViewLikedSongs.getItems().addAll( listFavoritesSongs );
     }
 
+    //------------------------FUNTIONS OF ARTISTVIEWSONG----------------------------------------------------------------
+    @FXML
+    void showSongsByYearArtist(ActionEvent event){
+        if (isFilteredYear2) {
+            isFilteredName2= true;
+            isFilteredTime2 = true;
+            isFilteredArtist2 = true;
+
+            btnTimeArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnNameArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+
+            btnYearArtist.setStyle(
+                    " -fx-background-color: #a3c0f5; " +
+                            "-fx-text-fill: black;" +
+                            "-fx-border-color: black;");
+            getSongsByYearArtist();
+
+        } else {
+            btnYearArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            refreshTableViewArtistSongs(artistSelected);
+        }
+        isFilteredYear2 = !isFilteredYear2;
+    }
+
+    @FXML
+    void showSongsByNameArtist(ActionEvent event) {
+        if (isFilteredName2) {
+            isFilteredTime2 = true;
+            isFilteredYear2 = true;
+            btnTimeArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnYearArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnNameArtist.setStyle(
+                    " -fx-background-color: #a3c0f5; " +
+                            "-fx-text-fill: black;" +
+                            "-fx-border-color: black;");
+            getSongsByNameArtist();
+
+        } else {
+            btnNameArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            refreshTableViewArtistSongs(artistSelected);
+
+        }
+        isFilteredName2 = !isFilteredName2;
+    }
+
+    @FXML
+    void showSongsByTimeArtist(ActionEvent event) {
+        if (isFilteredTime2) {
+            isFilteredName2= true;
+            isFilteredYear2 = true;
+
+            btnNameArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnYearArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnTimeArtist.setStyle(
+                    " -fx-background-color: #a3c0f5; " +
+                            "-fx-text-fill: black;" +
+                            "-fx-border-color: black;");
+            getSongsByTimeArtist();
+        } else {
+            btnTimeArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            refreshTableViewArtistSongs(artistSelected);
+        }
+        isFilteredTime2 = !isFilteredTime2;
+    }
+
+
+    private void getSongsByYearArtist() {
+        List<Song> aux = artistSelected.getSongList().toList();
+        aux.sort((song1, song2) -> Integer.compare(Integer.parseInt(song2.getYear()), Integer.parseInt(song1.getYear())));
+        listSongsArtist.clear();
+        listSongsArtist.addAll( aux );
+        tableViewArtist.getItems().clear();
+        tableViewArtist.getItems().addAll( listSongsArtist );
+    }
+
+    private void getSongsByNameArtist() {
+        List<Song> aux = artistSelected.getSongList().toList();
+        aux.sort((song1, song2) -> {
+            int artistComparison = song1.getArtist().getName().compareToIgnoreCase( song2.getArtist().getName() );
+            if ( artistComparison != 0 ) {
+                return artistComparison; // Ordenar por nombre de artista
+            }else{
+                return song1.getName().compareToIgnoreCase(song2.getName()); // Si tienen el mismo artista, ordenar por nombre de canción
+            }
+        });
+        listSongsArtist.clear();
+        listSongsArtist.addAll( aux );
+        tableViewArtist.getItems().clear();
+        tableViewArtist.getItems().addAll( listSongsArtist );
+    }
+
+    private void getSongsByTimeArtist() {
+        List<Song> aux = artistSelected.getSongList().toList();
+        aux.sort((song1, song2) -> Integer.compare(Integer.parseInt(song2.getDuration()), Integer.parseInt(song1.getDuration())));
+        listSongsArtist.clear();
+        listSongsArtist.addAll( aux );
+        tableViewArtist.getItems().clear();
+        tableViewArtist.getItems().addAll( listSongsArtist );
+    }
 
 
 
@@ -1414,10 +1549,10 @@ public class UserViewController implements Initializable {
                 anchorPlayer.setVisible( true );
                 selectedSong = userController.mfm.getSongByName(lblFS1.getText());
                 lblPlayer.setText( selectedSong.getName() );
-
+                playSongVideo(selectedSong.getName(),true);//Reanudar video
+                playing = true;
                 displayImageSongPlayer(selectedSong);
                 imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
-                playing = true;
             }
 
         });
@@ -1442,7 +1577,7 @@ public class UserViewController implements Initializable {
                 anchorPlayer.setVisible( true );
                 selectedSong = userController.mfm.getSongByName(lblFS2.getText());
                 lblPlayer.setText( selectedSong.getName() );
-
+                playSongVideo(selectedSong.getName(),true);//Reanudar video
                 displayImageSongPlayer(selectedSong);
                 imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
                 playing = true;
@@ -1469,7 +1604,7 @@ public class UserViewController implements Initializable {
                 anchorPlayer.setVisible( true );
                 selectedSong = userController.mfm.getSongByName(lblFS3.getText());
                 lblPlayer.setText( selectedSong.getName() );
-
+                playSongVideo(selectedSong.getName(),true);//Reanudar video
                 displayImageSongPlayer(selectedSong);
                 imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
                 playing = true;
@@ -1495,7 +1630,7 @@ public class UserViewController implements Initializable {
                 anchorPlayer.setVisible( true );
                 selectedSong = userController.mfm.getSongByName(lblFS4.getText());
                 lblPlayer.setText( selectedSong.getName() );
-
+                playSongVideo(selectedSong.getName(),true);//Reanudar video
                 displayImageSongPlayer(selectedSong);
                 imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
                 playing = true;
@@ -1522,7 +1657,7 @@ public class UserViewController implements Initializable {
                 anchorPlayer.setVisible( true );
                 selectedSong = userController.mfm.getSongByName(lblFS5.getText());
                 lblPlayer.setText( selectedSong.getName() );
-
+                playSongVideo(selectedSong.getName(),true);//Reanudar video
                 displayImageSongPlayer(selectedSong);
                 imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
                 playing = true;
@@ -1534,6 +1669,7 @@ public class UserViewController implements Initializable {
                 anchorSongsArtist.setVisible( true );
                 labelTitle.setText(lblSA1.getText()+"'s songs" );
                 Artist artist = userController.mfm.getArtist(lblSA1.getText());
+                this.artistSelected = artist;
                 refreshTableViewArtistSongs( artist );
             }
         });
@@ -1542,6 +1678,8 @@ public class UserViewController implements Initializable {
                 anchorSongsArtist.setVisible( true );
                 labelTitle.setText(lblSA2.getText()+"'s songs" );
                 Artist artist = userController.mfm.getArtist(lblSA2.getText());
+                this.artistSelected = artist;
+
                 refreshTableViewArtistSongs( artist );
             }
         });
@@ -1551,6 +1689,8 @@ public class UserViewController implements Initializable {
                 anchorSongsArtist.setVisible( true );
                 labelTitle.setText(lblSA3.getText()+"'s songs" );
                 Artist artist = userController.mfm.getArtist(lblSA3.getText());
+                this.artistSelected = artist;
+
                 refreshTableViewArtistSongs( artist );
             }
         });
@@ -1559,6 +1699,8 @@ public class UserViewController implements Initializable {
                 anchorSongsArtist.setVisible( true );
                 labelTitle.setText(lblSA4.getText()+"'s songs" );
                 Artist artist = userController.mfm.getArtist(lblSA4.getText());
+                this.artistSelected = artist;
+
                 refreshTableViewArtistSongs( artist );
             }
         });

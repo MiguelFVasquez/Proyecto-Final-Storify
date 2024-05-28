@@ -208,15 +208,15 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPlayer" layoutX="25.0" layoutY="511.0" prefHeight="182.0" prefWidth="161.0" visible="false">
+      <AnchorPane fx:id="anchorPlayer" layoutX="11.0" layoutY="503.0" prefHeight="162.0" prefWidth="193.0">
          <children>
-            <AnchorPane layoutX="21.0" layoutY="9.0" prefHeight="125.0" prefWidth="150.0">
+            <AnchorPane layoutX="21.0" layoutY="14.0" prefHeight="122.0" prefWidth="150.0">
                <styleClass>
                   <String fx:value="white-bg" />
                   <String fx:value="shadow" />
                </styleClass>
                <children>
-                  <StackPane layoutX="9.0" prefHeight="127.0" prefWidth="133.0">
+                  <StackPane layoutX="9.0" layoutY="4.0" prefHeight="123.0" prefWidth="133.0">
                      <children>
                         <ImageView fx:id="imagePlayer" fitHeight="106.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow" StackPane.alignment="BOTTOM_CENTER">
                            <image>
@@ -225,35 +225,25 @@
                         </ImageView>
                         <Label fx:id="lblPlayer" text="Label" StackPane.alignment="TOP_CENTER">
                            <StackPane.margin>
-                              <Insets top="2.0" />
+                              <Insets top="1.0" />
                            </StackPane.margin>
                         </Label>
                      </children>
                   </StackPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="6.0" layoutY="127.0" prefHeight="41.0" prefWidth="180.0" style="-fx-background-color: #00053D; -fx-border-color: fff; -fx-border-radius: 8;">
+            <AnchorPane layoutX="28.0" layoutY="123.0" prefHeight="29.0" prefWidth="137.0" style="-fx-background-color: #00053D; -fx-border-color: fff; -fx-border-radius: 8;">
                <styleClass>
                   <String fx:value="white-bg" />
                   <String fx:value="shadow" />
                </styleClass>
                <children>
-                  <ImageView fx:id="imageBtnPlay" fitHeight="40.0" fitWidth="35.0" layoutX="73.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageBtnPlay" fitHeight="18.0" fitWidth="19.0" layoutX="59.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/playerItems/1.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btnPlay" layoutX="73.0" layoutY="6.0" mnemonicParsing="false" onAction="#playSong" prefHeight="35.0" prefWidth="35.0" style="-fx-background-color: transparent;" />
-                  <ImageView accessibleRole="BUTTON" fitHeight="35.0" fitWidth="35.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/playerItems/5.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView accessibleRole="BUTTON" fitHeight="40.0" fitWidth="35.0" layoutX="125.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/playerItems/4.png" />
-                     </image>
-                  </ImageView>
+                  <Button fx:id="btnPlay" layoutX="52.0" layoutY="2.0" mnemonicParsing="false" onAction="#playSong" prefHeight="19.0" prefWidth="30.0" style="-fx-background-color: transparent;" />
                </children>
             </AnchorPane>
          </children>
@@ -493,7 +483,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorSongsArtist" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0" visible="false">
+      <AnchorPane fx:id="anchorSongsArtist" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />
@@ -530,6 +520,10 @@
                   <Font name="Calibri" size="17.0" />
                </font>
             </Button>
+            <Button fx:id="btnTimeArtist" layoutX="859.0" layoutY="43.0" mnemonicParsing="false" onAction="#showSongsByTimeArtist" styleClass="btnBlue" text="Time" />
+            <Button fx:id="btnNameArtist" layoutX="913.0" layoutY="43.0" mnemonicParsing="false" onAction="#showSongsByNameArtist" styleClass="btnBlue" text="Name" />
+            <FontAwesomeIconView fill="#00b2ff" glyphName="LIST" layoutX="978.0" layoutY="64.0" size="20" />
+            <Button fx:id="btnYearArtist" layoutX="807.0" layoutY="43.0" mnemonicParsing="false" onAction="#showSongsByYearArtist" styleClass="btnBlue" text="Year" />
          </children>
       </AnchorPane>
    </children>

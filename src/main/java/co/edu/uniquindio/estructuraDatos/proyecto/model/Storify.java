@@ -311,6 +311,9 @@ public class Storify implements IStorify, Serializable {
             throw new ArtistException("El artista "+ name+ " no ha sido encontrado");
         }else {
             deleted=true;
+            for(Song song: artistAux.getSongList()){
+                songList.remove( song );
+            }
             artistTree.eliminar(artistAux);
         }
         return deleted;
