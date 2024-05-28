@@ -643,13 +643,28 @@ public class UserViewController implements Initializable {
     void logOut(ActionEvent event) {
         loginViewController.show();
         optionsViewController.close();
-        pauseVideo();
+        pauseAllVideos();
         this.stage.close();
     }
 
-    private void pauseVideo() {
+    private void pauseAllVideos() {
         if (playing) {
-            playSongVideo(selectedSong.getName(), false); // Pausar el video antes de cerrar sesión
+            if (selectedSong != null) {
+                playSongVideo(selectedSong.getName(), false); // Pausar la canción principal
+            }
+            songArtistSelection = getSelectedSong(tableViewArtist);
+            if (songArtistSelection != null) {
+                playSongVideo(songArtistSelection.getName(), false); // Pausar la canción de Artist
+            }
+            songSearch = getSelectedSong(tableViewSearch);
+            if (songSearch != null) {
+                playSongVideo(songSearch.getName(), false); // Pausar la canción de Search
+            }
+            songSelection = getSelectedSong(tableViewLikedSongs);
+            if (songSelection != null) {
+                playSongVideo(songSelection.getName(), false); // Pausar la canción de Library
+            }
+            playing = false; // Asegurarse de actualizar el estado de reproducción
         }
     }
 
@@ -992,29 +1007,6 @@ public class UserViewController implements Initializable {
         }
     }
 
-    @FXML
-    void playSong(ActionEvent event){
-        if (playing) {
-            imageBtnPlay.setImage(new Image("file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/1.png"));
-            playSongVideo(selectedSong.getName(),false); //Pause video
-            playing = false;
-        } else {
-            imageBtnPlay.setImage(new Image("file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png"));
-            playSongVideo(selectedSong.getName(),true);//Reanudar video
-            playing = true;
-        }
-    }
-
-    private void playSongVideo(String songName, Boolean play) {
-        Song song = userController.mfm.getSongByName(songName); // Obtener la canción por su nombre
-        if (song != null) {
-            String videoUrl = song.getLink().toString(); // Obtener el enlace de YouTube de la canción
-            System.out.println((play ? "Reproduciendo" : "Pausando") + " canción: " + songName + " con URL: " + videoUrl); // Mensaje de depuración
-            userController.mfm.playSong(webView,videoUrl,play); // Reproducir el video en una nueva ventana de JavaFX
-        } else {
-            System.out.println("La canción no fue encontrada.");
-        }
-    }
 
     @FXML
     void removeFavoriteSongUser(ActionEvent event){
@@ -1182,15 +1174,7 @@ public class UserViewController implements Initializable {
         return userController.mfm.verifySong(user, songSelection);
     }
 
-    @FXML
-    void playSongArtist(ActionEvent event){
 
-    }
-
-    @FXML
-    void playSongSearch(ActionEvent event){
-
-    }
     @FXML
     void addSongSearchFavorite(ActionEvent event) throws UserException, SongException {
         if(!verifySong(songSearch)){
@@ -1208,12 +1192,6 @@ public class UserViewController implements Initializable {
         }
         userController.mfm.saveDataTest();
     }
-    @FXML
-    void playSongLibrary(ActionEvent event){
-
-    }
-
-
 
 
     //------------------------------------INITIALIZATION-------------------------
@@ -1315,10 +1293,10 @@ public class UserViewController implements Initializable {
                 }
                 btnPlaySongSearch.setDisable( false );
                 btnLikeSongSearch.setDisable( false );
-
             }else{
                 btnLikeSongSearch.setDisable( true );
                 btnPlaySongSearch.setDisable( true );
+                tableViewSearch.getSelectionModel().clearSelection();
 
 
             }
@@ -1855,6 +1833,95 @@ public class UserViewController implements Initializable {
         return list;
     }
 
+    @FXML
+    void playSong(ActionEvent event){
+        if (playing) {
+            imageBtnPlay.setImage(new Image("file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/1.png"));
+            playSongVideo(selectedSong.getName(),false); //Pause video
+            playing = false;
+        } else {
+            imageBtnPlay.setImage(new Image("file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png"));
+            playSongVideo(selectedSong.getName(),true);//Reanudar video
+            playing = true;
+        }
+    }
+
+    @FXML
+    void playSongArtist(ActionEvent event){
+        songArtistSelection = getSelectedSong(tableViewArtist); // Asumiendo que tienes una TableView llamada artistTableView
+        if (songArtistSelection != null) {
+            displayInfoPlayerArtist(songArtistSelection);
+        } else {
+            System.out.println("No se ha seleccionado ninguna canción.");
+        }
+    }
+
+    @FXML
+    void playSongSearch(ActionEvent event){
+        songSearch = getSelectedSong(tableViewSearch);
+        if(songSearch != null){
+            displayInfoPlayerSearch(songSearch);
+        }else{
+            System.out.println("No se ha seleccionado ninguna canción.");
+        }
+    }
+
+    @FXML
+    void playSongLibrary(ActionEvent event){
+        songSelection = getSelectedSong(tableViewLikedSongs);
+        if(songSelection != null){
+            displayInfoPlayerLibrary(songSelection);
+        }
+    }
+
+    private Song getSelectedSong(TableView<Song> tableView) {
+        return tableView.getSelectionModel().getSelectedItem();
+    }
+
+    private void playSongVideo(String songName, Boolean play) {
+        Song song = userController.mfm.getSongByName(songName); // Obtener la canción por su nombre
+        if (song != null) {
+            String videoUrl = song.getLink().toString(); // Obtener el enlace de YouTube de la canción
+            //System.out.println((play ? "Reproduciendo" : "Pausando") + " canción: " + songName + " con URL: " + videoUrl); // Mensaje de depuración
+            userController.mfm.playSong(webView,videoUrl,play); // Reproducir el video en una nueva ventana de JavaFX
+        } else {
+            System.out.println("La canción no fue encontrada.");
+        }
+    }
+
+    private void displayInfoPlayerArtist(Song artistSelection){
+        anchorPlayer.setVisible( true );
+        songArtistSelection = userController.mfm.getSongByName(artistSelection.getName());
+        lblPlayer.setText( songArtistSelection.getName() );
+
+        displayImageSongPlayer(songArtistSelection);
+        imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
+        playing = true;
+        playSongVideo(songArtistSelection.getName(),true); // Reproducir el video de la canción seleccionada
+    }
+
+    private void displayInfoPlayerSearch(Song searchSelection){
+        anchorPlayer.setVisible( true );
+        songSearch = userController.mfm.getSongByName(searchSelection.getName());
+        lblPlayer.setText( songSearch.getName() );
+
+        displayImageSongPlayer(songSearch);
+        imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
+        playing = true;
+        playSongVideo(songSearch.getName(),true); // Reproducir el video de la canción seleccionada
+    }
+
+    private void displayInfoPlayerLibrary(Song librarySelection){
+        anchorPlayer.setVisible( true );
+        songSelection = userController.mfm.getSongByName(librarySelection.getName());
+        lblPlayer.setText( songSelection.getName() );
+
+        displayImageSongPlayer(songSelection);
+        imageBtnPlay.setImage( new Image( "file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/playerItems/pause.png" ) );
+        playing = true;
+        playSongVideo(songSelection.getName(),true); // Reproducir el video de la canción seleccionada
+    }
+
     private void displayInfoPlayer(Label label){
         anchorPlayer.setVisible( true );
         selectedSong = userController.mfm.getSongByName(label.getText());
@@ -1873,11 +1940,6 @@ public class UserViewController implements Initializable {
             imagePlayer.setImage( image );
             imagePlayer.setFitWidth(125 );
             imagePlayer.setFitHeight( 106 );
-//
-//            Rectangle clip = new Rectangle(imageView.getFitWidth(), imageView.getFitHeight());
-//            clip.setArcWidth(20); // Cambia este valor según el grado de redondeo que desees
-//            clip.setArcHeight(20);
-//            imageView.setClip( clip );
 
         } catch (Exception e) {
             e.printStackTrace();

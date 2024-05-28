@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.10" class="java.beans.XMLDecoder">
+<java version="17.0.11" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Storify" id="Storify0">
   <void property="nombre">
    <string>Shuhenfy</string>
@@ -279,6 +279,23 @@
      </void>
      <void property="userName">
       <string>Santiago</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Camilo</string>
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.User">
+     <void property="email">
+      <string>jalbaranmontoya@gmail.com</string>
+     </void>
+     <void property="password">
+      <string>12</string>
+     </void>
+     <void property="songList">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList"/>
+     </void>
+     <void property="userName">
+      <string>Camilo</string>
      </void>
     </object>
    </void>
