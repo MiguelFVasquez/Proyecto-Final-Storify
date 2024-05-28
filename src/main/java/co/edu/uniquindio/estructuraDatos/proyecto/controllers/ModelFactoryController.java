@@ -25,7 +25,6 @@ public class ModelFactoryController {
 
 
 
-
     private static class SingletonHolder {
         // El constructor de Singleton puede ser llamado desde aquí al ser protected
         private final static ModelFactoryController eINSTANCE;
@@ -162,6 +161,10 @@ public class ModelFactoryController {
     }
     public Gender getMostListenedGenderByUser(User user) {
         return user.getMostListenedGender();
+    }
+
+    public boolean verifySong(User user, Song songSelection) {
+        return user.verifySong( songSelection.getCode() );
     }
 
 

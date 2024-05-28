@@ -25,6 +25,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
@@ -290,6 +291,7 @@ public class UserViewController implements Initializable {
     private WebView webView;
     private Song selectedSong;
     private boolean showingToolTip = false;
+    private Song songArtistSelection;
 
     public void setLoginViewController(LoginViewController loginViewController) {
         this.loginViewController = loginViewController;
@@ -346,6 +348,31 @@ public class UserViewController implements Initializable {
 
 
     }
+    private void showTooltip2(String message, Stage stage) {
+        // Create a Tooltip
+        Tooltip tooltip = new Tooltip(message);
+        tooltip.setAutoHide(true);
+
+        // Customize the size of the Tooltip
+        tooltip.setStyle("-fx-font-size: 20px; -fx-padding: 5px;");
+
+        // Calculate the center of the window
+        Bounds stageBounds = stage.getScene().getRoot().getLayoutBounds();
+        double x = (stageBounds.getWidth() - tooltip.getWidth()) ;
+        double y = (stageBounds.getHeight() - tooltip.getHeight()) ;
+
+        Point2D p = stage.getScene().getRoot().localToScreen(x, y);
+
+        // Show the Tooltip at the center of the window
+        tooltip.show(stage.getScene().getRoot(), p.getX(), p.getY());
+        tooltip.centerOnScreen();
+        // Automatically hide the Tooltip after 5 seconds
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(e -> {
+            tooltip.hide();
+        });
+        delay.play();
+    }
 
 
     //------------------------------FUNCTIONS OF SHOW-------------------------------------------------------------------
@@ -357,6 +384,7 @@ public class UserViewController implements Initializable {
         anchorSearch.setVisible( false );
         anchorUserSettings.setVisible( false );
         anchorAnalytics.setVisible( false );
+        anchorSongsArtist.setVisible( false );
         showReleasesSongs( getSongs() );
         showArtist( getArtists() );
 
@@ -494,6 +522,8 @@ public class UserViewController implements Initializable {
         anchorSearch.setVisible( true );
         anchorUserSettings.setVisible( false );
         anchorAnalytics.setVisible( false );
+        anchorSongsArtist.setVisible( false );
+
     }
     @FXML
     void showLibraryInfo(ActionEvent event) {
@@ -503,6 +533,8 @@ public class UserViewController implements Initializable {
         anchorSearch.setVisible( false );
         anchorUserSettings.setVisible( false );
         anchorAnalytics.setVisible( false );
+        anchorSongsArtist.setVisible( false );
+
         refreshTableViewFavorites();
 
     }
@@ -513,6 +545,8 @@ public class UserViewController implements Initializable {
         anchorSearch.setVisible( false );
         anchorUserSettings.setVisible( true );
         anchorAnalytics.setVisible( false );
+        anchorSongsArtist.setVisible( false );
+
 
         labelTitle.setText( "Settings" );
         txtNameSettings.setText( user.getUserName() );
@@ -528,6 +562,8 @@ public class UserViewController implements Initializable {
         anchorSearch.setVisible( false );
         anchorUserSettings.setVisible( false );
         anchorAnalytics.setVisible( true );
+        anchorSongsArtist.setVisible( false );
+
 
 
         Artist artistMostListened = userController.mfm.getMostListenedArtist();
@@ -911,9 +947,27 @@ public class UserViewController implements Initializable {
     }
 
     @FXML
-    void addSongArtistToFavoriteSongs(ActionEvent event){
+    void addSongArtistToFavoriteSongs(ActionEvent event) throws UserException, SongException {
+        if(!verifySong(songArtistSelection)){
+            userController.mfm.addSongToUserList(user.getUserName(), songArtistSelection);
+            showTooltip2( "Sond added to your favorites", stage );
+
+
+
+        }else{
+            userController.mfm.removeSongFromUserList( user.getUserName(), songArtistSelection);
+            showTooltip2( "Sond removed from your's favorites", stage );
+
+
+        }
+        userController.mfm.saveDataTest();
 
     }
+
+    private boolean verifySong(Song songSelection) {
+        return userController.mfm.verifySong(user, songSelection);
+    }
+
     @FXML
     void playSongArtist(ActionEvent event){
 
@@ -934,7 +988,7 @@ public class UserViewController implements Initializable {
         anchorUserSettings.setVisible( false );
         anchorAnalytics.setVisible( false );
         anchorSongsArtist.setVisible( false );
-
+        btnLikeSongArtist.setDisable( true );
         webView = new WebView();
         webView.setPrefSize(125, 106); // Ajustar el tamaño del WebView
         anchorPlayer.setTopAnchor(webView, 0.0);
@@ -982,6 +1036,22 @@ public class UserViewController implements Initializable {
 
             }else{
                 btnUnlike.setDisable( true );
+
+            }
+        });
+        tableViewArtist.getSelectionModel().selectedItemProperty().addListener( (obs , oldSelection , newSelection) -> {
+            if ( newSelection != null ) {
+                songArtistSelection = newSelection;
+                if(!verifySong( newSelection )){
+                    btnLikeSongArtist.setText( "Like" );
+                }else{
+                    btnLikeSongArtist.setText( "Unlike" );
+
+                }
+                btnLikeSongArtist.setDisable( false );
+
+            }else{
+                btnLikeSongArtist.setDisable( true );
 
             }
         });

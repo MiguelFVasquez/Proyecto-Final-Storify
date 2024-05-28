@@ -1,2 +1,2 @@
-kurouduads@@Forrest Frank@@Estadounidense@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/forrestFrankPHOTO.png@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@64191f01
-ioMrMrlnin@@Milo J@@Argentino@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/miloJPHOTO.png@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@6d807c43
+kurouduads@@Forrest Frank@@Estadounidense@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/forrestFrankPHOTO.png@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@34893840
+ioMrMrlnin@@Milo J@@Argentino@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/miloJPHOTO.png@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@41e90f3e
