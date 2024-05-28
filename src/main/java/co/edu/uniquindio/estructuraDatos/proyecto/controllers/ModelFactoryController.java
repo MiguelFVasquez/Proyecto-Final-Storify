@@ -25,6 +25,7 @@ public class ModelFactoryController {
 
 
 
+
     private static class SingletonHolder {
         // El constructor de Singleton puede ser llamado desde aquí al ser protected
         private final static ModelFactoryController eINSTANCE;
@@ -173,6 +174,10 @@ public class ModelFactoryController {
     }
 
     //-------------------------Admin functions---------------------------------------------------
+
+    public boolean deleteSong(Song songSelection) throws SongException {
+       return storify.deleteSong( songSelection );
+    }
         //---------------------Artist functions------------------------------------------------
 
     public List<Artist> getListArtist(){

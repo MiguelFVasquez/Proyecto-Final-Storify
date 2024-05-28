@@ -1,19 +1,23 @@
 # WORKING ON PROJECT: 
-## ***TASKS**
-### **TO DO**
 
-- Reproducir una canción
-- Avanzar en la fila para reproducir la siguiente canción
-- Implementar colas ¿?
+## ***TASKS**
+
+### **TO DO**
+- Documentar código
+- Java DOC
+
 
 
 ### DOING
+
+
+### DONE
+- Reproducir una canción
+- Avanzar en la fila para reproducir la siguiente canción
+- Implementar colas ¿?
 - Motor de búsqueda O Y y Artistas
 - Funcionamiento al presionar en caratulas de Artistas
 - Mejorar reproductor de musica (Pausar y reanudar)
-
-### DONE
-
 - Seleccionar una canción y añadirla a la lista de usuario
 - Visualización de portadas en UserView
 - Validación de campos de Login

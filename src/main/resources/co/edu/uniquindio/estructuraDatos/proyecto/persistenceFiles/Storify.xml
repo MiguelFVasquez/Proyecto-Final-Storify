@@ -272,7 +272,7 @@
       <string>santiagoorozcozuluaga@gmail.com</string>
      </void>
      <void property="password">
-      <string>12</string>
+      <string>0502</string>
      </void>
      <void property="songList">
       <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList"/>

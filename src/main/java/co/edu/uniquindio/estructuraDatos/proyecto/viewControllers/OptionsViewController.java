@@ -32,8 +32,6 @@ public class OptionsViewController {
     @FXML
     private URL location;
 
-    @FXML
-    private Button btnAddQueue;
 
     @FXML
     private Button btnLike;
@@ -154,10 +152,6 @@ public class OptionsViewController {
         delay.play();
     }
 
-    @FXML
-    void addSongToQueue(ActionEvent event) {
-
-    }
 
     @FXML
     void initialize() {
@@ -166,8 +160,7 @@ public class OptionsViewController {
         btnLike.setOnMouseEntered(event -> btnLike.setStyle("-fx-background-color: rgba(0, 0, 0, 0.1); -fx-text-fill: black; -fx-background-radius: 4px;"));
         btnLike.setOnMouseExited(event -> btnLike.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
 
-        btnAddQueue.setOnMouseEntered(event -> btnAddQueue.setStyle("-fx-background-color: rgba(0, 0, 0, 0.1); -fx-text-fill: black;"));
-        btnAddQueue.setOnMouseExited(event -> btnAddQueue.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
+
 
     }
     public void song(){

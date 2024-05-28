@@ -7,10 +7,8 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
-import javafx.scene.image.Image;
 import org.junit.Test;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -108,7 +106,7 @@ public class StorifyTest {
     public void testDeleteSong() throws MalformedURLException, SongException {
         Song song= newSong();
         storify.addSong(song);
-        boolean result= storify.delateSong(song);
+        boolean result= storify.deleteSong(song);
         assertTrue(result);
     }
     //-------------------Metodos de los artistas---------------------------

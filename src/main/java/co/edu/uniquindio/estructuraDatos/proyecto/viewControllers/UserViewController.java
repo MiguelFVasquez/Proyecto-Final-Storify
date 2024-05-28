@@ -1266,15 +1266,18 @@ public class UserViewController implements Initializable {
 
         stage.initStyle( StageStyle.UNDECORATED );
 
-
+        btnPlaySongLibrary.setDisable( true);
         btnUnlike.setDisable( true );
         tableViewLikedSongs.getSelectionModel().selectedItemProperty().addListener( (obs , oldSelection , newSelection) -> {
             if ( newSelection != null ) {
                 songSelection = newSelection;
                 btnUnlike.setDisable( false );
+                btnPlaySongLibrary.setDisable( false);
 
             }else{
                 btnUnlike.setDisable( true );
+                btnPlaySongLibrary.setDisable( true);
+
 
             }
         });

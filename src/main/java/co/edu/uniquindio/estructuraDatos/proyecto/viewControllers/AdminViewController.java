@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.estructuraDatos.proyecto.controllers.AdminController;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.ArtistException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
+import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
@@ -106,7 +107,8 @@ public class AdminViewController implements Initializable {
     private Button btnConfirmChangesSong;
     @FXML
     private Button btnEditSong;
-
+    @FXML
+    private Button btnRemoveSong;
     //-----------Elementos del artista------
     @FXML
     private TextField txtNameArtist;
@@ -134,6 +136,9 @@ public class AdminViewController implements Initializable {
     private Button btnConfirmChangesArtist;
     @FXML
     private Button btnCancelChanges;
+    @FXML
+    private Button btnRemoveArtist;
+
 
     //------------Variables auxiliares---------------
     private Stage stage;
@@ -305,9 +310,17 @@ public class AdminViewController implements Initializable {
         }
         if (year.isEmpty()){
             notification+= "Type song's year\n";
+        }else {
+            if (!isNumber(year)) {
+                notification += "Type song's year in numbers\n";
+            }
         }
         if (duration.isEmpty()){
             notification+="Type song's duration\n";
+        }else {
+            if (!isNumber(duration)) {
+                notification += "Type song's duration in numbers\n";
+            }
         }
         if (link == (null) || link.isEmpty()){
             notification+= "Type song's link\n";
@@ -320,6 +333,15 @@ public class AdminViewController implements Initializable {
         }
         showMessage("Notification", "Invalid data", notification, Alert.AlertType.INFORMATION);
         return false;
+    }
+
+    private boolean isNumber(String string) {
+        try {
+            Float.parseFloat(string);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private URL obtenerURL() {
@@ -516,13 +538,94 @@ public class AdminViewController implements Initializable {
         showPopUp( "Now you can edit the info of the song on the fields at the top" , stage);
     }
 
+    @FXML
+    void removeSongFromApp(ActionEvent event){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Are you sure you want delete this song?");
+        alert.setContentText("This accion can't be reversed");
+
+        // Agregar botones al diálogo
+        ButtonType confirmButtonType = new ButtonType("Confirm");
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(confirmButtonType, cancelButtonType);
+
+        // Mostrar el diálogo y esperar la respuesta del usuario
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == confirmButtonType) {
+                // El usuario confirmó la acción, realiza la acción deseada
+                try {
+                    deleteSong();
+                    adminController.mfm.saveDataTest();
+
+                }  catch (SongException e) {
+                    throw new RuntimeException( e );
+                }
+            }
+            cleanUpSong( event );
+            refreshTableViewSong();
+            tableViewSongs.getSelectionModel().clearSelection();
+        });
+    }
+
+    private void deleteSong() throws SongException {
+        if(adminController.mfm.deleteSong(songSelection)){
+            showMessage( "Notification", "Song eliminated Succesfully" ,
+                    "The song has been removed", Alert.AlertType.INFORMATION );
+        }else{
+            showMessage( "Notification", "Song not eliminated" ,
+                    "The song wasn't been removed", Alert.AlertType.INFORMATION );
+        }
+    }
+
+    @FXML
+    void removeArtistFromApp(ActionEvent event){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Are you sure you want delete this artist?");
+        alert.setContentText("This accion can't be reversed");
+
+        // Agregar botones al diálogo
+        ButtonType confirmButtonType = new ButtonType("Confirm");
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(confirmButtonType, cancelButtonType);
+
+        // Mostrar el diálogo y esperar la respuesta del usuario
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == confirmButtonType) {
+                // El usuario confirmó la acción, realiza la acción deseada
+                try {
+                    deleteArtist();
+                    adminController.mfm.saveDataTest();
+
+                } catch (ArtistException e) {
+                    throw new RuntimeException( e );
+                }
+            }
+
+            cleanUpArtist( event );
+            try {
+                refreshTableViewArtist();
+            } catch (IOException e) {
+                throw new RuntimeException( e );
+            }
+            refreshTableViewSong();
+            tableViewArtists.getSelectionModel().clearSelection();
+        });
+    }
+
+    private void deleteArtist() throws ArtistException {
+        if ( adminController.mfm.deleteArtist( artistSelection ) ){
+            showMessage( "Notification", "Artist eliminated" ,
+                    "Artist has been removed" , Alert.AlertType.INFORMATION );
+        }else{
+            showMessage( "Notification", "Artist not eliminated" ,
+                    "Artist wasn't removed" , Alert.AlertType.INFORMATION );
+        }
+    }
 
 
-
-
-
-
-//------------------------------------------------SONGS----------------------------------------------
+    //------------------------------------------------SONGS----------------------------------------------
     @FXML
     void selectCoverSong(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnSelectCover.getScene().getWindow();
@@ -662,9 +765,8 @@ public class AdminViewController implements Initializable {
         txtDurationSong.clear();
         comboBoxGender.setValue( null );
         comboBoxArtist.setValue( null );
+        imageViewSongPortait.setImage( null );
 
-        Image image = new Image("file:" + "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/musica.png");
-        imageViewSongPortait.setImage(image);
     }
 
     @FXML
@@ -754,13 +856,16 @@ public class AdminViewController implements Initializable {
         this.tableColumnNationality.setCellValueFactory(new PropertyValueFactory<>("nationality"));
         this.tableColumnGroup.setCellValueFactory(new PropertyValueFactory<>("isAlone"));
 
+        btnRemoveArtist.setDisable( true );
         tableViewArtists.getSelectionModel().selectedItemProperty().addListener( (obs , oldSelection , newSelection) -> {
             if ( newSelection != null ) {
                 artistSelection = newSelection;
                 showArtistInfo();
                 btnEditArtist.setDisable( false );
+                btnRemoveArtist.setDisable( false );
             }else{
                 createArtistForm();
+                btnRemoveArtist.setDisable( true );
                 btnEditArtist.setDisable( true );
             }
         });
@@ -769,14 +874,17 @@ public class AdminViewController implements Initializable {
         this.columnYear.setCellValueFactory(new PropertyValueFactory<>("year"));
         this.columnArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
 
+        btnRemoveSong.setDisable( true );
         tableViewSongs.getSelectionModel().selectedItemProperty().addListener( (obs , oldSelection , newSelection) -> {
             if ( newSelection != null ) {
                 songSelection = newSelection;
                 showSongInfo();
                 btnAddSong.setDisable( true );
+                btnRemoveSong.setDisable( false );
 
                 btnEditSong.setDisable( false );
             }else{
+                btnRemoveSong.setDisable( true );
                 songSelection = null;
                 btnAddSong.setDisable( false );
                 createSongForm();

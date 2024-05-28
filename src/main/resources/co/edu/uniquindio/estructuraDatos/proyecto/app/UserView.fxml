@@ -427,9 +427,9 @@
                   <String fx:value="background-register" />
                </styleClass>
                <children>
-                  <Label fx:id="lblmostListenedGender" alignment="CENTER" layoutX="36.0" layoutY="47.0" prefHeight="32.0" prefWidth="319.0" text="Most listened gender: " textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="lblmostListenedGender" alignment="CENTER" layoutX="44.0" layoutY="43.0" prefHeight="46.0" prefWidth="302.0" text="Electrónica" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font name="Calibri Bold" size="22.0" />
+                        <Font name="Calibri Bold" size="50.0" />
                      </font>
                   </Label>
                </children>
@@ -483,7 +483,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorSongsArtist" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
+      <AnchorPane fx:id="anchorSongsArtist" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0" visible="false">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />

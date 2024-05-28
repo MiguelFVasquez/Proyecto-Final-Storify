@@ -21,7 +21,7 @@ public interface IStorify {
     //-----Metodos de cancion-------------------
 
     public boolean addSong(Song newSong) throws SongException;
-    public boolean delateSong(Song songDelete) throws SongException;
+    public boolean deleteSong(Song songDelete) throws SongException;
     public boolean updateSong(Song songUpdate) throws SongException;
 
 }

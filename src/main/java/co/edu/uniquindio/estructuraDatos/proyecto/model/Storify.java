@@ -311,9 +311,17 @@ public class Storify implements IStorify, Serializable {
             throw new ArtistException("El artista "+ name+ " no ha sido encontrado");
         }else {
             deleted=true;
-            for(Song song: artistAux.getSongList()){
-                songList.remove( song );
+
+            if(artistAux.getSongList().toList() !=null && !artistAux.getSongList().toList().isEmpty() ){
+                for(Song song: artistAux.getSongList()){
+                    try {
+                        deleteSong( song );
+                    } catch (SongException e) {
+                        throw new RuntimeException( e );
+                    }
+                }
             }
+
             artistTree.eliminar(artistAux);
         }
         return deleted;
@@ -426,7 +434,7 @@ public class Storify implements IStorify, Serializable {
     }
 
     @Override
-    public boolean delateSong(Song songDelete) throws SongException {
+    public boolean deleteSong(Song songDelete) throws SongException {
         boolean deleted= false;
         String code= songDelete.getCode();
         if (getSong(code)==null){
@@ -434,6 +442,12 @@ public class Storify implements IStorify, Serializable {
         }else {
             deleted=true;
             songList.remove(songDelete);
+            for (Map.Entry<String, User> entry: usersMap.entrySet()) {
+                if(entry.getValue().verifySong( songDelete.getCode() )){
+                    entry.getValue().getSongList().delete(songDelete);
+                }
+
+            }
             songDelete.getArtist().deleteSong(songDelete);
         }
         return deleted;
