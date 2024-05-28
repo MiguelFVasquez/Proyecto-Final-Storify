@@ -8,9 +8,9 @@
    <void method="add">
     <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
      <void property="artist">
-      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist" id="Artist0">
        <void property="code">
-        <string>onoJnJAoel</string>
+        <string>goM rrn nt</string>
        </void>
        <void property="name">
         <string>Milo J</string>
@@ -19,7 +19,7 @@
         <string>Argentino</string>
        </void>
        <void property="photo">
-        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/milito.jpg</string>
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/miloJPHOTO.png</string>
        </void>
        <void property="songList">
         <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
@@ -30,7 +30,7 @@
       <string>lMcn Moooc</string>
      </void>
      <void property="cover">
-      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/RinconCover.jpg</string>
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/riconCover.png</string>
      </void>
      <void property="duration">
       <string>107</string>
@@ -54,7 +54,7 @@
      <void property="artist">
       <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
        <void property="code">
-        <string>eoktiEFoFn</string>
+        <string>ksror rras</string>
        </void>
        <void property="name">
         <string>Forrest Frank</string>
@@ -63,7 +63,7 @@
         <string>Estadounidense</string>
        </void>
        <void property="photo">
-        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/forrestFrank.jpg</string>
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/forrestFrankPHOTO.png</string>
        </void>
        <void property="songList">
         <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
@@ -74,7 +74,7 @@
       <string>eeornFKF  </string>
      </void>
      <void property="cover">
-      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/lowKeyCover.jpg</string>
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/lk.png</string>
      </void>
      <void property="duration">
       <string>90</string>
@@ -140,29 +140,13 @@
    <void method="add">
     <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
      <void property="artist">
-      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
-       <void property="code">
-        <string>onoJnJAoel</string>
-       </void>
-       <void property="name">
-        <string>Milo J</string>
-       </void>
-       <void property="nationality">
-        <string>Argentino</string>
-       </void>
-       <void property="photo">
-        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/milito.jpg</string>
-       </void>
-       <void property="songList">
-        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
-       </void>
-      </object>
+      <object idref="Artist0"/>
      </void>
      <void property="code">
       <string>EOEOSDlElR</string>
      </void>
      <void property="cover">
-      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/carenciasCordura.jpg</string>
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/carenciasDeCorduraCover.png</string>
      </void>
      <void property="duration">
       <string>117</string>
@@ -187,64 +171,13 @@
       <string>santiagoorozcozuluaga@gmail.com</string>
      </void>
      <void property="password">
-      <string>11</string>
-     </void>
-     <void property="songList">
-      <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList"/>
-     </void>
-     <void property="userName">
-      <string>Santiago</string>
-     </void>
-    </object>
-   </void>
-   <void method="put">
-    <string>Camilo</string>
-    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.User">
-     <void property="email">
-      <string>jalbaranmontoya@gmail.com</string>
-     </void>
-     <void property="password">
       <string>12</string>
      </void>
      <void property="songList">
       <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList"/>
      </void>
      <void property="userName">
-      <string>Camilo</string>
-     </void>
-    </object>
-   </void>
-   <void method="put">
-    <string>Moly</string>
-    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.User">
-     <void property="email">
-      <string>asd</string>
-     </void>
-     <void property="password">
-      <string>11</string>
-     </void>
-     <void property="songList">
-      <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList"/>
-     </void>
-     <void property="userName">
-      <string>Moly</string>
-     </void>
-    </object>
-   </void>
-   <void method="put">
-    <string>Hola</string>
-    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.User">
-     <void property="email">
-      <string>sad</string>
-     </void>
-     <void property="password">
-      <string>11</string>
-     </void>
-     <void property="songList">
-      <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.CircularLinkedList"/>
-     </void>
-     <void property="userName">
-      <string>Hola</string>
+      <string>Santiago</string>
      </void>
     </object>
    </void>

@@ -30,7 +30,7 @@
       </ImageView>
       <VBox layoutX="5.0" layoutY="215.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="232.0" prefWidth="198.0" style="-fx-spacing: 12;">
          <children>
-            <Button fx:id="btnHome" mnemonicParsing="false" onAction="#showHomeInfo" prefHeight="59.0" prefWidth="210.0" style="-fx-background-color: transparent;" text="Home" textAlignment="CENTER">
+            <Button fx:id="btnHome" mnemonicParsing="false" onAction="#showHomeInfo" prefHeight="49.0" prefWidth="212.0" style="-fx-background-color: transparent;" text="Home" textAlignment="CENTER">
                <font>
                   <Font name="Calibri Light" size="27.0" />
                </font>
@@ -58,6 +58,14 @@
                </font>
                <graphic>
                   <FontAwesomeIconView fill="#a3c0f5" glyphName="USER" size="30" stroke="#4a4a4a" textAlignment="JUSTIFY" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnAnalytics" layoutX="10.0" layoutY="193.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#showAnalytics" prefHeight="59.0" prefWidth="210.0" style="-fx-background-color: transparent;" text="Analytics" textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri Light" size="27.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#a3c0f5" glyphName="INFO" size="30" stroke="#4a4a4a" textAlignment="JUSTIFY" />
                </graphic>
             </Button>
          </children>
@@ -200,9 +208,9 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPlayer" layoutX="-6.0" layoutY="457.0" prefHeight="200.0" prefWidth="227.0" visible="false">
+      <AnchorPane fx:id="anchorPlayer" layoutX="25.0" layoutY="511.0" prefHeight="182.0" prefWidth="161.0">
          <children>
-            <AnchorPane layoutX="39.0" layoutY="30.0" prefHeight="125.0" prefWidth="150.0">
+            <AnchorPane layoutX="21.0" layoutY="9.0" prefHeight="125.0" prefWidth="150.0">
                <styleClass>
                   <String fx:value="white-bg" />
                   <String fx:value="shadow" />
@@ -224,7 +232,7 @@
                   </StackPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="24.0" layoutY="150.0" prefHeight="41.0" prefWidth="180.0" style="-fx-background-color: #00053D; -fx-border-color: fff; -fx-border-radius: 8;">
+            <AnchorPane layoutX="6.0" layoutY="127.0" prefHeight="41.0" prefWidth="180.0" style="-fx-background-color: #00053D; -fx-border-color: fff; -fx-border-radius: 8;">
                <styleClass>
                   <String fx:value="white-bg" />
                   <String fx:value="shadow" />
@@ -320,7 +328,7 @@
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorUserSettings" layoutX="265.0" layoutY="115.0" prefHeight="546.0" prefWidth="439.0">
+      <AnchorPane fx:id="anchorUserSettings" layoutX="265.0" layoutY="115.0" prefHeight="546.0" prefWidth="439.0" visible="false">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />
@@ -380,6 +388,90 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="WARNING" />
                </graphic>
             </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorAnalytics" layoutX="267.0" layoutY="115.0" prefHeight="546.0" prefWidth="1042.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <Label layoutX="546.0" layoutY="30.0" text="Most listened artist on the app">
+               <font>
+                  <Font name="Calibri Italic" size="34.0" />
+               </font>
+            </Label>
+            <StackPane fx:id="stackPA" alignment="BOTTOM_LEFT" layoutX="616.0" layoutY="98.0" prefHeight="258.0" prefWidth="283.0">
+               <children>
+                  <ImageView fx:id="imagePA" fitHeight="209.0" fitWidth="262.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="CENTER" />
+               </children>
+               <styleClass>
+                  <String fx:value="artistBg" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </StackPane>
+            <Label layoutX="606.0" layoutY="411.0" text="Most listened gender: ">
+               <font>
+                  <Font name="Calibri Italic" size="34.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblmostListenedGender" alignment="CENTER" layoutX="599.0" layoutY="460.0" prefHeight="32.0" prefWidth="319.0" text="Most listened gender: " textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="22.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="556.0" layoutY="321.0" prefHeight="71.0" prefWidth="404.0" style="-fx-background-color: gold; -fx-border-color: black; -fx-border-radius: 8px;">
+               <styleClass>
+                  <String fx:value="white-bg" />
+                  <String fx:value="shadow" />
+                  <String fx:value="bgInfo" />
+               </styleClass>
+               <children>
+                  <Label fx:id="lblPA" alignment="CENTER" contentDisplay="CENTER" layoutX="58.0" layoutY="13.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="23.0" prefWidth="285.0" text="Label" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="39.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Label layoutX="59.0" layoutY="30.0" text="Most listened artist by you">
+               <font>
+                  <Font name="Calibri Italic" size="34.0" />
+               </font>
+            </Label>
+            <StackPane fx:id="stackPAU" alignment="BOTTOM_LEFT" layoutX="100.0" layoutY="98.0" prefHeight="258.0" prefWidth="283.0">
+               <children>
+                  <ImageView fx:id="imagePAU" fitHeight="209.0" fitWidth="262.0" pickOnBounds="true" preserveRatio="true" styleClass="roundedImageView" StackPane.alignment="CENTER" />
+               </children>
+               <styleClass>
+                  <String fx:value="artistBg2" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </StackPane>
+            <AnchorPane layoutX="40.0" layoutY="321.0" prefHeight="71.0" prefWidth="404.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-radius: 8px;">
+               <styleClass>
+                  <String fx:value="white-bg" />
+                  <String fx:value="shadow" />
+                  <String fx:value="bgInfo2" />
+               </styleClass>
+               <children>
+                  <Label fx:id="lblPAU" alignment="CENTER" contentDisplay="CENTER" layoutX="58.0" layoutY="13.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="23.0" prefWidth="285.0" text="Label" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="39.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Label layoutX="90.0" layoutY="411.0" text="Most listened gender: ">
+               <font>
+                  <Font name="Calibri Italic" size="34.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblmostListenedGenderByUser" alignment="CENTER" layoutX="83.0" layoutY="460.0" prefHeight="32.0" prefWidth="319.0" text="Most listened gender: " textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="22.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

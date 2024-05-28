@@ -1,24 +1,25 @@
 # WORKING ON PROJECT: Shuh3n
 ## ***TASKS**
 ### **TO DO**
-- Seleccionar una canción y añadirla a la lista de usuario
+
 - Reproducir una canción
 - Avanzar en la fila para reproducir la siguiente canción
 - Implementar colas ¿?
-- Funcionamiento al presionar en caratulas de albumes 
-- Motor de búsqueda O Y y Artistas
-- Filtros en ventana library
-- Revisar motor de busqueda ((ERROR COLLECTIONS))
-- Mejorar reproductor de musica (Pausar y reanudar)
-
-
 
 
 ### DOING
+- Motor de búsqueda O Y y Artistas
+- Funcionamiento al presionar en caratulas de Artistas
+- Mejorar reproductor de musica (Pausar y reanudar)
+
+### DONE
+
+- Seleccionar una canción y añadirla a la lista de usuario
 - Visualización de portadas en UserView
 - Validación de campos de Login
 - Funcionalidad de botones Tab register
-### DONE
+- Filtros en ventana library
+- Revisar motor de busqueda ((ERROR COLLECTIONS))
 - Edita canción ADminView
 - Editar Artista en AdminView
 - Corregir actualizacion de canciones en la home del user

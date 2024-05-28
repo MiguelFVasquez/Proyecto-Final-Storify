@@ -10,6 +10,7 @@ import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.ArtistException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.UserException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
+import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import javafx.animation.FadeTransition;
@@ -61,6 +62,8 @@ public class UserViewController implements Initializable {
     private AnchorPane anchorPlayer;
     @FXML
     private AnchorPane anchorUserSettings;
+    @FXML
+    private AnchorPane anchorAnalytics;
 
     @FXML
     private StackPane stackFS1;
@@ -80,6 +83,10 @@ public class UserViewController implements Initializable {
     private StackPane stackA3;
     @FXML
     private StackPane stackA4;
+    @FXML
+    private StackPane stackPA;
+    @FXML
+    private StackPane stackPAU;
 
     @FXML
     private ImageView imageFS1;
@@ -107,6 +114,10 @@ public class UserViewController implements Initializable {
     private ImageView imagePlayer;
     @FXML
     private ImageView imageBtnPlay;
+    @FXML
+    private ImageView imagePA;
+    @FXML
+    private ImageView imagePAU;
 
     @FXML
     private Button btnUserSettings;
@@ -133,6 +144,15 @@ public class UserViewController implements Initializable {
     private Label lblSA3;
     @FXML
     private Label lblSA4;
+    @FXML
+    private Label lblPA;
+    @FXML
+    private Label lblPAU;
+    @FXML
+    private Label lblmostListenedGender;
+    @FXML
+    private Label lblmostListenedGenderByUser;
+
     @FXML
     private Label labelTitle;
     @FXML
@@ -312,6 +332,7 @@ public class UserViewController implements Initializable {
         anchorLibrary.setVisible( false );
         anchorSearch.setVisible( false );
         anchorUserSettings.setVisible( false );
+        anchorAnalytics.setVisible( false );
         showReleasesSongs( getSongs() );
         showArtist( getArtists() );
 
@@ -442,23 +463,80 @@ public class UserViewController implements Initializable {
     }
 
     @FXML
-    void showLibraryInfo(ActionEvent event) {
-        labelTitle.setText( "Library" );
-        anchorHome.setVisible( false );
-        anchorLibrary.setVisible( true );
-        anchorSearch.setVisible( false );
-        anchorUserSettings.setVisible( false );
-        refreshTableViewFavorites();
-
-    }
-
-    @FXML
     void showSearchInfo(ActionEvent event) {
         labelTitle.setText( "Search" );
         anchorHome.setVisible( false );
         anchorLibrary.setVisible( false );
         anchorSearch.setVisible( true );
         anchorUserSettings.setVisible( false );
+        anchorAnalytics.setVisible( false );
+    }
+    @FXML
+    void showLibraryInfo(ActionEvent event) {
+        labelTitle.setText( "Library" );
+        anchorHome.setVisible( false );
+        anchorLibrary.setVisible( true );
+        anchorSearch.setVisible( false );
+        anchorUserSettings.setVisible( false );
+        anchorAnalytics.setVisible( false );
+        refreshTableViewFavorites();
+
+    }
+    @FXML
+    void showUserSettings(ActionEvent event){
+        anchorHome.setVisible( false );
+        anchorLibrary.setVisible( false );
+        anchorSearch.setVisible( false );
+        anchorUserSettings.setVisible( true );
+        anchorAnalytics.setVisible( false );
+
+        labelTitle.setText( "Settings" );
+        txtNameSettings.setText( user.getUserName() );
+        txtPasswordSettings.setText( user.getPassword() );
+        txtEmailSettings.setText( user.getEmail() );
+
+    }
+    @FXML
+    void showAnalytics(ActionEvent event) {
+        labelTitle.setText( "Analytics" );
+        anchorHome.setVisible( false );
+        anchorLibrary.setVisible( false );
+        anchorSearch.setVisible( false );
+        anchorUserSettings.setVisible( false );
+        anchorAnalytics.setVisible( true );
+
+
+        Artist artistMostListened = userController.mfm.getMostListenedArtist();
+            if(artistMostListened!=null){
+                displayInfoArtistMostListened( artistMostListened, imagePA, lblPA);
+            }else{
+                lblPA.setText( "Mysterious??" );
+            }
+
+        Gender genderMostListened = userController.mfm.getMostListenedGender();
+            if(genderMostListened!=null){
+                lblmostListenedGender.setText( genderMostListened.toString() );
+
+            }else{
+                lblmostListenedGender.setText( "Every gender is too listened" );
+
+            }
+
+        Artist artistMostListenedByUser = userController.mfm.getMostListenedArtistByUser(user);
+        if ( artistMostListenedByUser != null ) {
+            displayInfoArtistMostListened( artistMostListenedByUser , imagePAU , lblPAU );
+        } else {
+            lblPAU.setText( "Mysterious??" );
+        }
+        Gender genderMLU = userController.mfm.getMostListenedGenderByUser( user );
+        if(genderMLU!=null){
+            lblmostListenedGenderByUser.setText( genderMLU.toString() );
+
+        }else{
+            lblmostListenedGenderByUser.setText( "You listen to various genres" );
+
+        }
+
     }
     @FXML
     void logOut(ActionEvent event) {
@@ -684,18 +762,21 @@ public class UserViewController implements Initializable {
         }
 
     }
-    @FXML
-    void showUserSettings(ActionEvent event){
-        anchorHome.setVisible( false );
-        anchorLibrary.setVisible( false );
-        anchorSearch.setVisible( false );
-        anchorUserSettings.setVisible( true );
-        labelTitle.setText( "Settings" );
-        txtNameSettings.setText( user.getUserName() );
-        txtPasswordSettings.setText( user.getPassword() );
-        txtEmailSettings.setText( user.getEmail() );
 
 
+    private void displayInfoArtistMostListened(Artist artist, ImageView imageView, Label label) {
+
+        try {
+            // Crear el Image y el ImageView
+            Image image = new Image( artist.getPhoto());
+            label.setText( artist.getName() );
+            imageView.setImage( image );
+            imageView.setFitWidth(262 );
+            imageView.setFitHeight( 209 );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -811,6 +892,8 @@ public class UserViewController implements Initializable {
         anchorLibrary.setVisible( false );
         anchorPlayer.setVisible( false );
         anchorUserSettings.setVisible( false );
+        anchorAnalytics.setVisible( false );
+
         webView = new WebView();
         webView.setPrefSize(125, 106); // Ajustar el tamaño del WebView
         anchorPlayer.setTopAnchor(webView, 0.0);
@@ -1035,6 +1118,26 @@ public class UserViewController implements Initializable {
             stackA4.setStyle("-fx-background-color: transparent; " +
                     "-fx-text-fill: black;");
             animationScaleOut( stackA4 );
+        });
+
+        stackPA.setOnMouseEntered((MouseEvent e) -> {
+            stackPA.setCursor( Cursor.NONE );
+            animationScaleIn( stackPA );
+        });
+
+        stackPA.setOnMouseExited((MouseEvent e) -> {
+            stackPA.setCursor( Cursor.DEFAULT );
+            animationScaleOut( stackPA );
+        });
+
+        stackPAU.setOnMouseEntered((MouseEvent e) -> {
+            stackPAU.setCursor( Cursor.NONE );
+            animationScaleIn( stackPAU );
+        });
+
+        stackPAU.setOnMouseExited((MouseEvent e) -> {
+            stackPAU.setCursor( Cursor.DEFAULT );
+            animationScaleOut( stackPAU );
         });
 
 

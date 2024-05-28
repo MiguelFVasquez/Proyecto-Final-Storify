@@ -139,6 +139,38 @@
     -fx-background-color: transparent; /* Para asegurar que el fondo sea transparente */
 }
 
+.artistBg{
+     -fx-background-opacity: 60%;
+     -fx-background-radius: 20px;
+     -fx-background-image: url('../images/image.png');
+     -fx-background-size: cover;
+     -fx-background-repeat: no-repeat;
+
+}.artistBg2{
+     -fx-background-opacity: 60%;
+     -fx-background-radius: 20px;
+     -fx-background-image: url('../images/mostFamous.png');
+     -fx-background-size: cover;
+     -fx-background-repeat: no-repeat;
+
+}
+.bgInfo{
+     -fx-background-opacity: 60%;
+     -fx-background-radius: 20px;
+     -fx-background-image: url('../images/gold.png');
+     -fx-background-size: cover;
+     -fx-background-repeat: no-repeat;
+
+}.bgInfo2{
+     -fx-background-opacity: 60%;
+     -fx-background-radius: 20px;
+     -fx-background-image: url('../images/black.png');
+     -fx-background-size: cover;
+     -fx-background-repeat: no-repeat;
+
+}
+
+
 
 
 

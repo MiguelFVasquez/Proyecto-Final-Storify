@@ -150,6 +150,20 @@ public class ModelFactoryController {
         storify.deleteUser(  user);
     }
 
+    public Artist getMostListenedArtist() {
+        return storify.getMostListenedArtist();
+    }
+    public Gender getMostListenedGender() {
+        return storify.getMostListenedGender();
+    }
+
+    public Artist getMostListenedArtistByUser(User user) {
+        return user.getMostListenedArtist();
+    }
+    public Gender getMostListenedGenderByUser(User user) {
+        return user.getMostListenedGender();
+    }
+
 
     public void playSong(WebView webView, String url, Boolean play){
         storify.playSong(webView, url,play);

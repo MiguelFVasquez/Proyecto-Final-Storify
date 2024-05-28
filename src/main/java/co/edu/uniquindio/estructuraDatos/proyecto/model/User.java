@@ -144,7 +144,9 @@ public class User implements Serializable {
 
         for (Song songAux : songList){
             Artist artist= songAux.getArtist();
-            artistCount.put(artist,artistCount.getOrDefault(artist,0) +1);
+            if(artist!=null){
+                artistCount.put(artist,artistCount.getOrDefault(artist,0) +1);
+            }
         }
         //Artista con mas apariciones
         Artist mostLikedArtist= null;

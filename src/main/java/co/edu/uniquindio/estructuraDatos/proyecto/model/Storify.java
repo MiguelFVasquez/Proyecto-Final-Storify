@@ -595,8 +595,11 @@ public class Storify implements IStorify, Serializable {
         Map<Artist, Integer> artistCount= new HashMap<>();
         for (User userAux: usersMap.values() ){
             Artist mostListenedArtist= userAux.getMostListenedArtist(); //Obtener el artista mas escuchado de cada usuario
-            artistCount.put(mostListenedArtist, artistCount.getOrDefault(mostListenedArtist,0)+1);
+            if(mostListenedArtist!=null){
+                artistCount.put(mostListenedArtist, artistCount.getOrDefault(mostListenedArtist,0)+1);
+            }
         }
+        System.out.println(artistCount);
         //Encontrar el artista mas escuchado
         Artist mostListenedArtisit= null;
         int maxCount= 0;
