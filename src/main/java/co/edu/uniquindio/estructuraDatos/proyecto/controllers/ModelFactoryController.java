@@ -11,7 +11,6 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Storify;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import co.edu.uniquindio.estructuraDatos.proyecto.persistence.Persistence;
 import co.edu.uniquindio.estructuraDatos.proyecto.viewControllers.LoginViewController;
-import javafx.scene.image.Image;
 import javafx.scene.web.WebView;
 
 import java.io.IOException;
@@ -127,10 +126,6 @@ public class ModelFactoryController {
 
     }
 
-//    public void addFavSong(User user, Song songSelected) throws SongException {
-//        user.addSongToList( songSelected );
-//    }
-
     public List<Song> searchArtist(String newValue) throws ArtistException {
         return storify.searchSongByArtistName( newValue );
     }
@@ -146,6 +141,15 @@ public class ModelFactoryController {
         }
         return storify.searchO( newValue, newValue, null , newValue );
     }
+    public boolean updateUser(String name , String password , String email) throws UserException {
+        User user = new User(name,password,email);
+        return storify.updateUser(user  );
+    }
+
+    public void deleteUser(User user) throws UserException {
+        storify.deleteUser(  user);
+    }
+
 
     public void playSong(WebView webView, String url, Boolean play){
         storify.playSong(webView, url,play);

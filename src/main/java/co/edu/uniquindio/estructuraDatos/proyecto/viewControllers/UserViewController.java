@@ -13,17 +13,18 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Artist;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Song;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.User;
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -58,6 +59,8 @@ public class UserViewController implements Initializable {
     private AnchorPane anchorLibrary;
     @FXML
     private AnchorPane anchorPlayer;
+    @FXML
+    private AnchorPane anchorUserSettings;
 
     @FXML
     private StackPane stackFS1;
@@ -106,6 +109,9 @@ public class UserViewController implements Initializable {
     private ImageView imageBtnPlay;
 
     @FXML
+    private Button btnUserSettings;
+
+    @FXML
     private Label lblFS1;
 
     @FXML
@@ -134,18 +140,36 @@ public class UserViewController implements Initializable {
     @FXML
     private TextField txtSearch;
     @FXML
+    private TextField txtEmailSettings;
+
+    @FXML
+    private TextField txtNameSettings;
+
+    @FXML
+    private PasswordField txtPasswordSettings;
+
+    @FXML
     private Button btnHome;
     @FXML
     private Button btnPlay;
+    @FXML
+    private Button btnCancelChangesSettings;
+
+    @FXML
+    private Button btnConfirmChangesSettings;
+
+    @FXML
+    private Button btnDeleteAcc;
+
+    @FXML
+    private Button btnEditInfoSettings;
 
     @FXML
     private Button btnLibrary;
     @FXML
     private Button btnSearch;
-
     @FXML
     private Button btnDeshacer;
-
     @FXML
     private Button btnTime;
     @FXML
@@ -221,6 +245,7 @@ public class UserViewController implements Initializable {
     private boolean playing= false;
     private WebView webView;
     private Song selectedSong;
+    private boolean showingToolTip = false;
 
     public void setLoginViewController(LoginViewController loginViewController) {
         this.loginViewController = loginViewController;
@@ -286,6 +311,7 @@ public class UserViewController implements Initializable {
         anchorHome.setVisible( true );
         anchorLibrary.setVisible( false );
         anchorSearch.setVisible( false );
+        anchorUserSettings.setVisible( false );
         showReleasesSongs( getSongs() );
         showArtist( getArtists() );
 
@@ -418,9 +444,10 @@ public class UserViewController implements Initializable {
     @FXML
     void showLibraryInfo(ActionEvent event) {
         labelTitle.setText( "Library" );
+        anchorHome.setVisible( false );
         anchorLibrary.setVisible( true );
         anchorSearch.setVisible( false );
-        anchorHome.setVisible( false );
+        anchorUserSettings.setVisible( false );
         refreshTableViewFavorites();
 
     }
@@ -428,19 +455,20 @@ public class UserViewController implements Initializable {
     @FXML
     void showSearchInfo(ActionEvent event) {
         labelTitle.setText( "Search" );
-        anchorSearch.setVisible( true );
-        anchorLibrary.setVisible( false );
         anchorHome.setVisible( false );
+        anchorLibrary.setVisible( false );
+        anchorSearch.setVisible( true );
+        anchorUserSettings.setVisible( false );
     }
     @FXML
     void logOut(ActionEvent event) {
         loginViewController.show();
         optionsViewController.close();
-        logout();
+        pauseVideo();
         this.stage.close();
     }
 
-    private void logout() {
+    private void pauseVideo() {
         if (playing) {
             playSongVideo(selectedSong.getName(), false); // Pausar el video antes de cerrar sesión
         }
@@ -656,6 +684,120 @@ public class UserViewController implements Initializable {
         }
 
     }
+    @FXML
+    void showUserSettings(ActionEvent event){
+        anchorHome.setVisible( false );
+        anchorLibrary.setVisible( false );
+        anchorSearch.setVisible( false );
+        anchorUserSettings.setVisible( true );
+        labelTitle.setText( "Settings" );
+        txtNameSettings.setText( user.getUserName() );
+        txtPasswordSettings.setText( user.getPassword() );
+        txtEmailSettings.setText( user.getEmail() );
+
+
+    }
+
+    @FXML
+    void cancelChangesSettings(ActionEvent event) {
+        txtPasswordSettings.setEditable( false );
+        txtEmailSettings.setEditable( false );
+        btnCancelChangesSettings.setVisible( false );
+        btnConfirmChangesSettings.setVisible( false );
+        btnEditInfoSettings.setVisible( true );
+
+        txtPasswordSettings.setText( user.getPassword() );
+        txtEmailSettings.setText( user.getEmail() );
+
+    }
+
+    @FXML
+    void changeInfoUser(ActionEvent event) throws UserException {
+        String name = txtNameSettings.getText();
+        String password = txtPasswordSettings.getText();
+        String email = txtEmailSettings.getText();
+
+        if(verifyBlankSpaces( email, password )){
+            updateInfoUser( name, password,email );
+            userController.mfm.saveDataTest();
+            txtPasswordSettings.setEditable( false );
+            txtEmailSettings.setEditable( false );
+            btnCancelChangesSettings.setVisible( false );
+            btnConfirmChangesSettings.setVisible( false );
+            btnEditInfoSettings.setVisible( true );
+        }
+
+    }
+
+    private void updateInfoUser(String name , String password , String email) throws UserException {
+
+        if(userController.mfm.updateUser(name,password,email)){
+            showMessage( "Notification", "User updated",
+                    "The user info was changed", Alert.AlertType.INFORMATION );
+        }else{
+            showMessage( "Notification", "User not updated",
+                    "The user wasn't changed", Alert.AlertType.INFORMATION );
+        }
+
+    }
+
+    private boolean verifyBlankSpaces(String email, String password) {
+        String notification = "";
+        if(email.isEmpty()){
+            notification += "Type your new email\n";
+        }
+        if (password.isEmpty()){
+            notification += "Type your new password";
+        }
+        if( notification.isEmpty() )
+            return true;
+        showMessage("Notification", "Blank space",
+                notification, Alert.AlertType.INFORMATION);
+        return false;
+    }
+
+    @FXML
+    void deleteAcc(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Are you sure you want delete your account");
+        alert.setContentText("This accion can't be reversed");
+
+        // Agregar botones al diálogo
+        ButtonType confirmButtonType = new ButtonType("Confirm");
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(confirmButtonType, cancelButtonType);
+
+        // Mostrar el diálogo y esperar la respuesta del usuario
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == confirmButtonType) {
+                // El usuario confirmó la acción, realiza la acción deseada
+                try {
+                    logOut(event);
+                    deleleUser();
+
+                } catch (UserException e) {
+                    throw new RuntimeException( e );
+                }
+            }
+        });
+
+    }
+
+    private void deleleUser() throws UserException {
+        userController.mfm.deleteUser(user);
+        userController.mfm.saveUsers();
+    }
+
+    @FXML
+    void editInfoUserSettings(ActionEvent event) {
+        txtPasswordSettings.setEditable( true );
+        txtEmailSettings.setEditable( true );
+        btnCancelChangesSettings.setVisible( true );
+        btnConfirmChangesSettings.setVisible( true );
+        btnEditInfoSettings.setVisible( false );
+    }
+
 
 
 
@@ -666,6 +808,9 @@ public class UserViewController implements Initializable {
         this.userController= new UserController();
         anchorHome.setVisible( false );
         anchorPlayer.setVisible( false );
+        anchorLibrary.setVisible( false );
+        anchorPlayer.setVisible( false );
+        anchorUserSettings.setVisible( false );
         webView = new WebView();
         webView.setPrefSize(125, 106); // Ajustar el tamaño del WebView
         anchorPlayer.setTopAnchor(webView, 0.0);
@@ -748,6 +893,8 @@ public class UserViewController implements Initializable {
         btnSearch.setOnMouseExited(event -> btnSearch.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
         btnLibrary.setOnMouseEntered(event -> btnLibrary.setStyle("-fx-background-color: rgba(0, 0, 0, 0.1); -fx-text-fill: black;"));
         btnLibrary.setOnMouseExited(event -> btnLibrary.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
+        btnUserSettings.setOnMouseEntered(event -> btnUserSettings.setStyle("-fx-background-color: rgba(0, 0, 0, 0.1); -fx-text-fill: black;"));
+        btnUserSettings.setOnMouseExited(event -> btnUserSettings.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
 
 
 
@@ -1106,8 +1253,39 @@ public class UserViewController implements Initializable {
             }
         });
 
+        Tooltip tooltip = new Tooltip();
+
+        // Actualizar el texto del Tooltip cuando el usuario interactúa con el PasswordField
+        txtPasswordSettings.setOnMouseEntered(event -> showTooltip( txtPasswordSettings.getText(), stage) );
 
 
+
+
+
+    }
+
+    private void showTooltip(String message, Stage stage) {
+        // Create a Tooltip
+       if(!showingToolTip){
+           Tooltip tooltip = new Tooltip(message);
+           tooltip.setAutoHide(true);
+
+           // Customize the style of the Tooltip
+           tooltip.setStyle("-fx-font-size: 14px; -fx-background-color: #f0f0f0; -fx-text-fill: #333333;");
+
+           // Calculate the position relative to the TextField
+           Point2D point = txtPasswordSettings.localToScreen(txtPasswordSettings.getWidth() / 2, txtPasswordSettings.getHeight() / 2);
+
+           // Show the Tooltip near the mouse position
+           tooltip.show(stage, point.getX() + 10, point.getY() + 10); // Offset the position slightly
+
+           // Automatically hide the Tooltip after a certain duration
+           PauseTransition delay = new PauseTransition(Duration.seconds(0.8)); // Adjust the duration as needed
+           delay.setOnFinished(e -> {
+               tooltip.hide();
+           });
+           delay.play();
+       }
     }
 
 
