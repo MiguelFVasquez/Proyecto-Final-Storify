@@ -474,9 +474,7 @@ public class AdminViewController implements Initializable {
             if(link!=null){
                 Artist artist= adminController.mfm.getArtist(artistName);
                 uptadeSong( songSelection.getCode() , nameSong , gender , year , duration , link , cover.getUrl() , artist );
-                Song songAux = adminController.mfm.getSong( songSelection.getCode() );
-                adminController.mfm.updateArtistSong( artistName , songAux );
-                //adminController.mfm.saveResourceXML();
+
                 adminController.mfm.saveDataTest();
                 cleanUpSong( event );
                 refreshTableViewSong();
@@ -641,9 +639,6 @@ public class AdminViewController implements Initializable {
                 String codeSong= generateCode(nameSong,artistName);
                 Artist artist= adminController.mfm.getArtist(artistName);
                 createSong( codeSong , nameSong , gender , year , duration , link , cover.getUrl() , artist );
-                Song songAux = adminController.mfm.getSong( codeSong );
-                adminController.mfm.addSongToArtistList( artistName , songAux );
-                //adminController.mfm.saveResourceXML();
                 adminController.mfm.saveDataTest();
                 System.out.printf( "Lista de canciones: " + getSongsList() );
                 cleanUpSong( event );

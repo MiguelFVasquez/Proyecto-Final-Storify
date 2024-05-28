@@ -1,4 +1,4 @@
-# WORKING ON PROJECT: Shuh3n 
+# WORKING ON PROJECT:  
 ## ***TASKS**
 ### **TO DO**
 - Seleccionar una canción y añadirla a la lista de usuario
@@ -8,6 +8,7 @@
 - Funcionamiento al presionar en caratulas de albumes 
 - Motor de búsqueda O Y y Artistas
 - Filtros en ventana library
+- Revisar motor de busqueda ((ERROR COLLECTIONS))
 
 
 

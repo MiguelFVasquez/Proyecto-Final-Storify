@@ -73,27 +73,6 @@
             <Font name="Calibri Bold" size="60.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorSearch" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
-         <styleClass>
-            <String fx:value="white-bg" />
-            <String fx:value="shadow" />
-         </styleClass>
-         <children>
-            <TextField layoutX="212.0" layoutY="34.0" prefHeight="30.0" prefWidth="609.0" styleClass="txtFields2" />
-            <FontAwesomeIconView fill="#a3c0f5" glyphName="SEARCH" layoutX="827.0" layoutY="58.0" size="30" stroke="#4a4a4a" textAlignment="JUSTIFY" />
-            <TableView fx:id="tableViewSearch" layoutX="148.0" layoutY="112.0" prefHeight="418.0" prefWidth="771.0">
-              <columns>
-                <TableColumn fx:id="colummImageSearch" prefWidth="60.0" />
-                <TableColumn fx:id="columnNameSearch" minWidth="0.0" prefWidth="214.0" text="Name" />
-                  <TableColumn fx:id="columnArtistSearch" prefWidth="235.0" text="Artist's name" />
-                  <TableColumn fx:id="columnTimeSearch" prefWidth="270.0" text="Duration" />
-              </columns>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </TableView>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="anchorHome" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
          <styleClass>
             <String fx:value="white-bg" />
@@ -308,6 +287,28 @@
             <FontAwesomeIconView fill="#00b2ff" glyphName="LIST" layoutX="1012.0" layoutY="63.0" size="20" />
             <Button fx:id="btnUnlike" layoutX="28.0" layoutY="533.0" mnemonicParsing="false" onAction="#removeFavoriteSongUser" styleClass="btnGreen" text="Unlike" />
             <Button fx:id="btnYear" layoutX="793.0" layoutY="42.0" mnemonicParsing="false" onAction="#showSongsByYear" styleClass="btnBlue" text="Year" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorSearch" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <TextField fx:id="txtSearch" layoutX="210.0" layoutY="47.0" prefHeight="30.0" prefWidth="609.0" styleClass="txtFields2" />
+            <FontAwesomeIconView fill="#a3c0f5" glyphName="SEARCH" layoutX="827.0" layoutY="72.0" size="30" stroke="#4a4a4a" textAlignment="JUSTIFY" />
+            <TableView fx:id="tableViewSearch" layoutX="148.0" layoutY="112.0" prefHeight="418.0" prefWidth="771.0">
+              <columns>
+                <TableColumn fx:id="colummImageSearch" prefWidth="60.0" />
+                <TableColumn fx:id="columnNameSearch" minWidth="0.0" prefWidth="214.0" text="Name" />
+                  <TableColumn fx:id="columnArtistSearch" prefWidth="235.0" text="Artist's name" />
+                  <TableColumn fx:id="columnTimeSearch" prefWidth="270.0" text="Duration" />
+              </columns>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TableView>
+            <Button fx:id="btnSearchSong" layoutX="893.0" layoutY="61.0" mnemonicParsing="false" onAction="#searchInfoSong" text="Button" />
          </children>
       </AnchorPane>
    </children>

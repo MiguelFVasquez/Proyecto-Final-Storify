@@ -1,2 +1,2 @@
-FnoeFdaski@@Forrest Frank@@Estadounidense@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/forrestFrank.jpg@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@b612ecb
-AJrlnitnni@@Milo J@@Argentino@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/milito.jpg@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@54791dd5
+eoktiEFoFn@@Forrest Frank@@Estadounidense@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/forrestFrank.jpg@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@53fa483d
+onoJnJAoel@@Milo J@@Argentino@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/milito.jpg@@false@@co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList@7a968e7

@@ -451,6 +451,7 @@ public class Storify implements IStorify, Serializable {
             throw new SongException("La canción: '" + name+ "' no ha sido encontrada");
         }else {
             updated=true;
+            songAux.getArtist().delateSong( songAux );
             songAux.setName(name);
             songAux.setCover(newCover);
             songAux.setYear(newYear);
@@ -458,6 +459,8 @@ public class Storify implements IStorify, Serializable {
             songAux.setGender(newGender);
             songAux.setLink(newLink);
             songAux.setArtist(newArtist);
+            newArtist.addSong( songAux );
+
         }
         return updated;
     }
@@ -502,7 +505,14 @@ public class Storify implements IStorify, Serializable {
         DoublyLinkedList<Song> songList= new DoublyLinkedList<>();
         for (Artist artistAux: artistTree){
             if (artistAux.getName().equals(artistName)){
+                System.out.println("Debería mostrar el artista");
                 songList=artistAux.getSongList();
+            }
+            else{
+                if(artistAux.getName().contains( artistName )){
+                    System.out.println("Debería mostrar artistas relacionados");
+                    songList=artistAux.getSongList();
+                }
             }
         }
         return songList.toList();

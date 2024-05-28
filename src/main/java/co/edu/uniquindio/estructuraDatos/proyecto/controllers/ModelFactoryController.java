@@ -130,6 +130,13 @@ public class ModelFactoryController {
 //        user.addSongToList( songSelected );
 //    }
 
+    public List<Song> searchArtist(String newValue) throws ArtistException {
+        return storify.searchSongByArtistName( newValue );
+    }
+    public List<Song> searchO(String newValue) {
+        return storify.searchO( newValue, newValue, Gender.valueOf( newValue ) , newValue );
+    }
+
     //-------------------------Admin functions---------------------------------------------------
         //---------------------Artist functions------------------------------------------------
 
