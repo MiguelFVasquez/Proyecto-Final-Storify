@@ -13,6 +13,7 @@ import javafx.concurrent.Task;
 import javafx.scene.web.WebView;
 
 import java.io.Serializable;
+import java.lang.reflect.GenericArrayType;
 import java.net.URL;
 import java.util.*;
 
@@ -560,17 +561,17 @@ public class Storify implements IStorify, Serializable {
      *
      * @return
      */
-    public Gender getMostListenedGender(){
+    public Gender getGenderMostSongs(){
         Map<Gender, Integer> genderCount = new HashMap<>();
 
         // Recopilar los géneros más escuchados de todos los usuarios
-        for (User user : usersMap.values()) {
-            Gender mostListenedGender = user.getMostListenedGender(); //Se obtiene el mas escuchado de cada usuario
-            genderCount.put(mostListenedGender, genderCount.getOrDefault(mostListenedGender, 0) + 1);
+        for (Song song : songList) {
+            Gender gender = song.getGender();
+            genderCount.put(gender, genderCount.getOrDefault(gender, 0) + 1);
         }
 
         // Encontrar el género con el recuento más alto
-        Gender mostListenedGender = null;
+        Gender mostGenderSongs = null;
         int maxCount = 0;
 
         for (Map.Entry<Gender, Integer> entry : genderCount.entrySet()) {
@@ -579,10 +580,10 @@ public class Storify implements IStorify, Serializable {
 
             if (count > maxCount) {
                 maxCount = count;
-                mostListenedGender = genre;
+                mostGenderSongs = genre;
             }
         }
-        return mostListenedGender;
+        return mostGenderSongs;
     }
 
     /**

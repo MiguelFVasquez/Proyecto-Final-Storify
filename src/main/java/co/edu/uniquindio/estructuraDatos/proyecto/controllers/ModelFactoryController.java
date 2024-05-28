@@ -153,7 +153,7 @@ public class ModelFactoryController {
         return storify.getMostListenedArtist();
     }
     public Gender getMostListenedGender() {
-        return storify.getMostListenedGender();
+        return storify.getGenderMostSongs();
     }
 
     public Artist getMostListenedArtistByUser(User user) {

@@ -153,8 +153,6 @@ public class UserViewController implements Initializable {
     private Label lblPAU;
     @FXML
     private Label lblmostListenedGender;
-    @FXML
-    private Label lblmostListenedGenderByUser;
 
     @FXML
     private Label labelTitle;
@@ -183,7 +181,13 @@ public class UserViewController implements Initializable {
     @FXML
     private Button btnPlaySongArtist;
     @FXML
+    private Button btnPlaySongLibrary;
+    @FXML
     private Button btnLikeSongArtist;
+    @FXML
+    private Button btnPlaySongSearch;
+    @FXML
+    private Button btnLikeSongSearch;
 
     @FXML
     private Button btnConfirmChangesSettings;
@@ -199,7 +203,13 @@ public class UserViewController implements Initializable {
     @FXML
     private Button btnSearch;
     @FXML
-    private Button btnDeshacer;
+    private Button btnUndo;
+    @FXML
+    private Button btnUndoLikedSongs;
+    @FXML
+    private Button btnUndoSearch;
+    @FXML
+    private Button btnUndoArtist;
     @FXML
     private Button btnTime;
     @FXML
@@ -292,6 +302,7 @@ public class UserViewController implements Initializable {
     private Song selectedSong;
     private boolean showingToolTip = false;
     private Song songArtistSelection;
+    private Song songSearch;
 
     public void setLoginViewController(LoginViewController loginViewController) {
         this.loginViewController = loginViewController;
@@ -313,6 +324,32 @@ public class UserViewController implements Initializable {
         this.anchorPane = anchorPane;
     }
     //------------------------------UTILITIES-----------------------------------
+
+
+    public Stack<String> getStateStack() {
+        return stateStack;
+    }
+
+    public void setStateStack(Stack<String> stateStack) {
+        this.stateStack = stateStack;
+    }
+
+    public Stack<Song> getSongsStack() {
+        return songsStack;
+    }
+
+    public void setSongsStack(Stack<Song> songsStack) {
+        this.songsStack = songsStack;
+    }
+
+    public Stack<Song> getSongsDeleteStack() {
+        return songsDeleteStack;
+    }
+
+    public void setSongsDeleteStack(Stack<Song> songsDeleteStack) {
+        this.songsDeleteStack = songsDeleteStack;
+    }
+
     private void showMessage(String title, String header, String content, Alert.AlertType alertype) {
         Alert alert = new Alert(alertype);
         alert.setTitle(title);
@@ -337,7 +374,7 @@ public class UserViewController implements Initializable {
     //Se pasa la cancion que se desea eliminar
     private void removeSong(String userName, Song songToRemove){
         try{
-            if (userController.mfm.removeSongFromUserList(userName,songToRemove)){
+            if (userController.mfm.removeSongFromUserList(user.getUserName(),songToRemove)){
                 showMessage("Notification", "Song removed from list", "The song: '" + songToRemove.getName() +" ' was removed from list successfully", Alert.AlertType.INFORMATION );
             }
         } catch (UserException e) {
@@ -578,7 +615,7 @@ public class UserViewController implements Initializable {
                 lblmostListenedGender.setText( genderMostListened.toString() );
 
             }else{
-                lblmostListenedGender.setText( "Every gender is too listened" );
+                lblmostListenedGender.setText( "All genders has the same numbers of songs " );
 
             }
 
@@ -587,14 +624,6 @@ public class UserViewController implements Initializable {
             displayInfoArtistMostListened( artistMostListenedByUser , imagePAU , lblPAU );
         } else {
             lblPAU.setText( "Mysterious??" );
-        }
-        Gender genderMLU = userController.mfm.getMostListenedGenderByUser( user );
-        if(genderMLU!=null){
-            lblmostListenedGenderByUser.setText( genderMLU.toString() );
-
-        }else{
-            lblmostListenedGenderByUser.setText( "You listen to various genres" );
-
         }
 
     }
@@ -646,12 +675,16 @@ public class UserViewController implements Initializable {
             isFilteredTime = true;
             isFilteredArtist = true;
 
-            btnYear.setStyle("-fx-background-color: transparent;" +
+            btnArtist.setStyle("-fx-background-color: transparent;" +
                     "    -fx-text-fill: black;" +
                     "    -fx-border-color: #a3c0f5;");
-            btnYear.setStyle("-fx-background-color: transparent;" +
+            btnTime.setStyle("-fx-background-color: transparent;" +
                     "    -fx-text-fill: black;" +
                     "    -fx-border-color: #a3c0f5;");
+            btnName.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+
             btnYear.setStyle(
                     " -fx-background-color: #a3c0f5; " +
                             "-fx-text-fill: black;" +
@@ -677,6 +710,9 @@ public class UserViewController implements Initializable {
                     "    -fx-text-fill: black;" +
                     "    -fx-border-color: #a3c0f5;");
             btnArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnYear.setStyle("-fx-background-color: transparent;" +
                     "    -fx-text-fill: black;" +
                     "    -fx-border-color: #a3c0f5;");
             btnName.setStyle(
@@ -705,6 +741,9 @@ public class UserViewController implements Initializable {
                     "    -fx-text-fill: black;" +
                     "    -fx-border-color: #a3c0f5;");
             btnArtist.setStyle("-fx-background-color: transparent;" +
+                    "    -fx-text-fill: black;" +
+                    "    -fx-border-color: #a3c0f5;");
+            btnYear.setStyle("-fx-background-color: transparent;" +
                     "    -fx-text-fill: black;" +
                     "    -fx-border-color: #a3c0f5;");
             btnTime.setStyle(
@@ -770,21 +809,54 @@ public class UserViewController implements Initializable {
 
 
     @FXML
-    void regresarAccion(ActionEvent event) {
-        String userName= userController.mfm.getUserName();
-        if(stateStack.isEmpty()){
-            showMessage("Notification", "Nothing to undo", "There isn't nothing to undo", Alert.AlertType.INFORMATION);
-        }else {
-            if (stateStack.pop().equals("Agrego")){ //Si agrego una cancion, la función deshacer lo que hace es eliminarla
-                Song songToRemove= songsStack.pop();
-                removeSong(userName,songToRemove);
-                songsDeleteStack.push(songToRemove); //Añade la cancion a una nueva pila, donde se guardan las canciones eliminadas para poder acceder a ellas depues cuando se haga el rehacer
-            }else { //SI elimino la canción , lo que hara la funcón es agregarla
-                songSelection= songsStack.pop(); // La canción seleccionada pasa a ser la ultima adicipon de la cola y procede a agregarse
+    void revertAction(ActionEvent event) {
+        revertActionManager();
+    }
+    @FXML
+    void revertActionLikeSongs(ActionEvent event){
+        revertActionManager();
+        refreshTableViewFavorites();
+
+    }
+    @FXML
+    void revertActionSearch(ActionEvent event){
+        revertActionManager();
+    }
+    @FXML
+    void revertActionArtist(ActionEvent event){
+        revertActionManager();
+    }
+
+    private void revertActionManager() {
+        String userName = userController.mfm.getUserName();
+        if ( stateStack.isEmpty() ) {
+            showMessage( "Notification" , "Nothing to undo" , "There isn't nothing to undo" , Alert.AlertType.INFORMATION );
+        } else {
+            if ( stateStack.pop().equals( "add" ) ) { //Si agrego una cancion, la función deshacer lo que hace es eliminarla
+                Song songToRemove = songsStack.pop();
+                songsDeleteStack.push( songToRemove );
+                removeSong( userName , songToRemove );
+                stateStack.push( "remove" );
+                btnUndo.setText( "Undo" );
+                btnUndoArtist.setText( "Undo" );
+                btnUndoLikedSongs.setText( "Undo" );
+                btnUndoSearch.setText( "Undo" );
+
+                //Añade la cancion a una nueva pila, donde se guardan las canciones eliminadas para poder acceder a ellas depues cuando se haga el rehacer
+            } else { //SI elimino la canción , lo que hara la funcón es agregarla
+                songSelection = songsDeleteStack.pop(); // La canción seleccionada pasa a ser la ultima adicipon de la cola y procede a agregarse
+                songsStack.push( songSelection );
+                addSong( user.getUserName() , songSelection );
+                stateStack.push( "add" );
+                btnUndo.setText( "Redo" );
+                btnUndoArtist.setText( "Redo" );
+                btnUndoLikedSongs.setText( "Redo" );
+                btnUndoSearch.setText( "Redo" );
 
             }
         }
     }
+
     @FXML
     void playSong(ActionEvent event){
         if (playing) {
@@ -812,6 +884,8 @@ public class UserViewController implements Initializable {
     @FXML
     void removeFavoriteSongUser(ActionEvent event){
         if(songSelection!=null){
+            stateStack.push("remove");
+            songsDeleteStack.push(songSelection);
             removeSong( user.getUserName(), songSelection );
             refreshTableViewFavorites();
             userController.mfm.saveDataTest();
@@ -951,14 +1025,19 @@ public class UserViewController implements Initializable {
         if(!verifySong(songArtistSelection)){
             userController.mfm.addSongToUserList(user.getUserName(), songArtistSelection);
             showTooltip2( "Sond added to your favorites", stage );
+            stateStack.push("add");
+            songsStack.push(songSearch);
+            tableViewArtist.getSelectionModel().clearSelection();
+
 
 
 
         }else{
             userController.mfm.removeSongFromUserList( user.getUserName(), songArtistSelection);
             showTooltip2( "Sond removed from your's favorites", stage );
-
-
+            stateStack.push("remove");
+            songsDeleteStack.push(songSearch);
+            tableViewArtist.getSelectionModel().clearSelection();
         }
         userController.mfm.saveDataTest();
 
@@ -970,6 +1049,32 @@ public class UserViewController implements Initializable {
 
     @FXML
     void playSongArtist(ActionEvent event){
+
+    }
+
+    @FXML
+    void playSongSearch(ActionEvent event){
+
+    }
+    @FXML
+    void addSongSearchFavorite(ActionEvent event) throws UserException, SongException {
+        if(!verifySong(songSearch)){
+            userController.mfm.addSongToUserList(user.getUserName(), songSearch);
+            tableViewSearch.getSelectionModel().clearSelection();
+            stateStack.push("add");
+            songsStack.push(songSearch);
+            showTooltip2( "Sond added to your favorites", stage );
+        }else{
+            userController.mfm.removeSongFromUserList( user.getUserName(), songSearch);
+            tableViewSearch.getSelectionModel().clearSelection();
+            showTooltip2( "Sond removed from your's favorites", stage );
+            stateStack.push("remove");
+            songsDeleteStack.push(songSearch);
+        }
+        userController.mfm.saveDataTest();
+    }
+    @FXML
+    void playSongLibrary(ActionEvent event){
 
     }
 
@@ -988,7 +1093,6 @@ public class UserViewController implements Initializable {
         anchorUserSettings.setVisible( false );
         anchorAnalytics.setVisible( false );
         anchorSongsArtist.setVisible( false );
-        btnLikeSongArtist.setDisable( true );
         webView = new WebView();
         webView.setPrefSize(125, 106); // Ajustar el tamaño del WebView
         anchorPlayer.setTopAnchor(webView, 0.0);
@@ -1039,6 +1143,8 @@ public class UserViewController implements Initializable {
 
             }
         });
+        btnLikeSongArtist.setDisable( true );
+        btnPlaySongArtist.setDisable( true );
         tableViewArtist.getSelectionModel().selectedItemProperty().addListener( (obs , oldSelection , newSelection) -> {
             if ( newSelection != null ) {
                 songArtistSelection = newSelection;
@@ -1048,10 +1154,34 @@ public class UserViewController implements Initializable {
                     btnLikeSongArtist.setText( "Unlike" );
 
                 }
+                btnPlaySongArtist.setDisable( false );
                 btnLikeSongArtist.setDisable( false );
 
             }else{
                 btnLikeSongArtist.setDisable( true );
+                btnPlaySongArtist.setDisable( true );
+
+
+            }
+        });
+        btnLikeSongSearch.setDisable( true );
+        btnPlaySongSearch.setDisable( true );
+        tableViewSearch.getSelectionModel().selectedItemProperty().addListener( (obs , oldSelection , newSelection) -> {
+            if ( newSelection != null ) {
+                songSearch = newSelection;
+                if(!verifySong( newSelection )){
+                    btnLikeSongSearch.setText( "Like" );
+                }else{
+                    btnLikeSongSearch.setText( "Unlike" );
+
+                }
+                btnPlaySongSearch.setDisable( false );
+                btnLikeSongSearch.setDisable( false );
+
+            }else{
+                btnLikeSongSearch.setDisable( true );
+                btnPlaySongSearch.setDisable( true );
+
 
             }
         });
