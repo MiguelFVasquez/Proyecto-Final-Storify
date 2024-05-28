@@ -10,10 +10,8 @@ import co.edu.uniquindio.estructuraDatos.proyecto.model.Interfaces.IStorify;
 import co.edu.uniquindio.estructuraDatos.proyecto.utilities.EmailUtil;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.scene.image.Image;
 import javafx.scene.web.WebView;
 
-import javax.print.DocFlavor;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.*;
@@ -432,7 +430,7 @@ public class Storify implements IStorify, Serializable {
         }else {
             deleted=true;
             songList.remove(songDelete);
-            songDelete.getArtist().delateSong(songDelete);
+            songDelete.getArtist().deleteSong(songDelete);
         }
         return deleted;
     }
@@ -454,7 +452,7 @@ public class Storify implements IStorify, Serializable {
             throw new SongException("La canción: '" + name+ "' no ha sido encontrada");
         }else {
             updated=true;
-            songAux.getArtist().delateSong( songAux );
+            songAux.getArtist().deleteSong( songAux );
             songAux.setName(name);
             songAux.setCover(newCover);
             songAux.setYear(newYear);

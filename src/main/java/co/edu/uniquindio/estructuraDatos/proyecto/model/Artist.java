@@ -3,10 +3,8 @@ package co.edu.uniquindio.estructuraDatos.proyecto.model;
 import co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList;
 import co.edu.uniquindio.estructuraDatos.proyecto.exceptions.SongException;
 import co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender;
-import javafx.scene.image.Image;
 
 import java.io.Serializable;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +82,7 @@ public class Artist implements Serializable, Comparable<Artist> {
     public void addSong(Song newSong){
         this.songList.addLast(newSong);
     }
-    public void delateSong(Song songDelete){
+    public void deleteSong(Song songDelete){
         this.songList.delete(songDelete);
     }
 

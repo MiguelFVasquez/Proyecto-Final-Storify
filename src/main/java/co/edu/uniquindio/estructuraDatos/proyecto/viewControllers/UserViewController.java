@@ -64,6 +64,8 @@ public class UserViewController implements Initializable {
     private AnchorPane anchorUserSettings;
     @FXML
     private AnchorPane anchorAnalytics;
+    @FXML
+    private AnchorPane anchorSongsArtist;
 
     @FXML
     private StackPane stackFS1;
@@ -174,6 +176,13 @@ public class UserViewController implements Initializable {
     private Button btnPlay;
     @FXML
     private Button btnCancelChangesSettings;
+    @FXML
+    private Button btnCloseArtistSongs;
+
+    @FXML
+    private Button btnPlaySongArtist;
+    @FXML
+    private Button btnLikeSongArtist;
 
     @FXML
     private Button btnConfirmChangesSettings;
@@ -200,6 +209,8 @@ public class UserViewController implements Initializable {
     private Button btnUnlike;
     @FXML
     private Button btnYear;
+    @FXML
+    private Button btnAnalytics;
 
 
     @FXML
@@ -210,6 +221,8 @@ public class UserViewController implements Initializable {
 
     @FXML
     private TableColumn<Song, String> columnImage;
+    @FXML
+    private TableColumn<Song, String> columnImageArtist;
 
     @FXML
     private TableColumn<Song, String> columnName;
@@ -222,15 +235,21 @@ public class UserViewController implements Initializable {
 
     @FXML
     private TableColumn<Song, String> columnNameSearch;
+    @FXML
+    private TableColumn<Song, String> columnNameSongArtist;
 
     @FXML
     private TableColumn<Song, String> columnTime;
 
     @FXML
     private TableColumn<Song, String> columnTimeSearch;
+    @FXML
+    private TableColumn<Song, String> columnTimeArtist;
 
     @FXML
     private TableColumn<Song, String> columnYearSearch;
+    @FXML
+    private TableColumn<Song, String> columnYearArtist;
 
 
     @FXML
@@ -238,6 +257,8 @@ public class UserViewController implements Initializable {
 
     @FXML
     private TableView<Song> tableViewSearch = new TableView<>();
+    @FXML
+    private TableView<Song> tableViewArtist = new TableView<>();
 
     private Stage stage;
 
@@ -255,6 +276,9 @@ public class UserViewController implements Initializable {
     private ObservableList<Song> listSongs2 = FXCollections.observableArrayList();
     private ObservableList<Song> listFavoritesSongs = FXCollections.observableArrayList();
     private ObservableList<Song> listFavoritesSongs2 = FXCollections.observableArrayList();
+    private ObservableList<Song> listSongsArtist = FXCollections.observableArrayList();
+
+
     private boolean isFilteredArtist = true;
     private boolean isFilteredName = true;
     private boolean isFilteredTime = true;
@@ -879,6 +903,22 @@ public class UserViewController implements Initializable {
         btnEditInfoSettings.setVisible( false );
     }
 
+    @FXML
+    void backToHome(ActionEvent event){
+        anchorSongsArtist.setVisible( false );
+        anchorHome.setVisible( true );
+        labelTitle.setText( "Home" );
+    }
+
+    @FXML
+    void addSongArtistToFavoriteSongs(ActionEvent event){
+
+    }
+    @FXML
+    void playSongArtist(ActionEvent event){
+
+    }
+
 
 
 
@@ -893,6 +933,7 @@ public class UserViewController implements Initializable {
         anchorPlayer.setVisible( false );
         anchorUserSettings.setVisible( false );
         anchorAnalytics.setVisible( false );
+        anchorSongsArtist.setVisible( false );
 
         webView = new WebView();
         webView.setPrefSize(125, 106); // Ajustar el tamaño del WebView
@@ -956,6 +997,11 @@ public class UserViewController implements Initializable {
         this.columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.columnTime.setCellValueFactory(new PropertyValueFactory<>("duration"));
         this.columnYear.setCellValueFactory(new PropertyValueFactory<>("year"));
+
+        this.columnImageArtist.setCellValueFactory(new PropertyValueFactory<>("cover"));
+        this.columnNameSongArtist.setCellValueFactory(new PropertyValueFactory<>("name"));
+        this.columnTimeArtist.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        this.columnYearArtist.setCellValueFactory(new PropertyValueFactory<>("year"));
         refreshTableViewSearch();
 
     }
@@ -978,6 +1024,8 @@ public class UserViewController implements Initializable {
         btnLibrary.setOnMouseExited(event -> btnLibrary.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
         btnUserSettings.setOnMouseEntered(event -> btnUserSettings.setStyle("-fx-background-color: rgba(0, 0, 0, 0.1); -fx-text-fill: black;"));
         btnUserSettings.setOnMouseExited(event -> btnUserSettings.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
+        btnAnalytics.setOnMouseEntered(event -> btnAnalytics.setStyle("-fx-background-color: rgba(0, 0, 0, 0.1); -fx-text-fill: black;"));
+        btnAnalytics.setOnMouseExited(event -> btnAnalytics.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
 
 
 
@@ -1281,6 +1329,44 @@ public class UserViewController implements Initializable {
             }
         });
 
+        stackA1.setOnMouseClicked(event -> {
+            if(event.getButton()== MouseButton.PRIMARY){
+                anchorSongsArtist.setVisible( true );
+                labelTitle.setText(lblSA1.getText()+"'s songs" );
+                Artist artist = userController.mfm.getArtist(lblSA1.getText());
+                refreshTableViewArtistSongs( artist );
+            }
+        });
+        stackA2.setOnMouseClicked(event -> {
+            if(event.getButton()== MouseButton.PRIMARY){
+                anchorSongsArtist.setVisible( true );
+                labelTitle.setText(lblSA2.getText()+"'s songs" );
+                Artist artist = userController.mfm.getArtist(lblSA2.getText());
+                refreshTableViewArtistSongs( artist );
+            }
+        });
+
+        stackA3.setOnMouseClicked(event -> {
+            if(event.getButton()== MouseButton.PRIMARY){
+                anchorSongsArtist.setVisible( true );
+                labelTitle.setText(lblSA3.getText()+"'s songs" );
+                Artist artist = userController.mfm.getArtist(lblSA3.getText());
+                refreshTableViewArtistSongs( artist );
+            }
+        });
+        stackA4.setOnMouseClicked(event -> {
+            if(event.getButton()== MouseButton.PRIMARY){
+                anchorSongsArtist.setVisible( true );
+                labelTitle.setText(lblSA4.getText()+"'s songs" );
+                Artist artist = userController.mfm.getArtist(lblSA4.getText());
+                refreshTableViewArtistSongs( artist );
+            }
+        });
+
+
+
+
+
         colummImageSearch.setCellFactory(column -> new TableCell<Song, String>() {
             private final ImageView imageView = new ImageView();
 
@@ -1299,6 +1385,26 @@ public class UserViewController implements Initializable {
             }
         });
         columnImage.setCellFactory( column -> new TableCell<Song, String>() {
+
+            private final ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(String url , boolean empty) {
+                super.updateItem( url , empty );
+                if ( empty || url == null ) {
+                    setGraphic( null );
+                } else {
+
+                    imageView.setImage( new Image( url ) );
+                    imageView.setFitHeight( 50 ); // Ajusta el tamaño de la imagen según sea necesario
+                    imageView.setFitWidth( 50 );  // Ajusta el tamaño de la imagen según sea necesario
+                    setGraphic( imageView );
+                }
+            }
+
+        } );
+
+        columnImageArtist.setCellFactory( column -> new TableCell<Song, String>() {
 
             private final ImageView imageView = new ImageView();
 
@@ -1499,6 +1605,14 @@ public class UserViewController implements Initializable {
         tableViewLikedSongs.getItems().clear();
         tableViewLikedSongs.setItems( getSongsFavorites() );
 
+    }
+
+    void refreshTableViewArtistSongs(Artist artist){
+        List<Song> aux = artist.getSongList().toList();
+        listSongsArtist.clear();
+        listSongsArtist.addAll( aux );
+        tableViewArtist.getItems().clear();
+        tableViewArtist.getItems().addAll( listSongsArtist );
     }
 
 

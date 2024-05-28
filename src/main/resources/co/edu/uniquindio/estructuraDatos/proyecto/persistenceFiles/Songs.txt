@@ -1,4 +1,3 @@
-lMcn Moooc@@Rincón@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/riconCover.png@@2023@@107@@Pop@@https://youtu.be/Qip3xXCTzh4?si=w2Sbl3-sXKSArrt4@@Milo
-eeornFKF  @@Low Key@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/lk.png@@2024@@90@@Gospel@@https://youtu.be/0cdniMLLmjw?si=qNn_-4JNqALbO8yk@@Milo
-twagTPTTno@@Navigating@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/ab67616d00001e029cf15c7323fb85b7112197d5.jpg@@2024@@180@@Rock@@https://youtu.be/NEsFt6pFmok?si=kV08Depte3zkbIBE@@Milo
-EOEOSDlElR@@CARENCIAS DE CORDURA@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/carenciasDeCorduraCover.png@@2023@@117@@Pop@@https://youtu.be/hfABkoRgNRg?si=3K1Uu6usoYOI9q0v@@Milo
+MDN AJJARC@@CARENCIAS DE CORDURA@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/carenciasDeCorduraCover.png@@2023@@120@@Pop@@https://youtu.be/hfABkoRgNRg?si=c9dyzMzVhupiZk7s@@Milo
+iónilcoJMJ@@Rincón@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/riconCover.png@@2023@@107@@Pop@@https://youtu.be/Qip3xXCTzh4?si=-AgrSQ6k-Z3swo3u@@Milo
+FFoeLowrwe@@Low Key@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/lk.png@@2024@@90@@Gospel@@https://youtu.be/0cdniMLLmjw?si=_3fxB2b4gGB6lOBp@@Milo

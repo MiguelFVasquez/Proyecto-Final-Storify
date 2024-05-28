@@ -8,9 +8,9 @@
    <void method="add">
     <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
      <void property="artist">
-      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist" id="Artist0">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
        <void property="code">
-        <string>goM rrn nt</string>
+        <string>ioMrMrlnin</string>
        </void>
        <void property="name">
         <string>Milo J</string>
@@ -27,7 +27,51 @@
       </object>
      </void>
      <void property="code">
-      <string>lMcn Moooc</string>
+      <string>MDN AJJARC</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/carenciasDeCorduraCover.png</string>
+     </void>
+     <void property="duration">
+      <string>120</string>
+     </void>
+     <void property="gender">
+      <object class="java.lang.Enum" id="Gender0" method="valueOf">
+       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
+       <string>Pop</string>
+      </object>
+     </void>
+     <void property="name">
+      <string>CARENCIAS DE CORDURA</string>
+     </void>
+     <void property="year">
+      <string>2023</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
+       <void property="code">
+        <string>ioMrMrlnin</string>
+       </void>
+       <void property="name">
+        <string>Milo J</string>
+       </void>
+       <void property="nationality">
+        <string>Argentino</string>
+       </void>
+       <void property="photo">
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/miloJPHOTO.png</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string>iónilcoJMJ</string>
      </void>
      <void property="cover">
       <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/riconCover.png</string>
@@ -36,10 +80,7 @@
       <string>107</string>
      </void>
      <void property="gender">
-      <object class="java.lang.Enum" id="Gender0" method="valueOf">
-       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
-       <string>Pop</string>
-      </object>
+      <object idref="Gender0"/>
      </void>
      <void property="name">
       <string>Rincón</string>
@@ -54,7 +95,7 @@
      <void property="artist">
       <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
        <void property="code">
-        <string>ksror rras</string>
+        <string>kurouduads</string>
        </void>
        <void property="name">
         <string>Forrest Frank</string>
@@ -71,7 +112,7 @@
       </object>
      </void>
      <void property="code">
-      <string>eeornFKF  </string>
+      <string>FFoeLowrwe</string>
      </void>
      <void property="cover">
       <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/lk.png</string>
@@ -90,75 +131,6 @@
      </void>
      <void property="year">
       <string>2024</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
-     <void property="artist">
-      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist">
-       <void property="code">
-        <string>nnitieissi</string>
-       </void>
-       <void property="name">
-        <string>Twenty One Pilots</string>
-       </void>
-       <void property="nationality">
-        <string>Estadounidense</string>
-       </void>
-       <void property="photo">
-        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/ab67616100005174274df4dfcb960867eccedfb5.jpg</string>
-       </void>
-       <void property="songList">
-        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
-       </void>
-      </object>
-     </void>
-     <void property="code">
-      <string>twagTPTTno</string>
-     </void>
-     <void property="cover">
-      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/ab67616d00001e029cf15c7323fb85b7112197d5.jpg</string>
-     </void>
-     <void property="duration">
-      <string>180</string>
-     </void>
-     <void property="gender">
-      <object class="java.lang.Enum" method="valueOf">
-       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
-       <string>Rock</string>
-      </object>
-     </void>
-     <void property="name">
-      <string>Navigating</string>
-     </void>
-     <void property="year">
-      <string>2024</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
-     <void property="artist">
-      <object idref="Artist0"/>
-     </void>
-     <void property="code">
-      <string>EOEOSDlElR</string>
-     </void>
-     <void property="cover">
-      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/carenciasDeCorduraCover.png</string>
-     </void>
-     <void property="duration">
-      <string>117</string>
-     </void>
-     <void property="gender">
-      <object idref="Gender0"/>
-     </void>
-     <void property="name">
-      <string>CARENCIAS DE CORDURA</string>
-     </void>
-     <void property="year">
-      <string>2023</string>
      </void>
     </object>
    </void>

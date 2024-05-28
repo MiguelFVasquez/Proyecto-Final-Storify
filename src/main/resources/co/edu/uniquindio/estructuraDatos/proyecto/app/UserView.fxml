@@ -390,7 +390,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorAnalytics" layoutX="267.0" layoutY="115.0" prefHeight="546.0" prefWidth="1042.0">
+      <AnchorPane fx:id="anchorAnalytics" layoutX="267.0" layoutY="115.0" prefHeight="546.0" prefWidth="1042.0" visible="false">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />
@@ -472,6 +472,40 @@
                   <Font name="Calibri" size="22.0" />
                </font>
             </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorSongsArtist" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
+         <styleClass>
+            <String fx:value="white-bg" />
+            <String fx:value="shadow" />
+         </styleClass>
+         <children>
+            <TableView fx:id="tableViewArtist" layoutX="66.0" layoutY="77.0" prefHeight="426.0" prefWidth="934.0">
+               <columns>
+                  <TableColumn fx:id="columnImageArtist" prefWidth="60.0" />
+                  <TableColumn fx:id="columnNameSongArtist" minWidth="0.0" prefWidth="400.0" text="Name" />
+                  <TableColumn fx:id="columnTimeArtist" minWidth="0.0" prefWidth="254.0" text="Duration" />
+                  <TableColumn fx:id="columnYearArtist" prefWidth="218.0" text="Year" />
+               </columns>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TableView>
+            <Button fx:id="btnCloseArtistSongs" layoutX="66.0" layoutY="26.0" mnemonicParsing="false" onAction="#backToHome" style="-fx-background-color: transparent; -fx-border-color: #e74c3c; -fx-border-radius: 8px;">
+               <graphic>
+                  <FontAwesomeIconView fill="#e74c3c" glyphName="CLOSE" size="30" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnLikeSongArtist" layoutX="66.0" layoutY="511.0" mnemonicParsing="false" onAction="#addSongArtistToFavoriteSongs" prefHeight="30.0" prefWidth="141.0" style="-fx-border-color: black; -fx-background-radius: 8px; -fx-border-radius: 8px;" styleClass="background-login" text="Like">
+               <font>
+                  <Font name="Calibri" size="17.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnPlaySongArtist" layoutX="463.0" layoutY="511.0" mnemonicParsing="false" onAction="#playSongArtist" prefHeight="35.0" prefWidth="141.0" style="-fx-background-radius: 8; -fx-border-color: black; -fx-border-radius: 8;" styleClass="background-register" text="Play">
+               <font>
+                  <Font name="Calibri" size="17.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

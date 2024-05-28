@@ -93,6 +93,7 @@ public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
                     current.getNext().setPrev(current.getPrev()); // Enlazamos el nodo siguiente con el anterior
                 }
                 size--; // Reducimos el tamaño de la lista
+
                 return; // Terminamos el método después de eliminar el nodo
             }
             current = current.getNext(); // Avanzamos al siguiente nodo
