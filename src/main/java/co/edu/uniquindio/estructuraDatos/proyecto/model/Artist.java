@@ -106,7 +106,7 @@ public class Artist implements Serializable, Comparable<Artist> {
     public boolean addSongToList(Song newSong) throws SongException {
         boolean flag= false;
         if (!verifySong(newSong.getCode())){
-            throw new SongException("La cación ya se encuentra en la lista");
+            throw new SongException("La canción ya se encuentra en la lista");
         }else {
             songList.addLast(newSong);
             flag=true;

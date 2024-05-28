@@ -22,23 +22,22 @@ public class StorifyTest {
     private Song newSong() throws MalformedURLException {
         String code = "0003";
         String name = "Todo Lit";
-        String rutaCover = "C:\\Users.txt\\Juan Miguel\\OneDrive - uqvirtual.edu.co\\5to semestre\\Programación\\Cover1.jpeg";
-        Image cover = new Image(new File(rutaCover).toURI().toString()); // Crear objeto Image con la ruta de la imagen
+        String rutaCover = "file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/Holaaaa.png";
         String year = "2024";
         String duration = "3:00";
         Gender gender = Gender.Reggaeton;
         URL link = new URL("https://www.youtube.com/watch?v=yTAh5-e2dRY&pp=ygUIdG9kbyBsaXQ%3D");
         Artist artist = newArtist();
-        return new Song(code, name, new File(rutaCover).toURI().toString(), year, duration, gender, link, artist);
+        return new Song(code, name, rutaCover, year, duration, gender, link, artist);
     }
 
     private Artist newArtist(){
         String code= "jkdak00";
         String name= "Eladio";
         String nationality= "Puerto Rico";
-        Image image = new Image( "file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/eladio.jpg" );
+        String cover= "file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/eladio.jpg";
         boolean isAlone= true;
-        return new Artist(code,name,nationality,"file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/eladio.jpg",isAlone);
+        return new Artist(code,name,nationality,cover,isAlone);
     }
     //-------------Metodos de prueba(test)------------------------
 
