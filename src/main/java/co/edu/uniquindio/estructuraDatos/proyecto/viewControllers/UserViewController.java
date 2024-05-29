@@ -523,7 +523,7 @@ public class UserViewController implements Initializable {
     private void showArtist(List<Artist> artists) {
         int n= 0;
         if ( !artists.isEmpty() ) {
-            for (int i = artists.size()-1; i >= 0; i--) {
+            for (int i = 0; i < artists.size(); i++) {
                 Artist artistAux = artists.get( i );
 
                 switch (n) {
