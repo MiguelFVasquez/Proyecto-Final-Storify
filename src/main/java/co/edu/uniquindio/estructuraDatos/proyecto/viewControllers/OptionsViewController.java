@@ -82,6 +82,13 @@ public class OptionsViewController {
         this.user = user;
     }
 
+
+    /**
+     * Metodo de boton que permite agregar una cancion a la lista de favoritos
+     * @param event
+     * @throws SongException
+     * @throws UserException
+     */
     @FXML
     void addSongToLikedSongs(ActionEvent event) throws SongException, UserException {
         if(!isFavorite){
@@ -106,6 +113,12 @@ public class OptionsViewController {
         }
 
     }
+
+    /**
+     * Metodo que muestras mensajes de confirmacion
+     * @param message
+     * @param stage
+     */
     private void showTooltip(String message, Stage stage) {
         // Create a Tooltip
         Tooltip tooltip = new Tooltip(message);
@@ -132,6 +145,11 @@ public class OptionsViewController {
         delay.play();
     }
 
+    /**
+     * Metodo que muestras alertas en la interfaz
+     * @param message
+     * @param ownerStage
+     */
     private void showAlert(String message, Stage ownerStage) {
         // Create a Popup
         Popup popup = new Popup();
@@ -160,9 +178,11 @@ public class OptionsViewController {
         btnLike.setOnMouseEntered(event -> btnLike.setStyle("-fx-background-color: rgba(0, 0, 0, 0.1); -fx-text-fill: black; -fx-background-radius: 4px;"));
         btnLike.setOnMouseExited(event -> btnLike.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
 
-
-
     }
+
+    /**
+     * Metodo que setea el texto en el boton de agregar o quitar de favoritos
+     */
     public void song(){
         if(isFavorite){
             btnLike.setText( "Unlike" );

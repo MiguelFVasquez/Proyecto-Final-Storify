@@ -90,7 +90,7 @@
             <Font name="Calibri Bold" size="60.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorHome" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0" visible="false">
+      <AnchorPane fx:id="anchorHome" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />
@@ -155,7 +155,7 @@
             <StackPane fx:id="stackA1" layoutX="43.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <ImageView fx:id="imageSA1" fitHeight="170.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
-                  <Label fx:id="lblSA1" prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
+                  <Label fx:id="lblSA1" prefHeight="18.0" prefWidth="105.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
                      <padding>
                         <Insets left="14.0" />
                      </padding>
@@ -170,7 +170,7 @@
             </StackPane>
             <StackPane fx:id="stackA2" layoutX="285.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="lblSA2" prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
+                  <Label fx:id="lblSA2" prefHeight="18.0" prefWidth="130.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
                      <padding>
                         <Insets left="14.0" />
                      </padding>
@@ -183,7 +183,7 @@
             </StackPane>
             <StackPane fx:id="stackA3" layoutX="531.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="lblSA3" prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
+                  <Label fx:id="lblSA3" prefHeight="18.0" prefWidth="82.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
@@ -194,7 +194,7 @@
             <StackPane fx:id="stackA4" layoutX="774.0" layoutY="313.0" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <ImageView fx:id="imageSA4" fitHeight="142.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="lblSA4" prefHeight="17.0" prefWidth="84.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
+                  <Label fx:id="lblSA4" prefHeight="18.0" prefWidth="123.0" text="Label" StackPane.alignment="BOTTOM_LEFT">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
@@ -306,7 +306,7 @@
             <Button fx:id="btnUndoLikedSongs" layoutX="930.0" layoutY="527.0" mnemonicParsing="false" onAction="#revertActionLikeSongs" prefHeight="27.0" prefWidth="107.0" style="-fx-background-color: #edb3a1; -fx-border-radius: 8; -fx-cursor: hand; -fx-border-color: black; -fx-background-radius: 8;" text="Undo" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorSearch" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
+      <AnchorPane fx:id="anchorSearch" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0" visible="false">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />
@@ -401,7 +401,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorAnalytics" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0">
+      <AnchorPane fx:id="anchorAnalytics" layoutX="259.0" layoutY="115.0" prefHeight="572.0" prefWidth="1066.0" visible="false">
          <styleClass>
             <String fx:value="white-bg" />
             <String fx:value="shadow" />

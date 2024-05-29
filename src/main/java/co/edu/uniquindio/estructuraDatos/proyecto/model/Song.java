@@ -18,9 +18,23 @@ public class Song implements Serializable {
     private URL link;
     private Artist artist;
 
+    /**
+     * Contructor vacio
+     */
     public Song() {
     }
 
+    /**
+     * Contructor con los atributos de cancion ya asignada a un artista
+     * @param code
+     * @param name
+     * @param cover
+     * @param year
+     * @param duration
+     * @param gender
+     * @param link
+     * @param artist
+     */
     public Song(String code, String name, String cover, String year, String duration, Gender gender, URL link, Artist artist) {
         this.code = code;
         this.name = name;
@@ -32,6 +46,16 @@ public class Song implements Serializable {
         this.artist = artist;
     }
 
+    /**
+     * Contructor con los atributos de cancion ya asignada a un artista nuevo
+     * @param code
+     * @param name
+     * @param cover
+     * @param year
+     * @param duration
+     * @param gender
+     * @param link
+     */
     public Song(String code, String name, String cover, String year, String duration, Gender gender, URL link) {
         this.code = code;
         this.name = name;
@@ -107,6 +131,11 @@ public class Song implements Serializable {
         this.artist = artist;
     }
 
+    /**
+     * Metodo que valida si dos canciones son iguales segun su codigo
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -120,10 +149,23 @@ public class Song implements Serializable {
         return Objects.hash(code);
     }
 
+    /**
+     * Metodo que valida la igualdad de dos canciones segun el codigo
+     * @param code
+     * @return
+     */
     public boolean verifyCode(String code){
         return this.getCode().equals(code);
     }
 
+    /**
+     * Metodo que verifica la informacion de el motor de busqueda Y
+     * @param artistName
+     * @param songName
+     * @param gender
+     * @param year
+     * @return
+     */
     public boolean verifyInfoY(String artistName,String songName, Gender gender, String year){
         if (this.artist.getName().equals(artistName) && this.name.equals(songName) && this.gender==gender && this.year.equals(year)){
             return true;
@@ -131,6 +173,14 @@ public class Song implements Serializable {
         return false;
     }
 
+    /**
+     * Metodo que verifica la informacion de el motor de busqueda O
+     * @param artistName
+     * @param songName
+     * @param gender
+     * @param year
+     * @return
+     */
     public boolean verifyInfoO(String artistName,String songName, Gender gender, String year){
         if(gender==null){
             if (this.artist.getName().equals(artistName) || this.name.equalsIgnoreCase(songName) || this.year.equalsIgnoreCase(year)

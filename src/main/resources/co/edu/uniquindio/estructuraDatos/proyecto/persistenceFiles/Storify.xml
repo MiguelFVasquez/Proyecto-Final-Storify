@@ -263,6 +263,210 @@
      </void>
     </object>
    </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist" id="Artist0">
+       <void property="code">
+        <string>ntndOsiwOd</string>
+       </void>
+       <void property="name">
+        <string>Twenty One Pilots</string>
+       </void>
+       <void property="nationality">
+        <string>Estadounidense</string>
+       </void>
+       <void property="photo">
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/TopArtist.png</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string>Tiiey nsti</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/TopCover.png</string>
+     </void>
+     <void property="duration">
+      <string>180</string>
+     </void>
+     <void property="gender">
+      <object class="java.lang.Enum" id="Gender2" method="valueOf">
+       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
+       <string>Rock</string>
+      </object>
+     </void>
+     <void property="name">
+      <string>Vignette</string>
+     </void>
+     <void property="year">
+      <string>2024</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object idref="Artist0"/>
+     </void>
+     <void property="code">
+      <string>nOtPotttPs</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/TopCover.png</string>
+     </void>
+     <void property="duration">
+      <string>240</string>
+     </void>
+     <void property="gender">
+      <object idref="Gender2"/>
+     </void>
+     <void property="name">
+      <string>Navigating</string>
+     </void>
+     <void property="year">
+      <string>2024</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist" id="Artist1">
+       <void property="code">
+        <string>rol uoPnaE</string>
+       </void>
+       <void property="name">
+        <string>Eladio Carrion</string>
+       </void>
+       <void property="nationality">
+        <string>Puerto Rico</string>
+       </void>
+       <void property="photo">
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/EladioArtist.png</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string> tiCnmdror</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/SolMariaCover.png</string>
+     </void>
+     <void property="duration">
+      <string>120</string>
+     </void>
+     <void property="gender">
+      <object class="java.lang.Enum" id="Gender3" method="valueOf">
+       <class>co.edu.uniquindio.estructuraDatos.proyecto.model.Enum.Gender</class>
+       <string>Reggaeton</string>
+      </object>
+     </void>
+     <void property="name">
+      <string>Tu ritmo</string>
+     </void>
+     <void property="year">
+      <string>2024</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object idref="Artist1"/>
+     </void>
+     <void property="code">
+      <string>JaloMnfeol</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/SolMariaCover.png</string>
+     </void>
+     <void property="duration">
+      <string>180</string>
+     </void>
+     <void property="gender">
+      <object idref="Gender3"/>
+     </void>
+     <void property="name">
+      <string>La cancion feliz del disco ft Milo J</string>
+     </void>
+     <void property="year">
+      <string>2024</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Artist" id="Artist2">
+       <void property="code">
+        <string>tEatrrstci</string>
+       </void>
+       <void property="name">
+        <string>America</string>
+       </void>
+       <void property="nationality">
+        <string>Estadounidense</string>
+       </void>
+       <void property="photo">
+        <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/photosArtists/AmericaArtist.png</string>
+       </void>
+       <void property="songList">
+        <object class="co.edu.uniquindio.estructuraDatos.proyecto.DataStructure.DoublyLinkedList"/>
+       </void>
+      </object>
+     </void>
+     <void property="code">
+      <string>Ya ccoaaor</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/AmericaCover.png</string>
+     </void>
+     <void property="duration">
+      <string>180</string>
+     </void>
+     <void property="gender">
+      <object idref="Gender2"/>
+     </void>
+     <void property="name">
+      <string>You can do magic</string>
+     </void>
+     <void property="year">
+      <string>1982</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.estructuraDatos.proyecto.model.Song">
+     <void property="artist">
+      <object idref="Artist2"/>
+     </void>
+     <void property="code">
+      <string>ne m wwwie</string>
+     </void>
+     <void property="cover">
+      <string>file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/AmericaCover.png</string>
+     </void>
+     <void property="duration">
+      <string>280</string>
+     </void>
+     <void property="gender">
+      <object idref="Gender2"/>
+     </void>
+     <void property="name">
+      <string>A horse with no name</string>
+     </void>
+     <void property="year">
+      <string>1971</string>
+     </void>
+    </object>
+   </void>
   </void>
   <void property="usersMap">
    <void method="put">

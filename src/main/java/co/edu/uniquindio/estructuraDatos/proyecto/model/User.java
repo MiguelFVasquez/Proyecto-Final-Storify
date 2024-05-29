@@ -19,10 +19,18 @@ public class User implements Serializable {
     private String email;
     private CircularLinkedList<Song> songList;
 
-
-
+    /**
+     * Constructor vacio
+     */
     public User() {
     }
+
+    /**
+     * Constructor con los atributos de el objeto usuario
+     * @param userName
+     * @param password
+     * @param email
+     */
     public User(String userName, String password, String email) {
         this.userName = userName;
         this.password = password;
@@ -65,6 +73,12 @@ public class User implements Serializable {
     public void setSongList(CircularLinkedList<Song> songList) {
         this.songList = songList;
     }
+
+    /**
+     * Metodo que verifica las canciones de el usuario por su codigo
+     * @param code
+     * @return
+     */
     public boolean verifySong(String code){
         boolean flag=false;
             for (Song songAux: songList) {
@@ -80,7 +94,7 @@ public class User implements Serializable {
     }
 
     /**
-     *
+     * Metodo que agrega una canciones a la lista de canciones de el usuario
      * @param newSong
      * @return
      * @throws SongException
@@ -97,7 +111,7 @@ public class User implements Serializable {
     }
 
     /**
-     *
+     * Metodo que elimina una cancione de la lista de canciones de el usuario
      * @param songDelete
      * @return
      * @throws SongException
@@ -114,6 +128,10 @@ public class User implements Serializable {
         return flag;
     }
 
+    /**
+     * Metodo que obtiene el genero mas escuchado
+     * @return
+     */
     public Gender getMostListenedGender() {
         Map<Gender, Integer> genderCount = new HashMap<>();
 
@@ -139,6 +157,10 @@ public class User implements Serializable {
         return mostLikedGender;
     }
 
+    /**
+     * Metodo que obtiene el artista mas escuchado
+     * @return
+     */
     public Artist getMostListenedArtist() {
         Map<Artist, Integer> artistCount = new HashMap<>();
 

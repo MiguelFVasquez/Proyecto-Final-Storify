@@ -70,6 +70,13 @@ public class FileUtil {
         }
         return aux;
     }
+
+    /**
+     * Metodo que salva los rescursos serializados
+     * @param rutaArchivo
+     * @param object
+     * @throws Exception
+     */
     public static void salvarRecursoSerializado(String rutaArchivo, Object object)	throws Exception {
         ObjectOutputStream oos = null;
         try {
@@ -83,8 +90,14 @@ public class FileUtil {
         }
     }
 
-    //---------------------MANEJO DE XML--------------------------------
+    //---------------------MANEJO DE XML--------------------------------//
 
+    /**
+     * Metodo que permite cargar los recursos serializados
+     * @param rutaArchivo
+     * @return
+     * @throws IOException
+     */
     public static Object cargarRecursoSerializadoXML(String rutaArchivo) throws IOException {
 
         XMLDecoder decodificadorXML;
@@ -97,6 +110,12 @@ public class FileUtil {
 
     }
 
+    /**
+     * Metodo que salva los recursos de un objeto serializado
+     * @param rutaArchivo
+     * @param objeto
+     * @throws IOException
+     */
     public static void salvarRecursoSerializadoXML(String rutaArchivo, Object objeto) throws IOException {
         XMLEncoder codificadorXML;
 

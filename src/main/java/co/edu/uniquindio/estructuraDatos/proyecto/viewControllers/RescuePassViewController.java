@@ -101,6 +101,11 @@ public class RescuePassViewController {
 
     }
 
+    /**
+     * Metodo de boton que cambia la contraseña validando si son iguales
+     * @param event
+     * @throws UserException
+     */
     @FXML
     void changePassword(ActionEvent event) throws UserException {
 
@@ -125,10 +130,20 @@ public class RescuePassViewController {
 
     }
 
+    /**
+     * Metodo que cambia la contraseña de el usuario
+     * @param clientName
+     * @param pass1
+     * @throws UserException
+     */
     public void changePasswordClient(User clientName , String pass1) throws UserException {
         rescuePassController.mfm.changePassword(clientName  , pass1);
     }
 
+    /**
+     * Metodo de boton que verifica el codigo de recuperacion enviado a el correo
+     * @param event
+     */
     @FXML
     void verifyCodeRescue(ActionEvent event){
         String aux = "";
@@ -149,6 +164,9 @@ public class RescuePassViewController {
         }
     }
 
+    /**
+     * Metodo que limpia los campos
+     */
     void clearCodeSpaces(){
         txtcode1.clear();
         txtcode2.clear();
@@ -157,6 +175,10 @@ public class RescuePassViewController {
         txtcode5.clear();
     }
 
+    /**
+     * Metodo de boton que cuando se cambia la contraseña se cierra la ventana
+     * @param event
+     */
     @FXML
     void closeWindow(ActionEvent event) {
         anchorSecond.setVisible(false);
@@ -171,6 +193,10 @@ public class RescuePassViewController {
         });
     }
 
+    /**
+     * Metodo de boyon que muestra la ventana para ingresar el codigo
+     * @param event
+     */
     @FXML
     void showAnchorFirst(ActionEvent event) {
         anchorSecond.setVisible(false);
@@ -197,6 +223,15 @@ public class RescuePassViewController {
 
     }
 
+    /**
+     * Metodo que verifica los campos donde se ingresa el codigo
+     * @param txt1
+     * @param txt2
+     * @param txt3
+     * @param txt4
+     * @param txt5
+     * @param btn
+     */
     private void verifySpaces(TextField txt1, TextField txt2,TextField txt3, TextField txt4,TextField txt5,  Button btn) {
         if (!txt1.getText().isEmpty() && !txt2.getText().isEmpty() && !txt3.getText().isEmpty() && !txt4.getText().isEmpty()&& !txt5.getText().isEmpty()) {
             btn.setDisable(false); // Habilitar el botón si ambos campos están llenos
@@ -205,6 +240,9 @@ public class RescuePassViewController {
         }
     }
 
+    /**
+     * Metodo que controla los eventos de mouse y a nimaciones
+     */
     public void eventsManager() {
         btnSubmit.setDisable(true);
 
@@ -296,14 +334,16 @@ public class RescuePassViewController {
                 }
             }
         });
-
-
     }
 
     public void setAnchorPane(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
     }
 
+    /**
+     * Metodo de boton que cuando el usuario ingresa el usuario y existe busca el correo de ese usuario
+     * @param event
+     */
     @FXML
     void searchEmail(ActionEvent event) {
         String userName = txtNameAcc.getText();
@@ -328,6 +368,11 @@ public class RescuePassViewController {
         }
     }
 
+    /**
+     * Metodo que obtiene el usuario por su nombre de usuario
+     * @param userName
+     * @return
+     */
     private User getUserFromUsername(String userName) {
         // Obtener el mapa de usuarios cargados desde el archivo
         HashMap<String, User> users = rescuePassController.mfm.getStorify().getUsersMap();
@@ -340,6 +385,11 @@ public class RescuePassViewController {
         return null;
     }
 
+    /**
+     * Metodo que obtiene el correo de un usuario segun su nombre de usuario
+     * @param userName
+     * @return
+     */
     private String getEmailFromUsername(String userName) {
         // Obtener el mapa de usuarios cargados desde el archivo
         HashMap<String, User> users = rescuePassController.mfm.getStorify().getUsersMap();
@@ -354,7 +404,11 @@ public class RescuePassViewController {
         return null;
     }
 
-
+    /**
+     * Metodo que verifica las credenciales de el nombre de usuaio
+     * @param userName
+     * @return
+     */
     private boolean verifyCredentials(String userName) {
         // Obtener el mapa de usuarios cargados desde el archivo
         HashMap<String, User> users = rescuePassController.mfm.getStorify().getUsersMap();
@@ -367,7 +421,11 @@ public class RescuePassViewController {
         return false;// Las credenciales son inválidas
     }
 
-
+    /**
+     * Metodo que verifica los espacios en blanco
+     * @param userName
+     * @return
+     */
     private boolean verifyBlankSpaces(String userName){
         String notification = "";
         if(userName.isEmpty()){
@@ -382,6 +440,13 @@ public class RescuePassViewController {
         return false;
     }
 
+    /**
+     * Metodo para mostrar mensajes en la interfaz
+     * @param title
+     * @param header
+     * @param content
+     * @param alertype
+     */
     public void showMessage(String title, String header, String content, Alert.AlertType alertype) {
         Alert alert = new Alert(alertype);
         alert.setTitle(title);

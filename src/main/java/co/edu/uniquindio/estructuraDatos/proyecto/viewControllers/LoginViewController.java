@@ -96,7 +96,7 @@ public class LoginViewController implements Initializable {
 
     private AnchorPane anchorPane;
 
-    public String getLogInName(){
+    public String getLogInName() {
         return txtName.getText();
     }
 
@@ -104,12 +104,21 @@ public class LoginViewController implements Initializable {
         this.anchorPane = anchorPane;
     }
 
+
+    /**
+     * Metodo de boton que activa el tab para iniciar sesion
+     * @param event
+     */
     @FXML
-    void activeSignUpTab(ActionEvent event) {
-        tabSignUp.setDisable( false );
-        tabPane.getSelectionModel().select( tabSignUp );
-        tabLogIn.setDisable( true );
+    void activeLogInTab(ActionEvent event) {
+        tabLogIn.setDisable( false );
+        tabPane.getSelectionModel().select( tabLogIn );
+        tabSignUp.setDisable( true );
     }
+
+    /*+
+    Metodo de boton que valida el inicio de sesio de un usuario
+     */
     @FXML
     void logIn(ActionEvent event) throws IOException {
         String userName = txtName.getText();
@@ -164,6 +173,12 @@ public class LoginViewController implements Initializable {
         cleanUp();
     }
 
+    /**
+     * Metodo que verifica las credenciales de un usuario para cuando intenta iniciar sesion
+     * @param userName
+     * @param password
+     * @return
+     */
     private boolean verifyCredentials(String userName, String password) {
         // Obtener el mapa de usuarios cargados desde el archivo
         HashMap<String, User> users =  loginController.mfm.getStorify().getUsersMap();;
@@ -179,6 +194,12 @@ public class LoginViewController implements Initializable {
         return false; // Las credenciales son inválidas
     }
 
+    /**
+     * Metodo que verifica los espacios en blanco para el inicio de sesion
+     * @param userName
+     * @param password
+     * @return
+     */
     private boolean verifyBlankSpaces(String userName, String password) {
         String notification = "";
         if(userName.isEmpty()){
@@ -197,7 +218,9 @@ public class LoginViewController implements Initializable {
         return false;
     }
 
-
+    /**
+     * Metodo que limpia los cambios de el inicio de sesion
+     */
     void cleanUp(){
         txtName.clear();
         txtPassword.clear();
@@ -207,6 +230,10 @@ public class LoginViewController implements Initializable {
         txtEmail.clear();
     }
 
+    /**
+     * Metodo de boton que cierra la venta de inicio de sesion
+     * @param event
+     */
     @FXML
     void closeWindow(ActionEvent event) {
         FadeTransition fadeOut = new FadeTransition( Duration.seconds( 1 ) , anchorPane  );
@@ -219,14 +246,23 @@ public class LoginViewController implements Initializable {
         });
     }
 
+    /**
+     * Metodo de boton que habilita el tab para el registro de un nuevo usuario
+     * @param event
+     */
     @FXML
-    void activeLogInTab(ActionEvent event) {
-        tabLogIn.setDisable( false );
-        tabPane.getSelectionModel().select( tabLogIn );
-        tabSignUp.setDisable( true );
+    void activeSignUpTab(ActionEvent event) {
+        tabSignUp.setDisable( false );
+        tabPane.getSelectionModel().select( tabSignUp );
+        tabLogIn.setDisable( true );
     }
 
-
+    /**
+     * Metodo de boton que captura los datos de un usuario y lo crea
+     * @param event
+     * @throws UserException
+     * @throws IOException
+     */
     @FXML
     void registerUser(ActionEvent event) throws UserException, IOException {
         String userName = txtNameRegister.getText();
@@ -242,6 +278,14 @@ public class LoginViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo que registra los datos de el usuario y lo crea
+     * @param userName
+     * @param password
+     * @param email
+     * @return
+     * @throws UserException
+     */
     public boolean userRegist(String userName, String password, String email) throws UserException {
         try {
             if(loginController.mfm.registerUser(userName,password,email)){
@@ -254,8 +298,10 @@ public class LoginViewController implements Initializable {
         return false;
     }
 
-
-
+    /**
+     * Metodo que verifica la confirmacion de la contraseña en el tab de registro
+     * @return
+     */
     public boolean verifyPasswordRegister(){
         boolean flag = false;
         if (txtPasswordRegister.getText().equals(txtPasswordConfirRegister.getText())){
@@ -267,6 +313,13 @@ public class LoginViewController implements Initializable {
         return false;
     }
 
+    /**
+     * Metodo que verifica los espacios en blanco de el tab de registro de usuario
+     * @param userName
+     * @param password
+     * @param email
+     * @return
+     */
     private boolean verifyRegisterBlankSpaces(String userName, String password, String email) {
         String notification = "";
         if(userName.isEmpty()){
@@ -294,7 +347,11 @@ public class LoginViewController implements Initializable {
     }
 
 
-
+    /**
+     * Metodo de boton para abri le ventana para recuperar contraseña
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void rescuePassword(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -326,7 +383,16 @@ public class LoginViewController implements Initializable {
         controller.show();
     }
     
-    //--------------------------------------UTILITARY FUNCTIONS
+    //--------------------------------------UTILITARY FUNCTIONS---------------//
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        tabSignUp.setDisable( true );
+        this.loginController= new LoginController();
+        loginController.mfm.initLoginViewController(this);
+        eventsControl();
+    }
+
     @FXML
     void initialize() {
         tabSignUp.setDisable( true );
@@ -339,6 +405,13 @@ public class LoginViewController implements Initializable {
         this.stage = stage2;
     }
 
+    /**
+     * Metodo para mostrar mensaje en la interfaz
+     * @param title
+     * @param header
+     * @param content
+     * @param alertype
+     */
     public void showMessage(String title, String header, String content, Alert.AlertType alertype) {
         Alert alert = new Alert(alertype);
         alert.setTitle(title);
@@ -347,6 +420,9 @@ public class LoginViewController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Metodo que maneja los eventos de el mouse y animaciones
+     */
     void eventsControl(){
         ScaleTransition scaleIn = new ScaleTransition(Duration.seconds(0.2), btnLogin);
         scaleIn.setFromX(1);
@@ -430,11 +506,11 @@ public class LoginViewController implements Initializable {
             }
         });
 
-
-
-
     }
 
+    /**
+     * Mostras animacion
+     */
     public void show() {
         FadeTransition fadeIn = new FadeTransition( Duration.seconds(1) , anchorPane);
         fadeIn.setFromValue(0);
@@ -444,11 +520,4 @@ public class LoginViewController implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        tabSignUp.setDisable( true );
-        this.loginController= new LoginController();
-        loginController.mfm.initLoginViewController(this);
-        eventsControl();
-    }
 }

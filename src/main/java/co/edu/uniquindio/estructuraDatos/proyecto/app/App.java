@@ -17,10 +17,16 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.Objects;
 
+
 public class App extends Application {
     private double y;
     private double x;
 
+    /**
+     * Metodo que da inicio a la aplicacion
+     * @param primaryStage
+     * @throws IOException
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
 
@@ -80,59 +86,4 @@ public class App extends Application {
         });
         fadeOut.play();
     }
-        /*
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation( App.class.getResource( "First.fxml" ) );
-        AnchorPane anchorPane = loader.load();
-        FirstViewController controller = loader.getController();
-        Scene scene = new Scene( anchorPane );
-        Stage stage = new Stage();
-        stage.setScene( scene );
-        stage.initStyle( StageStyle.UNDECORATED );
-        controller.init( stage );
-        FadeTransition fadeIn = new FadeTransition( Duration.seconds(1), stage.getScene().getRoot());
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-
-        // Crear una transición de fade out
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(2), stage.getScene().getRoot());
-        fadeOut.setFromValue(1);
-        fadeOut.setToValue(0);
-
-        // Configurar un timeline para coordinar el fade in y el fade out
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0), event2 -> {
-                    // Mostrar la ventana y comenzar el fade in
-                    controller.show();
-                    fadeIn.play();
-                }),
-                new KeyFrame( Duration.seconds(1), event2 -> {
-                    // Comenzar el fade out después de que termine el fade in
-                    fadeIn.stop();
-                    fadeOut.play();
-                }),
-                new KeyFrame(Duration.seconds(3), event2 -> {
-                    // Cerrar la ventana después de que termine el fade out
-
-                    stage.close();
-                })
-        );
-
-        // Iniciar el timeline
-        timeline.play();
-
-        FXMLLoader loader1 = new FXMLLoader();
-        loader1.setLocation( App.class.getResource( "LoginView.fxml" ) );
-        AnchorPane anchorPane1 = loader1.load();
-        LoginViewController loginViewController = loader1.getController();
-        Scene scene2 = new Scene( anchorPane1 );
-        Stage stage2 = new Stage();
-        stage2.setScene( scene2 );
-        stage2.initStyle( StageStyle.UNDECORATED );
-        loginViewController.init( stage2 );
-        FadeTransition fadeIn2 = new FadeTransition( Duration.seconds(1), stage2.getScene().getRoot());
-        fadeIn2.setFromValue(0);
-        fadeIn2.setToValue(1);*/
-
-
 }

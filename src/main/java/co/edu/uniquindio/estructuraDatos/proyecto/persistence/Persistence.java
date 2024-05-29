@@ -26,6 +26,11 @@ public class Persistence {
     public static final String ROUTE_MODEL_STORIFY = "src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/persistenceFiles/Storify.xml";
 
 
+    /**
+     * Metodo que carga los datos de el archivo
+     * @param storify
+     * @throws IOException
+     */
     public static void cargarDatosArchivos(Storify storify) throws IOException {
         // Cargar datos de usuarios
         HashMap<String, User> usuariosCargados = loadUsers2();
@@ -56,7 +61,11 @@ public class Persistence {
     }
     //-------------------------------------USERS-------------------------------------------
 
-    //Funcion para guardar los ususarios en el archivo de texto
+    /**
+     * Funcion para guardar los ususarios en el archivo de texto
+     * @param users
+     * @throws IOException
+     */
     public static void saveUsers(HashMap<String, User> users) throws IOException {
         StringBuilder content = new StringBuilder();
 
@@ -69,8 +78,12 @@ public class Persistence {
         UtilFile.guardarArchivo(ROUTE_USER_FILE, content.toString(), false);
     }
 
-    //Función para cargar los usuarios desde el archivo
 
+    /**
+     * Función para cargar los usuarios desde el archivo
+     * @return
+     * @throws IOException
+     */
     public static HashMap<String, User> cargarUsuarios() throws IOException {
         HashMap<String, User> usuarios = new HashMap<>();
         List<String> contenido = UtilFile.leerArchivo(ROUTE_USER_FILE);
@@ -93,6 +106,10 @@ public class Persistence {
         return usuarios;
     }
 
+    /**
+     * Metodo auxiliar para guardar los datos de los usuarios
+     * @param usersMap
+     */
     public static void saveUsers2(HashMap<String, User> usersMap) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ROUTE_USER_FILE2))) {
             outputStream.writeObject(usersMap);
@@ -101,6 +118,10 @@ public class Persistence {
         }
     }
 
+    /**
+     * Metodo auxiliar que carga los datos de los usuarios
+     * @return
+     */
     public static HashMap<String, User> loadUsers2() {
         HashMap<String, User> aux= new HashMap<>();
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ROUTE_USER_FILE2))) {
@@ -113,7 +134,13 @@ public class Persistence {
     }
 
 
-    //---------------------------SONG----------------------
+    //---------------------------SONG-----------------------------------//
+
+    /**
+     * Metodo que guarda los datos de el objeto cancion
+     * @param canciones
+     * @throws IOException
+     */
     public static void saveSongs(List<Song> canciones) throws IOException {
         StringBuilder contenido = new StringBuilder();
 
@@ -135,6 +162,10 @@ public class Persistence {
         UtilFile.guardarArchivo(ROUTE_SONGS_FILE, contenido.toString(), false);
     }
 
+    /**
+     * Metodo auxiliar que guarda los datos de el objeto cancion
+     * @param songList
+     */
     public static void saveSongs2(List<Song> songList) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ROUTE_SONGS_FILE2))) {
             outputStream.writeObject(songList);
@@ -143,6 +174,11 @@ public class Persistence {
         }
     }
 
+    /**
+     * Metodo auxiliar que carga los datos de el objeto cancion
+     * @return
+     * @throws IOException
+     */
     public static List<Song> loadSongs2() throws IOException {
         List<Song> aux = new ArrayList<>();
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ROUTE_SONGS_FILE2))) {
@@ -154,8 +190,11 @@ public class Persistence {
         return aux;
     }
 
-
-
+    /**
+     * Metodo que carga los datos de el objeto tipo cancion
+     * @return
+     * @throws IOException
+     */
     public static List<Song> loadSong() throws IOException {
         List<Song> songs = new ArrayList<>();
         List<String> content = UtilFile.leerArchivo(ROUTE_SONGS_FILE);
@@ -195,6 +234,11 @@ public class Persistence {
         return songs;
     }
 
+    /**
+     * Metodo que carga la imagen
+     * @param ruta
+     * @return
+     */
     public static Image cargarImagen(String ruta) {
         // Cargar la imagen desde la ruta especificada
         Image imagen = new Image(ruta);
@@ -202,8 +246,13 @@ public class Persistence {
     }
 
 
-    //--------------------------Artist---------------------
-    //Metodo para guardar los artistas en el archivo txt
+    //--------------------------Artist------------------------//
+
+    /**
+     * Metodo para guardar los artistas en el archivo txt
+     * @param arbolArtistas
+     * @throws IOException
+     */
     public static void saveArtist(BinaryTree<Artist> arbolArtistas) throws IOException {
         StringBuilder contenido = new StringBuilder();
 
@@ -225,7 +274,11 @@ public class Persistence {
         UtilFile.guardarArchivo(ROUTE_ARTIST_FILE, contenido.toString(), false);
     }
 
-
+    /**
+     * Metodo auxilar que guarda los datos de el objeto tipo artista
+     * @param arbolArtistas
+     * @throws IOException
+     */
     public static void saveArtist2(BinaryTree<Artist> arbolArtistas) throws IOException {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ROUTE_ARTIST_FILE2))) {
             outputStream.writeObject(arbolArtistas);
@@ -234,10 +287,11 @@ public class Persistence {
         }
     }
 
-
-
-
-    //Metodo que carga los artistas desde el archivo
+    /**
+     * Metodo que carga los artistas desde el archivo
+     * @return
+     * @throws IOException
+     */
     public static BinaryTree<Artist> loadArtist() throws IOException {
         BinaryTree<Artist> arbolArtistas = new BinaryTree<>();
         List<String> contenido = UtilFile.leerArchivo(ROUTE_ARTIST_FILE);
@@ -264,7 +318,11 @@ public class Persistence {
         return arbolArtistas;
     }
 
-
+    /**
+     * Metodo auxilar que carga los artistas desde el archivo
+     * @return
+     * @throws IOException
+     */
     public static BinaryTree<Artist> loadArtistS2() throws IOException {
         BinaryTree<Artist> aux = new BinaryTree<>();
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ROUTE_ARTIST_FILE2))) {
@@ -276,7 +334,12 @@ public class Persistence {
         return aux;
     }
 
-    //----------------------------------STORIFY XML-------------------------------------
+    //----------------------------------STORIFY XML-------------------------------------//
+
+    /**
+     * Metodo que guarda los recursos de la instancia de la clase principal
+     * @param storify
+     */
     public static void saveResourceStorifyXML(Storify storify) {
         try {
             UtilFile.salvarRecursoSerializadoXML(ROUTE_MODEL_STORIFY, storify);
@@ -286,7 +349,10 @@ public class Persistence {
         }
     }
 
-
+    /**
+     * Metodo que carga los recursos de la instancia de la clase principal
+     * @return
+     */
     public static Storify loadResourceStorifyXML() {
 
         Storify storify= null;

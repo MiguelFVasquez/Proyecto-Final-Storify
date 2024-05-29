@@ -16,7 +16,13 @@ import static org.junit.Assert.*;
 public class StorifyTest {
     private Storify storify= new Storify();
 
-    //-------Intanciamos clases para probarlas
+    //-------Intanciamos clases para probarlas-------------//
+
+    /**
+     * Testamos la creacion exitosa de una cancion a la lista
+     * @return
+     * @throws MalformedURLException
+     */
     private Song newSong() throws MalformedURLException {
         String code = "0003";
         String name = "Todo Lit";
@@ -29,6 +35,10 @@ public class StorifyTest {
         return new Song(code, name, rutaCover, year, duration, gender, link, artist);
     }
 
+    /**
+     * Testeamos la creacion existosa de un artista a el arbol
+     * @return
+     */
     private Artist newArtist(){
         String code= "jkdak00";
         String name= "Eladio";
@@ -64,7 +74,12 @@ public class StorifyTest {
         assertTrue(result);
     }
 
-
+    /**
+     * Test donde agragamos una cancion a la lista de canciones de el usuario
+     * @throws UserException
+     * @throws MalformedURLException
+     * @throws SongException
+     */
     @Test
     public void testAddSongToUserList() throws UserException, MalformedURLException, SongException {
         User newUser= new User("juanmi","0190191","juanmi@gmail.com");
@@ -74,6 +89,13 @@ public class StorifyTest {
         boolean result= storify.addSongToUserList(newUser.getUserName(), newSong);
         assertTrue(result);
     }
+
+    /**
+     * Test donde eliminamos una cancion de la lista de canciones de el usuario
+     * @throws MalformedURLException
+     * @throws UserException
+     * @throws SongException
+     */
     @Test
     public void testRemoveSongFromUserList() throws MalformedURLException, UserException, SongException {
         User newUser= new User("juanmi","0190191","juanmi@gmail.com");
@@ -84,9 +106,10 @@ public class StorifyTest {
         boolean result= storify.removeSongFromUserList(newUser.getUserName(),song);
         assertTrue(result);
     }
-    //------------------------Metodos de las canciones--------------------------
+    //------------------------Metodos de las canciones--------------------------//
+
     /**
-     *
+     * Test donde agregamos una cancion nueva
      * @throws UserException
      * @throws MalformedURLException
      * @throws SongException
@@ -109,13 +132,23 @@ public class StorifyTest {
         boolean result= storify.deleteSong(song);
         assertTrue(result);
     }
-    //-------------------Metodos de los artistas---------------------------
+    //-------------------Metodos de los artistas---------------------------//
+
+    /**
+     * Test donde agregamos un artista nueva a el arbol
+     * @throws ArtistException
+     */
     @Test
     public void testAddArtist() throws ArtistException {
         Artist newArtist= newArtist();
         boolean result= storify.addArtist(newArtist);
         assertTrue(result);
     }
+
+    /**
+     * Test donde eliminamos un artista de el arbol
+     * @throws ArtistException
+     */
     @Test
     public void testDeleteArtist() throws ArtistException {
         Artist artist= newArtist();
@@ -124,6 +157,12 @@ public class StorifyTest {
         assertTrue(result);
     }
 
+    /**
+     * Test donde agregamos una cancion a la lista de canciones de un artista
+     * @throws MalformedURLException
+     * @throws ArtistException
+     * @throws SongException
+     */
     @Test
     public void testAddSongToArtistList() throws MalformedURLException, ArtistException, SongException {
         Artist artist= newArtist();
@@ -133,6 +172,13 @@ public class StorifyTest {
         boolean result= storify.addSongToArtistList(newArtist().getName(), song);
         assertTrue(result);
     }
+
+    /**
+     * Test donde eliminamos una cancion de la lista de canciones de un artista
+     * @throws MalformedURLException
+     * @throws ArtistException
+     * @throws SongException
+     */
     @Test
     public void testRemoveSongFromArtistList() throws MalformedURLException, ArtistException, SongException {
         Artist artist= newArtist();

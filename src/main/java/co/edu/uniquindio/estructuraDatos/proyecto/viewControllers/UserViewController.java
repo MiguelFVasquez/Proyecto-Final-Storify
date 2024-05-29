@@ -362,6 +362,13 @@ public class UserViewController implements Initializable {
         this.songsDeleteStack = songsDeleteStack;
     }
 
+    /**
+     * Metodo para mostrar mensajes en la interfaz
+     * @param title
+     * @param header
+     * @param content
+     * @param alertype
+     */
     private void showMessage(String title, String header, String content, Alert.AlertType alertype) {
         Alert alert = new Alert(alertype);
         alert.setTitle(title);
@@ -370,6 +377,14 @@ public class UserViewController implements Initializable {
         alert.showAndWait();
     }
 
+    //============================== Song functions =====================================//
+
+    /**
+     * Metodo que agrega una cancion a la lista de canciones de un usuario
+     * @param userName
+     * @param songToAdd
+     * @return
+     */
     private boolean addSong(String userName, Song songToAdd){
         try {
             if (userController.mfm.addSongToUserList(userName,songToAdd)){
@@ -383,7 +398,12 @@ public class UserViewController implements Initializable {
         }
         return false;
     }
-    //Se pasa la cancion que se desea eliminar
+
+    /**
+     * Metodo que elimina una cancione de la lista de canciones de un usuario
+     * @param userName
+     * @param songToRemove
+     */
     private void removeSong(String userName, Song songToRemove){
         try{
             if (userController.mfm.removeSongFromUserList(user.getUserName(),songToRemove)){
@@ -394,9 +414,13 @@ public class UserViewController implements Initializable {
         } catch (SongException e) {
             showMessage("Error", "Error deleting song from list", e.getMessage(), Alert.AlertType.ERROR);
         }
-
-
     }
+
+    /**
+     * Metodo que muestras mensajes en la interfaz
+     * @param message
+     * @param stage
+     */
     private void showTooltip2(String message, Stage stage) {
         // Create a Tooltip
         Tooltip tooltip = new Tooltip(message);
@@ -424,7 +448,12 @@ public class UserViewController implements Initializable {
     }
 
 
-    //------------------------------FUNCTIONS OF SHOW-------------------------------------------------------------------
+    //------------------------------FUNCTIONS OF SHOW---------------------------------------------------------//
+
+    /**
+     * Metodo de boton que muestra la informacion de la home view
+     * @param event
+     */
     @FXML
     void showHomeInfo(ActionEvent event) {
         labelTitle.setText( "Home" );
@@ -438,6 +467,11 @@ public class UserViewController implements Initializable {
         showArtist( getArtists() );
 
     }
+
+    /**
+     * Metodo que muestra las ultimas canciones agragadas a la lista en la home view
+     * @param songs
+     */
     private void showReleasesSongs(List<Song> songs){
         int n= 0;
         if(songs.size() != 0){
@@ -480,8 +514,12 @@ public class UserViewController implements Initializable {
 
             }
         }
-
     }
+
+    /**
+     * Metodo que muestras los ultimos artistas agregados a el arbol en la home view
+     * @param artists
+     */
     private void showArtist(List<Artist> artists) {
         int n= 0;
         if ( !artists.isEmpty() ) {
@@ -515,6 +553,12 @@ public class UserViewController implements Initializable {
             }
         }
     }
+
+    /**
+     * Metodo que muestra la imagen de una canciones en la home view
+     * @param song
+     * @param imageView
+     */
     private void displayImageSong(Song song, ImageView imageView) {
 
         try {
@@ -523,16 +567,17 @@ public class UserViewController implements Initializable {
             imageView.setImage( image );
             imageView.setFitWidth(183 );
             imageView.setFitHeight( 160 );
-//
-//            Rectangle clip = new Rectangle(imageView.getFitWidth(), imageView.getFitHeight());
-//            clip.setArcWidth(20); // Cambia este valor según el grado de redondeo que desees
-//            clip.setArcHeight(20);
-//            imageView.setClip( clip );
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Metodo que muestra la imagen de un artista en la home view
+     * @param artist
+     * @param imageView
+     */
     private void displayImageArtists(Artist artist, ImageView imageView) {
 
         try {
@@ -541,28 +586,40 @@ public class UserViewController implements Initializable {
             imageView.setImage( image );
             imageView.setFitWidth(190 );
             imageView.setFitHeight( 170 );
-//
-//            Rectangle clip = new Rectangle(imageView.getFitWidth(), imageView.getFitHeight());
-//            clip.setArcWidth(20); // Cambia este valor según el grado de redondeo que desees
-//            clip.setArcHeight(20);
-//            imageView.setClip( clip );
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
+    /**
+     * Instancia de el metodo que obtiene las canciones de la lista de canciones
+     * @return
+     */
     public List<Song> getSongs(){
         return userController.mfm.getSongList();
     }
+
+    /**
+     * Instancia de metodo que obtiene las cancionesde la lista de canciones de un usuario
+     * @return
+     */
     public List<Song> getFavoritesSongs(){
         return user.getSongToList();
     }
+
+    /**
+     * Instancia de metodo que obtiene la lista de artistas
+     * @return
+     */
     public List<Artist> getArtists(){
         return userController.mfm.getListArtist();
     }
 
+    /**
+     * Metodo de boton que muestra la view para buscar canciones
+     * @param event
+     */
     @FXML
     void showSearchInfo(ActionEvent event) {
         labelTitle.setText( "Search" );
@@ -574,6 +631,11 @@ public class UserViewController implements Initializable {
         anchorSongsArtist.setVisible( false );
 
     }
+
+    /**
+     * Metodo de boton que muestra la view de la libreria de un usuario
+     * @param event
+     */
     @FXML
     void showLibraryInfo(ActionEvent event) {
         labelTitle.setText( "Library" );
@@ -585,8 +647,12 @@ public class UserViewController implements Initializable {
         anchorSongsArtist.setVisible( false );
 
         refreshTableViewFavorites();
-
     }
+
+    /**
+     * Metodo de boton que muestra la view de las configuraciones de un usuario
+     * @param event
+     */
     @FXML
     void showUserSettings(ActionEvent event){
         anchorHome.setVisible( false );
@@ -596,13 +662,17 @@ public class UserViewController implements Initializable {
         anchorAnalytics.setVisible( false );
         anchorSongsArtist.setVisible( false );
 
-
         labelTitle.setText( "Settings" );
         txtNameSettings.setText( user.getUserName() );
         txtPasswordSettings.setText( user.getPassword() );
         txtEmailSettings.setText( user.getEmail() );
 
     }
+
+    /**
+     * Metodo de boton que muestra la view de las estadisticas
+     * @param event
+     */
     @FXML
     void showAnalytics(ActionEvent event) {
         labelTitle.setText( "Analytics" );
@@ -639,6 +709,11 @@ public class UserViewController implements Initializable {
         }
 
     }
+
+    /**
+     * Metodo que permite cerrar sesion a el usuario
+     * @param event
+     */
     @FXML
     void logOut(ActionEvent event) {
         loginViewController.show();
@@ -647,6 +722,9 @@ public class UserViewController implements Initializable {
         this.stage.close();
     }
 
+    /**
+     * Metodo que pausa la reproduccion de la canciones cuando se cierra sesion
+     */
     private void pauseAllVideos() {
         if (playing) {
             if (selectedSong != null) {
@@ -668,6 +746,10 @@ public class UserViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo de boton que filtra las canciones por su artista en la view de busqueda
+     * @param event
+     */
     @FXML
     void showSongsByArtist(ActionEvent event) {
         if (isFilteredArtist) {
@@ -695,6 +777,10 @@ public class UserViewController implements Initializable {
         isFilteredArtist = !isFilteredArtist;
     }
 
+    /**
+     * Metodo de boton que filtra las canciones por año en la view de busqueda
+     * @param event
+     */
     @FXML
     void showSongsByYear(ActionEvent event){
         if (isFilteredYear) {
@@ -727,8 +813,10 @@ public class UserViewController implements Initializable {
         isFilteredYear = !isFilteredYear;
     }
 
-
-
+    /**
+     * Metodo de boton que filtra las canciones por su nombre en la view de busqueda
+     * @param event
+     */
     @FXML
     void showSongsByName(ActionEvent event) {
         if (isFilteredName) {
@@ -759,9 +847,10 @@ public class UserViewController implements Initializable {
         isFilteredName = !isFilteredName;
     }
 
-
-
-
+    /**
+     * Metodo de boton que filtra las canciones por la duracion de la cancion en el view de busqueda
+     * @param event
+     */
     @FXML
     void showSongsByTime(ActionEvent event) {
         if (isFilteredTime) {
@@ -792,7 +881,9 @@ public class UserViewController implements Initializable {
         isFilteredTime = !isFilteredTime;
     }
 
-
+    /**
+     * Metodo que obitne la lista de canciones segun su nombre
+     */
     private void getSongsByName() {
         List<Song> aux = getFavoritesSongs();
         aux.sort((song1, song2) -> song1.getName().compareToIgnoreCase(song2.getName()));
@@ -802,6 +893,9 @@ public class UserViewController implements Initializable {
         tableViewLikedSongs.getItems().addAll( listFavoritesSongs );
     }
 
+    /**
+     * Metodo que obitne la lista de canciones segun su año
+     */
     private void getSongsByYear(){
         List<Song> aux = getFavoritesSongs();
         aux.sort((song1, song2) -> Integer.compare(Integer.parseInt(song2.getYear()), Integer.parseInt(song1.getYear())));
@@ -810,6 +904,10 @@ public class UserViewController implements Initializable {
         tableViewLikedSongs.getItems().clear();
         tableViewLikedSongs.getItems().addAll( listFavoritesSongs );
     }
+
+    /**
+     * Metodo que obitne la lista de canciones segun su duracion
+     */
     private void getSongsByTime(){
         List<Song> aux = getFavoritesSongs();
         aux.sort((song1, song2) -> Integer.compare(Integer.parseInt(song2.getDuration()), Integer.parseInt(song1.getDuration())));
@@ -819,6 +917,9 @@ public class UserViewController implements Initializable {
         tableViewLikedSongs.getItems().addAll( listFavoritesSongs );
     }
 
+    /**
+     * Metodo que obitne la lista de canciones segun su artista
+     */
     private void getSongsByArtist(){
         List<Song> aux = getFavoritesSongs();
         aux.sort((song1, song2) -> {
@@ -835,7 +936,12 @@ public class UserViewController implements Initializable {
         tableViewLikedSongs.getItems().addAll( listFavoritesSongs );
     }
 
-    //------------------------FUNTIONS OF ARTISTVIEWSONG----------------------------------------------------------------
+    //------------------------FUNTIONS OF ARTISTVIEWSONG--------------------------------------------------------//
+
+    /**
+     * Metodo que filtra las canciones de un artista segun el año en la vie de artista
+     * @param event
+     */
     @FXML
     void showSongsByYearArtist(ActionEvent event){
         if (isFilteredYear2) {
@@ -865,6 +971,10 @@ public class UserViewController implements Initializable {
         isFilteredYear2 = !isFilteredYear2;
     }
 
+    /**
+     * Metodo que filtra las canciones de un artista segun el nombre en la vie de artista
+     * @param event
+     */
     @FXML
     void showSongsByNameArtist(ActionEvent event) {
         if (isFilteredName2) {
@@ -892,6 +1002,10 @@ public class UserViewController implements Initializable {
         isFilteredName2 = !isFilteredName2;
     }
 
+    /**
+     * Metodo que filtra las canciones de un artista segun la duracion de la cancion en la vie de artista
+     * @param event
+     */
     @FXML
     void showSongsByTimeArtist(ActionEvent event) {
         if (isFilteredTime2) {
@@ -918,7 +1032,9 @@ public class UserViewController implements Initializable {
         isFilteredTime2 = !isFilteredTime2;
     }
 
-
+    /**
+     * Metodo que obtine la lista de canciones de un artista segun su año
+     */
     private void getSongsByYearArtist() {
         List<Song> aux = artistSelected.getSongList().toList();
         aux.sort((song1, song2) -> Integer.compare(Integer.parseInt(song2.getYear()), Integer.parseInt(song1.getYear())));
@@ -928,6 +1044,9 @@ public class UserViewController implements Initializable {
         tableViewArtist.getItems().addAll( listSongsArtist );
     }
 
+    /**
+     * Metodo que obtine la lista de canciones de un artista segun su nombre
+     */
     private void getSongsByNameArtist() {
         List<Song> aux = artistSelected.getSongList().toList();
         aux.sort((song1, song2) -> {
@@ -944,6 +1063,9 @@ public class UserViewController implements Initializable {
         tableViewArtist.getItems().addAll( listSongsArtist );
     }
 
+    /**
+     * Metodo que obtine la lista de canciones de un artista segun su duracion
+     */
     private void getSongsByTimeArtist() {
         List<Song> aux = artistSelected.getSongList().toList();
         aux.sort((song1, song2) -> Integer.compare(Integer.parseInt(song2.getDuration()), Integer.parseInt(song1.getDuration())));
@@ -953,30 +1075,49 @@ public class UserViewController implements Initializable {
         tableViewArtist.getItems().addAll( listSongsArtist );
     }
 
+//----------------------------Funcionalidades del usuario----------------------------------//
 
-
-//----------------------------Funcionalidades del usuario----------------------------------
-
-
+    /**
+     * Metodo de boton que deshace una accion
+     * @param event
+     */
     @FXML
     void revertAction(ActionEvent event) {
         revertActionManager();
     }
+
+    /**
+     * Metodo de boton que deshace el like de un usuario a un cancion en la libreria
+     * @param event
+     */
     @FXML
     void revertActionLikeSongs(ActionEvent event){
         revertActionManager();
         refreshTableViewFavorites();
 
     }
+
+    /**
+     * Metodo de boton que deshace el like de un usuario a un cancion en la view de busqueda
+     * @param event
+     */
     @FXML
     void revertActionSearch(ActionEvent event){
         revertActionManager();
     }
+
+    /**
+     * Metodo de boton que deshace el like de un usuario a un cancion en la view de artista
+     * @param event
+     */
     @FXML
     void revertActionArtist(ActionEvent event){
         revertActionManager();
     }
 
+    /**
+     * Metodo que maneja la logica para deshacer la accion de el usuario
+     */
     private void revertActionManager() {
         String userName = userController.mfm.getUserName();
         if ( stateStack.isEmpty() ) {
@@ -1007,7 +1148,10 @@ public class UserViewController implements Initializable {
         }
     }
 
-
+    /**
+     * Metodo de boton que elimina una cancion de la lista de canciones favoritas de el usuario
+     * @param event
+     */
     @FXML
     void removeFavoriteSongUser(ActionEvent event){
         if(songSelection!=null){
@@ -1021,10 +1165,14 @@ public class UserViewController implements Initializable {
             showMessage( "Notification", "Song not selected",
                     "Please select a Song" , Alert.AlertType.INFORMATION);
         }
-
     }
 
-
+    /**
+     * Metodo que muestras la informacion de el artista mas escuchado en la view de estadisticas
+     * @param artist
+     * @param imageView
+     * @param label
+     */
     private void displayInfoArtistMostListened(Artist artist, ImageView imageView, Label label) {
 
         try {
@@ -1040,6 +1188,12 @@ public class UserViewController implements Initializable {
         }
     }
 
+    //=================================== User utility =======================================//
+
+    /**
+     * Metodo de boton que cancela los cambios realizados en la view de configuracion de un usuario
+     * @param event
+     */
     @FXML
     void cancelChangesSettings(ActionEvent event) {
         txtPasswordSettings.setEditable( false );
@@ -1053,6 +1207,11 @@ public class UserViewController implements Initializable {
 
     }
 
+    /**
+     * Metodo de boton que cambia la informacion de un usuario en la view de configuracion de ususario
+     * @param event
+     * @throws UserException
+     */
     @FXML
     void changeInfoUser(ActionEvent event) throws UserException {
         String name = txtNameSettings.getText();
@@ -1071,6 +1230,13 @@ public class UserViewController implements Initializable {
 
     }
 
+    /**
+     * Metodo que confirma la actualizacion de los datos de el usuario en la view de configuracion de usuario
+     * @param name
+     * @param password
+     * @param email
+     * @throws UserException
+     */
     private void updateInfoUser(String name , String password , String email) throws UserException {
 
         if(userController.mfm.updateUser(name,password,email)){
@@ -1083,6 +1249,12 @@ public class UserViewController implements Initializable {
 
     }
 
+    /**
+     * Metodo que valida los espacios en blanco de la view de condifuracion de usuario
+     * @param email
+     * @param password
+     * @return
+     */
     private boolean verifyBlankSpaces(String email, String password) {
         String notification = "";
         if(email.isEmpty()){
@@ -1098,6 +1270,10 @@ public class UserViewController implements Initializable {
         return false;
     }
 
+    /**
+     * Metodo de boton que elimian la cuenta de eun usuario en la view de configuracion de usuario
+     * @param event
+     */
     @FXML
     void deleteAcc(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -1126,11 +1302,19 @@ public class UserViewController implements Initializable {
 
     }
 
+    /**
+     * Instancia de metodo que elimina y serliaza el usuario
+     * @throws UserException
+     */
     private void deleleUser() throws UserException {
         userController.mfm.deleteUser(user);
         userController.mfm.saveUsers();
     }
 
+    /**
+     * Metodo de boton que habilita los campos para editar la configuracion de el usuario
+     * @param event
+     */
     @FXML
     void editInfoUserSettings(ActionEvent event) {
         txtPasswordSettings.setEditable( true );
@@ -1140,6 +1324,10 @@ public class UserViewController implements Initializable {
         btnEditInfoSettings.setVisible( false );
     }
 
+    /**
+     * Metodo de boton que te permite regresar a el menu princiapl
+     * @param event
+     */
     @FXML
     void backToHome(ActionEvent event){
         anchorSongsArtist.setVisible( false );
@@ -1147,6 +1335,12 @@ public class UserViewController implements Initializable {
         labelTitle.setText( "Home" );
     }
 
+    /**
+     * Metodo de boton que permite agregar una cancion a favoritos desde la view de artista
+     * @param event
+     * @throws UserException
+     * @throws SongException
+     */
     @FXML
     void addSongArtistToFavoriteSongs(ActionEvent event) throws UserException, SongException {
         if(!verifySong(songArtistSelection)){
@@ -1174,7 +1368,12 @@ public class UserViewController implements Initializable {
         return userController.mfm.verifySong(user, songSelection);
     }
 
-
+    /**
+     * Metodo de boton que permite agregar una cancion a favoritos desde la view de busqueda
+     * @param event
+     * @throws UserException
+     * @throws SongException
+     */
     @FXML
     void addSongSearchFavorite(ActionEvent event) throws UserException, SongException {
         if(!verifySong(songSearch)){
@@ -1194,7 +1393,7 @@ public class UserViewController implements Initializable {
     }
 
 
-    //------------------------------------INITIALIZATION-------------------------
+    //------------------------------------INITIALIZATION---------------------------//
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.loginViewController= new LoginViewController();
@@ -1328,6 +1527,9 @@ public class UserViewController implements Initializable {
 
     }
 
+    /**
+     * Metodo que controla los eventos de mouse y animaciones
+     */
     void eventsControll(){
 
         btnLogOut.setOnMouseEntered(event -> btnLogOut.setStyle("-fx-background-color: rgba(0, 0, 0, 0.1); -fx-text-fill: black;"));
@@ -1344,11 +1546,7 @@ public class UserViewController implements Initializable {
         btnAnalytics.setOnMouseExited(event -> btnAnalytics.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
 
 
-
-
-
         //----------------------------------------------ANIMATIONS------------------------------------------------------
-
 
         // Manejar eventos de mouse
         stackFS1.setOnMouseEntered((MouseEvent e) -> {
@@ -1503,8 +1701,6 @@ public class UserViewController implements Initializable {
             stackPAU.setCursor( Cursor.DEFAULT );
             animationScaleOut( stackPAU );
         });
-
-
 
 
 
@@ -1687,9 +1883,6 @@ public class UserViewController implements Initializable {
         });
 
 
-
-
-
         colummImageSearch.setCellFactory(column -> new TableCell<Song, String>() {
             private final ImageView imageView = new ImageView();
 
@@ -1748,7 +1941,6 @@ public class UserViewController implements Initializable {
         } );
 
 
-
         txtSearch.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -1790,12 +1982,13 @@ public class UserViewController implements Initializable {
         // Actualizar el texto del Tooltip cuando el usuario interactúa con el PasswordField
         txtPasswordSettings.setOnMouseEntered(event -> showTooltip( txtPasswordSettings.getText(), stage) );
 
-
-
-
-
     }
 
+    /**
+     * Metodo que muestra mensaje en la interfaz
+     * @param message
+     * @param stage
+     */
     private void showTooltip(String message, Stage stage) {
         // Create a Tooltip
        if(!showingToolTip){
@@ -1820,8 +2013,12 @@ public class UserViewController implements Initializable {
        }
     }
 
-
-
+    /**
+     * Metodo que busca la informacion para la view de busqueda
+     * @param newValue
+     * @return
+     * @throws ArtistException
+     */
     private List<Song> searchInfo(String newValue) throws ArtistException {
         List<Song> list= userController.mfm.searchArtist(newValue);
         List<Song> list2 = userController.mfm.searchO( newValue );
@@ -1833,6 +2030,12 @@ public class UserViewController implements Initializable {
         return list;
     }
 
+    //================================= Media utilities =======================================//
+
+    /**
+     * Metodo de boton que reproduce una cancione seleccionada desde la view principal
+     * @param event
+     */
     @FXML
     void playSong(ActionEvent event){
         if (playing) {
@@ -1846,9 +2049,13 @@ public class UserViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo de boton que reproduce una cancione seleccionada desde la view de artista
+     * @param event
+     */
     @FXML
     void playSongArtist(ActionEvent event){
-        songArtistSelection = getSelectedSong(tableViewArtist); // Asumiendo que tienes una TableView llamada artistTableView
+        songArtistSelection = getSelectedSong(tableViewArtist);
         if (songArtistSelection != null) {
             displayInfoPlayerArtist(songArtistSelection);
         } else {
@@ -1856,6 +2063,10 @@ public class UserViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo de boton que reproduce una cancione seleccionada desde la view de busqueda
+     * @param event
+     */
     @FXML
     void playSongSearch(ActionEvent event){
         songSearch = getSelectedSong(tableViewSearch);
@@ -1866,6 +2077,10 @@ public class UserViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo de boton que reproduce una cancione seleccionada desde la view de libreria
+     * @param event
+     */
     @FXML
     void playSongLibrary(ActionEvent event){
         songSelection = getSelectedSong(tableViewLikedSongs);
@@ -1874,10 +2089,20 @@ public class UserViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo que obtiene la seleccion de el usuario ya sea en la view de busqueda, de libreria o de artista
+     * @param tableView
+     * @return
+     */
     private Song getSelectedSong(TableView<Song> tableView) {
         return tableView.getSelectionModel().getSelectedItem();
     }
 
+    /**
+     * Metodo que reproduce el video segun el link de la cancion obtenida por su nombre
+     * @param songName
+     * @param play
+     */
     private void playSongVideo(String songName, Boolean play) {
         Song song = userController.mfm.getSongByName(songName); // Obtener la canción por su nombre
         if (song != null) {
@@ -1889,6 +2114,10 @@ public class UserViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo que habilita y pone el reprodcutor de la musica desde la view de artista
+     * @param artistSelection
+     */
     private void displayInfoPlayerArtist(Song artistSelection){
         anchorPlayer.setVisible( true );
         songArtistSelection = userController.mfm.getSongByName(artistSelection.getName());
@@ -1900,6 +2129,10 @@ public class UserViewController implements Initializable {
         playSongVideo(songArtistSelection.getName(),true); // Reproducir el video de la canción seleccionada
     }
 
+    /**
+     * Metodo que habilita y pone el reprodcutor de la musica desde la view de busqueda
+     * @param artistSelection
+     */
     private void displayInfoPlayerSearch(Song searchSelection){
         anchorPlayer.setVisible( true );
         songSearch = userController.mfm.getSongByName(searchSelection.getName());
@@ -1911,6 +2144,10 @@ public class UserViewController implements Initializable {
         playSongVideo(songSearch.getName(),true); // Reproducir el video de la canción seleccionada
     }
 
+    /**
+     * Metodo que habilita y pone el reprodcutor de la musica desde la view de libreria
+     * @param artistSelection
+     */
     private void displayInfoPlayerLibrary(Song librarySelection){
         anchorPlayer.setVisible( true );
         songSelection = userController.mfm.getSongByName(librarySelection.getName());
@@ -1922,6 +2159,10 @@ public class UserViewController implements Initializable {
         playSongVideo(songSelection.getName(),true); // Reproducir el video de la canción seleccionada
     }
 
+    /**
+     * Metodo que habilita y pone el reprodcutor de la musica desde la view de principal
+     * @param artistSelection
+     */
     private void displayInfoPlayer(Label label){
         anchorPlayer.setVisible( true );
         selectedSong = userController.mfm.getSongByName(label.getText());
@@ -1933,6 +2174,10 @@ public class UserViewController implements Initializable {
         playSongVideo(selectedSong.getName(),true); // Reproducir el video de la canción seleccionada
     }
 
+    /**
+     * Metodo que pone la imagen en el reproductor dependiendo de la seleccioanda
+     * @param song
+     */
     private void displayImageSongPlayer(Song song) {
         try {
             // Crear el Image y el ImageView
@@ -1945,6 +2190,8 @@ public class UserViewController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    //==================================== Animations =======================================//
 
     void animationScaleIn(StackPane stack){
         ScaleTransition scaleIn = new ScaleTransition(Duration.millis(200), stack);
@@ -1992,21 +2239,39 @@ public class UserViewController implements Initializable {
         });
     }
 
+    //====================================== Functions utilities =========================================//
+
+    /**
+     * Metodo que obtiene la lista de canciones
+     * @return
+     */
     private ObservableList<Song> getSongsObservable() {
         listSongs2.addAll( getSongs());
         return listSongs2;
     }
+
+    /**
+     * Metodo que obtiene la lista de canciones favoritas
+     * @return
+     */
     private ObservableList<Song> getSongsFavorites() {
         listFavoritesSongs2.addAll(getFavoritesSongs() );
         return listFavoritesSongs2;
     }
 
+    /**
+     * Metodo que refresca la tabla de busqueda
+     */
     void refreshTableViewSearch() {
         listSongs2.clear();
         tableViewSearch.getItems().clear();
         tableViewSearch.setItems( getSongsObservable() );
 
     }
+
+    /**
+     * Metodo que refresaca la tabla de favoritos
+     */
     void refreshTableViewFavorites() {
         listFavoritesSongs2.clear();
         tableViewLikedSongs.getItems().clear();
@@ -2014,6 +2279,10 @@ public class UserViewController implements Initializable {
 
     }
 
+    /**
+     * Metodo que refresaca la tabla de artistas
+     * @param artist
+     */
     void refreshTableViewArtistSongs(Artist artist){
         List<Song> aux = artist.getSongList().toList();
         listSongsArtist.clear();
@@ -2021,6 +2290,4 @@ public class UserViewController implements Initializable {
         tableViewArtist.getItems().clear();
         tableViewArtist.getItems().addAll( listSongsArtist );
     }
-
-
 }

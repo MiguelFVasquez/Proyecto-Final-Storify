@@ -12,11 +12,18 @@ public class CircularLinkedList<T> implements Iterable<T> , Serializable {
     private Node<T> first;
     private int size;
 
+    /**
+     * Constructor de la lista circulas
+     */
     public CircularLinkedList() {
         first = null;
         size = 0;
     }
 
+    /**
+     * Metodo que agreaga los datos a la lista
+     * @param data
+     */
     public void add(T data) {
         Node<T> newNode = new Node<>(data);
         if (first == null) {
@@ -29,6 +36,10 @@ public class CircularLinkedList<T> implements Iterable<T> , Serializable {
         size++;
     }
 
+    /**
+     * Metodo que elimina los datos de la lista segun una posicion especifica
+     * @param position
+     */
     public void delete(int position) {
         if (position < 0 || position >= size) {
             throw new IndexOutOfBoundsException("Invalid position");
@@ -99,7 +110,11 @@ public class CircularLinkedList<T> implements Iterable<T> , Serializable {
         throw new NoSuchElementException("Element not found: " + data.toString());
     }
 
-
+    /**
+     * Metodo que obtiene la posicion de un nodo
+     * @param position
+     * @return
+     */
     public T get(int position) {
         if (position < 0 || position >= size) {
             throw new IndexOutOfBoundsException("Invalid position");
@@ -111,6 +126,10 @@ public class CircularLinkedList<T> implements Iterable<T> , Serializable {
         return current.getData();
     }
 
+    /**
+     * Metodo que obtiene el tamañao de la lista
+     * @return
+     */
     public int getSize() {
         return size;
     }

@@ -4,3 +4,9 @@ FFoeLowrwe@@Low Key@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/p
 JJM oll YY@@ALWAYS@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/alwaysCover.png@@2024@@98@@Gospel@@https://youtu.be/XSuV2osXSLE?si=XOu2JLF2-loG_2s2@@Milo
 oeayv iret@@Pólvora de Ayer@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/polvoraAyerCover.png@@2024@@118@@Ranchera@@https://youtu.be/E8fP0NmJcT4?si=K6E1OGSCc1Xxm86h@@Milo
 ar C e rnP@@Corazón de Piedra@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/corazonPiedraCover.png@@2024@@104@@Corridos@@https://youtu.be/4zLh1QI4bMA?si=W8Rb2d0hYGt-7tyE@@Milo
+Tiiey nsti@@Vignette@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/TopCover.png@@2024@@180@@Rock@@https://youtu.be/eoEKwwbPfvc?si=FsIJM--suWB27Gf_@@Milo
+nOtPotttPs@@Navigating@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/TopCover.png@@2024@@240@@Rock@@https://youtu.be/07YtBj3BEBQ?si=djNALHAUz68UyFoM@@Milo
+ tiCnmdror@@Tu ritmo@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/SolMariaCover.png@@2024@@120@@Reggaeton@@https://youtu.be/EcENgXSfY74?si=NnKV9p_sgnFS0pFZ@@Milo
+JaloMnfeol@@La cancion feliz del disco ft Milo J@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/SolMariaCover.png@@2024@@180@@Reggaeton@@https://youtu.be/WQVSDCp0n3E?si=j3GI9wkDQKBrJsBv@@Milo
+Ya ccoaaor@@You can do magic@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/AmericaCover.png@@1982@@180@@Rock@@https://youtu.be/tt4cR9szMS8?si=xefRDOnFL45TaO3O@@Milo
+ne m wwwie@@A horse with no name@@file:src/main/resources/co/edu/uniquindio/estructuraDatos/proyecto/images/covers/AmericaCover.png@@1971@@280@@Rock@@https://youtu.be/na47wMFfQCo?si=QfaFo1BexO4-E8G8@@Milo

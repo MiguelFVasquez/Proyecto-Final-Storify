@@ -7,7 +7,16 @@ import java.util.ArrayList;
 
 public class UtilFile {
 
-    //-------------------------FILES------------------------------
+    //-------------------------FILES------------------------------//
+
+    /**
+     * Metodo que permite guardar los datos
+     * @param ruta
+     * @param contenido
+     * @param flagAnexarContenido
+     * @throws IOException
+     * @throws IOException
+     */
     public static void guardarArchivo(String ruta,String contenido, Boolean flagAnexarContenido) throws IOException, IOException {
         FileWriter fw = new FileWriter(ruta,flagAnexarContenido);
         BufferedWriter bfw = new BufferedWriter(fw);
@@ -16,6 +25,12 @@ public class UtilFile {
         fw.close();
     }
 
+    /**
+     * Metodo que permite leer los datos guardados
+     * @param ruta
+     * @return
+     * @throws IOException
+     */
     public static ArrayList<String> leerArchivo(String ruta) throws IOException {
 
         ArrayList<String>  contenido = new ArrayList<String>();
@@ -31,8 +46,14 @@ public class UtilFile {
         return contenido;
     }
 
-    //--------------------------XML-------------------------------------------
+    //--------------------------XML-------------------------------------------//
 
+    /**
+     * Metodo que permite cargar los recursos de un objeto serializado
+     * @param rutaArchivo
+     * @return
+     * @throws IOException
+     */
     public static Object cargarRecursoSerializadoXML(String rutaArchivo) throws IOException {
 
         XMLDecoder decodificadorXML;
@@ -45,6 +66,12 @@ public class UtilFile {
 
     }
 
+    /**
+     * Metodo de respaldo para los recursos serializados
+     * @param rutaArchivo
+     * @param objeto
+     * @throws IOException
+     */
     public static void salvarRecursoSerializadoXML(String rutaArchivo, Object objeto) throws IOException {
         XMLEncoder codificadorXML;
 

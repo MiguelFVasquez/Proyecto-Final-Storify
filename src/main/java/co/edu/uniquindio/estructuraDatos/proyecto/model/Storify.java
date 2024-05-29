@@ -18,32 +18,36 @@ import java.net.URL;
 import java.util.*;
 
 /*
-* La tienda guarda su catálogo de música agrupando las Canciones en sus respectivos autores en forma
-de lista, los Artistas se almacenan en forma de Árbol Binario, el orden del árbol está dado por el nombre
-de los Artistas. Además tenga en cuenta que los usuarios se guardan en un HashMap, donde la llave de
+La tienda guarda su catalogo de música agrupando las Canciones en sus respectivos autores en forma
+de lista, los Artistas se almacenan en forma de arbol Binario, el orden del arbol esta dado por el nombre
+de los Artistas. Ademas tenga en cuenta que los usuarios se guardan en un HashMap, donde la llave de
 cada usuario es su username.
-*
-* */
+ */
 public class Storify implements IStorify, Serializable {
     private String nombre;
     private HashMap<String, User> usersMap;
     private BinaryTree<Artist> artistTree;
     private List<Song> songList;
 
+    /**
+     * Contructor con los atributos
+     */
     public Storify() {
         this.usersMap = new HashMap<>();
         this.artistTree= new BinaryTree<>();
         this.songList= new ArrayList<>();
     }
+
+    /**
+     * Constructor para instaciar el singleton
+     * @param nombre
+     */
     public Storify(String nombre) {
         this.nombre = nombre;
         this.usersMap = new HashMap<>();
         this.artistTree= new BinaryTree<>();
         this.songList= new ArrayList<>();
     }
-
-
-
 
 
     public String getNombre() {
@@ -88,24 +92,21 @@ public class Storify implements IStorify, Serializable {
         return usersMap.getOrDefault(username,null);
     }
 
+    /**
+     * Metodo que verifija si existe el nombre de usuario
+     * @param username
+     * @return
+     */
     public boolean verifyUser(String username){
         return usersMap.containsKey(username);
     }
-    public boolean verifyPassword(String password){
-        return usersMap.containsKey(password);
-    }
 
-    public boolean logIn(String userName, String password){
-        boolean flag= false;
-        if (usersMap.containsKey(userName)){
-            User userAux= usersMap.get(userName);
-            if (userAux.getPassword().equals(password)){
-                flag=true;
-            }
-        }
-        return flag;
-    }
-
+    /**
+     * Metodo que agrega un usauario a el mapa
+     * @param newUser
+     * @return
+     * @throws UserException
+     */
     @Override
     public boolean addUser(User newUser) throws UserException {
         boolean added= false;
@@ -119,6 +120,12 @@ public class Storify implements IStorify, Serializable {
         return added;
     }
 
+    /**
+     * Metodo que elimina un usuario por su nombre de usuario
+     * @param userDelete
+     * @return
+     * @throws UserException
+     */
     @Override
     public boolean deleteUser(User userDelete) throws UserException {
         boolean deleted= false;
@@ -132,6 +139,12 @@ public class Storify implements IStorify, Serializable {
         return deleted;
     }
 
+    /**
+     * Metodo que actualiza los datos de un usuario
+     * @param userUpdate
+     * @return
+     * @throws UserException
+     */
     @Override
     public boolean updateUser(User userUpdate) throws UserException {
         boolean updated=false;
@@ -148,6 +161,33 @@ public class Storify implements IStorify, Serializable {
         }
         return updated;
     }
+
+    /**
+     * Metodo que verifica la contraseña de el usuario
+     * @param password
+     * @return
+     */
+    public boolean verifyPassword(String password){
+        return usersMap.containsKey(password);
+    }
+
+    /**
+     * Metodo que permite a el usuario loguearse
+     * @param userName
+     * @param password
+     * @return
+     */
+    public boolean logIn(String userName, String password){
+        boolean flag= false;
+        if (usersMap.containsKey(userName)){
+            User userAux= usersMap.get(userName);
+            if (userAux.getPassword().equals(password)){
+                flag=true;
+            }
+        }
+        return flag;
+    }
+
 
     /**
      * Metodo para añadir una canción a la lista del usuario
@@ -241,8 +281,6 @@ public class Storify implements IStorify, Serializable {
      * Envia el correo al usuario mediante un hilo aparte para que no se interrumpa
      * @param user El usuario al que se enviará el correo electrónico
      * @param code El código de recuperación de contraseña
-     * //@param customMessage El mensaje personalizado que se incluirá en el correo electrónico
-     * //@param imagePath La ruta de la imagen que se adjuntará como logo
      */
     public void sendRescueEmail(User user, String code) {
         new Thread(new Runnable() {
@@ -289,6 +327,12 @@ public class Storify implements IStorify, Serializable {
         return artistAux;
     }
 
+    /**
+     * Metodo que agrega un artista a el arbol de artista
+     * @param newArtist
+     * @return
+     * @throws ArtistException
+     */
     @Override
     public boolean addArtist(Artist newArtist) throws ArtistException {
         boolean added=false;
@@ -302,6 +346,12 @@ public class Storify implements IStorify, Serializable {
         return added;
     }
 
+    /**
+     * Metodo que elimina un artista de el arbol de artista
+     * @param artistDelete
+     * @return
+     * @throws ArtistException
+     */
     @Override
     public boolean deleteArtist(Artist artistDelete) throws ArtistException {
         boolean deleted=false;
@@ -326,6 +376,13 @@ public class Storify implements IStorify, Serializable {
         }
         return deleted;
     }
+
+    /**
+     * Metodo que actualiza los datos de un artista
+     * @param artistUpdate
+     * @return
+     * @throws ArtistException
+     */
     @Override
     public boolean updateArtist(Artist artistUpdate) throws ArtistException {
         boolean updated= false;
@@ -406,13 +463,23 @@ public class Storify implements IStorify, Serializable {
                 .anyMatch(s -> s.getName().equals(name));
     }
 
-
+    /**
+     * Metodo que obtiene una cancion segun el codigo
+     * @param code
+     * @return
+     */
     public Song getSong(String code){
         Optional<Song> songOptional= this.songList.stream()
                 .filter(s ->s.getCode().equals(code))
                 .findFirst();
         return songOptional.orElse(null);
     }
+
+    /**
+     * Metodo que obtiene una cancion segun el nombre
+     * @param name
+     * @return
+     */
     public Song getSongByName(String name){
         Optional<Song> songOptional= this.songList.stream()
                 .filter(s ->s.getName().equals(name))
@@ -420,6 +487,12 @@ public class Storify implements IStorify, Serializable {
         return songOptional.orElse(null);
     }
 
+    /**
+     * Metodo que agrega una cancion nueva a la lista de canciones
+     * @param newSong
+     * @return
+     * @throws SongException
+     */
     @Override
     public boolean addSong(Song newSong) throws SongException {
         boolean added= false;
@@ -433,6 +506,12 @@ public class Storify implements IStorify, Serializable {
         return added;
     }
 
+    /**
+     * Metodo que elimina una cancione de la lista de canciones
+     * @param songDelete
+     * @return
+     * @throws SongException
+     */
     @Override
     public boolean deleteSong(Song songDelete) throws SongException {
         boolean deleted= false;
@@ -453,6 +532,12 @@ public class Storify implements IStorify, Serializable {
         return deleted;
     }
 
+    /**
+     * Metodo que actualiza los datos de una cancion de la lista de canciones
+     * @param songUpdate
+     * @return
+     * @throws SongException
+     */
     @Override
     public boolean updateSong(Song songUpdate) throws SongException {
         boolean updated = false;
@@ -484,6 +569,13 @@ public class Storify implements IStorify, Serializable {
         return updated;
     }
 
+    /**
+     * Metodo que actualiza los datos de una cancione de la lista de canciones de el artista
+     * @param songUpdate
+     * @param artist
+     * @return
+     * @throws SongException
+     */
     public boolean updateSongArtist(Song songUpdate, Artist artist) throws SongException {
         boolean updated = false;
         String code = songUpdate.getCode();//Este no podra ser cambiado ya que es el id de la canción
@@ -633,7 +725,12 @@ public class Storify implements IStorify, Serializable {
 
     //===================== METODOS PARA REPRODUCIR MUSICA ================================ //
 
-    // Método para reproducir una canción en YouTube usando WebView
+    /**
+     * Metodo que reproduce una canciones tomando el link de youtbe de esta, buscandola en el navvegador por medio de JavaFx WebView
+     * @param webView
+     * @param videoUrl
+     * @param play
+     */
     public void playSong(WebView webView, String videoUrl, boolean play) {
         Task<Void> task = new Task<>() {
             @Override

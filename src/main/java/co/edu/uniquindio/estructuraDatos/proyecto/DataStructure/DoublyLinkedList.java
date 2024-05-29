@@ -11,11 +11,20 @@ public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
     private Node<T> last;
     private int size;
 
+    /**
+     * Constructor de la lista doblemente enlazada
+     */
     public DoublyLinkedList() {
         first = null;
         last = null;
         size = 0;
     }
+
+    /**
+     * Metodo que valdia si el dato existe
+     * @param data
+     * @return
+     */
     public boolean contains(T data) {
         Node<T> current = first;
         while (current != null) {
@@ -27,6 +36,10 @@ public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
         return false;
     }
 
+    /**
+     * Ketodo que agrega un dato a el inicio de la lista
+     * @param data
+     */
     public void addFirst(T data) {
         Node<T> newNode = new Node<>(data);
         if (first == null) {
@@ -40,6 +53,10 @@ public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
         size++;
     }
 
+    /**
+     * Metodo que agrega un dato al final de la lista
+     * @param data
+     */
     public void addLast(T data) {
         Node<T> newNode = new Node<>(data);
         if (last == null) {
@@ -53,6 +70,10 @@ public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
         size++;
     }
 
+    /**
+     * Metodo que borra un dato segun la posicion indicada
+     * @param position
+     */
     public void delete(int position) {
         if (position < 0 || position >= size) {
             throw new IndexOutOfBoundsException("Invalid position");
@@ -76,6 +97,10 @@ public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
         size--;
     }
 
+    /**
+     * Metodo que borra un dato de la lista
+     * @param data
+     */
     public void delete(T data) {
         Node<T> current = first;
         while (current != null) {
@@ -100,7 +125,11 @@ public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
         }
     }
 
-
+    /**
+     * Metodo que obtiene la posicion de un dato de la lista
+     * @param position
+     * @return
+     */
     public T get(int position) {
         if (position < 0 || position >= size) {
             throw new IndexOutOfBoundsException("Invalid position");
@@ -112,6 +141,11 @@ public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
         return current.getData();
     }
 
+    /**
+     * Metodo que agrega los datos en orden numero a la lista
+     * @param dato
+     * @param lista
+     */
     public void agregarEnOrden(int dato, DoublyLinkedList<Integer> lista) {
         Node<Integer> nuevoNodo = new Node<>(dato);
 
@@ -143,7 +177,9 @@ public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
         lista.size++;
     }
 
-
+    /**
+     * Metodo que imprime la lista
+     */
     public void printList(){
         Node<T> current= first;
         while (current!=null){
@@ -154,7 +190,9 @@ public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
 
     }
 
-
+    /**
+     * Metodo que imprime la lista al reves
+     */
     public void printListReverse(){
         Node<T> current= last;
         while(current!=null){
@@ -164,18 +202,32 @@ public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
         System.out.println();
     }
 
-
+    /**
+     * Metodo que obtiene el tamaño
+     * @return
+     */
     public int getSize() {
         return size;
     }
 
-
+    /**
+     * Metodo que determina la distancia entre dos datos de la lista
+     * @param x
+     * @return
+     */
     public int distanciaMaximaEntreElementos(int x) {
         int[] maxDistance = {0}; // Usamos un array para almacenar la distancia máxima (mutable)
         distanciaMaximaRecursiva(first, x, 0, maxDistance);
         return maxDistance[0];
     }
 
+    /**
+     * Metodo recursivo que determina la distancia entre dos datos de la lista
+     * @param current
+     * @param x
+     * @param currentDistance
+     * @param maxDistance
+     */
     private void distanciaMaximaRecursiva(Node<T> current, int x, int currentDistance, int[] maxDistance) {
         if (current == null) {
             return; // Si llegamos al final de la lista, terminamos la recursión
@@ -188,6 +240,10 @@ public class DoublyLinkedList<T> implements Iterable<T> , Serializable {
         distanciaMaximaRecursiva(current.getNext(), x, (Integer) (current.getData()) == x ? 0 : currentDistance + 1, maxDistance);
     }
 
+    /**
+     * Metodo que contiene los datos en una lista
+     * @return
+     */
     public List<T> toList() {
         List<T> list = new ArrayList<>(); // Crea una lista para contener los elementos
         Node<T> current = first; // Comienza desde el primer nodo

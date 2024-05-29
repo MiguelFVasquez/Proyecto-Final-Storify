@@ -8,6 +8,12 @@ import java.util.Properties;
 
 public class EmailUtil {
 
+    /**
+     * Metodo que pemite el envio de correo a un usuario
+     * @param correo
+     * @param asunto
+     * @param contenido
+     */
     public static void sendEmail(String correo, String asunto, String contenido){
 
         String host = "smtp.gmail.com";

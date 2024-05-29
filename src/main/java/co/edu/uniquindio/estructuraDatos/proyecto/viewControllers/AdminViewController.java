@@ -67,7 +67,7 @@ public class AdminViewController implements Initializable {
 
     @FXML
     private Button btnSongs;
-    //---------------Elementos de la cancion--------------------
+    //---------------Elementos de la cancion--------------------//
     @FXML
     private ComboBox<String> comboBoxArtist;
     @FXML
@@ -109,7 +109,7 @@ public class AdminViewController implements Initializable {
     private Button btnEditSong;
     @FXML
     private Button btnRemoveSong;
-    //-----------Elementos del artista------
+    //-----------Elementos del artista--------//
     @FXML
     private TextField txtNameArtist;
     @FXML
@@ -154,7 +154,15 @@ public class AdminViewController implements Initializable {
     private ObservableList<String> namesArtist = FXCollections.observableArrayList();
 
 
-    //-------------------Auxiliars functions-----------------------
+    //-------------------Auxiliars functions-----------------------//
+
+    /**
+     * Metodo que crea mensajes para mostrar en la interfaz
+     * @param title
+     * @param header
+     * @param content
+     * @param alertype
+     */
     public void showMessage(String title, String header, String content, Alert.AlertType alertype) {
         Alert alert = new Alert(alertype);
         alert.setTitle(title);
@@ -163,7 +171,12 @@ public class AdminViewController implements Initializable {
         alert.showAndWait();
     }
 
-
+    /**
+     * Metodo que genera el codigo para una cancion
+     * @param word1
+     * @param word2
+     * @return
+     */
     public static String generateCode(String word1, String word2) {
         String combinedWords = word1 + word2;
         Random random = new Random();
@@ -175,6 +188,11 @@ public class AdminViewController implements Initializable {
         return code.toString();
     }
 
+    /**
+     * Metodo que crea el tootltipo en la view de el administrador para mostrar mensajes
+     * @param s
+     * @param stage
+     */
     private void showPopUp(String s , Stage stage) {
         // Crear el contenido del "Tooltip"
         Popup popup = new Popup();
@@ -218,22 +236,43 @@ public class AdminViewController implements Initializable {
     }
 
 
-    //------------------------------Auxiliars artist's functions-----------------------------
+    //------------------------------Auxiliars artist's functions-----------------------------//
+
+    /**
+     * Metodo que refresca los items de la tabla de artistas
+     * @throws IOException
+     */
     private void refreshTableViewArtist() throws IOException {
         artistsList.clear();
         tableViewArtists.getItems().clear();
         tableViewArtists.setItems(getArtistsList());
     }
+
+    /**
+     * Metodo que obtiene la lista de los artistas
+     * @return
+     * @throws IOException
+     */
     private ObservableList<Artist> getArtistsList() throws IOException {
         artistsList.addAll(adminController.mfm.getListArtist());
         return artistsList;
     }
+
+    /**
+     * Metodo que obtiene la lista el nombre de los artistas
+     * @return
+     */
     private ObservableList<String> getNamesArtist(){
         namesArtist.addAll(adminController.mfm.getNamesArtistList());
         return namesArtist;
     }
 
-
+    /**
+     * Metodo que verifica los espacios en blanco de los textFields
+     * @param name
+     * @param nationality
+     * @return
+     */
     private boolean verifySpacesArtist(String name, String nationality){
         String notification="";
         if (name.isEmpty()){
@@ -249,6 +288,15 @@ public class AdminViewController implements Initializable {
         return false;
     }
 
+    /**
+     * Metodo que crea el objeto artista
+     * @param code
+     * @param name
+     * @param nationality
+     * @param image
+     * @param isAGroup
+     * @return
+     */
     private boolean createArtist(String code, String name, String nationality, String image , boolean isAGroup){
         try {
             if (adminController.mfm.addArtist(code,name,nationality, image, isAGroup)){
@@ -266,19 +314,29 @@ public class AdminViewController implements Initializable {
         anchorArtists.setVisible( true );
     }
 
-//--------------------------Auxiliars song's functios--------------------------------------------
+//--------------------------Auxiliars song's functios--------------------------------------------//
 
+    /**
+     * Metodo que obtiene la lista de canciones
+     * @return
+     */
     private ObservableList<Song> getSongsList(){
         songsList.clear();
         songsList.addAll(adminController.mfm.getSongList());
         return songsList;
     }
 
+    /**
+     * Metodo que refresca los items de la tabla de canciones
+     */
     private void refreshTableViewSong(){
         tableViewSongs.getItems().clear();
         tableViewSongs.setItems(getSongsList());
     }
 
+    /**
+     * Metodo que muestra la informacion de una cancion
+     */
     private void showSongInfo(){
         txtNameSong.setEditable( false );
         comboBoxGender.setDisable( true);
@@ -297,6 +355,18 @@ public class AdminViewController implements Initializable {
         imageViewSongPortait.setImage(new Image( songSelection.getCover() ));
 
     }
+
+    /**
+     * Metodo que verifica los espacio en blanco de una cancion
+     * @param name
+     * @param gender
+     * @param artist
+     * @param year
+     * @param duration
+     * @param link
+     * @param image
+     * @return
+     */
     private boolean verifySong(String name, Gender gender, String artist, String year, String duration, String link, Image image){
         String notification="";
         if (name.isEmpty()){
@@ -335,6 +405,11 @@ public class AdminViewController implements Initializable {
         return false;
     }
 
+    /**
+     * Metodo que valida que dato ingresado sea un numero
+     * @param string
+     * @return
+     */
     private boolean isNumber(String string) {
         try {
             Float.parseFloat(string);
@@ -344,6 +419,10 @@ public class AdminViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo que obtiene la url de una cancion
+     * @return
+     */
     private URL obtenerURL() {
         try {
             // Intenta crear un objeto URL con el valor del TextField
@@ -355,6 +434,17 @@ public class AdminViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo que crea un objeto de tipo cancion
+     * @param code
+     * @param name
+     * @param gender
+     * @param year
+     * @param duration
+     * @param link
+     * @param image
+     * @param artist
+     */
     private void createSong(String code, String name, Gender gender, String year, String duration, URL link, String image, Artist artist) {
         try {
             if (adminController.mfm.addSong(code, name, image, year, duration, gender, link, artist)) {
@@ -366,8 +456,13 @@ public class AdminViewController implements Initializable {
 
     }
 
-//--------------------------EVENTOS DE LOS BOTONES-----------------------------------------------
+//--------------------------EVENTOS DE LOS BOTONES-----------------------------------------------//
 
+    /**
+     * Metodo que agrega un artista a el arbol cuando se preciona el boton en la interfaz
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void addArtist(ActionEvent event) throws IOException {
         String nameArtist= txtNameArtist.getText();
@@ -391,6 +486,10 @@ public class AdminViewController implements Initializable {
 
     }
 
+    /**
+     * Metodo que limpia los campos de texto para crear y editar un artista
+     * @param event
+     */
     @FXML
     void cleanUpArtist(ActionEvent event) {
         createArtistForm();
@@ -400,6 +499,10 @@ public class AdminViewController implements Initializable {
         imageViewArtist.setImage( null );
     }
 
+    /**
+     * Metodo que permite editar los datos de un artista
+     * @param event
+     */
     @FXML
     void editInfoArtists(ActionEvent event) {
         txtNationalityArtist.setEditable( true );
@@ -413,6 +516,13 @@ public class AdminViewController implements Initializable {
 
         showPopUp( "Now you can edit the info of the artist on the fields at the top" , stage);
     }
+
+    /**
+     * Metodo que actualiza los datos de el artista
+     * @param event
+     * @throws ArtistException
+     * @throws IOException
+     */
     @FXML
     void updateInfoArtist(ActionEvent event) throws ArtistException, IOException {
         String name = txtNameArtist.getText();
@@ -431,6 +541,10 @@ public class AdminViewController implements Initializable {
         }
 
     }
+
+    /**
+     * Metodo que permite habilitar y deshabilitar los campos para crear un artista
+     */
     void createArtistForm(){
         txtNameArtist.setEditable( true );
         txtNationalityArtist.setEditable( true );
@@ -444,6 +558,9 @@ public class AdminViewController implements Initializable {
         btnCancelChanges.setVisible( false );
     }
 
+    /**
+     * Metodo que permite habilitar y deshabilitar los campos para crear una cancion
+     */
     void createSongForm(){
         txtNameSong.setEditable( true );
         comboBoxGender.setDisable( false );
@@ -461,6 +578,11 @@ public class AdminViewController implements Initializable {
         btnCancelChangesSong.setVisible( false );
     }
 
+    /**
+     * Metodo que confirma los datos actualizados de un artista
+     * @param artist
+     * @throws ArtistException
+     */
     private void updateArtist(Artist artist) throws ArtistException {
 
         boolean flag = adminController.mfm.updateArtist( artist );
@@ -474,14 +596,29 @@ public class AdminViewController implements Initializable {
 
     }
 
+    /**
+     * Bonton que cancela la edicion de los datos de el artista
+     * @param event
+     */
     @FXML
     void cancelInfoUpdate(ActionEvent event) {
         createArtistForm();
     }
+
+    /**
+     * Boton que cancela la edicion de los datos de una cancion
+     * @param event
+     */
     @FXML
     void cancelInfoSongUpdate(ActionEvent event) {
         cleanUpSong( event );
     }
+
+    /**
+     * Metodo de boton que permite actualizar los datos de una cancion
+     * @param event
+     * @throws SongException
+     */
     @FXML
     void updateInfoSong(ActionEvent event) throws SongException {
         String nameSong= txtNameSong.getText();
@@ -510,6 +647,18 @@ public class AdminViewController implements Initializable {
 
     }
 
+    /**
+     * Metodo que confirma la actualizacion de los datos de una cancion
+     * @param code
+     * @param nameSong
+     * @param gender
+     * @param year
+     * @param duration
+     * @param link
+     * @param url
+     * @param artist
+     * @throws SongException
+     */
     private void uptadeSong(String code , String nameSong , Gender gender , String year , String duration , URL link , String url , Artist artist) throws SongException {
         if(adminController.mfm.updateSong(code, nameSong, gender,year,duration,link, url, artist)){
             showMessage( "Notification", "Info changed" , "The info of the song has been changed", Alert.AlertType.INFORMATION );
@@ -519,6 +668,10 @@ public class AdminViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo de boton que habilita los campos para editar una cancion
+     * @param event
+     */
     @FXML
     void editInfoSong(ActionEvent event) {
         txtNameSong.setEditable( true );
@@ -538,6 +691,10 @@ public class AdminViewController implements Initializable {
         showPopUp( "Now you can edit the info of the song on the fields at the top" , stage);
     }
 
+    /**
+     * Metodo de boton que permite remover una cancion de la aplicacion
+     * @param event
+     */
     @FXML
     void removeSongFromApp(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -568,6 +725,10 @@ public class AdminViewController implements Initializable {
         });
     }
 
+    /**
+     * Metodo que confirma la eliminacion de una cancion
+     * @throws SongException
+     */
     private void deleteSong() throws SongException {
         if(adminController.mfm.deleteSong(songSelection)){
             showMessage( "Notification", "Song eliminated Succesfully" ,
@@ -578,6 +739,10 @@ public class AdminViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo de boton que permite eliminar un artista de la aplicacion
+     * @param event
+     */
     @FXML
     void removeArtistFromApp(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -614,6 +779,10 @@ public class AdminViewController implements Initializable {
         });
     }
 
+    /**
+     * Metodo confirma la eliminacion de un artista
+     * @throws ArtistException
+     */
     private void deleteArtist() throws ArtistException {
         if ( adminController.mfm.deleteArtist( artistSelection ) ){
             showMessage( "Notification", "Artist eliminated" ,
@@ -625,7 +794,13 @@ public class AdminViewController implements Initializable {
     }
 
 
-    //------------------------------------------------SONGS----------------------------------------------
+    //------------------------------------------------SONGS----------------------------------------------//
+
+    /**
+     * Metodo de boton que permite seleccionar la imagen de la cancion
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void selectCoverSong(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnSelectCover.getScene().getWindow();
@@ -670,6 +845,12 @@ public class AdminViewController implements Initializable {
         }
 
     }
+
+    /**
+     * Metodo de boton que permite seleccionar la imagen de el artista
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void selectPhotoArtist(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnSelectPhotoArtist.getScene().getWindow();
@@ -714,6 +895,11 @@ public class AdminViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo que muestra la imagen seleccionada
+     * @param imagePath
+     * @param imageView
+     */
     private void displayImage(String imagePath, ImageView imageView) {
         try {
             // Crear el Image y el ImageView
@@ -724,6 +910,12 @@ public class AdminViewController implements Initializable {
         }
     }
 
+    /**
+     * Metodo de boton que permite agregar una canccion a la lista y que se muestra en la tabla de canciones
+     * @param event
+     * @throws ArtistException
+     * @throws SongException
+     */
     @FXML
     void addSong(ActionEvent event) throws ArtistException, SongException {
         String nameSong= txtNameSong.getText();
@@ -754,8 +946,10 @@ public class AdminViewController implements Initializable {
         }
     }
 
-
-
+    /**
+     * Metodo que limpia los campos de view para crear canciones
+     * @param event
+     */
     @FXML
     void cleanUpSong(ActionEvent event) {
         createSongForm();
@@ -769,24 +963,39 @@ public class AdminViewController implements Initializable {
 
     }
 
+    /**
+     * Metodo que permite a el usuario cerrar sesion
+     * @param event
+     */
     @FXML
     void logOut(ActionEvent event) {
         loginViewController.show();
         this.stage.close();
     }
 
+    /**
+     * Metodo que permite mostras la view con la tabla de los artistas y los campos apra agregar uno nuevo
+     * @param event
+     */
     @FXML
     void showArtistsInfo(ActionEvent event) {
         anchorSongs.setVisible( false );
         anchorArtists.setVisible( true );
     }
 
+    /**
+     * Metodo que permite mostrar la view con la tabla de las canciones y los campos para agregar una nueva
+     * @param event
+     */
     @FXML
     void showSongsInfo(ActionEvent event) {
         anchorArtists.setVisible( false );
         anchorSongs.setVisible( true );
     }
 
+    /**
+     * Metodo que maneja los eventos de el mouse
+     */
     void eventsControl(){
         btnLogOut.setOnMouseEntered(event -> btnLogOut.setStyle("-fx-background-color: rgba(0, 0, 0, 0.1); -fx-text-fill: black;"));
         btnLogOut.setOnMouseExited(event -> btnLogOut.setStyle("-fx-background-color: transparent; -fx-text-fill: black;"));
@@ -797,10 +1006,17 @@ public class AdminViewController implements Initializable {
 
     }
 
+    /**
+     * Metodo que inicializa el siguiente escenario
+     * @param stage2
+     */
     public void init(Stage stage2) {
         this.stage = stage2;
     }
 
+    /**
+     * Metodo que crea una animacion
+     */
     public void show() {
         FadeTransition fadeIn = new FadeTransition( Duration.seconds(1) , anchorPane);
         fadeIn.setFromValue(0);
@@ -817,6 +1033,10 @@ public class AdminViewController implements Initializable {
             stage.setY( event.getScreenY()-y );
         });
     }
+
+    /**
+     * Metodo que inicializa el controller con la view de canciones y los evnetos de mouse
+     */
     @FXML
     void initialize() {
         adminController= new AdminController();
@@ -833,7 +1053,11 @@ public class AdminViewController implements Initializable {
         this.anchorPane = anchorPane;
     }
 
-
+    /**
+     * Metodo initialize para la view de administrador
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.adminController= new AdminController();
@@ -901,6 +1125,10 @@ public class AdminViewController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Metodo que carga los datos de un artista seleccionado para mostrar sus datos
+     */
     void showArtistInfo(){
         txtNameArtist.setEditable( false );
         txtNationalityArtist.setEditable( false );

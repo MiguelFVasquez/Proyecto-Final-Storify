@@ -75,7 +75,10 @@ public class BinaryTree <T extends Comparable<T> > implements Iterable<T> , Seri
         }
     }
 
-
+    /**
+     * Metodo que elimina un dato de el arbol
+     * @param dato
+     */
     public void eliminar(T dato) {
         root = eliminarNodo(root, dato);
     }
@@ -113,6 +116,11 @@ public class BinaryTree <T extends Comparable<T> > implements Iterable<T> , Seri
         return nodo;
     }
 
+    /**
+     * Metodo que busca el nodo siguiente
+     * @param nodo
+     * @return
+     */
     private Node<T> encontrarSucesor(Node<T> nodo) {
         Node<T> actual = nodo;
         while (actual.getPrev() != null) {
@@ -200,6 +208,10 @@ public class BinaryTree <T extends Comparable<T> > implements Iterable<T> , Seri
         this.postorden(this.root);
     }
 
+    /**
+     * Iterador de el arbol binario
+     * @return
+     */
     @Override
     public Iterator<T> iterator() {
         return new ArbolIterator(root);
