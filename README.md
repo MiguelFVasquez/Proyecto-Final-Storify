@@ -1,18 +1,15 @@
-# WORKING ON PROJECT: Milito
+# WORKING ON PROJECT: 
 
 ## ***TASKS**
 
 ### **TO DO**
-- Reproducir canciones desde searchView, artistView y libraryView
-- Documentar código
-- Java DOC
-
-
 
 ### DOING
 
-
 ### DONE
+- Reproducir canciones desde searchView, artistView y libraryView
+- Documentar código
+- Java DOC
 - Reproducir una canción
 - Avanzar en la fila para reproducir la siguiente canción
 - Implementar colas ¿?
@@ -21,6 +18,7 @@
 - Mejorar reproductor de musica (Pausar y reanudar)
 - Seleccionar una canción y añadirla a la lista de usuario
 - Visualización de portadas en UserView
+- Rescue password with email
 - Validación de campos de Login
 - Funcionalidad de botones Tab register
 - Filtros en ventana library
@@ -43,8 +41,6 @@
 - Implementar hilos
 - Funcionalidad par obtener el artista y el genero mas escuchado de toda la tienda
 
-
 ## OPTIONALS
-- Rescue password with email
 
-<sub>**Agregen las demas cosas que se vayan haciendo uwu**</sub>
+
