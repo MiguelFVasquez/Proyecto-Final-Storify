@@ -123,7 +123,7 @@ public class LoginViewController implements Initializable {
     void logIn(ActionEvent event) throws IOException {
         String userName = txtName.getText();
         String password = txtPassword.getText();
-        if(txtName.getText().equals(  "admin" ) /*&& txtPassword.getText().equals( "$aDmiN" )*/&& txtPassword.getText().equals( "123" ) ){
+        if(txtName.getText().equals(  "admin" ) && txtPassword.getText().equals( "$aDmiN" )){
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation( App.class.getResource( "AdminView.fxml" ) );
             AnchorPane anchorPane = loader.load();

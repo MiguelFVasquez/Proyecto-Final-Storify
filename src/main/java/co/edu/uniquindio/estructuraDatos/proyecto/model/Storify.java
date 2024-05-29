@@ -13,7 +13,6 @@ import javafx.concurrent.Task;
 import javafx.scene.web.WebView;
 
 import java.io.Serializable;
-import java.lang.reflect.GenericArrayType;
 import java.net.URL;
 import java.util.*;
 
