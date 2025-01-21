@@ -1,3 +1,7 @@
+## **VISTA PREVIA**
+![](https://github.com/MiguelFVasquez/Proyecto-Final-Storify/blob/main/Shuh3nFY.jpg)
+
+
 # WORKING ON PROJECT: 
 
 ## ***TASKS**
